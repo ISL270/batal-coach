@@ -110,8 +110,8 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 
     <key>CFBundleLocalizations</key>
 	<array>
-		<string>en</string>
 		<string>ar</string>
+		<string>en</string>
 	</array>
 
     ...
