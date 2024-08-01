@@ -15,7 +15,7 @@ class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
   final Color background;
 
   const ColorsX({
+    required this.background,
     this.primary = const Color(0xFFFF3333),
-    this.background = const Color(0xFFFFFFFF),
   });
 }
