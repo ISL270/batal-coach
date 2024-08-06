@@ -18,7 +18,6 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
     Color? background,
   }) {
     return ColorsX(
-      primary: primary ?? this.primary,
       background: background ?? this.background,
     );
   }
@@ -27,7 +26,6 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
   ColorsX lerp(covariant ThemeExtension<ColorsX>? other, double t) {
     if (other is! ColorsX) return this as ColorsX;
     return ColorsX(
-      primary: Color.lerp(primary, other.primary, t)!,
       background: Color.lerp(background, other.background, t)!,
     );
   }
