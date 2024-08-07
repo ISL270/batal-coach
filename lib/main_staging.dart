@@ -9,5 +9,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     name: 'btl-stg',
     options: DefaultFirebaseOptions.currentPlatform,
-  );  await bootstrap(App.new);
+  );
+  await bootstrap(App.new);
 }
