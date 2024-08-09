@@ -61,6 +61,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '471671834406',
     projectId: 'btl-stg',
     storageBucket: 'btl-stg.appspot.com',
+    authDomain: 'btl-stg.firebaseapp.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -70,5 +71,6 @@ class DefaultFirebaseOptions {
     projectId: 'btl-stg',
     storageBucket: 'btl-stg.appspot.com',
     iosBundleId: 'com.example.verygoodcore.btl.stg',
+    authDomain: 'btl-stg.firebaseapp.com',
   );
 }

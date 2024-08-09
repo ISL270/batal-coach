@@ -13,4 +13,5 @@ Future<void> main() async {
   );
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
-  await bootstrap(() => App(authenticationRepository: authenticationRepository));}
+  await bootstrap(() => App(authenticationRepository: authenticationRepository));
+}

@@ -61,6 +61,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '474399213072',
     projectId: 'btl-prod',
     storageBucket: 'btl-prod.appspot.com',
+    authDomain: 'btl-prod.firebaseapp.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -70,5 +71,6 @@ class DefaultFirebaseOptions {
     projectId: 'btl-prod',
     storageBucket: 'btl-prod.appspot.com',
     iosBundleId: 'com.example.verygoodcore.btl',
+    authDomain: 'btl-prod.firebaseapp.com',
   );
 }
