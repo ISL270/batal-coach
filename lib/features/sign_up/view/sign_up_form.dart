@@ -1,4 +1,5 @@
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
+import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -16,9 +17,7 @@ class SignUpForm extends StatelessWidget {
         } else if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(state.errorMessage ?? 'Sign Up Failure')),
-            );
+            ..showSnackBar(SnackBar(content: Text(state.errorMessage ?? 'Sign Up Failure')));
         }
       },
       child: Align(
@@ -51,10 +50,9 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: 'email',
+            labelText: context.l10n.email,
             helperText: '',
-            errorText:
-                state.email.displayError != null ? 'invalid email' : null,
+            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
           ),
         );
       },
@@ -70,14 +68,12 @@ class _PasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<SignUpCubit>().passwordChanged(password),
+          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            labelText: context.l10n.password,
             helperText: '',
-            errorText:
-                state.password.displayError != null ? 'invalid password' : null,
+            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
           ),
         );
       },
@@ -95,15 +91,14 @@ class _ConfirmPasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
-          onChanged: (confirmPassword) => context
-              .read<SignUpCubit>()
-              .confirmedPasswordChanged(confirmPassword),
+          onChanged: (confirmPassword) =>
+              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'confirm password',
+            labelText: context.l10n.confirmPassword,
             helperText: '',
             errorText: state.confirmedPassword.displayError != null
-                ? 'passwords do not match'
+                ? context.l10n.passwordsDontMatch
                 : null,
           ),
         );
@@ -127,10 +122,9 @@ class _SignUpButton extends StatelessWidget {
                   ),
                   backgroundColor: Colors.orangeAccent,
                 ),
-                onPressed: state.isValid
-                    ? () => context.read<SignUpCubit>().signUpFormSubmitted()
-                    : null,
-                child: const Text('SIGN UP'),
+                onPressed:
+                    state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
+                child: Text(context.l10n.signUp),
               );
       },
     );

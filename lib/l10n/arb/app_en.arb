@@ -1,7 +1,13 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "login": "Login",
+    "signUp": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "signInWithGoogle": "Sign in with google",
+    "createAccount": "Create account",
+    "invalidEmail": "invalid email",
+    "invalidPassword": "invalid password",
+    "passwordsDontMatch": "passwords do not match"
 }

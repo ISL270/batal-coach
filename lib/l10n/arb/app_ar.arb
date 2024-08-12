@@ -1,7 +1,13 @@
 {
     "@@locale": "ar",
-    "counterAppBarTitle": "عداد",
-    "@counterAppBarTitle": {
-        "description": "عدااااد"
-    }
+    "login": "تسجيل الدخول",
+    "signUp": "التسجيل",
+    "email": "البريد الالكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "signInWithGoogle": "تسجيل الدخول بجوجل",
+    "createAccount": "انشاء حساب",
+    "invalidEmail": "بريد الكتروني غير صالح",
+    "invalidPassword": "كلمة المرور غير صالحة",
+    "passwordsDontMatch": "كلمات المرور لا تتطابق"
 }
