@@ -62,6 +62,7 @@ class DefaultFirebaseOptions {
     projectId: 'btl-stg',
     authDomain: 'btl-stg.firebaseapp.com',
     storageBucket: 'btl-stg.appspot.com',
+    authDomain: 'btl-stg.firebaseapp.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -72,5 +73,6 @@ class DefaultFirebaseOptions {
     authDomain: 'btl-stg.firebaseapp.com',
     storageBucket: 'btl-stg.appspot.com',
     iosBundleId: 'com.example.verygoodcore.btl.stg',
+    authDomain: 'btl-stg.firebaseapp.com',
   );
 }
