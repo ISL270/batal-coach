@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "471671834406",
+    "project_id": "btl-stg",
+    "storage_bucket": "btl-stg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471671834406:android:d510743bae52e2a4ece3e7",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.btl.stg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcJtvuQ0AZyEV90VdrlZCCyfsZb75n5Q0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

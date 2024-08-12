@@ -60,6 +60,7 @@ class DefaultFirebaseOptions {
     appId: '1:471671834406:android:d510743bae52e2a4ece3e7',
     messagingSenderId: '471671834406',
     projectId: 'btl-stg',
+    authDomain: 'btl-stg.firebaseapp.com',
     storageBucket: 'btl-stg.appspot.com',
   );
 
@@ -68,6 +69,7 @@ class DefaultFirebaseOptions {
     appId: '1:471671834406:ios:9153fe9af0bfd1e8ece3e7',
     messagingSenderId: '471671834406',
     projectId: 'btl-stg',
+    authDomain: 'btl-stg.firebaseapp.com',
     storageBucket: 'btl-stg.appspot.com',
     iosBundleId: 'com.example.verygoodcore.btl.stg',
   );

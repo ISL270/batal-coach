@@ -60,6 +60,7 @@ class DefaultFirebaseOptions {
     appId: '1:474399213072:android:ad811add16938f238cec95',
     messagingSenderId: '474399213072',
     projectId: 'btl-prod',
+    authDomain: 'btl-prod.firebaseapp.com',
     storageBucket: 'btl-prod.appspot.com',
   );
 
@@ -68,6 +69,7 @@ class DefaultFirebaseOptions {
     appId: '1:474399213072:ios:01235f9fc7beef388cec95',
     messagingSenderId: '474399213072',
     projectId: 'btl-prod',
+    authDomain: 'btl-prod.firebaseapp.com',
     storageBucket: 'btl-prod.appspot.com',
     iosBundleId: 'com.example.verygoodcore.btl',
   );

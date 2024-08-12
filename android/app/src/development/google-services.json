@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "474399213072",
-    "project_id": "btl-prod",
-    "storage_bucket": "btl-prod.appspot.com"
+    "project_number": "1028269511628",
+    "project_id": "btl-dev-69d91",
+    "storage_bucket": "btl-dev-69d91.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:474399213072:android:ad811add16938f238cec95",
+        "mobilesdk_app_id": "1:1028269511628:android:7ac72f876ef421a81e0369",
         "android_client_info": {
-          "package_name": "com.example.verygoodcore.btl"
+          "package_name": "com.example.verygoodcore.btl.dev"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDeWOHtE3fDeaGhtxjrFLOI843T7izG8NQ"
+          "current_key": "AIzaSyDwdFGQq-sbUMcoj6k7H8h4TfJXmJlQlj4"
         }
       ],
       "services": {
