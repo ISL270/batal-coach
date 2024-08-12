@@ -9,5 +9,7 @@
     "createAccount": "انشاء حساب",
     "invalidEmail": "بريد الكتروني غير صالح",
     "invalidPassword": "كلمة المرور غير صالحة",
-    "passwordsDontMatch": "كلمات المرور لا تتطابق"
+    "passwordsDontMatch": "كلمات المرور لا تتطابق",
+    "loginFailed": "فشل تسجيل الدخول",
+    "signUpFailed": "فشل التسجيل"
 }

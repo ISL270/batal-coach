@@ -18,9 +18,7 @@ class LoginForm extends StatelessWidget {
         if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(state.errorMessage ?? 'Authentication Failure')),
-            );
+            ..showSnackBar(SnackBar(content: Text(state.errorMessage ?? context.l10n.loginFailed)));
         }
       },
       child: SingleChildScrollView(

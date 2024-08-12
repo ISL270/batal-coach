@@ -9,5 +9,7 @@
     "createAccount": "Create account",
     "invalidEmail": "invalid email",
     "invalidPassword": "invalid password",
-    "passwordsDontMatch": "passwords do not match"
+    "passwordsDontMatch": "passwords do not match",
+    "loginFailed": "Login failed",
+    "loginFailed": "Sign up failed"
 }
