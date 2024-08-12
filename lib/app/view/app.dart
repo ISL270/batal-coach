@@ -1,6 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/bloc/auth_bloc.dart';
-import 'package:btl/app/cubit/theme_cubit.dart';
+import 'package:btl/app/bloc/settings/settings_bloc.dart';
 import 'package:btl/app/flavors.dart';
 import 'package:btl/app/routes.dart';
 import 'package:btl/app/themes.dart';
@@ -25,16 +25,16 @@ class App extends StatelessWidget {
           value: _authRepo,
           child: MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => ThemeCubit()),
+              BlocProvider(create: (_) => SettingsBloc()),
               BlocProvider(create: (_) => AuthBloc(authRepo: _authRepo)),
             ],
-            child: BlocBuilder<ThemeCubit, ThemeMode>(
-              builder: (context, themeMode) {
+            child: BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
                 return MaterialApp(
-                  locale: arabicLocale,
-                  themeMode: themeMode,
                   theme: AppTheme.light,
                   darkTheme: AppTheme.dark,
+                  themeMode: state.themeMode,
+                  locale: state.language.locale,
                   supportedLocales: AppLocalizations.supportedLocales,
                   localizationsDelegates: AppLocalizations.localizationsDelegates,
                   debugShowCheckedModeBanner: appFlavor != Flavors.production.name,
