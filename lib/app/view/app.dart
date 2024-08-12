@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/bloc/auth_bloc.dart';
 import 'package:btl/app/cubit/theme_cubit.dart';
@@ -14,12 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class App extends StatelessWidget {
-  final AuthenticationRepository _authenticationRepository;
+  final AuthenticationRepository _authRepo;
 
-  const App({
-    required AuthenticationRepository authenticationRepository,
-    super.key,
-  }) : _authenticationRepository = authenticationRepository;
+  const App({required AuthenticationRepository authRepo, super.key}) : _authRepo = authRepo;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +22,11 @@ class App extends StatelessWidget {
       designSize: const Size(393, 852),
       builder: (context, child) {
         return RepositoryProvider.value(
-          value: _authenticationRepository,
+          value: _authRepo,
           child: MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => ThemeCubit()),
-              BlocProvider(
-                  create: (_) => AuthBloc(authenticationRepository: _authenticationRepository)),
+              BlocProvider(create: (_) => AuthBloc(authRepo: _authRepo)),
             ],
             child: BlocBuilder<ThemeCubit, ThemeMode>(
               builder: (context, themeMode) {

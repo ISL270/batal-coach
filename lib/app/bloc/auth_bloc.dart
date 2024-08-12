@@ -8,19 +8,19 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AppEvent, AuthState> {
-  final AuthenticationRepository _authenticationRepository;
+  final AuthenticationRepository _authRepo;
   late final StreamSubscription<User> _userSubscription;
 
-  AuthBloc({required AuthenticationRepository authenticationRepository})
-      : _authenticationRepository = authenticationRepository,
+  AuthBloc({required AuthenticationRepository authRepo})
+      : _authRepo = authRepo,
         super(
-          authenticationRepository.currentUser.isNotEmpty
-              ? AuthState.authenticated(authenticationRepository.currentUser)
+          authRepo.currentUser.isNotEmpty
+              ? AuthState.authenticated(authRepo.currentUser)
               : const AuthState.unauthenticated(),
         ) {
     on<_AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
-    _userSubscription = _authenticationRepository.user.listen(
+    _userSubscription = _authRepo.user.listen(
       (user) => add(_AppUserChanged(user)),
     );
   }
@@ -34,7 +34,7 @@ class AuthBloc extends Bloc<AppEvent, AuthState> {
   }
 
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AuthState> emit) {
-    unawaited(_authenticationRepository.logOut());
+    unawaited(_authRepo.logOut());
   }
 
   @override
