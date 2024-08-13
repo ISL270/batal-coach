@@ -1,6 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/bloc/settings/settings_bloc.dart';
-import 'package:btl/app/enum/language.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:btl/features/sign_up/widgets/sign_up_form.dart';
 import 'package:btl/injection/injection.dart';
@@ -23,12 +22,7 @@ class SignUpPage extends StatelessWidget {
         title: Text(context.l10n.signUp),
         actions: [
           IconButton(
-            onPressed: () {
-              final lang = context.read<SettingsBloc>().state.language == Language.arabic
-                  ? Language.english
-                  : Language.arabic;
-              context.read<SettingsBloc>().add(SettingsLanguageChanged(lang));
-            },
+            onPressed: context.read<SettingsBloc>().switchLanguage,
             icon: const Icon(Icons.g_translate),
           )
         ],

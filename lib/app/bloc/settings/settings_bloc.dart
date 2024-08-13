@@ -18,6 +18,10 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   void _onLanguageChanged(SettingsLanguageChanged event, Emitter<SettingsState> emit) =>
       emit(state.copyWith(language: event.language));
 
+  void switchLanguage() => add(SettingsLanguageChanged(
+        state.language == Language.arabic ? Language.english : Language.arabic,
+      ));
+
   void _onThemeChanged(SettingsThemeChanged event, Emitter<SettingsState> emit) =>
       emit(state.copyWith(themeMode: event.themeMode));
 
