@@ -1,23 +1,26 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/bloc/settings/settings_bloc.dart';
 import 'package:btl/app/enum/language.dart';
-import 'package:btl/features/login/cubit/login_cubit.dart';
-import 'package:btl/features/login/view/login_form.dart';
+import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
+import 'package:btl/features/sign_up/widgets/sign_up_form.dart';
 import 'package:btl/injection/injection.dart';
 import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: LoginPage());
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const SignUpPage());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.login),
+        leading: const BackButton(),
+        title: Text(context.l10n.signUp),
         actions: [
           IconButton(
             onPressed: () {
@@ -32,9 +35,9 @@ class LoginPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: BlocProvider(
-          create: (_) => LoginCubit(getIt.get<AuthenticationRepository>()),
-          child: const LoginForm(),
+        child: BlocProvider<SignUpCubit>(
+          create: (_) => SignUpCubit(getIt.get<AuthenticationRepository>()),
+          child: const SignUpForm(),
         ),
       ),
     );
