@@ -1,9 +1,8 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/bloc/auth_bloc.dart';
 import 'package:btl/app/bloc/settings/settings_bloc.dart';
-import 'package:btl/app/flavors.dart';
-import 'package:btl/app/routes.dart';
-import 'package:btl/app/themes.dart';
+import 'package:btl/app/enum/flavors.dart';
+import 'package:btl/app/theming/themes.dart';
 import 'package:btl/injection/injection.dart';
 import 'package:btl/l10n/l10n.dart';
 import 'package:flow_builder/flow_builder.dart';

@@ -1,5 +1,5 @@
-import 'package:btl/app/app_colors_extension.dart';
-import 'package:btl/app/text_theme_extension.dart';
+import 'package:btl/app/theming/app_colors_extension.dart';
+import 'package:btl/app/theming/text_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
