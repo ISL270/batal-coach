@@ -1,5 +1,5 @@
 import 'package:btl/features/login/cubit/login_cubit.dart';
-import 'package:btl/features/sign_up/sign_up_page.dart';
+import 'package:btl/features/sign_up/sign_up_screen.dart';
 import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
