@@ -1,4 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:btl/app/bloc/settings/settings_bloc.dart';
+import 'package:btl/app/enum/language.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:btl/features/sign_up/view/sign_up_form.dart';
 import 'package:btl/l10n/l10n.dart';
@@ -15,7 +17,21 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.signUp)),
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: Text(context.l10n.signUp),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final lang = context.read<SettingsBloc>().state.language == Language.arabic
+                  ? Language.english
+                  : Language.arabic;
+              context.read<SettingsBloc>().add(SettingsLanguageChanged(lang));
+            },
+            icon: const Icon(Icons.g_translate),
+          )
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: BlocProvider<SignUpCubit>(
