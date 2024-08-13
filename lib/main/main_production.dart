@@ -1,4 +1,3 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/app.dart';
 import 'package:btl/bootstrap.dart';
 import 'package:btl/firebase_options/firebase_options_prod.dart';
@@ -11,7 +10,5 @@ Future<void> main() async {
     name: 'btl-prod',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final authenticationRepository = AuthenticationRepository();
-  await authenticationRepository.user.first;
-  await bootstrap(() => App(authRepo: authenticationRepository));
+  await bootstrap(App.new);
 }
