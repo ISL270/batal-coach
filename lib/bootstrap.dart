@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:btl/injection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -31,10 +32,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   // Add cross-flavor configuration here
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
+    storageDirectory:
+        kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
   );
+
+  configureDependencies();
 
   runApp(await builder());
 }
