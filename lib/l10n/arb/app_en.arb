@@ -11,5 +11,5 @@
     "invalidPassword": "invalid password",
     "passwordsDontMatch": "passwords do not match",
     "loginFailed": "Login failed",
-    "loginFailed": "Sign up failed"
+    "signUpFailed": "Sign up failed"
 }
