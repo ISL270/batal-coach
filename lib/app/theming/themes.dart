@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData get light => ThemeData(
+        navigationBarTheme: _navigationBarThemeData,
         extensions: [
           // Use this instead of default colorScheme.
           _lightColorScheme,
@@ -15,6 +16,7 @@ class AppTheme {
       );
 
   static ThemeData get dark => ThemeData(
+        navigationBarTheme: _navigationBarThemeData,
         extensions: [
           // Use this instead of default colorScheme.
           _darkColorScheme,
@@ -32,4 +34,10 @@ final _textTheme = TextThemeX(
   small: GoogleFonts.notoSansArabic(fontSize: 12.sp),
   medium: GoogleFonts.notoSansArabic(fontSize: 16.sp),
   large: GoogleFonts.notoSansArabic(fontSize: 20.sp),
+);
+
+final _navigationBarThemeData = NavigationBarThemeData(
+  height: 70,
+  indicatorColor: _lightColorScheme.primary,
+  labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
 );

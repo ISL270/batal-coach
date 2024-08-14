@@ -1,6 +1,5 @@
 import 'package:btl/app/bloc/auth_bloc.dart';
 import 'package:btl/app/constants.dart/default.dart';
-import 'package:btl/app/theming/app_colors_extension.dart';
 import 'package:btl/features/home/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,19 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final textTheme = Theme.of(context).textTheme;
     final user = context.select((AuthBloc bloc) => bloc.state.user);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.exit_to_app),
-            onPressed: () => context.read<AuthBloc>().add(AuthLogoutRequested()),
-          ),
-        ],
-      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
-        indicatorColor: context.colorsX.primary,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         destinations: const [
           NavigationDestination(
             selectedIcon: Icon(Icons.dashboard),
