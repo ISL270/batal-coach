@@ -3,10 +3,10 @@ import 'package:btl/features/home/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: HomePage());
+  static const name = 'home';
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             key: const Key('homePage_logout_iconButton'),
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
-              context.read<AuthBloc>().add(const AppLogoutRequested());
+              context.read<AuthBloc>().add(AuthLogoutRequested());
             },
           ),
         ],

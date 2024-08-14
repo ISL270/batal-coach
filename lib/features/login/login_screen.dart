@@ -7,10 +7,10 @@ import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: LoginPage());
+  static const name = 'login';
 
   @override
   Widget build(BuildContext context) {

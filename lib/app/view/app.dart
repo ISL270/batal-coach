@@ -5,7 +5,7 @@ import 'package:btl/app/enum/flavors.dart';
 import 'package:btl/app/theming/themes.dart';
 import 'package:btl/injection/injection.dart';
 import 'package:btl/l10n/l10n.dart';
-import 'package:flow_builder/flow_builder.dart';
+import 'package:btl/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,8 @@ class App extends StatelessWidget {
           ],
           child: BlocBuilder<SettingsBloc, SettingsState>(
             builder: (context, state) {
-              return MaterialApp(
+              return MaterialApp.router(
+                routerConfig: router,
                 theme: AppTheme.light,
                 darkTheme: AppTheme.dark,
                 themeMode: state.themeMode,
@@ -34,10 +35,6 @@ class App extends StatelessWidget {
                 supportedLocales: AppLocalizations.supportedLocales,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 debugShowCheckedModeBanner: appFlavor != Flavors.production.name,
-                home: FlowBuilder<AuthStatus>(
-                  state: context.select((AuthBloc bloc) => bloc.state.status),
-                  onGeneratePages: onGenerateAppViewPages,
-                ),
               );
             },
           ),

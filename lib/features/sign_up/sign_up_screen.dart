@@ -7,12 +7,10 @@ import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
-  static Route<void> route() {
-    return MaterialPageRoute<void>(builder: (_) => const SignUpPage());
-  }
+  static const name = 'signup';
 
   @override
   Widget build(BuildContext context) {
