@@ -1,5 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:btl/app/bloc/settings/settings_bloc.dart';
+import 'package:btl/features/settings/settings/settings_bloc.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:btl/features/sign_up/widgets/sign_up_form.dart';
 import 'package:btl/injection/injection.dart';
