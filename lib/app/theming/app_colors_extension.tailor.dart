@@ -12,6 +12,7 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
   Color get primary;
   Color get onPrimary;
   Color get background;
+  Color get secondaryBackground;
   Color get onBackground;
 
   @override
@@ -19,10 +20,12 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
     Color? primary,
     Color? onPrimary,
     Color? background,
+    Color? secondaryBackground,
     Color? onBackground,
   }) {
     return ColorsX(
       background: background ?? this.background,
+      secondaryBackground: secondaryBackground ?? this.secondaryBackground,
       onBackground: onBackground ?? this.onBackground,
     );
   }
@@ -32,6 +35,8 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
     if (other is! ColorsX) return this as ColorsX;
     return ColorsX(
       background: Color.lerp(background, other.background, t)!,
+      secondaryBackground:
+          Color.lerp(secondaryBackground, other.secondaryBackground, t)!,
       onBackground: Color.lerp(onBackground, other.onBackground, t)!,
     );
   }
@@ -46,6 +51,8 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
             const DeepCollectionEquality()
                 .equals(background, other.background) &&
             const DeepCollectionEquality()
+                .equals(secondaryBackground, other.secondaryBackground) &&
+            const DeepCollectionEquality()
                 .equals(onBackground, other.onBackground));
   }
 
@@ -56,6 +63,7 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
       const DeepCollectionEquality().hash(primary),
       const DeepCollectionEquality().hash(onPrimary),
       const DeepCollectionEquality().hash(background),
+      const DeepCollectionEquality().hash(secondaryBackground),
       const DeepCollectionEquality().hash(onBackground),
     );
   }

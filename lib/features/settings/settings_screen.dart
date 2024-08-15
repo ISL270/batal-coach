@@ -1,5 +1,6 @@
 import 'package:btl/app/enum/language.dart';
 import 'package:btl/app/extension/bloc_extension.dart';
+import 'package:btl/app/extension/text_style.dart';
 import 'package:btl/app/theming/text_theme_extension.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Theme',
-                      style: context.textThemeX.medium,
+                      style: context.textThemeX.medium.bold,
                     ),
                     SegmentedButton(
                       showSelectedIcon: false,
@@ -63,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Language',
-                      style: context.textThemeX.medium,
+                      style: context.textThemeX.medium.bold,
                     ),
                     SegmentedButton(
                       showSelectedIcon: false,

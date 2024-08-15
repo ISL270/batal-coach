@@ -16,10 +16,13 @@ class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
   @override
   final Color background;
   @override
+  final Color secondaryBackground;
+  @override
   final Color onBackground;
 
   ColorsX({
     required this.background,
+    required this.secondaryBackground,
     required this.onBackground,
   });
 }

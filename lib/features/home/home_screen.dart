@@ -3,6 +3,8 @@ import 'package:btl/features/dashboard/dashboard_screen.dart';
 import 'package:btl/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 
+part 'widgets/nav_bar.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -25,31 +27,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Directionality(
-        textDirection: TextDirection.ltr,
-        child: NavigationBar(
-          selectedIndex: _currentIndex,
-          destinations: const [
-            NavigationDestination(
-              selectedIcon: Icon(Icons.dashboard),
-              icon: Icon(Icons.dashboard_outlined),
-              label: 'Dashboard',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.settings),
-              icon: Icon(Icons.settings_outlined),
-              label: 'Settings',
-            ),
-          ],
-          onDestinationSelected: (index) {
-            setState(() => _currentIndex = index);
-            _pageController.animateToPage(
-              _currentIndex,
-              curve: Default.curve,
-              duration: Default.duration,
-            );
-          },
-        ),
+      bottomNavigationBar: _NavBar(
+        currentIndex: _currentIndex,
+        onDestinationSelected: (index) {
+          setState(() => _currentIndex = index);
+          _pageController.animateToPage(
+            _currentIndex,
+            curve: Default.curve,
+            duration: Default.duration,
+          );
+        },
       ),
       body: PageView.builder(
         controller: _pageController,
