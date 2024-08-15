@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         reverse: context.settingsBloc.state.language.isArabic,
         controller: _pageController,
         itemBuilder: (context, index) {

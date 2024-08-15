@@ -1,3 +1,4 @@
+import 'package:btl/app/bloc/auth/auth_bloc.dart';
 import 'package:btl/app/enum/language.dart';
 import 'package:btl/app/extension/bloc_extension.dart';
 import 'package:btl/app/extension/text_style.dart';
@@ -17,82 +18,97 @@ class SettingsScreen extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, settings) {
-            return ListView(
+            return Padding(
               padding: const EdgeInsets.all(20),
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.l10n.theme,
-                      style: context.textThemeX.medium.bold,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        context.l10n.theme,
+                        style: context.textThemeX.large.bold,
+                      ),
+                      SegmentedButton(
+                        showSelectedIcon: false,
+                        selected: {settings.themeMode},
+                        onSelectionChanged: (selection) {
+                          context.settingsBloc.add(SettingsThemeChanged(selection.first));
+                        },
+                        segments: [
+                          ButtonSegment(
+                            value: ThemeMode.light,
+                            label: Text(
+                              context.l10n.light,
+                              style: context.textThemeX.small,
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: ThemeMode.dark,
+                            label: Text(
+                              context.l10n.dark,
+                              style: context.textThemeX.small,
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: ThemeMode.system,
+                            label: Text(
+                              context.l10n.system,
+                              style: context.textThemeX.small,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const Gap(20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        context.l10n.language,
+                        style: context.textThemeX.large.bold,
+                      ),
+                      SegmentedButton(
+                        showSelectedIcon: false,
+                        selected: {settings.language},
+                        onSelectionChanged: (selection) {
+                          context.settingsBloc.add(SettingsLanguageChanged(selection.first));
+                        },
+                        segments: [
+                          ButtonSegment(
+                            value: Language.arabic,
+                            label: Text(
+                              Language.arabic.name,
+                              style: context.textThemeX.small,
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: Language.english,
+                            label: Text(
+                              Language.english.name,
+                              style: context.textThemeX.small,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () => context.authBloc.add(AuthLogoutRequested()),
+                      label: Text(
+                        context.l10n.logout,
+                        style: context.textThemeX.large.bold,
+                      ),
+                      iconAlignment: IconAlignment.end,
+                      icon: const Icon(Icons.exit_to_app),
                     ),
-                    SegmentedButton(
-                      showSelectedIcon: false,
-                      selected: {settings.themeMode},
-                      onSelectionChanged: (selection) {
-                        context.settingsBloc.add(SettingsThemeChanged(selection.first));
-                      },
-                      segments: [
-                        ButtonSegment(
-                          value: ThemeMode.light,
-                          label: Text(
-                            context.l10n.light,
-                            style: context.textThemeX.small,
-                          ),
-                        ),
-                        ButtonSegment(
-                          value: ThemeMode.dark,
-                          label: Text(
-                            context.l10n.dark,
-                            style: context.textThemeX.small,
-                          ),
-                        ),
-                        ButtonSegment(
-                          value: ThemeMode.system,
-                          label: Text(
-                            context.l10n.system,
-                            style: context.textThemeX.small,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const Gap(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.l10n.language,
-                      style: context.textThemeX.medium.bold,
-                    ),
-                    SegmentedButton(
-                      showSelectedIcon: false,
-                      selected: {settings.language},
-                      onSelectionChanged: (selection) {
-                        context.settingsBloc.add(SettingsLanguageChanged(selection.first));
-                      },
-                      segments: [
-                        ButtonSegment(
-                          value: Language.arabic,
-                          label: Text(
-                            Language.arabic.name,
-                            style: context.textThemeX.small,
-                          ),
-                        ),
-                        ButtonSegment(
-                          value: Language.english,
-                          label: Text(
-                            Language.english.name,
-                            style: context.textThemeX.small,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             );
           },
         ),

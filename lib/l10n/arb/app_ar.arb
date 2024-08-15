@@ -18,5 +18,6 @@
     "system": "النظام",
     "language": "اللغة",
     "dashboard": "الرئيسية",
-    "settings": "الاعدادات"
+    "settings": "الاعدادات",
+    "logout": "تسجيل الخروج"
 }

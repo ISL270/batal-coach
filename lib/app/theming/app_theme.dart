@@ -16,6 +16,12 @@ ThemeData _themeData(ColorsX colorScheme) {
   return ThemeData(
     primaryColor: colorScheme.primary,
     scaffoldBackgroundColor: colorScheme.background,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onBackground,
+      ),
+    ),
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
         visualDensity: VisualDensity.compact,
@@ -52,12 +58,12 @@ ThemeData _themeData(ColorsX colorScheme) {
 final _lightColorScheme = ColorsX(
   background: const Color(0xFFF2F2F2),
   secondaryBackground: Colors.white,
-  onBackground: Colors.grey.shade900,
+  onBackground: Colors.black87,
 );
 
 final _darkColorScheme = ColorsX(
-  background: const Color.fromARGB(255, 39, 39, 39),
-  secondaryBackground: const Color.fromARGB(255, 46, 46, 46),
+  background: const Color(0xFF272727),
+  secondaryBackground: const Color(0xFF2E2E2E),
   onBackground: Colors.white,
 );
 
