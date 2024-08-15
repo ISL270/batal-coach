@@ -1,3 +1,4 @@
+import 'package:btl/app/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 const _avatarSize = 48.0;
@@ -12,9 +13,14 @@ class Avatar extends StatelessWidget {
     final photo = this.photo;
     return CircleAvatar(
       radius: _avatarSize,
+      backgroundColor: context.colorsX.primary,
       backgroundImage: photo != null ? NetworkImage(photo) : null,
       child: photo == null
-          ? const Icon(Icons.person_outline, size: _avatarSize)
+          ? Icon(
+              Icons.person_outline,
+              size: _avatarSize,
+              color: context.colorsX.onPrimary,
+            )
           : null,
     );
   }
