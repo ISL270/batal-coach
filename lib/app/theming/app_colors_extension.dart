@@ -10,11 +10,16 @@ part 'app_colors_extension.tailor.dart';
 @TailorMixin(themeGetter: ThemeGetter.onBuildContext)
 class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
   @override
-  final Color primary = const Color(0xFFFF3333);
+  final Color primary = const Color(0xFFFF3232);
+  @override
+  final Color onPrimary = const Color(0xFFFFFFFF);
   @override
   final Color background;
+  @override
+  final Color onBackground;
 
   ColorsX({
     required this.background,
+    required this.onBackground,
   });
 }

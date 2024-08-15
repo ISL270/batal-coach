@@ -10,15 +10,20 @@ part of 'app_colors_extension.dart';
 
 mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
   Color get primary;
+  Color get onPrimary;
   Color get background;
+  Color get onBackground;
 
   @override
   ColorsX copyWith({
     Color? primary,
+    Color? onPrimary,
     Color? background,
+    Color? onBackground,
   }) {
     return ColorsX(
       background: background ?? this.background,
+      onBackground: onBackground ?? this.onBackground,
     );
   }
 
@@ -27,6 +32,7 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
     if (other is! ColorsX) return this as ColorsX;
     return ColorsX(
       background: Color.lerp(background, other.background, t)!,
+      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
     );
   }
 
@@ -36,8 +42,11 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
         (other.runtimeType == runtimeType &&
             other is ColorsX &&
             const DeepCollectionEquality().equals(primary, other.primary) &&
+            const DeepCollectionEquality().equals(onPrimary, other.onPrimary) &&
             const DeepCollectionEquality()
-                .equals(background, other.background));
+                .equals(background, other.background) &&
+            const DeepCollectionEquality()
+                .equals(onBackground, other.onBackground));
   }
 
   @override
@@ -45,7 +54,9 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
     return Object.hash(
       runtimeType.hashCode,
       const DeepCollectionEquality().hash(primary),
+      const DeepCollectionEquality().hash(onPrimary),
       const DeepCollectionEquality().hash(background),
+      const DeepCollectionEquality().hash(onBackground),
     );
   }
 }
