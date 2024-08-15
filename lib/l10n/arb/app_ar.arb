@@ -11,5 +11,12 @@
     "invalidPassword": "كلمة المرور غير صالحة",
     "passwordsDontMatch": "كلمات المرور لا تتطابق",
     "loginFailed": "فشل تسجيل الدخول",
-    "signUpFailed": "فشل التسجيل"
+    "signUpFailed": "فشل التسجيل",
+    "theme": "النمط",
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "النظام",
+    "language": "اللغة",
+    "dashboard": "الرئيسية",
+    "settings": "الاعدادات"
 }

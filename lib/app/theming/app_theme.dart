@@ -18,6 +18,7 @@ ThemeData _themeData(ColorsX colorScheme) {
     scaffoldBackgroundColor: colorScheme.background,
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
+        visualDensity: VisualDensity.compact,
         selectedBackgroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
       ),

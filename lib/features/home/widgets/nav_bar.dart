@@ -21,16 +21,16 @@ class _NavBar extends StatelessWidget {
         child: NavigationBar(
           selectedIndex: currentIndex,
           elevation: 3,
-          destinations: const [
+          destinations: [
             NavigationDestination(
-              selectedIcon: Icon(Icons.dashboard),
-              icon: Icon(Icons.dashboard_outlined),
-              label: 'Dashboard',
+              selectedIcon: const Icon(Icons.dashboard),
+              icon: const Icon(Icons.dashboard_outlined),
+              label: context.l10n.dashboard,
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.settings),
-              icon: Icon(Icons.settings_outlined),
-              label: 'Settings',
+              selectedIcon: const Icon(Icons.settings),
+              icon: const Icon(Icons.settings_outlined),
+              label: context.l10n.settings,
             ),
           ],
           onDestinationSelected: onDestinationSelected,

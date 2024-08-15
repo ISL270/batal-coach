@@ -11,5 +11,12 @@
     "invalidPassword": "invalid password",
     "passwordsDontMatch": "passwords do not match",
     "loginFailed": "Login failed",
-    "signUpFailed": "Sign up failed"
+    "signUpFailed": "Sign up failed",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
 }

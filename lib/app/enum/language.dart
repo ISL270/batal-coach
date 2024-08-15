@@ -10,3 +10,8 @@ enum Language {
 
   const Language(this.code, this.locale, this.name);
 }
+
+extension LanguageX on Language {
+  bool get isArabic => this == Language.arabic;
+  bool get isEnglish => this == Language.english;
+}

@@ -3,6 +3,7 @@ import 'package:btl/app/extension/bloc_extension.dart';
 import 'package:btl/app/extension/text_style.dart';
 import 'package:btl/app/theming/text_theme_extension.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
+import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -23,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Theme',
+                      context.l10n.theme,
                       style: context.textThemeX.medium.bold,
                     ),
                     SegmentedButton(
@@ -36,21 +37,21 @@ class SettingsScreen extends StatelessWidget {
                         ButtonSegment(
                           value: ThemeMode.light,
                           label: Text(
-                            'Light',
+                            context.l10n.light,
                             style: context.textThemeX.small,
                           ),
                         ),
                         ButtonSegment(
                           value: ThemeMode.dark,
                           label: Text(
-                            'Dark',
+                            context.l10n.dark,
                             style: context.textThemeX.small,
                           ),
                         ),
                         ButtonSegment(
                           value: ThemeMode.system,
                           label: Text(
-                            'System',
+                            context.l10n.system,
                             style: context.textThemeX.small,
                           ),
                         ),
@@ -63,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Language',
+                      context.l10n.language,
                       style: context.textThemeX.medium.bold,
                     ),
                     SegmentedButton(

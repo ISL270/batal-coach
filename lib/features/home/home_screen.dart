@@ -1,6 +1,9 @@
 import 'package:btl/app/constants.dart/default.dart';
+import 'package:btl/app/enum/language.dart';
+import 'package:btl/app/extension/bloc_extension.dart';
 import 'package:btl/features/dashboard/dashboard_screen.dart';
 import 'package:btl/features/settings/settings_screen.dart';
+import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 part 'widgets/nav_bar.dart';
@@ -39,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       body: PageView.builder(
+        reverse: context.settingsBloc.state.language.isArabic,
         controller: _pageController,
         itemBuilder: (context, index) {
           return switch (index) {
