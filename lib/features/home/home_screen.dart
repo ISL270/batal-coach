@@ -1,8 +1,6 @@
-import 'package:btl/app/bloc/auth_bloc.dart';
 import 'package:btl/app/constants.dart/default.dart';
-import 'package:btl/features/home/widgets/avatar.dart';
+import 'package:btl/features/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final user = context.select((AuthBloc bloc) => bloc.state.user);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
@@ -55,41 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _pageController,
         itemBuilder: (context, index) {
           return switch (index) {
-            0 => Scaffold(
-                body: Align(
-                  alignment: const Alignment(0, -1 / 3),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Avatar(photo: user.photo),
-                      const SizedBox(height: 4),
-                      Text(user.email ?? '', style: textTheme.titleLarge),
-                      const SizedBox(height: 4),
-                      Text(user.name ?? '', style: textTheme.headlineSmall),
-                    ],
-                  ),
-                ),
-              ),
+            0 => const DashboardScreen(),
             1 => const Scaffold(
                 body: Center(
                   child: Text('settings'),
                 ),
               ),
-            _ => Scaffold(
-                body: Align(
-                  alignment: const Alignment(0, -1 / 3),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Avatar(photo: user.photo),
-                      const SizedBox(height: 4),
-                      Text(user.email ?? '', style: textTheme.titleLarge),
-                      const SizedBox(height: 4),
-                      Text(user.name ?? '', style: textTheme.headlineSmall),
-                    ],
-                  ),
-                ),
-              ),
+            _ => const DashboardScreen(),
           };
         },
       ),
