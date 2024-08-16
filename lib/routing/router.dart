@@ -6,6 +6,7 @@ import 'package:btl/features/splash/bloc/splash_bloc.dart';
 import 'package:btl/features/splash/splash_screen.dart';
 import 'package:btl/injection/injection.dart';
 import 'package:btl/routing/go_router_refresh_stream.dart';
+import 'package:btl/routing/go_router_state_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,17 +42,10 @@ final router = GoRouter(
     // if the user is not logged in, they need to login
     final authenticated = getIt.get<AuthenticationRepository>().isAuthenticated;
 
-    final loginloc = state.namedLocation(LoginScreen.name);
-    final loggingIn = state.matchedLocation == loginloc;
-
-    final signUpLoc = state.namedLocation(SignUpScreen.name);
-    final signnigUp = state.matchedLocation == signUpLoc;
-
     // bundle the location the user is coming from into a query parameter
-    final homeloc = state.namedLocation(HomeScreen.name);
-    final fromloc = state.matchedLocation == homeloc ? '' : state.matchedLocation;
+    final fromloc = state.isGoingToHome ? '' : state.matchedLocation;
     if (!authenticated) {
-      return loggingIn || signnigUp
+      return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
           : state.namedLocation(
               LoginScreen.name,
@@ -61,7 +55,9 @@ final router = GoRouter(
 
     // if the user is logged in, send them where they were going before (or
     // home if they weren't going anywhere)
-    if (loggingIn) return state.uri.queryParameters['from'] ?? homeloc;
+    if (state.isLoggingIn) {
+      return state.uri.queryParameters['from'] ?? state.namedLocation(HomeScreen.name);
+    }
 
     // no need to redirect at all
     return null;

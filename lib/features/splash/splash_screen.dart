@@ -1,3 +1,5 @@
+import 'package:btl/app/theming/app_colors_extension.dart';
+import 'package:btl/app/theming/text_theme_extension.dart';
 import 'package:btl/features/home/home_screen.dart';
 import 'package:btl/features/splash/bloc/splash_bloc.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +19,18 @@ class SplashScreen extends StatelessWidget {
           context.goNamed(HomeScreen.name);
         }
       },
-      child: const Scaffold(
-        body: Center(child: FlutterLogo()),
+      child: Scaffold(
+        body: Center(
+          child: Text(
+            'BTL',
+            style: context.textThemeX.large.copyWith(
+              fontSize: 25,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.w900,
+              color: context.colorsX.primary,
+            ),
+          ),
+        ),
       ),
     );
   }
