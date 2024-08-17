@@ -7,7 +7,7 @@ abstract final class AppColors {
   static const secondaryLight = Color(0xFFFFFFFF);
   static const lightTint = Color(0xB2FFFFFF);
   static const dark = Color(0xFF272727);
-  static const secondaryDark = Color(0xFF2E2E2E);
+  static const secondaryDark = Color(0xFF383838);
   static const darkTint = Color(0xB2000000);
   static const onDark = Color(0xDDFFFFFF);
   static const onLight = Color(0xDD000000);
