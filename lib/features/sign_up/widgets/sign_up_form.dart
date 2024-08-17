@@ -1,3 +1,4 @@
+import 'package:btl/app/theming/app_colors_extension.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class SignUpForm extends StatelessWidget {
         } else if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(state.errorMessage ?? context.l10n.signUpFailed)));
+            ..showSnackBar(
+                SnackBar(content: Text(state.errorMessage ?? context.l10n.signUpFailed)));
         }
       },
       child: Align(
@@ -120,7 +122,7 @@ class _SignUpButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  backgroundColor: Colors.orangeAccent,
+                  backgroundColor: context.colorsX.primary,
                 ),
                 onPressed:
                     state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,

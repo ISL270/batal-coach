@@ -10,6 +10,8 @@ part 'text_theme_extension.tailor.dart';
 @TailorMixin(themeGetter: ThemeGetter.onBuildContext)
 class TextThemeX extends ThemeExtension<TextThemeX> with _$TextThemeXTailorMixin {
   @override
+  final TextStyle heading;
+  @override
   final TextStyle small;
   @override
   final TextStyle medium;
@@ -17,6 +19,7 @@ class TextThemeX extends ThemeExtension<TextThemeX> with _$TextThemeXTailorMixin
   final TextStyle large;
 
   const TextThemeX({
+    required this.heading,
     required this.small,
     required this.medium,
     required this.large,

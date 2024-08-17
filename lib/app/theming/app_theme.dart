@@ -1,3 +1,5 @@
+import 'package:btl/app/constants.dart/app_colors.dart';
+import 'package:btl/app/extension/text_style.dart';
 import 'package:btl/app/extension/widget_state_extension.dart';
 import 'package:btl/app/theming/app_colors_extension.dart';
 import 'package:btl/app/theming/text_theme_extension.dart';
@@ -12,39 +14,110 @@ class AppTheme {
 }
 
 ThemeData _themeData(ColorsX colorScheme) {
-  final textTheme = _textTheme(colorScheme.onBackground);
+  final textTheme = TextThemeX(
+    heading: GoogleFonts.notoSansArabic(fontSize: 24.sp),
+    small: GoogleFonts.notoSansArabic(fontSize: 14.sp),
+    medium: GoogleFonts.notoSansArabic(fontSize: 16.sp),
+    large: GoogleFonts.notoSansArabic(fontSize: 18.sp),
+  );
   return ThemeData(
     primaryColor: colorScheme.primary,
     scaffoldBackgroundColor: colorScheme.background,
+    iconTheme: IconThemeData(color: colorScheme.onBackground),
+    progressIndicatorTheme: ProgressIndicatorThemeData(color: colorScheme.primary),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: colorScheme.primary,
+      selectionHandleColor: colorScheme.primary,
+      selectionColor: colorScheme.primary.withOpacity(.4),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(textStyle: const TextStyle().bold),
+    ),
+    appBarTheme: AppBarTheme(
+      color: colorScheme.background,
+      foregroundColor: colorScheme.onBackground,
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        textStyle: textTheme.small.bold,
         backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onBackground,
+        foregroundColor: colorScheme.onPrimary,
+        minimumSize: const Size(double.minPositive, 45),
+        disabledForegroundColor: colorScheme.onBackgroundTint,
+        disabledBackgroundColor: colorScheme.secondaryBackground,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
       ),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
         visualDensity: VisualDensity.compact,
+        foregroundColor: colorScheme.onBackground,
         selectedBackgroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
+      height: 65,
+      indicatorColor: Colors.transparent,
+      backgroundColor: colorScheme.secondaryBackground,
+      labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+      labelTextStyle: WidgetStatePropertyAll(textTheme.small.copyWith(
+        fontSize: 12,
+        color: colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      )),
       iconTheme: WidgetStateProperty.resolveWith((state) {
         if (state.isSelected) {
           return IconThemeData(color: colorScheme.primary);
         }
         return IconThemeData(color: colorScheme.onBackground);
       }),
-      height: 65,
-      labelTextStyle: WidgetStatePropertyAll(textTheme.small.copyWith(
-        fontSize: 12,
-        color: colorScheme.primary,
-        fontWeight: FontWeight.bold,
-      )),
-      indicatorColor: Colors.transparent,
-      backgroundColor: colorScheme.secondaryBackground,
-      labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      errorStyle: TextStyle(color: colorScheme.error),
+      labelStyle: TextStyle(color: colorScheme.onBackgroundTint),
+      floatingLabelStyle: TextStyle(color: colorScheme.onBackground).bold,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: colorScheme.onBackground),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: colorScheme.onBackground, width: 1.8),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: colorScheme.error),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: colorScheme.error, width: 1.8),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: colorScheme.onBackground),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: colorScheme.onBackground.withOpacity(.5)),
+      ),
+    ),
+    textTheme: TextTheme(
+      bodySmall: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      bodyMedium: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      bodyLarge: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      labelSmall: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      labelMedium: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      labelLarge: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      titleSmall: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      titleMedium: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      titleLarge: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      displaySmall: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      displayMedium: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      displayLarge: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      headlineSmall: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      headlineMedium: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
+      headlineLarge: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
     ),
     extensions: [
       // Use this instead of default colorScheme.

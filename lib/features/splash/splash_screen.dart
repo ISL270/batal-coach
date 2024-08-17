@@ -23,8 +23,7 @@ class SplashScreen extends StatelessWidget {
         body: Center(
           child: Text(
             'BTL',
-            style: context.textThemeX.large.copyWith(
-              fontSize: 25,
+            style: context.textThemeX.heading.copyWith(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w900,
               color: context.colorsX.primary,

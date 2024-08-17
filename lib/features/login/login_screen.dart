@@ -1,4 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:btl/app/theming/text_theme_extension.dart';
 import 'package:btl/features/login/cubit/login_cubit.dart';
 import 'package:btl/features/login/widgets/login_form.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
@@ -16,7 +17,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.login),
+        title: Text(
+          context.l10n.login,
+          style: context.textThemeX.heading,
+        ),
         actions: [
           IconButton(
             onPressed: context.read<SettingsBloc>().switchLanguage,
@@ -24,12 +28,9 @@ class LoginScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: BlocProvider(
-          create: (_) => LoginCubit(getIt.get<AuthenticationRepository>()),
-          child: const LoginForm(),
-        ),
+      body: BlocProvider(
+        create: (_) => LoginCubit(getIt.get<AuthenticationRepository>()),
+        child: const LoginForm(),
       ),
     );
   }
