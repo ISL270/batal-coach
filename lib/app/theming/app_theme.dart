@@ -56,19 +56,15 @@ ThemeData _themeData(ColorsX colorScheme) {
 }
 
 final _lightColorScheme = ColorsX(
-  background: const Color(0xFFF2F2F2),
-  secondaryBackground: Colors.white,
-  onBackground: Colors.black87,
+  background: AppColors.light,
+  secondaryBackground: AppColors.secondaryLight,
+  onBackground: AppColors.onLight,
+  onBackgroundTint: AppColors.darkTint,
 );
 
 final _darkColorScheme = ColorsX(
-  background: const Color(0xFF272727),
-  secondaryBackground: const Color(0xFF2E2E2E),
-  onBackground: Colors.white,
+  background: AppColors.dark,
+  secondaryBackground: AppColors.secondaryDark,
+  onBackground: AppColors.onDark,
+  onBackgroundTint: AppColors.lightTint,
 );
-
-TextThemeX _textTheme(Color color) => TextThemeX(
-      small: GoogleFonts.notoSansArabic(fontSize: 14.sp, color: color),
-      medium: GoogleFonts.notoSansArabic(fontSize: 16.sp, color: color),
-      large: GoogleFonts.notoSansArabic(fontSize: 18.sp, color: color),
-    );

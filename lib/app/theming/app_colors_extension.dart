@@ -1,3 +1,4 @@
+import 'package:btl/app/constants.dart/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
@@ -10,19 +11,28 @@ part 'app_colors_extension.tailor.dart';
 @TailorMixin(themeGetter: ThemeGetter.onBuildContext)
 class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
   @override
-  final Color primary = const Color(0xFFFF3232);
+  final Color primary = AppColors.primary;
   @override
-  final Color onPrimary = const Color(0xFFFFFFFF);
+  final Color onPrimary = AppColors.secondaryLight;
+  @override
+  final Color secondary = AppColors.secondary;
+  @override
+  final Color onSecondary = AppColors.secondaryLight;
   @override
   final Color background;
   @override
   final Color secondaryBackground;
   @override
   final Color onBackground;
+  @override
+  final Color onBackgroundTint;
+  @override
+  final Color error = AppColors.primary;
 
   ColorsX({
     required this.background,
     required this.secondaryBackground,
     required this.onBackground,
+    required this.onBackgroundTint,
   });
 }

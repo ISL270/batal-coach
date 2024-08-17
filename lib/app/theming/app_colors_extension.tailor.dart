@@ -11,22 +11,31 @@ part of 'app_colors_extension.dart';
 mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
   Color get primary;
   Color get onPrimary;
+  Color get secondary;
+  Color get onSecondary;
   Color get background;
   Color get secondaryBackground;
   Color get onBackground;
+  Color get onBackgroundTint;
+  Color get error;
 
   @override
   ColorsX copyWith({
     Color? primary,
     Color? onPrimary,
+    Color? secondary,
+    Color? onSecondary,
     Color? background,
     Color? secondaryBackground,
     Color? onBackground,
+    Color? onBackgroundTint,
+    Color? error,
   }) {
     return ColorsX(
       background: background ?? this.background,
       secondaryBackground: secondaryBackground ?? this.secondaryBackground,
       onBackground: onBackground ?? this.onBackground,
+      onBackgroundTint: onBackgroundTint ?? this.onBackgroundTint,
     );
   }
 
@@ -38,6 +47,8 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
       secondaryBackground:
           Color.lerp(secondaryBackground, other.secondaryBackground, t)!,
       onBackground: Color.lerp(onBackground, other.onBackground, t)!,
+      onBackgroundTint:
+          Color.lerp(onBackgroundTint, other.onBackgroundTint, t)!,
     );
   }
 
@@ -48,12 +59,18 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
             other is ColorsX &&
             const DeepCollectionEquality().equals(primary, other.primary) &&
             const DeepCollectionEquality().equals(onPrimary, other.onPrimary) &&
+            const DeepCollectionEquality().equals(secondary, other.secondary) &&
+            const DeepCollectionEquality()
+                .equals(onSecondary, other.onSecondary) &&
             const DeepCollectionEquality()
                 .equals(background, other.background) &&
             const DeepCollectionEquality()
                 .equals(secondaryBackground, other.secondaryBackground) &&
             const DeepCollectionEquality()
-                .equals(onBackground, other.onBackground));
+                .equals(onBackground, other.onBackground) &&
+            const DeepCollectionEquality()
+                .equals(onBackgroundTint, other.onBackgroundTint) &&
+            const DeepCollectionEquality().equals(error, other.error));
   }
 
   @override
@@ -62,9 +79,13 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
       runtimeType.hashCode,
       const DeepCollectionEquality().hash(primary),
       const DeepCollectionEquality().hash(onPrimary),
+      const DeepCollectionEquality().hash(secondary),
+      const DeepCollectionEquality().hash(onSecondary),
       const DeepCollectionEquality().hash(background),
       const DeepCollectionEquality().hash(secondaryBackground),
       const DeepCollectionEquality().hash(onBackground),
+      const DeepCollectionEquality().hash(onBackgroundTint),
+      const DeepCollectionEquality().hash(error),
     );
   }
 }
