@@ -43,9 +43,9 @@ ThemeData _themeData(ColorsX colorScheme) {
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
         minimumSize: const Size(double.minPositive, 45),
-        disabledForegroundColor: colorScheme.onBackgroundTint,
-        disabledBackgroundColor: colorScheme.secondaryBackground,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
+        disabledForegroundColor: colorScheme.isDark ? colorScheme.onBackgroundTint : null,
+        disabledBackgroundColor: colorScheme.isDark ? colorScheme.secondaryBackground : null,
       ),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
@@ -79,7 +79,7 @@ ThemeData _themeData(ColorsX colorScheme) {
       floatingLabelStyle: TextStyle(color: colorScheme.onBackground).bold,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: colorScheme.onBackground),
+        borderSide: BorderSide(color: colorScheme.onBackgroundTint),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
@@ -99,7 +99,7 @@ ThemeData _themeData(ColorsX colorScheme) {
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: colorScheme.onBackground.withOpacity(.5)),
+        borderSide: BorderSide(color: colorScheme.onBackgroundTint.withOpacity(.5)),
       ),
     ),
     textTheme: TextTheme(

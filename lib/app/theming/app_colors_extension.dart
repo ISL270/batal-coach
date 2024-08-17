@@ -36,3 +36,8 @@ class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
     required this.onBackgroundTint,
   });
 }
+
+extension X on ColorsX {
+  bool get isLight => background == AppColors.light;
+  bool get isDark => background == AppColors.dark;
+}

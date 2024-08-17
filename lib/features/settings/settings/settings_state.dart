@@ -24,6 +24,12 @@ class SettingsState extends Equatable {
         themeMode,
       ];
 
+  factory SettingsState.fromJson(Map<String, dynamic> json) => _$SettingsStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SettingsStateToJson(this);
+}
+
+extension SettingsStateX on SettingsState {
   SettingsState copyWith({
     Status? status,
     Language? language,
@@ -36,7 +42,6 @@ class SettingsState extends Equatable {
     );
   }
 
-  factory SettingsState.fromJson(Map<String, dynamic> json) => _$SettingsStateFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SettingsStateToJson(this);
+  bool get isThemeDark => themeMode == ThemeMode.dark;
+  bool get isThemeLight => themeMode == ThemeMode.light;
 }

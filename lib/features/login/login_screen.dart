@@ -1,4 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:btl/app/extension/bloc_extension.dart';
+import 'package:btl/app/extension/text_style.dart';
 import 'package:btl/app/theming/text_theme_extension.dart';
 import 'package:btl/features/login/cubit/login_cubit.dart';
 import 'package:btl/features/login/widgets/login_form.dart';
@@ -19,13 +21,23 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.l10n.login,
-          style: context.textThemeX.heading,
+          style: context.textThemeX.heading.bold,
         ),
         actions: [
           IconButton(
+            onPressed: () {
+              context.settingsBloc.add(SettingsThemeChanged(
+                context.settingsBloc.state.isThemeDark ? ThemeMode.light : ThemeMode.dark,
+              ));
+            },
+            icon: Icon(
+              context.settingsBloc.state.isThemeDark ? Icons.dark_mode : Icons.dark_mode_outlined,
+            ),
+          ),
+          IconButton(
             onPressed: context.read<SettingsBloc>().switchLanguage,
             icon: const Icon(Icons.g_translate),
-          )
+          ),
         ],
       ),
       body: BlocProvider(
