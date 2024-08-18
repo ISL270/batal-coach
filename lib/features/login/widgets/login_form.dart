@@ -57,7 +57,7 @@ class _EmailInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: context.l10n.email,
             helperText: '',
-            errorText: state.email.displayError != null ? 'invalid email' : null,
+            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
           ),
         );
       },
@@ -77,7 +77,7 @@ class _PasswordInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: context.l10n.password,
             helperText: '',
-            errorText: state.password.displayError != null ? 'invalid password' : null,
+            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
           ),
         );
       },
