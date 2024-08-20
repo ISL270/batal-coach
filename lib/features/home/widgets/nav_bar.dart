@@ -23,8 +23,8 @@ class _NavBar extends StatelessWidget {
           elevation: 3,
           destinations: [
             NavigationDestination(
-              selectedIcon: const Icon(Icons.dashboard),
-              icon: const Icon(Icons.dashboard_outlined),
+              selectedIcon: const Icon(Icons.fitness_center),
+              icon: const Icon(Icons.fitness_center_outlined),
               label: context.l10n.dashboard,
             ),
             NavigationDestination(

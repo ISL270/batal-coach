@@ -1,12 +1,12 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/app/bloc/auth/auth_bloc.dart';
 import 'package:btl/app/theming/text_theme_extension.dart';
-import 'package:btl/features/dashboard/widgets/avatar.dart';
+import 'package:btl/features/workout_builder/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+class WorkoutBuilderScreen extends StatelessWidget {
+  const WorkoutBuilderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
