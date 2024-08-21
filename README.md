@@ -61,7 +61,7 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 
 ### Adding Strings
 
-1. To add a new localizable string, open the `app_en.arb` file at `lib/l10n/arb/app_en.arb`.
+1. To add a new localizable string, open the `app_en.arb` file at `lib/core/l10n/arb/app_en.arb`.
 
 ```arb
 {
@@ -119,7 +119,7 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 
 ### Adding Translations
 
-1. For each supported locale, add a new ARB file in `lib/l10n/arb`.
+1. For each supported locale, add a new ARB file in `lib/core/l10narb`.
 
 ```
 ├── l10n
@@ -161,7 +161,7 @@ To use the latest translations changes, you will need to generate them:
 1. Generate localizations for the current project:
 
 ```sh
-flutter gen-l10n --arb-dir="lib/l10n/arb"
+flutter gen-l10n --arb-dir="lib/core/l10narb"
 ```
 
 Alternatively, run `flutter run` and code generation will take place automatically.

@@ -1,9 +1,9 @@
 import 'package:btl/core/constants.dart/default.dart';
 import 'package:btl/core/enums/language.dart';
 import 'package:btl/core/extensions/bloc_extension.dart';
+import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/features/settings/settings_screen.dart';
 import 'package:btl/features/workout_builder/presentation/workout_builder_screen.dart';
-import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 part 'widgets/nav_bar.dart';
