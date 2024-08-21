@@ -1,6 +1,6 @@
-import 'package:btl/app/view/app.dart';
+import 'package:btl/app.dart';
 import 'package:btl/bootstrap.dart';
-import 'package:btl/firebase_options/firebase_options_stg.dart';
+import 'package:btl/flavors/staging/firebase_options_stg.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

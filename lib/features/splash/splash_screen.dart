@@ -1,5 +1,5 @@
-import 'package:btl/app/theming/app_colors_extension.dart';
-import 'package:btl/app/theming/text_theme_extension.dart';
+import 'package:btl/core/theming/app_colors_extension.dart';
+import 'package:btl/core/theming/text_theme_extension.dart';
 import 'package:btl/features/home/home_screen.dart';
 import 'package:btl/features/splash/bloc/splash_bloc.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:btl/app/theming/app_colors_extension.dart';
+import 'package:btl/core/theming/app_colors_extension.dart';
 import 'package:btl/features/login/cubit/login_cubit.dart';
 import 'package:btl/features/sign_up/sign_up_screen.dart';
 import 'package:btl/l10n/l10n.dart';

@@ -1,5 +1,5 @@
-import 'package:btl/app/enum/language.dart';
-import 'package:btl/app/enum/status.dart';
+import 'package:btl/core/enums/language.dart';
+import 'package:btl/core/enums/status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';

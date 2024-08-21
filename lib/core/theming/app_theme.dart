@@ -1,8 +1,8 @@
-import 'package:btl/app/constants.dart/app_colors.dart';
-import 'package:btl/app/extension/text_style.dart';
-import 'package:btl/app/extension/widget_state_extension.dart';
-import 'package:btl/app/theming/app_colors_extension.dart';
-import 'package:btl/app/theming/text_theme_extension.dart';
+import 'package:btl/core/constants.dart/app_colors.dart';
+import 'package:btl/core/extensions/text_style.dart';
+import 'package:btl/core/extensions/widget_state_extension.dart';
+import 'package:btl/core/theming/app_colors_extension.dart';
+import 'package:btl/core/theming/text_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

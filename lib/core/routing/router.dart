@@ -1,12 +1,12 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:btl/core/injection/injection.dart';
+import 'package:btl/core/routing/go_router_refresh_stream.dart';
+import 'package:btl/core/routing/go_router_state_extension.dart';
 import 'package:btl/features/home/home_screen.dart';
 import 'package:btl/features/login/login_screen.dart';
 import 'package:btl/features/sign_up/sign_up_screen.dart';
 import 'package:btl/features/splash/bloc/splash_bloc.dart';
 import 'package:btl/features/splash/splash_screen.dart';
-import 'package:btl/injection/injection.dart';
-import 'package:btl/routing/go_router_refresh_stream.dart';
-import 'package:btl/routing/go_router_state_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 

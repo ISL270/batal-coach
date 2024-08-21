@@ -1,8 +1,8 @@
-import 'package:btl/app/bloc/auth/auth_bloc.dart';
-import 'package:btl/app/enum/language.dart';
-import 'package:btl/app/extension/bloc_extension.dart';
-import 'package:btl/app/extension/text_style.dart';
-import 'package:btl/app/theming/text_theme_extension.dart';
+import 'package:btl/core/blocs/auth/auth_bloc.dart';
+import 'package:btl/core/enums/language.dart';
+import 'package:btl/core/extensions/bloc_extension.dart';
+import 'package:btl/core/extensions/text_style.dart';
+import 'package:btl/core/theming/text_theme_extension.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
 import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:btl/app/theming/app_colors_extension.dart';
+import 'package:btl/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 const _avatarSize = 48.0;

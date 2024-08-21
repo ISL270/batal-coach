@@ -1,11 +1,11 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:btl/app/bloc/auth/auth_bloc.dart';
-import 'package:btl/app/enum/flavors.dart';
-import 'package:btl/app/theming/app_theme.dart';
+import 'package:btl/core/blocs/auth/auth_bloc.dart';
+import 'package:btl/core/injection/injection.dart';
+import 'package:btl/core/routing/router.dart';
+import 'package:btl/core/theming/app_theme.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
-import 'package:btl/injection/injection.dart';
+import 'package:btl/flavors/flavors.dart';
 import 'package:btl/l10n/l10n.dart';
-import 'package:btl/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

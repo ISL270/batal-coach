@@ -1,9 +1,9 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:btl/app/extension/bloc_extension.dart';
+import 'package:btl/core/extensions/bloc_extension.dart';
+import 'package:btl/core/injection/injection.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:btl/features/sign_up/widgets/sign_up_form.dart';
-import 'package:btl/injection/injection.dart';
 import 'package:btl/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
