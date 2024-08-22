@@ -1,6 +1,6 @@
 import 'package:btl/core/constants.dart/app_colors.dart';
-import 'package:btl/core/extensions/text_style.dart';
-import 'package:btl/core/extensions/widget_state_extension.dart';
+import 'package:btl/core/extensions/text_style_x.dart';
+import 'package:btl/core/extensions/widget_state_x.dart';
 import 'package:btl/core/theming/app_colors_extension.dart';
 import 'package:btl/core/theming/text_theme_extension.dart';
 import 'package:flutter/material.dart';
