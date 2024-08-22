@@ -1,3 +1,4 @@
+import 'package:btl/core/extensions/english_x.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: context.l10n.email,
+            labelText: context.l10n.email.capitalized,
             helperText: '',
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
           ),
@@ -71,7 +72,7 @@ class _PasswordInput extends StatelessWidget {
           onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: context.l10n.password,
+            labelText: context.l10n.password.capitalized,
             helperText: '',
             errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
           ),
@@ -95,7 +96,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
               context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: context.l10n.confirmPassword,
+            labelText: context.l10n.confirmPassword.capitalized,
             helperText: '',
             errorText: state.confirmedPassword.displayError != null
                 ? context.l10n.passwordsDontMatch
@@ -117,7 +118,7 @@ class _SignUpButton extends StatelessWidget {
             : ElevatedButton(
                 onPressed:
                     state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
-                child: Text(context.l10n.signUp),
+                child: Text(context.l10n.signUp.capitalized),
               );
       },
     );

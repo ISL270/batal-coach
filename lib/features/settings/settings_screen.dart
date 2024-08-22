@@ -1,5 +1,6 @@
 import 'package:btl/core/blocs/auth/auth_bloc.dart';
 import 'package:btl/core/extensions/bloc_x.dart';
+import 'package:btl/core/extensions/english_x.dart';
 import 'package:btl/core/extensions/text_style_x.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/core/l10n/language.dart';
@@ -26,7 +27,7 @@ class SettingsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        context.l10n.theme,
+                        context.l10n.theme.capitalized,
                         style: context.textThemeX.large.bold,
                       ),
                       SegmentedButton(
@@ -39,21 +40,21 @@ class SettingsScreen extends StatelessWidget {
                           ButtonSegment(
                             value: ThemeMode.light,
                             label: Text(
-                              context.l10n.light,
+                              context.l10n.light.capitalized,
                               style: context.textThemeX.small,
                             ),
                           ),
                           ButtonSegment(
                             value: ThemeMode.dark,
                             label: Text(
-                              context.l10n.dark,
+                              context.l10n.dark.capitalized,
                               style: context.textThemeX.small,
                             ),
                           ),
                           ButtonSegment(
                             value: ThemeMode.system,
                             label: Text(
-                              context.l10n.system,
+                              context.l10n.system.capitalized,
                               style: context.textThemeX.small,
                             ),
                           ),
@@ -66,7 +67,7 @@ class SettingsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        context.l10n.language,
+                        context.l10n.language.capitalized,
                         style: context.textThemeX.large.bold,
                       ),
                       SegmentedButton(
@@ -100,7 +101,7 @@ class SettingsScreen extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () => context.authBloc.add(AuthLogoutRequested()),
                       label: Text(
-                        context.l10n.logout,
+                        context.l10n.logout.capitalized,
                         style: context.textThemeX.large.bold,
                       ),
                       iconAlignment: IconAlignment.end,

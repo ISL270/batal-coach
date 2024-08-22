@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/core/extensions/bloc_x.dart';
+import 'package:btl/core/extensions/english_x.dart';
 import 'package:btl/core/injection/injection.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
@@ -18,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: Text(context.l10n.signUp),
+        title: Text(context.l10n.signUp.capitalized),
         actions: [
           IconButton(
             onPressed: () {

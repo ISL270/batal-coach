@@ -1,3 +1,4 @@
+import 'package:btl/core/extensions/english_x.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/core/theming/app_colors_extension.dart';
 import 'package:btl/features/login/cubit/login_cubit.dart';
@@ -55,7 +56,7 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: context.l10n.email,
+            labelText: context.l10n.email.capitalized,
             helperText: '',
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
           ),
@@ -75,7 +76,7 @@ class _PasswordInput extends StatelessWidget {
           onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: context.l10n.password,
+            labelText: context.l10n.password.capitalized,
             helperText: '',
             errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
           ),
@@ -95,7 +96,7 @@ class _LoginButton extends StatelessWidget {
             : ElevatedButton(
                 onPressed:
                     state.isValid ? () => context.read<LoginCubit>().logInWithCredentials() : null,
-                child: Text(context.l10n.login),
+                child: Text(context.l10n.login.capitalized),
               );
       },
     );
@@ -107,7 +108,7 @@ class _GoogleLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       label: Text(
-        context.l10n.signInWithGoogle,
+        context.l10n.signInWithGoogle.capitalized,
         style: const TextStyle(color: Colors.white),
       ),
       style: ElevatedButton.styleFrom(backgroundColor: context.colorsX.secondary),
@@ -124,7 +125,7 @@ class _SignUpButton extends StatelessWidget {
     return TextButton(
       onPressed: () => context.pushNamed(SignUpScreen.name),
       child: Text(
-        context.l10n.createAccount,
+        context.l10n.createAccount.capitalized,
         style: TextStyle(color: theme.primaryColor),
       ),
     );

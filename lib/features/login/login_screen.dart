@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/core/extensions/bloc_x.dart';
+import 'package:btl/core/extensions/english_x.dart';
 import 'package:btl/core/extensions/text_style_x.dart';
 import 'package:btl/core/injection/injection.dart';
 import 'package:btl/core/l10n/l10n.dart';
@@ -20,7 +21,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          context.l10n.login,
+          context.l10n.login.capitalized,
           style: context.textThemeX.heading.bold,
         ),
         actions: [
