@@ -18,7 +18,7 @@
     "system": "النظام",
     "language": "اللغة",
     "dashboard": "الرئيسية",
-    "settings": "الاعدادات",
+    "settings": "إعدادات",
     "logout": "تسجيل الخروج",
     "exercise": "{count, plural, =1{تمرين} other{تمارين}}",
     "@exercise": {

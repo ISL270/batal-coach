@@ -20,20 +20,19 @@ class _NavBar extends StatelessWidget {
         ),
         child: NavigationBar(
           selectedIndex: currentIndex,
-          elevation: 3,
+          onDestinationSelected: onDestinationSelected,
           destinations: [
             NavigationDestination(
-              label: context.l10n.exercise(1).capitalize().define(context),
               selectedIcon: const Icon(Icons.fitness_center),
               icon: const Icon(Icons.fitness_center_outlined),
+              label: context.l10n.exercise(1).definite.capitalize(),
             ),
             NavigationDestination(
-              label: context.l10n.settings,
+              label: context.l10n.settings.definite,
               selectedIcon: const Icon(Icons.settings),
               icon: const Icon(Icons.settings_outlined),
             ),
           ],
-          onDestinationSelected: onDestinationSelected,
         ),
       ),
     );
