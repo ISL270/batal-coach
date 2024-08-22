@@ -19,5 +19,15 @@
     "language": "Language",
     "dashboard": "Dashboard",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "exercise": "{count, plural, =1{exercise} other{exercises}}",
+    "@exercise": {
+    "placeholders": {
+        "count": {
+        "type": "num",
+        "format": "compact"
+        }
+      }
+    },
+    "workout": "Workout"
 }

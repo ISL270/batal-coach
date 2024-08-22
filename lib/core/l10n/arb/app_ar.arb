@@ -19,5 +19,15 @@
     "language": "اللغة",
     "dashboard": "الرئيسية",
     "settings": "الاعدادات",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "exercise": "{count, plural, =1{تمرين} other{تمارين}}",
+    "@exercise": {
+    "placeholders": {
+        "count": {
+        "type": "num",
+        "format": "compact"
+        }
+      }
+    },
+    "workout": "Workout"
 }

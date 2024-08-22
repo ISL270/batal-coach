@@ -10,6 +10,7 @@ dependencies:
   authentication_repository:
    git: https://github.com/ISL270/authentication_repository
   bloc: ^8.1.4
+  dartx: ^1.2.0
   equatable: ^2.0.5
   firebase_core: ^3.3.0
   flow_builder: ^0.1.0

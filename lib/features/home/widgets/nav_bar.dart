@@ -23,14 +23,14 @@ class _NavBar extends StatelessWidget {
           elevation: 3,
           destinations: [
             NavigationDestination(
+              label: context.l10n.exercise(1).capitalize().define(context),
               selectedIcon: const Icon(Icons.fitness_center),
               icon: const Icon(Icons.fitness_center_outlined),
-              label: context.l10n.dashboard,
             ),
             NavigationDestination(
+              label: context.l10n.settings,
               selectedIcon: const Icon(Icons.settings),
               icon: const Icon(Icons.settings_outlined),
-              label: context.l10n.settings,
             ),
           ],
           onDestinationSelected: onDestinationSelected,

@@ -44,4 +44,7 @@ extension SettingsStateX on SettingsState {
 
   bool get isThemeDark => themeMode == ThemeMode.dark;
   bool get isThemeLight => themeMode == ThemeMode.light;
+
+  bool get isArabic => language == Language.arabic;
+  bool get isEnglish => language == Language.english;
 }
