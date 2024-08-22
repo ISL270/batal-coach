@@ -15,9 +15,9 @@ SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$SettingsStateToJson(SettingsState instance) =>
     <String, dynamic>{
-      'status': _$StatusEnumMap[instance.status]!,
-      'language': _$LanguageEnumMap[instance.language]!,
-      'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
+      'status': _$StatusEnumMap[instance.status],
+      'language': _$LanguageEnumMap[instance.language],
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
     };
 
 const _$StatusEnumMap = {

@@ -25,12 +25,12 @@ class _NavBar extends StatelessWidget {
             NavigationDestination(
               selectedIcon: const Icon(Icons.fitness_center),
               icon: const Icon(Icons.fitness_center_outlined),
-              label: context.l10n.exercise(1).definite.capitalize(),
+              label: context.l10n.exercise(1).capitalizedDefinite,
             ),
             NavigationDestination(
-              label: context.l10n.settings.definite,
               selectedIcon: const Icon(Icons.settings),
               icon: const Icon(Icons.settings_outlined),
+              label: context.l10n.settings.capitalizedDefinite,
             ),
           ],
         ),
