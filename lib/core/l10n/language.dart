@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:btl/core/l10n/locales.dart';
+
 enum Language {
-  arabic('ar', Locale('ar'), 'العربية'),
-  english('en', Locale('en'), 'English');
+  arabic('ar', Locales.arabic, 'العربية'),
+  english('en', Locales.english, 'English');
 
   final Locale locale;
   final String code;

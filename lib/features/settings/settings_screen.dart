@@ -1,5 +1,5 @@
 import 'package:btl/core/blocs/auth/auth_bloc.dart';
-import 'package:btl/core/enums/language.dart';
+import 'package:btl/core/l10n/language.dart';
 import 'package:btl/core/extensions/bloc_x.dart';
 import 'package:btl/core/extensions/text_style_x.dart';
 import 'package:btl/core/l10n/l10n.dart';

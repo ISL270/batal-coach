@@ -1,4 +1,4 @@
-import 'package:btl/core/enums/language.dart';
+import 'package:btl/core/l10n/language.dart';
 import 'package:btl/core/enums/status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

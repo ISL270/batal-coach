@@ -1,4 +1,4 @@
-import 'package:btl/core/constants.dart/app_colors.dart';
+import 'package:btl/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
