@@ -23,8 +23,11 @@ class _NavBar extends StatelessWidget {
           onDestinationSelected: onDestinationSelected,
           destinations: [
             NavigationDestination(
-              selectedIcon: const Icon(Icons.fitness_center),
-              icon: const Icon(Icons.fitness_center_outlined),
+              selectedIcon: SvgAsset(
+                Assets.icons.dumbbell,
+                color: context.colorsX.primary,
+              ),
+              icon: SvgAsset(Assets.icons.dumbbellOutlined),
               label: context.l10n.exercise(1).capitalizedDefinite,
             ),
             NavigationDestination(

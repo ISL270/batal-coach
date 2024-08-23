@@ -20,6 +20,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
   form_inputs:
     git: https://github.com/ISL270/form_inputs
@@ -38,6 +39,7 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.1.7
   build_runner: ^2.4.11
+  flutter_gen_runner: ^5.6.0
   flutter_test:
     sdk: flutter
   injectable_generator: ^2.6.2
@@ -46,7 +48,13 @@ dev_dependencies:
   theme_tailor: ^3.0.1
   very_good_analysis: ^6.0.0
 
+flutter_gen:
+  output: lib/core/assets_gen/
+  line_length: 100
+
 
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/icons/
