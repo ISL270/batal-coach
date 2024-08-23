@@ -8,6 +8,7 @@ import 'package:btl/core/theming/text_theme_extension.dart';
 import 'package:btl/features/login/cubit/login_cubit.dart';
 import 'package:btl/features/login/widgets/login_form.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
+import 'package:btl/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Screen(
       appBar: AppBar(
         title: Text(
           context.l10n.login.capitalized,

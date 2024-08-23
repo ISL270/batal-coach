@@ -6,6 +6,7 @@ import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/features/settings/settings/settings_bloc.dart';
 import 'package:btl/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:btl/features/sign_up/widgets/sign_up_form.dart';
+import 'package:btl/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Screen(
       appBar: AppBar(
         leading: const BackButton(),
         title: Text(context.l10n.signUp.capitalized),
@@ -35,12 +36,9 @@ class SignUpScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: BlocProvider<SignUpCubit>(
-          create: (_) => SignUpCubit(getIt.get<AuthenticationRepository>()),
-          child: const SignUpForm(),
-        ),
+      body: BlocProvider<SignUpCubit>(
+        create: (_) => SignUpCubit(getIt.get<AuthenticationRepository>()),
+        child: const SignUpForm(),
       ),
     );
   }

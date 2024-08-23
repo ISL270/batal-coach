@@ -25,7 +25,7 @@ class LoginForm extends StatelessWidget {
         }
       },
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 22),
+        padding: const EdgeInsets.symmetric(vertical: 100),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
