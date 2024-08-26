@@ -5,10 +5,12 @@ import 'package:btl/core/extensions/string_x.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/core/l10n/language.dart';
 import 'package:btl/core/theming/app_colors_extension.dart';
+import 'package:btl/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/features/settings/settings_screen.dart';
-import 'package:btl/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/widgets/svg_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'widgets/nav_bar.dart';
 
@@ -46,15 +48,19 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       body: PageView.builder(
+        controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         reverse: context.settingsBloc.state.language.isArabic,
-        controller: _pageController,
-        itemBuilder: (context, index) {
-          return switch (index) {
-            0 => const WorkoutBuilderScreen(),
-            1 => const SettingsScreen(),
-            _ => const WorkoutBuilderScreen(),
-          };
+        itemBuilder: (context, index) => switch (index) {
+          0 => BlocProvider(
+              create: (context) => ExerciseBloc(),
+              child: const ExercisesScreen(),
+            ),
+          1 => const SettingsScreen(),
+          _ => BlocProvider(
+              create: (context) => ExerciseBloc(),
+              child: const ExercisesScreen(),
+            ),
         },
       ),
     );

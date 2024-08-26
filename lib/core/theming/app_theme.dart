@@ -56,6 +56,9 @@ ThemeData _themeData(ColorsX colorScheme) {
         selectedForegroundColor: colorScheme.onPrimary,
       ),
     ),
+    searchBarTheme: SearchBarThemeData(
+      backgroundColor: WidgetStatePropertyAll(colorScheme.secondaryBackground),
+    ),
     navigationBarTheme: NavigationBarThemeData(
       height: 65,
       indicatorColor: Colors.transparent,
