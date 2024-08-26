@@ -11,8 +11,8 @@
 import 'package:authentication_repository/authentication_repository.dart'
     as _i223;
 import 'package:btl/features/authentication/auth_module.dart' as _i732;
-import 'package:btl/features/exercise/data/data_sources/exercise_es_data_source.dart'
-    as _i485;
+import 'package:btl/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
+    as _i1068;
 import 'package:btl/features/exercise/data/data_sources/exercise_remote_data_source.dart'
     as _i556;
 import 'package:btl/features/exercise/data/repositories/exercise_repository.dart'
@@ -37,7 +37,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.singleton<_i556.ExerciseRemoteDataSource>(
-        () => _i485.ExerciseEsDataSource());
+        () => _i1068.ExerciseAlgoliaDataSource());
     gh.singleton<_i418.ExerciseRepository>(
         () => _i418.ExerciseRepository(gh<_i556.ExerciseRemoteDataSource>()));
     return this;

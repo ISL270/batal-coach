@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'exercise_es_data_source.dart';
+part of 'exercise_algolia_data_source.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExerciseES _$ExerciseESFromJson(Map<String, dynamic> json) => ExerciseES(
+ExerciseAlgolia _$ExerciseAlgoliaFromJson(Map<String, dynamic> json) =>
+    ExerciseAlgolia(
       json['id'] as String?,
       json['name'] as String?,
       json['force'] as String?,
@@ -24,7 +25,7 @@ ExerciseES _$ExerciseESFromJson(Map<String, dynamic> json) => ExerciseES(
       (json['images'] as List<dynamic>?)?.map((e) => e as String).toSet(),
     );
 
-Map<String, dynamic> _$ExerciseESToJson(ExerciseES instance) =>
+Map<String, dynamic> _$ExerciseAlgoliaToJson(ExerciseAlgolia instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

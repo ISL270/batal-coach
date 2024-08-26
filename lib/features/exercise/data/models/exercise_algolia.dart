@@ -1,8 +1,7 @@
-
-part of '../data_sources/exercise_es_data_source.dart';
+part of '../data_sources/exercise_algolia_data_source.dart';
 
 @JsonSerializable()
-class ExerciseES implements ExerciseRM {
+class ExerciseAlgolia implements ExerciseRM {
   @JsonKey(name: 'id')
   @override
   final String? id;
@@ -37,7 +36,7 @@ class ExerciseES implements ExerciseRM {
   @override
   final Set<String>? images;
 
-  const ExerciseES(
+  const ExerciseAlgolia(
     this.id,
     this.name,
     this.force,
@@ -51,7 +50,7 @@ class ExerciseES implements ExerciseRM {
     this.images,
   );
 
-  factory ExerciseES.fromJson(Map<String, dynamic> json) => _$ExerciseESFromJson(json);
+  factory ExerciseAlgolia.fromJson(Map<String, dynamic> json) => _$ExerciseAlgoliaFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ExerciseESToJson(this);
+  Map<String, dynamic> toJson() => _$ExerciseAlgoliaToJson(this);
 }

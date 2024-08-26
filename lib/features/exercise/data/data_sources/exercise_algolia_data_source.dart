@@ -3,15 +3,15 @@ import 'package:btl/features/exercise/data/models/exercise_rm.dart';
 import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part '../models/exercise_es.dart';
-part 'exercise_es_data_source.g.dart';
+part '../models/exercise_algolia.dart';
+part 'exercise_algolia_data_source.g.dart';
 
-@Singleton(as: ExerciseRemoteDataSource)  
-class ExerciseEsDataSource implements ExerciseRemoteDataSource {
+@Singleton(as: ExerciseRemoteDataSource)
+class ExerciseAlgoliaDataSource implements ExerciseRemoteDataSource {
   @override
   Future<Iterable<ExerciseRM>> getExercises() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    final exercises = mockJsonList.map(ExerciseES.fromJson);
+    final exercises = mockJsonList.map(ExerciseAlgolia.fromJson);
     return exercises;
   }
 }
