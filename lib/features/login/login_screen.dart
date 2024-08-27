@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: context.read<SettingsBloc>().switchLanguage,
+            onPressed: context.settingsBloc.switchLanguage,
             icon: const Icon(Icons.g_translate),
           ),
         ],

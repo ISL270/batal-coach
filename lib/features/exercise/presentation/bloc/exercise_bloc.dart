@@ -6,10 +6,12 @@ import 'package:btl/features/exercise/data/repositories/exercise_repository.dart
 import 'package:btl/features/exercise/domain/models/exercise.dart';
 import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 
 part 'exercise_event.dart';
 part 'exercise_state.dart';
 
+@injectable
 class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   final ExerciseRepository _repository;
 

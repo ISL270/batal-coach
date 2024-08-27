@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:authentication_repository/authentication_repository.dart'
     as _i223;
+import 'package:btl/core/blocs/auth/auth_bloc.dart' as _i461;
 import 'package:btl/features/authentication/auth_module.dart' as _i732;
 import 'package:btl/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
     as _i1068;
@@ -17,6 +18,8 @@ import 'package:btl/features/exercise/data/data_sources/exercise_remote_data_sou
     as _i556;
 import 'package:btl/features/exercise/data/repositories/exercise_repository.dart'
     as _i418;
+import 'package:btl/features/exercise/presentation/bloc/exercise_bloc.dart'
+    as _i427;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -40,6 +43,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1068.ExerciseAlgoliaDataSource());
     gh.singleton<_i418.ExerciseRepository>(
         () => _i418.ExerciseRepository(gh<_i556.ExerciseRemoteDataSource>()));
+    gh.factory<_i461.AuthBloc>(
+        () => _i461.AuthBloc(authRepo: gh<_i223.AuthenticationRepository>()));
+    gh.factory<_i427.ExerciseBloc>(
+        () => _i427.ExerciseBloc(gh<_i418.ExerciseRepository>()));
     return this;
   }
 }

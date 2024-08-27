@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
             icon: const Icon(Icons.dark_mode),
           ),
           IconButton(
-            onPressed: context.read<SettingsBloc>().switchLanguage,
+            onPressed: context.settingsBloc.switchLanguage,
             icon: const Icon(Icons.g_translate),
           ),
         ],
