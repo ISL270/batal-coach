@@ -28,7 +28,7 @@ class ExerciseAlgolia implements ExerciseRM {
   final Set<String>? secondaryMuscles;
   @JsonKey(name: 'instructions')
   @override
-  final String? instructions;
+  final List<String>? instructions;
   @JsonKey(name: 'category')
   @override
   final String? category;

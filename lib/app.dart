@@ -1,5 +1,5 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/core/blocs/auth/auth_bloc.dart';
+import 'package:btl/core/extensions/getit_x.dart';
 import 'package:btl/core/injection/injection.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/core/routing/router.dart';
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => SettingsBloc()),
-            BlocProvider(create: (_) => AuthBloc(authRepo: getIt.get<AuthenticationRepository>())),
+            BlocProvider(create: (_) => AuthBloc(authRepo: getIt.authRepo)),
           ],
           child: BlocBuilder<SettingsBloc, SettingsState>(
             builder: (context, state) {

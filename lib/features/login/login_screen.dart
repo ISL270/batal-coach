@@ -1,6 +1,6 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:btl/core/extensions/bloc_x.dart';
 import 'package:btl/core/extensions/english_x.dart';
+import 'package:btl/core/extensions/getit_x.dart';
 import 'package:btl/core/extensions/text_style_x.dart';
 import 'package:btl/core/injection/injection.dart';
 import 'package:btl/core/l10n/l10n.dart';
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (_) => LoginCubit(getIt.get<AuthenticationRepository>()),
+        create: (_) => LoginCubit(getIt.authRepo),
         child: const LoginForm(),
       ),
     );

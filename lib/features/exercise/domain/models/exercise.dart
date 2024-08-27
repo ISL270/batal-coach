@@ -6,7 +6,7 @@ class Exercise {
   final String? mechanic;
   final String? category;
   final String? equipment;
-  final String? instructions;
+  final List<String> instructions;
   final Set<String> images;
   final Set<String> primaryMuscles;
   final Set<String> secondaryMuscles;

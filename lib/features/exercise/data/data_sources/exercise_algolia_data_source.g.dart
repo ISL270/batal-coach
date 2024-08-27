@@ -20,7 +20,9 @@ ExerciseAlgolia _$ExerciseAlgoliaFromJson(Map<String, dynamic> json) =>
       (json['secondaryMuscles'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toSet(),
-      json['instructions'] as String?,
+      (json['instructions'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       json['category'] as String?,
       (json['images'] as List<dynamic>?)?.map((e) => e as String).toSet(),
     );

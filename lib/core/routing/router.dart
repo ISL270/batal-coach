@@ -1,4 +1,4 @@
-import 'package:authentication_repository/authentication_repository.dart';
+import 'package:btl/core/extensions/getit_x.dart';
 import 'package:btl/core/injection/injection.dart';
 import 'package:btl/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/core/routing/go_router_state_extension.dart';
@@ -37,10 +37,10 @@ final router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
   ],
-  refreshListenable: GoRouterRefreshStream(getIt.get<AuthenticationRepository>().user),
+  refreshListenable: GoRouterRefreshStream(getIt.authRepo.user),
   redirect: (context, state) {
     // if the user is not logged in, they need to login
-    final authenticated = getIt.get<AuthenticationRepository>().isAuthenticated;
+    final authenticated = getIt.authRepo.isAuthenticated;
 
     // bundle the location the user is coming from into a query parameter
     final fromloc = state.isGoingToHome ? '' : state.matchedLocation;

@@ -9,7 +9,7 @@ abstract interface class ExerciseRM {
   final String? equipment;
   final Set<String>? primaryMuscles;
   final Set<String>? secondaryMuscles;
-  final String? instructions;
+  final List<String>? instructions;
   final String? category;
   final Set<String>? images;
 
@@ -38,7 +38,7 @@ extension ERMX on ExerciseRM {
         equipment: equipment,
         primaryMuscles: primaryMuscles ?? {},
         secondaryMuscles: secondaryMuscles ?? {},
-        instructions: instructions,
+        instructions: instructions ?? [],
         category: category,
         images: images ?? {},
       );

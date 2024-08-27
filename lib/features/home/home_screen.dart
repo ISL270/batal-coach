@@ -1,7 +1,9 @@
 import 'package:btl/core/assets_gen/assets.gen.dart';
 import 'package:btl/core/constants/default.dart';
 import 'package:btl/core/extensions/bloc_x.dart';
+import 'package:btl/core/extensions/getit_x.dart';
 import 'package:btl/core/extensions/string_x.dart';
+import 'package:btl/core/injection/injection.dart';
 import 'package:btl/core/l10n/l10n.dart';
 import 'package:btl/core/l10n/language.dart';
 import 'package:btl/core/theming/app_colors_extension.dart';
@@ -53,12 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
         reverse: context.settingsBloc.state.language.isArabic,
         itemBuilder: (context, index) => switch (index) {
           0 => BlocProvider(
-              create: (context) => ExerciseBloc(),
+              create: (context) => ExerciseBloc(getIt.exerciseRepo),
               child: const ExercisesScreen(),
             ),
           1 => const SettingsScreen(),
           _ => BlocProvider(
-              create: (context) => ExerciseBloc(),
+              create: (context) => ExerciseBloc(getIt.exerciseRepo),
               child: const ExercisesScreen(),
             ),
         },

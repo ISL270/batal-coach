@@ -57,6 +57,7 @@ ThemeData _themeData(ColorsX colorScheme) {
       ),
     ),
     searchBarTheme: SearchBarThemeData(
+      
       backgroundColor: WidgetStatePropertyAll(colorScheme.secondaryBackground),
     ),
     navigationBarTheme: NavigationBarThemeData(
