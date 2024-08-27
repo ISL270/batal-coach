@@ -56,8 +56,10 @@ ThemeData _themeData(ColorsX colorScheme) {
         selectedForegroundColor: colorScheme.onPrimary,
       ),
     ),
+    listTileTheme: ListTileThemeData(textColor: colorScheme.onBackground),
     searchBarTheme: SearchBarThemeData(
-      
+      hintStyle:
+          WidgetStatePropertyAll(textTheme.medium.copyWith(color: colorScheme.onBackgroundTint)),
       backgroundColor: WidgetStatePropertyAll(colorScheme.secondaryBackground),
     ),
     navigationBarTheme: NavigationBarThemeData(
