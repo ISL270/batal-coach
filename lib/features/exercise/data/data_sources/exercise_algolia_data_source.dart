@@ -1,5 +1,5 @@
 import 'package:algoliasearch/algoliasearch.dart';
-import 'package:btl/core/generic_exception.dart';
+import 'package:btl/core/models/generic_exception.dart';
 import 'package:btl/features/exercise/data/data_sources/exercise_remote_data_source.dart';
 import 'package:btl/features/exercise/data/models/exercise_rm.dart';
 import 'package:fpdart/fpdart.dart';
@@ -19,11 +19,14 @@ class ExerciseAlgoliaDataSource implements ExerciseRemoteDataSource {
   @override
   Future<Either<NetworkException, Iterable<ExerciseRM>>> getExercises({
     required String searchTerm,
+    required int pageSize,
+    required int page,
   }) async {
     final queryHits = SearchForHits(
       indexName: 'exercises',
       query: searchTerm,
-      hitsPerPage: 10,
+      page: page,
+      hitsPerPage: pageSize,
     );
     try {
       final responseHits = await _client.searchIndex(request: queryHits);

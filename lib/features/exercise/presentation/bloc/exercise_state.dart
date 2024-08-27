@@ -1,18 +1,24 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 part of 'exercise_bloc.dart';
 
 final class ExerciseState extends Equatable {
   final Status status;
   final String searchTerm;
-  final Set<Exercise> exercises;
-  final Set<Exercise> searchResult;
   final GenericException? exception;
+
+  /// All Exercises.
+  final PaginatedResult<Exercise> exercises;
+
+  /// Exercises returned from search result.
+  final PaginatedResult<Exercise> searchResult;
 
   const ExerciseState._({
     required this.status,
-    required this.searchTerm,
     required this.exercises,
-    required this.searchResult,
     required this.exception,
+    required this.searchTerm,
+    required this.searchResult,
   });
 
   const ExerciseState._initial()
@@ -20,16 +26,26 @@ final class ExerciseState extends Equatable {
           status: Status.initial,
           searchTerm: '',
           exception: null,
-          exercises: const {},
-          searchResult: const {},
+          exercises: const PaginatedResult(),
+          searchResult: const PaginatedResult(),
         );
 
   ExerciseState _searchInProgress(String searchTerm) => _copyWith(
         status: Status.loading,
         searchTerm: searchTerm,
+        exception: null,
       );
 
-  ExerciseState _success({Set<Exercise>? exercises, Set<Exercise>? searchResult}) => _copyWith(
+  ExerciseState _fetchingNextPage() => _copyWith(
+        status: Status.pageLoading,
+        exception: null,
+      );
+
+  ExerciseState _success({
+    PaginatedResult<Exercise>? exercises,
+    PaginatedResult<Exercise>? searchResult,
+  }) =>
+      _copyWith(
         status: Status.success,
         exercises: exercises,
         searchResult: searchResult,
@@ -43,16 +59,16 @@ final class ExerciseState extends Equatable {
   ExerciseState _copyWith({
     Status? status,
     String? searchTerm,
-    Set<Exercise>? exercises,
-    Set<Exercise>? searchResult,
     GenericException? exception,
+    PaginatedResult<Exercise>? exercises,
+    PaginatedResult<Exercise>? searchResult,
   }) {
     return ExerciseState._(
       status: status ?? this.status,
-      searchTerm: searchTerm ?? this.searchTerm,
+      exception: exception ?? this.exception,
       exercises: exercises ?? this.exercises,
+      searchTerm: searchTerm ?? this.searchTerm,
       searchResult: searchResult ?? this.searchResult,
-      exception: exception,
     );
   }
 
@@ -60,10 +76,14 @@ final class ExerciseState extends Equatable {
   List<Object?> get props => [
         status,
         exercises,
+        exception,
         searchTerm,
         searchResult,
-        exception,
       ];
 
-  Set<Exercise> get displayedExercises => searchTerm.isBlank ? exercises : searchResult;
+  bool get hasSearchTerm => searchTerm.isNotBlank;
+
+  List<Exercise> get displayedExercises => hasSearchTerm ? searchResult.result : exercises.result;
+
+  bool get hasReachedMax => hasSearchTerm ? searchResult.hasReachedMax : exercises.hasReachedMax;
 }

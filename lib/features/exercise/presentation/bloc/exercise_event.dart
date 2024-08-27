@@ -9,10 +9,6 @@ sealed class ExerciseEvent extends Equatable {
 
 final class ExercisesInitialized extends ExerciseEvent {
   String get emptySearch => '';
-  const ExercisesInitialized();
-
-  @override
-  List<Object> get props => [];
 }
 
 final class ExerciseSearched extends ExerciseEvent {
@@ -22,3 +18,5 @@ final class ExerciseSearched extends ExerciseEvent {
   @override
   List<Object> get props => [searchTerm];
 }
+
+final class ExerciseNextPageFetched extends ExerciseEvent {}
