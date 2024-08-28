@@ -14,12 +14,15 @@ class Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: SafeArea(
-        child: Padding(
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
-          child: body,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: appBar,
+        body: SafeArea(
+          child: Padding(
+            padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
+            child: body,
+          ),
         ),
       ),
     );
