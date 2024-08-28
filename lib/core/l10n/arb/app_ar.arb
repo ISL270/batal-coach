@@ -29,5 +29,13 @@
         }
       }
     },
-    "workout": "Workout"
+    "workout": "{count, plural, =1{تدريب} other{تدريبات}}",
+    "@workout": {
+    "placeholders": {
+        "count": {
+        "type": "num",
+        "format": "compact"
+        }
+      }
+    }
 }

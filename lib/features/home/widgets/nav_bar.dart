@@ -28,7 +28,7 @@ class _NavBar extends StatelessWidget {
                 color: context.colorsX.primary,
               ),
               icon: SvgAsset(Assets.icons.dumbbellOutlined),
-              label: context.l10n.exercise(1).capitalizedDefinite,
+              label: context.l10n.workout(0).capitalizedDefinite,
             ),
             NavigationDestination(
               selectedIcon: const Icon(Icons.settings),
