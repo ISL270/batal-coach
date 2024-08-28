@@ -58,9 +58,13 @@ ThemeData _themeData(ColorsX colorScheme) {
     ),
     listTileTheme: ListTileThemeData(textColor: colorScheme.onBackground),
     searchBarTheme: SearchBarThemeData(
-      hintStyle:
-          WidgetStatePropertyAll(textTheme.medium.copyWith(color: colorScheme.onBackgroundTint)),
       backgroundColor: WidgetStatePropertyAll(colorScheme.secondaryBackground),
+      hintStyle: WidgetStatePropertyAll(textTheme.medium.copyWith(
+        color: colorScheme.onBackgroundTint,
+      )),
+      textStyle: WidgetStatePropertyAll(textTheme.medium.copyWith(
+        color: colorScheme.onBackgroundTint,
+      )),
     ),
     navigationBarTheme: NavigationBarThemeData(
       height: 65,
