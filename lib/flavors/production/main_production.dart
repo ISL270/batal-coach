@@ -1,4 +1,4 @@
-import 'package:btl/app.dart';
+import 'package:btl/app/app.dart';
 import 'package:btl/bootstrap.dart';
 import 'package:btl/flavors/production/firebase_options_prod.dart';
 import 'package:firebase_core/firebase_core.dart';
