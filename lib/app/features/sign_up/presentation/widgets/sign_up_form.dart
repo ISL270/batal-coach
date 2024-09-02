@@ -1,9 +1,13 @@
+import 'package:btl/app/core/enums/user_type.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
+import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/features/sign_up/cubit/sign_up_cubit.dart';
+import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:gap/gap.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({super.key});
@@ -18,7 +22,8 @@ class SignUpForm extends StatelessWidget {
         } else if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(state.errorMessage ?? context.l10n.signUpFailed)));
+            ..showSnackBar(
+                SnackBar(content: Text(state.errorMessage ?? context.l10n.signUpFailed)));
         }
       },
       child: Align(
@@ -26,12 +31,39 @@ class SignUpForm extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            BlocSelector<SignUpCubit, SignUpState, UserType>(
+              selector: (state) => state.userType,
+              builder: (context, userType) => SizedBox(
+                width: double.infinity,
+                child: SegmentedButton(
+                  style: SegmentedButton.styleFrom(
+                    textStyle: context.textThemeX.small.bold,
+                  ),
+                  expandedInsets: const EdgeInsets.all(1),
+                  showSelectedIcon: false,
+                  onSelectionChanged: (selection) =>
+                      context.read<SignUpCubit>().changeUserType(selection.first),
+                  segments: [
+                    ButtonSegment(
+                      value: UserType.coach,
+                      label: Text(context.l10n.coach.capitalized),
+                    ),
+                    ButtonSegment(
+                      value: UserType.trainee,
+                      label: Text(context.l10n.trainee.capitalized),
+                    ),
+                  ],
+                  selected: {userType},
+                ),
+              ),
+            ),
+            const Gap(30),
             _EmailInput(),
-            const SizedBox(height: 8),
+            const Gap(8),
             _PasswordInput(),
-            const SizedBox(height: 8),
+            const Gap(8),
             _ConfirmPasswordInput(),
-            const SizedBox(height: 8),
+            const Gap(8),
             _SignUpButton(),
           ],
         ),

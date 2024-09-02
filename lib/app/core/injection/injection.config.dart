@@ -12,13 +12,13 @@ import 'package:authentication_repository/authentication_repository.dart'
     as _i223;
 import 'package:btl/app/core/blocs/auth/auth_bloc.dart' as _i461;
 import 'package:btl/app/core/models/auth_module.dart' as _i732;
-import 'package:btl/app/trainee/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
+import 'package:btl/app/coach/exercise/data/data_sources/exercise_algolia_data_source.dart'
     as _i1068;
-import 'package:btl/app/trainee/features/exercise/data/data_sources/exercise_remote_data_source.dart'
+import 'package:btl/app/coach/exercise/data/data_sources/exercise_remote_data_source.dart'
     as _i556;
-import 'package:btl/app/trainee/features/exercise/data/repositories/exercise_repository.dart'
+import 'package:btl/app/coach/exercise/data/repositories/exercise_repository.dart'
     as _i418;
-import 'package:btl/app/trainee/features/exercise/presentation/bloc/exercise_bloc.dart'
+import 'package:btl/app/coach/exercise/presentation/bloc/exercise_bloc.dart'
     as _i427;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;

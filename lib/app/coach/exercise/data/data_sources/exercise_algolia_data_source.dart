@@ -1,7 +1,7 @@
 import 'package:algoliasearch/algoliasearch.dart';
+import 'package:btl/app/coach/exercise/data/data_sources/exercise_remote_data_source.dart';
+import 'package:btl/app/coach/exercise/data/models/exercise_rm.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
-import 'package:btl/app/trainee/features/exercise/data/data_sources/exercise_remote_data_source.dart';
-import 'package:btl/app/trainee/features/exercise/data/models/exercise_rm.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';

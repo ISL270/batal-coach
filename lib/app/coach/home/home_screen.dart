@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
 import 'package:btl/app/core/constants/default.dart';
 import 'package:btl/app/core/extensions/bloc_x.dart';
@@ -7,7 +8,6 @@ import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:btl/app/trainee/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
 import 'package:btl/app/widgets/svg_asset.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
+import 'package:btl/app/coach/exercise/data/models/exercise_rm.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
-import 'package:btl/app/trainee/features/exercise/data/models/exercise_rm.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class ExerciseRemoteDataSource {
