@@ -50,7 +50,8 @@ ThemeData _themeData(ColorsX colorScheme) {
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
       style: SegmentedButton.styleFrom(
-        visualDensity: VisualDensity.compact,
+        textStyle: textTheme.small,
+        visualDensity: VisualDensity.comfortable,
         foregroundColor: colorScheme.onBackground,
         selectedBackgroundColor: colorScheme.primary,
         selectedForegroundColor: colorScheme.onPrimary,

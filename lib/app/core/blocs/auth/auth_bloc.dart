@@ -1,47 +1,44 @@
-import 'dart:async';
+// ignore_for_file: avoid_redundant_argument_values
 
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:btl/app/core/enums/status.dart';
+import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/features/authentication/domain/models/user.dart';
+import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-@injectable
+@singleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthenticationRepository _authRepo;
-  late final StreamSubscription<User> _userSubscription;
-
-  AuthBloc({required AuthenticationRepository authRepo})
-      : _authRepo = authRepo,
-        super(
-          authRepo.currentUser.isNotEmpty
-              ? AuthState.authenticated(authRepo.currentUser)
-              : const AuthState.unauthenticated(),
-        ) {
-    on<_AuthUserChanged>(_onUserChanged);
+  final AuthRepository _authRepo;
+  AuthBloc(this._authRepo) : super(const AuthState.initial()) {
+    on<_AuthSubscriptionRequested>(_onSubscriptionRequested);
     on<AuthLogoutRequested>(_onLogoutRequested);
-    _userSubscription = _authRepo.user.listen(
-      (user) => add(_AuthUserChanged(user)),
+    add(_AuthSubscriptionRequested());
+  }
+
+  Future<void> _onSubscriptionRequested(
+    _AuthSubscriptionRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    await emit.forEach(
+      _authRepo.getUserUpdates(),
+      onData: (user) => state.success(user),
     );
   }
 
-  void _onUserChanged(_AuthUserChanged event, Emitter<AuthState> emit) {
-    emit(
-      event.user.isNotEmpty
-          ? AuthState.authenticated(event.user)
-          : const AuthState.unauthenticated(),
-    );
-  }
-
-  void _onLogoutRequested(AuthLogoutRequested event, Emitter<AuthState> emit) {
-    unawaited(_authRepo.logOut());
-  }
-
-  @override
-  Future<void> close() {
-    _userSubscription.cancel();
-    return super.close();
+  Future<void> _onLogoutRequested(
+    AuthLogoutRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.loading());
+    try {
+      await _authRepo.logOut();
+    } catch (e) {
+      emit(state.failure(e as GenericException));
+    }
   }
 }

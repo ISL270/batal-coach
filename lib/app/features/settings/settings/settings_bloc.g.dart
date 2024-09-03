@@ -22,9 +22,10 @@ Map<String, dynamic> _$SettingsStateToJson(SettingsState instance) =>
 
 const _$StatusEnumMap = {
   Status.initial: 'initial',
-  Status.loading: 'loading',
   Status.success: 'success',
   Status.failure: 'failure',
+  Status.loading: 'loading',
+  Status.pageLoading: 'pageLoading',
 };
 
 const _$LanguageEnumMap = {

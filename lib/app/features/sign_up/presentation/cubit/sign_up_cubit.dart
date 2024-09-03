@@ -1,6 +1,7 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/core/enums/user_type.dart';
+import 'package:btl/app/features/authentication/data/models/auth_exceptions.dart';
+import 'package:btl/app/features/authentication/domain/models/user_type.dart';
+import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
@@ -8,9 +9,8 @@ import 'package:formz/formz.dart';
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit(this._authenticationRepository) : super(const SignUpState());
-
-  final AuthenticationRepository _authenticationRepository;
+  final AuthRepository _authRepository;
+  SignUpCubit(this._authRepository) : super(const SignUpState());
 
   void changeUserType(UserType userType) => emit(state.copyWith(userType: userType));
 
@@ -68,20 +68,19 @@ class SignUpCubit extends Cubit<SignUpState> {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      await _authenticationRepository.signUp(
+      await _authRepository.signUp(
         email: state.email.value,
         password: state.password.value,
+        userType: state.userType,
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success));
-    } on SignUpWithEmailAndPasswordFailure catch (e) {
+    } catch (e) {
       emit(
         state.copyWith(
-          errorMessage: e.message,
+          errorMessage: (e as SignUpWithEmailAndPasswordException).message,
           status: FormzSubmissionStatus.failure,
         ),
       );
-    } catch (_) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
   }
 }

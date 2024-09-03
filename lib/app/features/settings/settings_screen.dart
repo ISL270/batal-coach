@@ -39,24 +39,15 @@ class SettingsScreen extends StatelessWidget {
                       segments: [
                         ButtonSegment(
                           value: ThemeMode.light,
-                          label: Text(
-                            context.l10n.light.capitalized,
-                            style: context.textThemeX.small,
-                          ),
+                          label: Text(context.l10n.light.capitalized),
                         ),
                         ButtonSegment(
                           value: ThemeMode.dark,
-                          label: Text(
-                            context.l10n.dark.capitalized,
-                            style: context.textThemeX.small,
-                          ),
+                          label: Text(context.l10n.dark.capitalized),
                         ),
                         ButtonSegment(
                           value: ThemeMode.system,
-                          label: Text(
-                            context.l10n.system.capitalized,
-                            style: context.textThemeX.small,
-                          ),
+                          label: Text(context.l10n.system.capitalized),
                         ),
                       ],
                     )
@@ -79,17 +70,11 @@ class SettingsScreen extends StatelessWidget {
                       segments: [
                         ButtonSegment(
                           value: Language.arabic,
-                          label: Text(
-                            Language.arabic.name,
-                            style: context.textThemeX.small,
-                          ),
+                          label: Text(Language.arabic.name),
                         ),
                         ButtonSegment(
                           value: Language.english,
-                          label: Text(
-                            Language.english.name,
-                            style: context.textThemeX.small,
-                          ),
+                          label: Text(Language.english.name),
                         ),
                       ],
                     )

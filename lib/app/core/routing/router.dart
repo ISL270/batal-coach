@@ -1,4 +1,5 @@
 import 'package:btl/app/coach/home/home_screen.dart';
+import 'package:btl/app/core/blocs/auth/auth_bloc.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -37,14 +38,14 @@ final router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
   ],
-  refreshListenable: GoRouterRefreshStream(getIt.authRepo.user),
+  refreshListenable: GoRouterRefreshStream(getIt.authBloc.stream.where(
+    (success) => success.status.isSuccess,
+  )),
   redirect: (context, state) {
-    // if the user is not logged in, they need to login
-    final authenticated = getIt.authRepo.isAuthenticated;
-
-    // bundle the location the user is coming from into a query parameter
+    // If the user is not logged in, they need to login.
+    // Bundle the location the user is coming from into a query parameter
     final fromloc = state.isGoingToHome ? '' : state.matchedLocation;
-    if (!authenticated) {
+    if (!getIt.authBloc.state.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
           : state.namedLocation(

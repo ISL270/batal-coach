@@ -9,11 +9,10 @@ sealed class GenericException implements Exception {
   });
 }
 
-/// Exception caused locally.
-/// e.g: business logic issues, mapping issues, etc.
-class LocalException extends GenericException {
+/// Business Exception.
+class BusinessException extends GenericException {
   // here you can extend attributes and methods as needed.
-  const LocalException({
+  const BusinessException({
     required super.code,
     required super.message,
   });

@@ -37,5 +37,7 @@
         "format": "compact"
         }
       }
-    }
+    },
+    "coach": "coach",
+    "trainee": "trainee"
 }

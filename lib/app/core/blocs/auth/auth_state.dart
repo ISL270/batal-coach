@@ -1,23 +1,47 @@
 part of 'auth_bloc.dart';
 
-enum AuthStatus {
-  authenticated,
-  unauthenticated,
-}
+class AuthState extends Equatable {
+  final User? user;
+  final Status status;
+  final GenericException? exception;
 
-final class AuthState extends Equatable {
   const AuthState._({
+    required this.user,
     required this.status,
-    this.user = User.empty,
+    required this.exception,
   });
 
-  const AuthState.authenticated(User user) : this._(status: AuthStatus.authenticated, user: user);
-
-  const AuthState.unauthenticated() : this._(status: AuthStatus.unauthenticated);
-
-  final AuthStatus status;
-  final User user;
+  const AuthState.initial()
+      : status = Status.initial,
+        user = null,
+        exception = null;
 
   @override
-  List<Object> get props => [status, user];
+  List<Object?> get props => [
+        user,
+        status,
+        exception,
+      ];
+}
+
+extension AuthStateX on AuthState {
+  AuthState success(User? user) => AuthState._(
+        user: user,
+        exception: null,
+        status: Status.success,
+      );
+
+  AuthState failure(GenericException? exception) => AuthState._(
+        user: user,
+        exception: exception,
+        status: Status.failure,
+      );
+
+  AuthState loading() => AuthState._(
+        user: user,
+        exception: exception,
+        status: Status.loading,
+      );
+
+  bool get isAuthenticated => user != null;
 }
