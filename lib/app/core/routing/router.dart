@@ -1,9 +1,9 @@
 import 'package:btl/app/coach/home/home_screen.dart';
-import 'package:btl/app/core/blocs/auth/auth_bloc.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/login/login_screen.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';

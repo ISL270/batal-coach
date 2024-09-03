@@ -16,7 +16,7 @@ import 'package:btl/app/coach/exercise/data/repositories/exercise_repository.dar
     as _i836;
 import 'package:btl/app/coach/exercise/presentation/bloc/exercise_bloc.dart'
     as _i511;
-import 'package:btl/app/core/blocs/auth/auth_bloc.dart' as _i1067;
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart' as _i1067;
 import 'package:btl/app/core/injection/firebase_module.dart' as _i260;
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
     as _i902;

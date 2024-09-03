@@ -1,4 +1,4 @@
-import 'package:btl/app/core/blocs/auth/auth_bloc.dart';
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

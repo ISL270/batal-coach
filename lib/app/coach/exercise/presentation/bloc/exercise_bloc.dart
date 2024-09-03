@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/exercise/data/repositories/exercise_repository.dart';
 import 'package:btl/app/coach/exercise/domain/models/exercise.dart';
-import 'package:btl/app/core/blocs/bloc_event_transformers.dart';
 import 'package:btl/app/core/enums/status.dart';
+import 'package:btl/app/core/models/bloc_event_transformers.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/models/paginated_result.dart';
 import 'package:dartx/dartx.dart';
