@@ -39,5 +39,6 @@
       }
     },
     "coach": "مدرب",
-    "trainee": "متدرب"
+    "trainee": "متدرب",
+    "yourCoachEmail": "الايميل الخاص بمدربك"
 }

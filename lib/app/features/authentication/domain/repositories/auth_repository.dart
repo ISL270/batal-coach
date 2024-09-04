@@ -6,6 +6,7 @@ import 'package:btl/app/features/authentication/data/models/fire_user_x.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartx/dartx_io.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -49,6 +50,7 @@ class AuthRepository {
   /// Throws a [SignUpWithEmailAndPasswordException] if an exception occurs.
   Future<void> signUp({
     required String email,
+    required String coachEmail,
     required String password,
     required UserType userType,
   }) async {
@@ -58,10 +60,10 @@ class AuthRepository {
         password: password,
       );
 
-      await _firestore
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set({'userType': userType.toJson()});
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'userType': userType.toJson(),
+        if (coachEmail.isNotNullOrBlank) 'coachEmail': coachEmail,
+      });
 
       final user = userCredential.user!.toBTLuser(userType);
       _userStream.add(user);

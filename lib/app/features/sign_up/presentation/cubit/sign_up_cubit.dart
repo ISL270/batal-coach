@@ -12,7 +12,17 @@ class SignUpCubit extends Cubit<SignUpState> {
   final AuthRepository _authRepository;
   SignUpCubit(this._authRepository) : super(const SignUpState());
 
-  void changeUserType(UserType userType) => emit(state.copyWith(userType: userType));
+  void changeUserType(UserType userType) {
+    emit(state.copyWith(
+      userType: userType,
+      isValid: Formz.validate([
+        state.email,
+        if (userType.isTrainee) state.coachEmail,
+        state.password,
+        state.confirmedPassword,
+      ]),
+    ));
+  }
 
   void emailChanged(String value) {
     final email = Email.dirty(value);
@@ -21,6 +31,21 @@ class SignUpCubit extends Cubit<SignUpState> {
         email: email,
         isValid: Formz.validate([
           email,
+          state.password,
+          state.confirmedPassword,
+        ]),
+      ),
+    );
+  }
+
+  void coachEmailChanged(String value) {
+    final coachEmail = Email.dirty(value);
+    emit(
+      state.copyWith(
+        coachEmail: coachEmail,
+        isValid: Formz.validate([
+          state.email,
+          coachEmail,
           state.password,
           state.confirmedPassword,
         ]),
@@ -72,6 +97,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         email: state.email.value,
         password: state.password.value,
         userType: state.userType,
+        coachEmail: state.coachEmail.value,
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {

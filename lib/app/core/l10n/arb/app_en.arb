@@ -39,5 +39,6 @@
       }
     },
     "coach": "coach",
-    "trainee": "trainee"
+    "trainee": "trainee",
+    "yourCoachEmail": "Your coach's email"
 }
