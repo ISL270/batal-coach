@@ -8,13 +8,13 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:btl/app/coach/exercise/data/data_sources/exercise_algolia_data_source.dart'
+import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
     as _i839;
-import 'package:btl/app/coach/exercise/data/data_sources/exercise_remote_data_source.dart'
+import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_remote_data_source.dart'
     as _i510;
-import 'package:btl/app/coach/exercise/data/repositories/exercise_repository.dart'
+import 'package:btl/app/coach/features/exercise/data/repositories/exercise_repository.dart'
     as _i836;
-import 'package:btl/app/coach/exercise/presentation/bloc/exercise_bloc.dart'
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart'
     as _i511;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/services/firestore_service.dart' as _i529;

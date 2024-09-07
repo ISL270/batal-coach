@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/home/home_screen.dart';
+import 'package:btl/app/coach/features/home/home_screen.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';

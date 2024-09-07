@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/scroll_controller_x.dart';

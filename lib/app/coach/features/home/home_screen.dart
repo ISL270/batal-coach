@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/exercise/presentation/exercises_screen.dart';
+import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
 import 'package:btl/app/core/constants/default.dart';
 import 'package:btl/app/core/extensions/bloc_x.dart';

@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/exercise/domain/models/exercise.dart';
+import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
 
 abstract interface class ExerciseRM {
   final String? id;

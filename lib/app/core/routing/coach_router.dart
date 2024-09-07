@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/home/home_screen.dart';
+import 'package:btl/app/coach/features/home/home_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';

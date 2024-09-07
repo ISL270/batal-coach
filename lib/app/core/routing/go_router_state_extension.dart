@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/home/home_screen.dart';
+import 'package:btl/app/coach/features/home/home_screen.dart';
 import 'package:btl/app/features/login/login_screen.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/features/splash/splash_screen.dart';
