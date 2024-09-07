@@ -16,10 +16,23 @@ import 'package:btl/app/coach/exercise/data/repositories/exercise_repository.dar
     as _i836;
 import 'package:btl/app/coach/exercise/presentation/bloc/exercise_bloc.dart'
     as _i511;
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart' as _i1067;
 import 'package:btl/app/core/injection/firebase_module.dart' as _i260;
+import 'package:btl/app/core/local_db/i_local_db.dart' as _i634;
+import 'package:btl/app/core/local_db/isar_db.dart' as _i793;
+import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart'
+    as _i193;
+import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart'
+    as _i623;
+import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart'
+    as _i538;
+import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart'
+    as _i139;
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
     as _i902;
+import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart'
+    as _i55;
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart'
+    as _i260;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
@@ -41,25 +54,38 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.auth);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    await gh.singletonAsync<_i634.LocalDB>(
+      () => _i793.IsarDB.create(),
+      preResolve: true,
+    );
     gh.singleton<_i510.ExerciseRemoteDataSource>(
         () => _i839.ExerciseAlgoliaDataSource());
+    gh.singleton<_i836.ExerciseRepository>(
+        () => _i836.ExerciseRepository(gh<_i510.ExerciseRemoteDataSource>()));
+    gh.singleton<_i623.UserLocalSource>(
+        () => _i193.UserIsarSource(gh<_i634.LocalDB>()));
+    gh.singleton<_i139.UserRemoteSource>(
+        () => _i538.UserFirestoreSource(gh<_i974.FirebaseFirestore>()));
+    gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
+          gh<_i623.UserLocalSource>(),
+          gh<_i139.UserRemoteSource>(),
+        ));
+    gh.factory<_i511.ExerciseBloc>(
+        () => _i511.ExerciseBloc(gh<_i836.ExerciseRepository>()));
     await gh.singletonAsync<_i902.AuthRepository>(
       () {
         final i = _i902.AuthRepository(
-          gh<_i974.FirebaseFirestore>(),
           gh<_i59.FirebaseAuth>(),
           gh<_i116.GoogleSignIn>(),
+          gh<_i55.UserRepository>(),
         );
         return i.init().then((_) => i);
       },
       preResolve: true,
+      dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i1067.AuthBloc>(
-        () => _i1067.AuthBloc(gh<_i902.AuthRepository>()));
-    gh.singleton<_i836.ExerciseRepository>(
-        () => _i836.ExerciseRepository(gh<_i510.ExerciseRemoteDataSource>()));
-    gh.factory<_i511.ExerciseBloc>(
-        () => _i511.ExerciseBloc(gh<_i836.ExerciseRepository>()));
+    gh.singleton<_i260.AuthBloc>(
+        () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     return this;
   }
 }
