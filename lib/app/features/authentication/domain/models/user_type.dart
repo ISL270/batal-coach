@@ -1,4 +1,6 @@
 enum UserType {
+  // Never change the order.
+  // Original order: 1- coach, 2- Trainee
   coach,
   trainee;
 

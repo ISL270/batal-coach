@@ -1,11 +1,10 @@
-import 'package:btl/app/features/authentication/domain/models/user_type.dart';
+import 'package:btl/app/core/models/domain_model.dart';
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+sealed class User extends Equatable implements DomainModel {
   const User({
     required this.id,
     required this.email,
-    required this.userType,
     this.name,
     this.photo,
     this.phoneNumber,
@@ -25,8 +24,6 @@ class User extends Equatable {
   /// Url for the current user's photo.
   final String? photo;
 
-  final UserType userType;
-
   @override
   List<Object?> get props => [
         email,
@@ -34,11 +31,35 @@ class User extends Equatable {
         name,
         photo,
         phoneNumber,
-        userType,
       ];
+}
 
+final class Coach extends User {
+  const Coach({
+    required super.id,
+    required super.email,
+    super.name,
+    super.phoneNumber,
+    super.photo,
+  });
   @override
-  String toString() {
-    return 'User(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, photo: $photo, userType: $userType)';
-  }
+  List<Object?> get props => [super.props];
+}
+
+final class Trainee extends User {
+  final String coachEmail;
+
+  const Trainee({
+    required super.id,
+    required super.email,
+    required this.coachEmail,
+    super.name,
+    super.phoneNumber,
+    super.photo,
+  });
+  @override
+  List<Object?> get props => [
+        super.props,
+        coachEmail,
+      ];
 }
