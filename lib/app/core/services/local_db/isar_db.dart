@@ -1,4 +1,4 @@
-import 'package:btl/app/core/local_db/i_local_db.dart';
+import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:injectable/injectable.dart';

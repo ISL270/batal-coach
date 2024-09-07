@@ -1,3 +1,4 @@
+import 'package:btl/app/core/services/firestore_service.dart';
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart';
 import 'package:btl/app/features/authentication/data/models/remote/fire_user_info.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -6,15 +7,15 @@ import 'package:injectable/injectable.dart';
 
 @Singleton(as: UserRemoteSource)
 final class UserFirestoreSource implements UserRemoteSource {
-  final FirebaseFirestore _firestore;
+  final FirestoreService _firestoreSvc;
 
-  UserFirestoreSource(this._firestore);
+  UserFirestoreSource(this._firestoreSvc);
 
   DocumentReference<Map<String, dynamic>> _userDoc(String id, UserType userType) {
     if (userType.isCoach) {
-      return _firestore.collection('coaches').doc(id);
+      return _firestoreSvc.coachesColl.doc(id);
     }
-    return _firestore.collection('trainees').doc(id);
+    return _firestoreSvc.traineesColl.doc(id);
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:btl/app/core/local_db/i_local_db.dart';
+import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
