@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:btl/app/core/models/generic_exception.dart';
-import 'package:btl/app/features/authentication/data/models/auth_exceptions.dart';
-import 'package:btl/app/features/authentication/data/models/fire_user_x.dart';
+import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartx/dartx_io.dart';
+import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,13 +14,13 @@ import 'package:rxdart/subjects.dart';
 @singleton
 class AuthRepository {
   final GoogleSignIn _googleSignIn;
-  final FirebaseFirestore _firestore;
   final fire_auth.FirebaseAuth _fireAuth;
+  final UserRepository _userRepository;
 
   AuthRepository(
-    this._firestore,
     this._fireAuth,
     this._googleSignIn,
+    this._userRepository,
   );
 
   // Using BehaviorSubject, any new listeners when begin listening to the stream,
@@ -38,9 +36,7 @@ class AuthRepository {
     final fireUser = _fireAuth.currentUser;
     if (fireUser == null) return;
     try {
-      final userInfo = await _firestore.collection('users').doc(fireUser.uid).get();
-      final userType = userInfo.data()!['userType'] as String;
-      final user = fireUser.toBTLuser(UserType.fromJson(userType));
+      final user = await _userRepository.getLocalUser();
       _userStream.add(user);
     } catch (_) {}
   }
@@ -59,14 +55,20 @@ class AuthRepository {
         email: email,
         password: password,
       );
+      if (userCredential.user == null) return;
 
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
-        'userType': userType.toJson(),
-        if (coachEmail.isNotNullOrBlank) 'coachEmail': coachEmail,
-      });
+      final user = await _userRepository.saveUserInfoRemote(
+        userType: userType,
+        coachEmail: coachEmail,
+        uid: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        photo: userCredential.user!.photoURL,
+        name: userCredential.user!.displayName,
+        phoneNumber: userCredential.user!.phoneNumber,
+      );
 
-      final user = userCredential.user!.toBTLuser(userType);
       _userStream.add(user);
+      await _userRepository.saveUserLocally(user);
     } catch (e) {
       throw switch (e) {
         (final fire_auth.FirebaseAuthException e) =>
@@ -82,17 +84,26 @@ class AuthRepository {
   Future<void> logInWithEmail({
     required String email,
     required String password,
+    required UserType userType,
   }) async {
     try {
       final userCredential = await _fireAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      if (userCredential.user == null) return;
 
-      final userInfo = await _firestore.collection('users').doc(userCredential.user!.uid).get();
-      final userType = userInfo.data()!['userType'] as String;
-      final user = userCredential.user!.toBTLuser(UserType.fromJson(userType));
+      final user = await _userRepository.getFullUserRemote(
+        userType: userType,
+        uid: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        photo: userCredential.user!.photoURL,
+        name: userCredential.user!.displayName,
+        phoneNumber: userCredential.user!.phoneNumber,
+      );
+
       _userStream.add(user);
+      await _userRepository.saveUserLocally(user!);
     } catch (e) {
       throw switch (e) {
         (final fire_auth.FirebaseAuthException e) =>
@@ -105,9 +116,10 @@ class AuthRepository {
   /// Starts the Sign In with Google Flow.
   ///
   /// Throws a [LogInWithGoogleException] if an exception occurs.
-  Future<void> logInWithGoogle() async {
+  Future<void> logInWithGoogle(UserType userType) async {
     try {
       late final fire_auth.AuthCredential credential;
+
       if (kIsWeb) {
         final googleProvider = fire_auth.GoogleAuthProvider();
         final userCredential = await _fireAuth.signInWithPopup(
@@ -124,10 +136,18 @@ class AuthRepository {
       }
 
       final userCredential = await _fireAuth.signInWithCredential(credential);
-      final userInfo = await _firestore.collection('users').doc(userCredential.user!.uid).get();
-      final userType = userInfo.data()!['userType'] as String;
-      final user = userCredential.user!.toBTLuser(UserType.fromJson(userType));
+      if (userCredential.user == null) return;
+
+      final user = await _userRepository.getFullUserRemote(
+        userType: userType,
+        uid: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        name: userCredential.user!.displayName,
+        photo: userCredential.user!.photoURL,
+        phoneNumber: userCredential.user!.phoneNumber,
+      );
       _userStream.add(user);
+      await _userRepository.saveUserLocally(user!);
     } catch (e) {
       throw switch (e) {
         (final fire_auth.FirebaseAuthException e) => LogInWithGoogleException.fromCode(e.code),
@@ -143,6 +163,7 @@ class AuthRepository {
         _googleSignIn.signOut(),
       ]);
       _userStream.add(null);
+      await _userRepository.deleteLocallySavedUser();
     } catch (_) {
       throw const BusinessException(
         code: '',
@@ -151,6 +172,7 @@ class AuthRepository {
     }
   }
 
+  @disposeMethod
   void dispose() {
     _userStream.close();
   }
