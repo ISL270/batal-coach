@@ -53,4 +53,19 @@ class ExerciseAlgolia implements ExerciseRM {
   factory ExerciseAlgolia.fromJson(Map<String, dynamic> json) => _$ExerciseAlgoliaFromJson(json);
 
   Map<String, dynamic> toJson() => _$ExerciseAlgoliaToJson(this);
+
+  @override
+  Exercise toDomain() => Exercise(
+        id: id!,
+        name: name!,
+        force: force,
+        level: level,
+        mechanic: mechanic,
+        equipment: equipment,
+        primaryMuscles: primaryMuscles ?? {},
+        secondaryMuscles: secondaryMuscles ?? {},
+        instructions: instructions ?? [],
+        category: category,
+        images: images ?? {},
+      );
 }

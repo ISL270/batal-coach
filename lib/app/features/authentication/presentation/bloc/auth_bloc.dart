@@ -14,6 +14,7 @@ part 'auth_state.dart';
 @singleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepo;
+
   AuthBloc(this._authRepo) : super(const AuthState.initial()) {
     on<_AuthSubscriptionRequested>(_onSubscriptionRequested);
     on<AuthLogoutRequested>(_onLogoutRequested);
@@ -40,5 +41,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } catch (e) {
       emit(state.failure(e as GenericException));
     }
+  }
+
+  @override
+  Future<void> close() {
+    _authRepo.dispose();
+    return super.close();
   }
 }

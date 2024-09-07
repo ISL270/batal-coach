@@ -26,20 +26,6 @@ abstract interface class ExerciseRM {
     this.category,
     this.images,
   );
-}
 
-extension ERMX on ExerciseRM {
-  Exercise toDomain() => Exercise(
-        id: id!,
-        name: name!,
-        force: force,
-        level: level,
-        mechanic: mechanic,
-        equipment: equipment,
-        primaryMuscles: primaryMuscles ?? {},
-        secondaryMuscles: secondaryMuscles ?? {},
-        instructions: instructions ?? [],
-        category: category,
-        images: images ?? {},
-      );
+  Exercise toDomain();
 }

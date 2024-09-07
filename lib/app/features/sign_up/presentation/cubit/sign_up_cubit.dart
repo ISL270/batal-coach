@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/features/authentication/data/models/auth_exceptions.dart';
+import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -99,7 +99,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         userType: state.userType,
         coachEmail: state.coachEmail.value,
       );
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
+      // emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(
         state.copyWith(
