@@ -5,7 +5,7 @@ final class SignUpState extends Equatable with FormzMixin {
     this.email = const Email.pure(),
     this.coachEmail = const Email.pure(),
     this.password = const Password.pure(),
-    this.confirmedPassword = const ConfirmedPassword.pure(),
+    this.confirmPassword = const ConfirmPassword.pure(),
     this.status = FormzSubmissionStatus.initial,
     this.userType = UserType.coach,
     this.errorMessage,
@@ -14,7 +14,7 @@ final class SignUpState extends Equatable with FormzMixin {
   final Email email;
   final Email coachEmail;
   final Password password;
-  final ConfirmedPassword confirmedPassword;
+  final ConfirmPassword confirmPassword;
   final FormzSubmissionStatus status;
   final UserType userType;
   final String? errorMessage;
@@ -24,7 +24,7 @@ final class SignUpState extends Equatable with FormzMixin {
         email,
         coachEmail,
         password,
-        confirmedPassword,
+        confirmPassword,
         status,
         userType,
         errorMessage,
@@ -34,7 +34,7 @@ final class SignUpState extends Equatable with FormzMixin {
     Email? email,
     Email? coachEmail,
     Password? password,
-    ConfirmedPassword? confirmedPassword,
+    ConfirmPassword? confirmedPassword,
     FormzSubmissionStatus? status,
     String? errorMessage,
     UserType? userType,
@@ -43,7 +43,7 @@ final class SignUpState extends Equatable with FormzMixin {
       email: email ?? this.email,
       coachEmail: coachEmail ?? this.coachEmail,
       password: password ?? this.password,
-      confirmedPassword: confirmedPassword ?? this.confirmedPassword,
+      confirmPassword: confirmedPassword ?? confirmPassword,
       status: status ?? this.status,
       userType: userType ?? this.userType,
       errorMessage: errorMessage ?? this.errorMessage,
@@ -56,6 +56,6 @@ final class SignUpState extends Equatable with FormzMixin {
         email,
         if (userType.isTrainee) coachEmail,
         password,
-        confirmedPassword,
+        confirmPassword,
       ];
 }

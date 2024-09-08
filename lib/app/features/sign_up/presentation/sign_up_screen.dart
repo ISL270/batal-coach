@@ -173,7 +173,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) =>
           previous.password != current.password ||
-          previous.confirmedPassword != current.confirmedPassword,
+          previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
@@ -183,9 +183,8 @@ class _ConfirmPasswordInput extends StatelessWidget {
           decoration: InputDecoration(
             labelText: context.l10n.confirmPassword.capitalized,
             helperText: '',
-            errorText: state.confirmedPassword.displayError != null
-                ? context.l10n.passwordsDontMatch
-                : null,
+            errorText:
+                state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
           ),
         );
       },

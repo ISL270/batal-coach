@@ -543,7 +543,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: c17517756dc28d2e715f7f2706dd6305052df387
+      resolved-ref: c7cdbfb060ef3355a209d54458a342834aecd929
       url: "https://github.com/ISL270/form_inputs"
     source: git
     version: "0.1.0+1"
@@ -551,10 +551,10 @@ packages:
     dependency: "direct main"
     description:
       name: formz
-      sha256: df8301299601139de7e653e68a07c332fd2db7cec65745eca1a1ea73fb711e06
+      sha256: a58eb48d84685b7ffafac1d143bf47d585bf54c7db89fe81c175dfd6e53201c7
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.7.0"
   fpdart:
     dependency: "direct main"
     description:
@@ -995,6 +995,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
+  phone_numbers_parser:
+    dependency: transitive
+    description:
+      name: phone_numbers_parser
+      sha256: af2fe52aaa3d9f8f44be3a5d0b9b49a1811133fc9f746e7be2d8ddf0fe46044a
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.0.0"
   platform:
     dependency: transitive
     description:

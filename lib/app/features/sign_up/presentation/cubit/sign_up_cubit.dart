@@ -21,15 +21,15 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void passwordChanged(String value) {
     final password = Password.dirty(value);
-    final confirmedPassword = ConfirmedPassword.dirty(
+    final confirmedPassword = ConfirmPassword.dirty(
       password: password.value,
-      value: state.confirmedPassword.value,
+      value: state.confirmPassword.value,
     );
     emit(state.copyWith(password: password, confirmedPassword: confirmedPassword));
   }
 
   void confirmedPasswordChanged(String value) {
-    final confirmedPassword = ConfirmedPassword.dirty(
+    final confirmedPassword = ConfirmPassword.dirty(
       password: state.password.value,
       value: value,
     );
