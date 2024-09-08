@@ -9,14 +9,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
-    as _i839;
+    as _i404;
 import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_remote_data_source.dart'
-    as _i510;
+    as _i441;
 import 'package:btl/app/coach/features/exercise/data/repositories/exercise_repository.dart'
-    as _i836;
+    as _i194;
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart'
-    as _i511;
+    as _i883;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
+import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
 import 'package:btl/app/core/services/firestore_service.dart' as _i529;
 import 'package:btl/app/core/services/local_db/i_local_db.dart' as _i898;
 import 'package:btl/app/core/services/local_db/isar_db.dart' as _i791;
@@ -54,24 +55,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
     gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     gh.singleton<_i529.FirestoreService>(() => _i529.FirestoreService());
-    gh.singleton<_i510.ExerciseRemoteDataSource>(
-        () => _i839.ExerciseAlgoliaDataSource());
+    gh.singleton<_i222.L10nService>(() => _i222.L10nService());
     await gh.singletonAsync<_i898.LocalDB>(
       () => _i791.IsarDB.create(),
       preResolve: true,
     );
-    gh.singleton<_i836.ExerciseRepository>(
-        () => _i836.ExerciseRepository(gh<_i510.ExerciseRemoteDataSource>()));
+    gh.singleton<_i441.ExerciseRemoteDataSource>(
+        () => _i404.ExerciseAlgoliaDataSource());
     gh.singleton<_i139.UserRemoteSource>(
         () => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
+    gh.singleton<_i194.ExerciseRepository>(
+        () => _i194.ExerciseRepository(gh<_i441.ExerciseRemoteDataSource>()));
     gh.singleton<_i623.UserLocalSource>(
         () => _i193.UserIsarSource(gh<_i898.LocalDB>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
           gh<_i623.UserLocalSource>(),
           gh<_i139.UserRemoteSource>(),
         ));
-    gh.factory<_i511.ExerciseBloc>(
-        () => _i511.ExerciseBloc(gh<_i836.ExerciseRepository>()));
+    gh.factory<_i883.ExerciseBloc>(
+        () => _i883.ExerciseBloc(gh<_i194.ExerciseRepository>()));
     await gh.singletonAsync<_i902.AuthRepository>(
       () {
         final i = _i902.AuthRepository(
