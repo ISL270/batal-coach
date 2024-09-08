@@ -1,28 +1,35 @@
+import 'package:dartx/dartx.dart';
 import 'package:formz/formz.dart';
 
 enum NameValidationError {
-  empty(trKey: 'nameRequired', enMsg: 'Name is required'),
+  nameRequired('Name is required'),
 
-  invalid(trKey: 'nameLettersOnly', enMsg: 'Name must contain letters only');
+  nameLettersOnly('Name must contain letters only');
 
-  const NameValidationError({required this.trKey, required this.enMsg});
+  const NameValidationError(this.msg);
 
-  /// Error message to be displayed.
-  final String enMsg;
-  final String trKey;
+  final String msg;
 }
 
 // Extend FormzInput and provide the input type and error type.
 class NameInput extends FormzInput<String, NameValidationError> {
   // Call super.pure to represent an unmodified form input.
-  const NameInput.pure() : super.pure('');
+  const NameInput.pure([super.value = '']) : super.pure();
 
   // Call super.dirty to represent a modified form input.
-  const NameInput.dirty({String value = ''}) : super.dirty(value);
+  const NameInput.dirty([super.value = '']) : super.dirty();
+
+  static final RegExp _nameRegExp = RegExp('[A-Za-zء-ي ]');
 
   // Override validator to handle validating a given input value.
   @override
   NameValidationError? validator(String value) {
-    return value.isEmpty ? NameValidationError.empty : null;
+    if (value.isBlank) {
+      return NameValidationError.nameRequired;
+    }
+    if (!_nameRegExp.hasMatch(value)) {
+      return NameValidationError.nameLettersOnly;
+    }
+    return null;
   }
 }

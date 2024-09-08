@@ -2,14 +2,13 @@ part of 'sign_up_cubit.dart';
 
 enum ConfirmPasswordValidationError { invalid }
 
-final class SignUpState extends Equatable {
+final class SignUpState extends Equatable with FormzMixin {
   const SignUpState({
     this.email = const Email.pure(),
     this.coachEmail = const Email.pure(),
     this.password = const Password.pure(),
     this.confirmedPassword = const ConfirmedPassword.pure(),
     this.status = FormzSubmissionStatus.initial,
-    this.isValid = false,
     this.userType = UserType.coach,
     this.errorMessage,
   });
@@ -19,7 +18,6 @@ final class SignUpState extends Equatable {
   final Password password;
   final ConfirmedPassword confirmedPassword;
   final FormzSubmissionStatus status;
-  final bool isValid;
   final UserType userType;
   final String? errorMessage;
 
@@ -30,7 +28,6 @@ final class SignUpState extends Equatable {
         password,
         confirmedPassword,
         status,
-        isValid,
         userType,
         errorMessage,
       ];
@@ -41,7 +38,6 @@ final class SignUpState extends Equatable {
     Password? password,
     ConfirmedPassword? confirmedPassword,
     FormzSubmissionStatus? status,
-    bool? isValid,
     String? errorMessage,
     UserType? userType,
   }) {
@@ -51,9 +47,17 @@ final class SignUpState extends Equatable {
       password: password ?? this.password,
       confirmedPassword: confirmedPassword ?? this.confirmedPassword,
       status: status ?? this.status,
-      isValid: isValid ?? this.isValid,
       userType: userType ?? this.userType,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  @override
+  // ignore: strict_raw_type
+  List<FormzInput> get inputs => [
+        email,
+        if (userType.isTrainee) coachEmail,
+        password,
+        confirmedPassword,
+      ];
 }

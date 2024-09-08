@@ -13,44 +13,17 @@ class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit(this._authRepository) : super(const SignUpState());
 
   void changeUserType(UserType userType) {
-    emit(state.copyWith(
-      userType: userType,
-      isValid: Formz.validate([
-        state.email,
-        if (userType.isTrainee) state.coachEmail,
-        state.password,
-        state.confirmedPassword,
-      ]),
-    ));
+    emit(state.copyWith(userType: userType));
   }
 
   void emailChanged(String value) {
     final email = Email.dirty(value);
-    emit(
-      state.copyWith(
-        email: email,
-        isValid: Formz.validate([
-          email,
-          state.password,
-          state.confirmedPassword,
-        ]),
-      ),
-    );
+    emit(state.copyWith(email: email));
   }
 
   void coachEmailChanged(String value) {
     final coachEmail = Email.dirty(value);
-    emit(
-      state.copyWith(
-        coachEmail: coachEmail,
-        isValid: Formz.validate([
-          state.email,
-          coachEmail,
-          state.password,
-          state.confirmedPassword,
-        ]),
-      ),
-    );
+    emit(state.copyWith(coachEmail: coachEmail));
   }
 
   void passwordChanged(String value) {
@@ -60,15 +33,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       value: state.confirmedPassword.value,
     );
     emit(
-      state.copyWith(
-        password: password,
-        confirmedPassword: confirmedPassword,
-        isValid: Formz.validate([
-          state.email,
-          password,
-          confirmedPassword,
-        ]),
-      ),
+      state.copyWith(password: password, confirmedPassword: confirmedPassword),
     );
   }
 
@@ -77,16 +42,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       password: state.password.value,
       value: value,
     );
-    emit(
-      state.copyWith(
-        confirmedPassword: confirmedPassword,
-        isValid: Formz.validate([
-          state.email,
-          state.password,
-          confirmedPassword,
-        ]),
-      ),
-    );
+    emit(state.copyWith(confirmedPassword: confirmedPassword));
   }
 
   Future<void> signUpFormSubmitted() async {
@@ -99,7 +55,6 @@ class SignUpCubit extends Cubit<SignUpState> {
         userType: state.userType,
         coachEmail: state.coachEmail.value,
       );
-      // emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(
         state.copyWith(

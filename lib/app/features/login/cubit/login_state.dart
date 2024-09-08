@@ -1,11 +1,10 @@
 part of 'login_cubit.dart';
 
-final class LoginState extends Equatable {
+final class LoginState extends Equatable with FormzMixin {
   const LoginState({
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.status = FormzSubmissionStatus.initial,
-    this.isValid = false,
     this.userType = UserType.coach,
     this.errorMessage,
   });
@@ -13,7 +12,6 @@ final class LoginState extends Equatable {
   final Email email;
   final Password password;
   final FormzSubmissionStatus status;
-  final bool isValid;
   final UserType userType;
   final String? errorMessage;
 
@@ -31,7 +29,6 @@ final class LoginState extends Equatable {
     Email? email,
     Password? password,
     FormzSubmissionStatus? status,
-    bool? isValid,
     String? errorMessage,
     UserType? userType,
   }) {
@@ -40,8 +37,11 @@ final class LoginState extends Equatable {
       password: password ?? this.password,
       status: status ?? this.status,
       userType: userType ?? this.userType,
-      isValid: isValid ?? this.isValid,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  @override
+  // ignore: strict_raw_type
+  List<FormzInput> get inputs => [email, password];
 }
