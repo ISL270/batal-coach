@@ -10,25 +10,17 @@ part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository _authRepository;
+
   LoginCubit(this._authRepository) : super(const LoginState());
 
-  void changeUserType(UserType userType) {
-    emit(state.copyWith(userType: userType));
-  }
+  void changeUserType(UserType userType) => emit(state.copyWith(userType: userType));
 
-  void emailChanged(String value) {
-    final email = Email.dirty(value);
+  void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
-    emit(state.copyWith(email: email));
-  }
-
-  void passwordChanged(String value) {
-    final password = Password.dirty(value);
-    emit(state.copyWith(password: password));
-  }
+  void passwordChanged(String value) => emit(state.copyWith(password: Password.dirty(value)));
 
   Future<void> logInWithCredentials() async {
-    if (!state.isValid) return;
+    if (state.isNotValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authRepository.logInWithEmail(
@@ -36,7 +28,6 @@ class LoginCubit extends Cubit<LoginState> {
         email: state.email.value,
         password: state.password.value,
       );
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(
         state.copyWith(
@@ -51,7 +42,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authRepository.logInWithGoogle(state.userType);
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
     } catch (e) {
       emit(
         state.copyWith(
