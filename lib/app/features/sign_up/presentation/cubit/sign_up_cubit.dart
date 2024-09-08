@@ -10,21 +10,14 @@ part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
   final AuthRepository _authRepository;
+
   SignUpCubit(this._authRepository) : super(const SignUpState());
 
-  void changeUserType(UserType userType) {
-    emit(state.copyWith(userType: userType));
-  }
+  void changeUserType(UserType userType) => emit(state.copyWith(userType: userType));
 
-  void emailChanged(String value) {
-    final email = Email.dirty(value);
-    emit(state.copyWith(email: email));
-  }
+  void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
-  void coachEmailChanged(String value) {
-    final coachEmail = Email.dirty(value);
-    emit(state.copyWith(coachEmail: coachEmail));
-  }
+  void coachEmailChanged(String value) => emit(state.copyWith(coachEmail: Email.dirty(value)));
 
   void passwordChanged(String value) {
     final password = Password.dirty(value);
@@ -32,9 +25,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       password: password.value,
       value: state.confirmedPassword.value,
     );
-    emit(
-      state.copyWith(password: password, confirmedPassword: confirmedPassword),
-    );
+    emit(state.copyWith(password: password, confirmedPassword: confirmedPassword));
   }
 
   void confirmedPasswordChanged(String value) {
@@ -46,7 +37,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   }
 
   Future<void> signUpFormSubmitted() async {
-    if (!state.isValid) return;
+    if (state.isNotValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authRepository.signUp(
