@@ -5,6 +5,7 @@ import 'package:btl/app/core/routing/go_router_state_extension.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
+import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';
 import 'package:btl/app/features/splash/splash_screen.dart';
@@ -33,7 +34,10 @@ final traineeRouter = GoRouter(
           GoRoute(
             name: SignUpScreen.name,
             path: SignUpScreen.name,
-            builder: (context, state) => const SignUpScreen(),
+            builder: (context, state) => BlocProvider(
+              create: (_) => SignUpCubit(getIt.authRepo),
+              child: const SignUpScreen(),
+            ),
           ),
         ]),
     GoRoute(
