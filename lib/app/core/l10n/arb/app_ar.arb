@@ -40,5 +40,7 @@
     },
     "coach": "مدرب",
     "trainee": "متدرب",
-    "yourCoachEmail": "الايميل الخاص بمدربك"
+    "yourCoachEmail": "الايميل الخاص بمدربك",
+    "name": "الاسم",
+    "phoneNumber": "رقم الهاتف"
 }

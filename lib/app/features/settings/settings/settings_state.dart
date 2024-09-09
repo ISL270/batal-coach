@@ -1,7 +1,8 @@
 part of 'settings_bloc.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SettingsState extends Equatable {
+  @JsonKey(fromJson: Status.fromJson, includeToJson: false)
   final Status status;
   final Language language;
   final ThemeMode themeMode;
@@ -13,7 +14,7 @@ class SettingsState extends Equatable {
   );
 
   const SettingsState.initial()
-      : status = Status.initial,
+      : status = const Initial(),
         language = Language.arabic,
         themeMode = ThemeMode.light;
 

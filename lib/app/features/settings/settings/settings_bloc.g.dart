@@ -8,25 +8,16 @@ part of 'settings_bloc.dart';
 
 SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) =>
     SettingsState(
-      $enumDecode(_$StatusEnumMap, json['status']),
+      Status.fromJson(json['status'] as Map<String, dynamic>?),
       $enumDecode(_$LanguageEnumMap, json['language']),
       $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
     );
 
 Map<String, dynamic> _$SettingsStateToJson(SettingsState instance) =>
     <String, dynamic>{
-      'status': _$StatusEnumMap[instance.status]!,
       'language': _$LanguageEnumMap[instance.language]!,
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
     };
-
-const _$StatusEnumMap = {
-  Status.initial: 'initial',
-  Status.success: 'success',
-  Status.failure: 'failure',
-  Status.loading: 'loading',
-  Status.pageLoading: 'pageLoading',
-};
 
 const _$LanguageEnumMap = {
   Language.arabic: 'arabic',

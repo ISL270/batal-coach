@@ -52,10 +52,10 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final authModule = _$AuthModule();
+    gh.singleton<_i222.L10nService>(() => _i222.L10nService());
     gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
     gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     gh.singleton<_i529.FirestoreService>(() => _i529.FirestoreService());
-    gh.singleton<_i222.L10nService>(() => _i222.L10nService());
     await gh.singletonAsync<_i898.LocalDB>(
       () => _i791.IsarDB.create(),
       preResolve: true,

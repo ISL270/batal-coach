@@ -51,7 +51,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
               const Gap(10),
               Expanded(
                 child: switch (state.status) {
-                  Status.loading => const Center(child: CircularProgressIndicator()),
+                  Loading() => const Center(child: CircularProgressIndicator()),
                   _ => state.displayedExercises.isEmpty
                       ? const Center(child: Text('No exercises found'))
                       : ListView.separated(

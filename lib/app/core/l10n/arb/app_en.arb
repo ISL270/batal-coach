@@ -40,5 +40,7 @@
     },
     "coach": "coach",
     "trainee": "trainee",
-    "yourCoachEmail": "Your coach's email"
+    "yourCoachEmail": "Your coach's email",
+    "name": "name",
+    "phoneNumber": "phone number"
 }
