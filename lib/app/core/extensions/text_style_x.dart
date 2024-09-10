@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 extension TextStyleX on TextStyle {
-  TextStyle get bold => copyWith(fontWeight: FontWeight.w600);
+  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 }

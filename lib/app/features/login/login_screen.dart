@@ -2,12 +2,12 @@ import 'package:btl/app/core/extensions/bloc_x.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
+import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +61,6 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Gap(40),
               BlocSelector<LoginCubit, LoginState, UserType>(
                 selector: (state) => state.userType,
                 builder: (context, userType) => SizedBox(
@@ -88,16 +87,26 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const Gap(30),
+              const Gap(25),
               _EmailInput(),
-              const Gap(15),
+              const Gap(25),
               _PasswordInput(),
-              const Gap(15),
+              const Gap(25),
               _LoginButton(),
               const Gap(25),
-              _GoogleLoginButton(),
-              const Gap(15),
-              _SignUpButton(),
+              Button.secondary(
+                label: context.l10n.signInWithGoogle.capitalized,
+                iconWithAlignment: const IconWithAlignment(
+                  Icon(FontAwesomeIcons.google),
+                ),
+                onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
+              ),
+              const Gap(25),
+              Button.outlined(
+                density: ButtonDensity.compact,
+                onPressed: () => context.pushNamed(SignUpScreen.name),
+                label: context.l10n.createAccount.capitalized,
+              ),
             ],
           ),
         ),
@@ -117,7 +126,6 @@ class _EmailInput extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: context.l10n.email.capitalized,
-            helperText: '',
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
           ),
         );
@@ -137,7 +145,6 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             labelText: context.l10n.password.capitalized,
-            helperText: '',
             errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
           ),
         );
@@ -151,43 +158,15 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
-        return state.status.isInProgress
-            ? const CircularProgressIndicator()
-            : ElevatedButton(
-                onPressed:
-                    state.isValid ? () => context.read<LoginCubit>().logInWithCredentials() : null,
-                child: Text(context.l10n.login.capitalized),
-              );
+        return Button.filled(
+          maxWidth: true,
+          isLoading: state.status.isInProgress,
+          density: ButtonDensity.comfortable,
+          shape: ButtonShape.roundedCorners,
+          onPressed: state.isValid ? () => context.read<LoginCubit>().logInWithCredentials() : null,
+          label: context.l10n.login.capitalized,
+        );
       },
-    );
-  }
-}
-
-class _GoogleLoginButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      label: Text(
-        context.l10n.signInWithGoogle.capitalized,
-        style: const TextStyle(color: Colors.white),
-      ),
-      style: ElevatedButton.styleFrom(backgroundColor: context.colorsX.secondary),
-      icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
-      onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
-    );
-  }
-}
-
-class _SignUpButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return TextButton(
-      onPressed: () => context.pushNamed(SignUpScreen.name),
-      child: Text(
-        context.l10n.createAccount.capitalized,
-        style: TextStyle(color: theme.primaryColor),
-      ),
     );
   }
 }

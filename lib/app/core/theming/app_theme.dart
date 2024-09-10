@@ -16,9 +16,9 @@ class AppTheme {
 ThemeData _themeData(ColorsX colorScheme) {
   final textTheme = TextThemeX(
     heading: GoogleFonts.notoSansArabic(fontSize: 24.sp),
-    small: GoogleFonts.notoSansArabic(fontSize: 14.sp),
-    medium: GoogleFonts.notoSansArabic(fontSize: 16.sp),
     large: GoogleFonts.notoSansArabic(fontSize: 18.sp),
+    medium: GoogleFonts.notoSansArabic(fontSize: 16.sp),
+    small: GoogleFonts.notoSansArabic(fontSize: 14.sp),
   );
   return ThemeData(
     primaryColor: colorScheme.primary,
@@ -37,15 +37,38 @@ ThemeData _themeData(ColorsX colorScheme) {
       color: colorScheme.background,
       foregroundColor: colorScheme.onBackground,
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        textStyle: textTheme.small.bold,
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
         minimumSize: const Size(double.minPositive, 45),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
         disabledForegroundColor: colorScheme.isDark ? colorScheme.onBackgroundTint : null,
         disabledBackgroundColor: colorScheme.isDark ? colorScheme.secondaryBackground : null,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(textTheme.small.bold),
+        overlayColor: WidgetStatePropertyAll(colorScheme.primary.withOpacity(.08)),
+        backgroundColor: WidgetStateProperty.resolveWith((state) {
+          if (state.isDisabled) {
+            return colorScheme.onBackgroundTint.withOpacity(.07);
+          }
+          return colorScheme.primary.withOpacity(.13);
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((state) {
+          if (state.isDisabled) {
+            return colorScheme.onBackgroundTint.withOpacity(.4);
+          }
+          return colorScheme.primary;
+        }),
+        minimumSize: const WidgetStatePropertyAll(Size(double.minPositive, 45)),
+        side: WidgetStateProperty.resolveWith((state) {
+          if (state.isDisabled) {
+            return BorderSide(color: colorScheme.onBackgroundTint.withOpacity(.3));
+          }
+          return BorderSide(color: colorScheme.primary);
+        }),
       ),
     ),
     segmentedButtonTheme: SegmentedButtonThemeData(
