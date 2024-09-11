@@ -1,15 +1,19 @@
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 
 abstract interface class UserInfoRM {
-  UserInfoRM();
+  final String uid;
+  final String email;
+  final String name;
+  final String phoneNumber;
 
-  User toDomain({
-    required String uid,
-    required String email,
-    required String? phoneNumber,
-    required String? photo,
-    required String? name,
+  UserInfoRM({
+    required this.uid,
+    required this.email,
+    required this.name,
+    required this.phoneNumber,
   });
+
+  User toDomain();
 
   UserInfoRM fromDomain(User user);
 

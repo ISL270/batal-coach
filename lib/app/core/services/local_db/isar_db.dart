@@ -21,24 +21,6 @@ final class IsarDB implements LocalDB {
   }
 
   @override
-  Future<bool> delete<T extends CacheModel>(T object) async {
-    return _isar.writeTxn(() => _isar.collection<T>().delete(object.cacheID));
-  }
-
-  bool deleteSync<T extends CacheModel>(T object) {
-    return _isar.writeTxnSync(() => _isar.collection<T>().deleteSync(object.cacheID));
-  }
-
-  @override
-  Future<void> deleteAll<T extends CacheModel>() async {
-    return _isar.writeTxn(() => _isar.collection<T>().clear());
-  }
-
-  void deleteAllSync<T extends CacheModel>() {
-    return _isar.writeTxnSync(() => _isar.collection<T>().clearSync());
-  }
-
-  @override
   Future<int> save<T extends CacheModel>(T object) async {
     return _isar.writeTxn(() => _isar.collection<T>().put(object));
   }
@@ -57,20 +39,38 @@ final class IsarDB implements LocalDB {
   }
 
   @override
-  Future<List<T>> getAll<T extends CacheModel>() async {
-    return _isar.txn(() => _isar.collection<T>().where().findAll());
-  }
-
-  List<T> getAlSyncl<T extends CacheModel>() {
-    return _isar.txnSync(() => _isar.collection<T>().where().findAllSync());
-  }
-
-  @override
   Future<T?> getFirst<T extends CacheModel>() async {
     return _isar.txn(() => _isar.collection<T>().where().findFirst());
   }
 
   T? getFirstSync<T extends CacheModel>() {
     return _isar.txnSync(() => _isar.collection<T>().where().findFirstSync());
+  }
+
+  @override
+  Future<List<T>> getAll<T extends CacheModel>() async {
+    return _isar.txn(() => _isar.collection<T>().where().findAll());
+  }
+
+  List<T> getAlSync<T extends CacheModel>() {
+    return _isar.txnSync(() => _isar.collection<T>().where().findAllSync());
+  }
+
+  @override
+  Future<bool> delete<T extends CacheModel>(T object) async {
+    return _isar.writeTxn(() => _isar.collection<T>().delete(object.cacheID));
+  }
+
+  bool deleteSync<T extends CacheModel>(T object) {
+    return _isar.writeTxnSync(() => _isar.collection<T>().deleteSync(object.cacheID));
+  }
+
+  @override
+  Future<void> deleteAll<T extends CacheModel>() async {
+    return _isar.writeTxn(() => _isar.collection<T>().clear());
+  }
+
+  void deleteAllSync<T extends CacheModel>() {
+    return _isar.writeTxnSync(() => _isar.collection<T>().clearSync());
   }
 }

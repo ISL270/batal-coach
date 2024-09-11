@@ -37,18 +37,13 @@ const UserIsarSchema = CollectionSchema(
       name: r'phoneNumber',
       type: IsarType.string,
     ),
-    r'photo': PropertySchema(
-      id: 4,
-      name: r'photo',
-      type: IsarType.string,
-    ),
     r'uid': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'uid',
       type: IsarType.string,
     ),
     r'userType': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'userType',
       type: IsarType.byte,
       enumMap: _UserIsaruserTypeEnumValueMap,
@@ -82,18 +77,7 @@ int _userIsarEstimateSize(
   }
   bytesCount += 3 + object.email.length * 3;
   bytesCount += 3 + object.name.length * 3;
-  {
-    final value = object.phoneNumber;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.photo;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.phoneNumber.length * 3;
   bytesCount += 3 + object.uid.length * 3;
   return bytesCount;
 }
@@ -108,9 +92,8 @@ void _userIsarSerialize(
   writer.writeString(offsets[1], object.email);
   writer.writeString(offsets[2], object.name);
   writer.writeString(offsets[3], object.phoneNumber);
-  writer.writeString(offsets[4], object.photo);
-  writer.writeString(offsets[5], object.uid);
-  writer.writeByte(offsets[6], object.userType.index);
+  writer.writeString(offsets[4], object.uid);
+  writer.writeByte(offsets[5], object.userType.index);
 }
 
 UserIsar _userIsarDeserialize(
@@ -123,11 +106,10 @@ UserIsar _userIsarDeserialize(
     coachEmail: reader.readStringOrNull(offsets[0]),
     email: reader.readString(offsets[1]),
     name: reader.readString(offsets[2]),
-    phoneNumber: reader.readStringOrNull(offsets[3]),
-    photo: reader.readStringOrNull(offsets[4]),
-    uid: reader.readString(offsets[5]),
+    phoneNumber: reader.readString(offsets[3]),
+    uid: reader.readString(offsets[4]),
     userType:
-        _UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offsets[6])] ??
+        _UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offsets[5])] ??
             UserType.coach,
   );
   object.cacheID = id;
@@ -148,12 +130,10 @@ P _userIsarDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
-    case 4:
-      return (reader.readStringOrNull(offset)) as P;
-    case 5:
       return (reader.readString(offset)) as P;
-    case 6:
+    case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
       return (_UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offset)] ??
           UserType.coach) as P;
     default:
@@ -724,25 +704,8 @@ extension UserIsarQueryFilter
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> phoneNumberIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'phoneNumber',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition>
-      phoneNumberIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'phoneNumber',
-      ));
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> phoneNumberEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -756,7 +719,7 @@ extension UserIsarQueryFilter
 
   QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition>
       phoneNumberGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -771,7 +734,7 @@ extension UserIsarQueryFilter
   }
 
   QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> phoneNumberLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -786,8 +749,8 @@ extension UserIsarQueryFilter
   }
 
   QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> phoneNumberBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -868,152 +831,6 @@ extension UserIsarQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'phoneNumber',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'photo',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'photo',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'photo',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'photo',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'photo',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'photo',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'photo',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'photo',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'photo',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'photo',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'photo',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> photoIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'photo',
         value: '',
       ));
     });
@@ -1258,18 +1075,6 @@ extension UserIsarQuerySortBy on QueryBuilder<UserIsar, UserIsar, QSortBy> {
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByPhoto() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'photo', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByPhotoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'photo', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByUid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uid', Sort.asc);
@@ -1357,18 +1162,6 @@ extension UserIsarQuerySortThenBy
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByPhoto() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'photo', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByPhotoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'photo', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByUid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uid', Sort.asc);
@@ -1424,13 +1217,6 @@ extension UserIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QDistinct> distinctByPhoto(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'photo', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QDistinct> distinctByUid(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1471,15 +1257,9 @@ extension UserIsarQueryProperty
     });
   }
 
-  QueryBuilder<UserIsar, String?, QQueryOperations> phoneNumberProperty() {
+  QueryBuilder<UserIsar, String, QQueryOperations> phoneNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phoneNumber');
-    });
-  }
-
-  QueryBuilder<UserIsar, String?, QQueryOperations> photoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'photo');
     });
   }
 

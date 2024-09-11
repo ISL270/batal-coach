@@ -1,7 +1,9 @@
+import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart';
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
@@ -11,54 +13,47 @@ final class UserRepository {
 
   UserRepository(this._localSource, this._remoteSource);
 
-  Future<User?> getLocalUser() async {
+  Future<User?> geUserLocal() async {
     final userCM = await _localSource.getSavedUser();
     return userCM?.toDomain();
   }
 
   Future<void> saveUserLocally(User user) => _localSource.saveUser(user);
 
-  Future<void> deleteLocallySavedUser() => _localSource.deleteSavedUser();
+  Future<void> deleteLocalUser() => _localSource.deleteSavedUser();
 
-  Future<User?> getFullUserRemote({
+  Future<Either<GenericException, User>> getUserRemote({
     required UserType userType,
     required String uid,
-    required String email,
-    required String? phoneNumber,
-    required String? photo,
-    required String? name,
   }) async {
-    final userInfoRM = await _remoteSource.getUserInfo(userType, uid);
-    return userInfoRM?.toDomain(
-      uid: uid,
-      email: email,
-      name: name,
-      phoneNumber: phoneNumber,
-      photo: photo,
-    );
+    try {
+      final userInfoRM = await _remoteSource.getUserInfo(userType, uid);
+      return right(userInfoRM.toDomain());
+    } catch (e) {
+      return left(e as GenericException);
+    }
   }
 
-  Future<User> saveUserInfoRemote({
+  Future<Either<GenericException, User>> saveUserInfoRemote({
     required String uid,
     required UserType userType,
     required String coachEmail,
     required String email,
-    required String? phoneNumber,
-    required String? photo,
-    required String? name,
+    required String name,
+    required String phoneNumber,
   }) async {
-    final userInfoRM = await _remoteSource.saveUserInfo(
-      uid: uid,
-      userType: userType,
-      coachEmail: coachEmail,
-    );
-
-    return userInfoRM.toDomain(
-      uid: uid,
-      email: email,
-      name: name,
-      phoneNumber: phoneNumber,
-      photo: photo,
-    );
+    try {
+      final userInfoRM = await _remoteSource.saveUserInfo(
+        userType,
+        uid: uid,
+        coachEmail: coachEmail,
+        email: email,
+        name: name,
+        phoneNumber: phoneNumber,
+      );
+      return right(userInfoRM.toDomain());
+    } catch (e) {
+      return left(e as GenericException);
+    }
   }
 }

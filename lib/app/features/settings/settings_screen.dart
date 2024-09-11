@@ -6,6 +6,7 @@ import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
+import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,17 +82,11 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: () => context.authBloc.add(AuthLogoutRequested()),
-                    label: Text(
-                      context.l10n.logout.capitalized,
-                      style: context.textThemeX.large.bold,
-                    ),
-                    iconAlignment: IconAlignment.end,
-                    icon: const Icon(Icons.exit_to_app),
-                  ),
+                Button.outlined(
+                  maxWidth: true,
+                  density: ButtonDensity.comfortable,
+                  onPressed: () => context.authBloc.add(AuthLogoutRequested()),
+                  label: context.l10n.logout.capitalized,
                 )
               ],
             ),

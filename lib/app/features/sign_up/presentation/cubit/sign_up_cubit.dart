@@ -19,8 +19,11 @@ class SignUpCubit extends Cubit<SignUpState> {
   void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
   void nameChanged(String value) => emit(state.copyWith(name: Name.dirty(value)));
-  
-  void phoneChanged(String value) => emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value)));
+
+  void phoneChanged(String value) {
+    final pppp = PhoneNumber.dirty(value);
+    emit(state.copyWith(phoneNumber: pppp));
+  }
 
   void coachEmailChanged(String value) => emit(state.copyWith(coachEmail: Email.dirty(value)));
 
@@ -42,14 +45,15 @@ class SignUpCubit extends Cubit<SignUpState> {
   }
 
   Future<void> signUpFormSubmitted() async {
-    if (state.isNotValid) return;
     emit(state.copyWith(status: const Loading()));
     try {
       await _authRepository.signUp(
-        email: state.email.value,
-        password: state.password.value,
-        userType: state.userType,
+        state.userType,
         coachEmail: state.coachEmail.value,
+        email: state.email.value,
+        name: state.name.value,
+        phoneNumber: state.phoneNumber.value,
+        password: state.password.value,
       );
     } catch (e) {
       emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));

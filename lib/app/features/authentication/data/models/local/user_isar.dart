@@ -23,10 +23,7 @@ final class UserIsar implements UserCM {
   String name;
 
   @override
-  String? phoneNumber;
-
-  @override
-  String? photo;
+  String phoneNumber;
 
   @override
   @enumerated
@@ -37,7 +34,6 @@ final class UserIsar implements UserCM {
     required this.email,
     required this.name,
     required this.userType,
-    required this.photo,
     required this.phoneNumber,
     this.coachEmail,
   });
@@ -49,7 +45,6 @@ final class UserIsar implements UserCM {
             email: email,
             name: name,
             phoneNumber: phoneNumber,
-            photo: photo,
           ),
         UserType.trainee => Trainee(
             id: uid,
@@ -57,26 +52,21 @@ final class UserIsar implements UserCM {
             coachEmail: coachEmail!,
             name: name,
             phoneNumber: phoneNumber,
-            photo: photo,
           ),
       };
 
   factory UserIsar.fromDomain(User user) => switch (user) {
         Coach() => UserIsar(
             uid: user.id,
-            //TODO: make name required.
-            name: user.name ?? '',
+            name: user.name,
             email: user.email,
-            photo: user.photo,
             phoneNumber: user.phoneNumber,
             userType: UserType.coach,
           ),
         Trainee() => UserIsar(
             uid: user.id,
-            //TODO: make name required.
-            name: user.name ?? '',
+            name: user.name,
             email: user.email,
-            photo: user.photo,
             phoneNumber: user.phoneNumber,
             coachEmail: user.coachEmail,
             userType: UserType.trainee,

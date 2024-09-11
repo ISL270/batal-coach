@@ -7,6 +7,7 @@ class SignUpWithEmailAndPasswordException implements BusinessException {
     this.message = 'An unknown exception occurred.',
   });
 
+  // TODO: convert to new switch case.
   /// Create an authentication message
   /// from a firebase authentication exception code.
   /// https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/createUserWithEmailAndPassword.html

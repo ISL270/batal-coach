@@ -5,31 +5,31 @@ sealed class User extends Equatable implements DomainModel {
   const User({
     required this.id,
     required this.email,
-    this.name,
-    this.photo,
-    this.phoneNumber,
+    required this.name,
+    // this.photo,
+    required this.phoneNumber,
   });
 
   /// The current user's id.
   final String id;
 
   /// The current user's name (display name).
-  final String? name;
+  final String name;
 
   /// The current user's email address.
   final String email;
 
-  final String? phoneNumber;
+  final String phoneNumber;
 
   /// Url for the current user's photo.
-  final String? photo;
+  // final String? photo;
 
   @override
   List<Object?> get props => [
         email,
         id,
         name,
-        photo,
+        // photo,
         phoneNumber,
       ];
 }
@@ -38,9 +38,9 @@ final class Coach extends User {
   const Coach({
     required super.id,
     required super.email,
-    super.name,
-    super.phoneNumber,
-    super.photo,
+    required super.name,
+    required super.phoneNumber,
+    // super.photo,
   });
   @override
   List<Object?> get props => [super.props];
@@ -53,9 +53,9 @@ final class Trainee extends User {
     required super.id,
     required super.email,
     required this.coachEmail,
-    super.name,
-    super.phoneNumber,
-    super.photo,
+    required super.name,
+    required super.phoneNumber,
+    // super.photo,
   });
   @override
   List<Object?> get props => [

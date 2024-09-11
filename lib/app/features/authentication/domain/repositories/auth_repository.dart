@@ -36,7 +36,7 @@ class AuthRepository {
     final fireUser = _fireAuth.currentUser;
     if (fireUser == null) return;
     try {
-      final user = await _userRepository.getLocalUser();
+      final user = await _userRepository.geUserLocal();
       _userStream.add(user);
     } catch (_) {}
   }
@@ -44,31 +44,40 @@ class AuthRepository {
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpWithEmailAndPasswordException] if an exception occurs.
-  Future<void> signUp({
-    required String email,
+  Future<void> signUp(
+    UserType userType, {
     required String coachEmail,
+    required String email,
+    required String name,
+    required String phoneNumber,
     required String password,
-    required UserType userType,
   }) async {
     try {
       final userCredential = await _fireAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (userCredential.user == null) return;
 
-      final user = await _userRepository.saveUserInfoRemote(
+      if (userCredential.user == null) {
+        throw SignUpWithEmailAndPasswordException.fromCode('user_not_found');
+      }
+
+      final res = await _userRepository.saveUserInfoRemote(
+        uid: userCredential.user!.uid,
         userType: userType,
         coachEmail: coachEmail,
-        uid: userCredential.user!.uid,
-        email: userCredential.user!.email!,
-        photo: userCredential.user!.photoURL,
-        name: userCredential.user!.displayName,
-        phoneNumber: userCredential.user!.phoneNumber,
+        email: email,
+        name: name,
+        phoneNumber: phoneNumber,
       );
 
-      _userStream.add(user);
-      await _userRepository.saveUserLocally(user);
+      await res.fold(
+        (e) => throw SignUpWithEmailAndPasswordException.fromCode(e.code),
+        (user) async {
+          _userStream.add(user);
+          await _userRepository.saveUserLocally(user);
+        },
+      );
     } catch (e) {
       throw switch (e) {
         (final fire_auth.FirebaseAuthException e) =>
@@ -81,29 +90,33 @@ class AuthRepository {
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordException] if an exception occurs.
-  Future<void> logInWithEmail({
+  Future<void> logInWithEmail(
+    UserType userType, {
     required String email,
     required String password,
-    required UserType userType,
   }) async {
     try {
       final userCredential = await _fireAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (userCredential.user == null) return;
 
-      final user = await _userRepository.getFullUserRemote(
+      if (userCredential.user == null) {
+        throw LogInWithEmailAndPasswordException.fromCode('user_not_found');
+      }
+
+      final res = await _userRepository.getUserRemote(
         userType: userType,
         uid: userCredential.user!.uid,
-        email: userCredential.user!.email!,
-        photo: userCredential.user!.photoURL,
-        name: userCredential.user!.displayName,
-        phoneNumber: userCredential.user!.phoneNumber,
       );
 
-      _userStream.add(user);
-      await _userRepository.saveUserLocally(user!);
+      await res.fold(
+        (e) => throw LogInWithEmailAndPasswordException.fromCode(e.code),
+        (user) async {
+          _userStream.add(user);
+          await _userRepository.saveUserLocally(user);
+        },
+      );
     } catch (e) {
       throw switch (e) {
         (final fire_auth.FirebaseAuthException e) =>
@@ -136,18 +149,23 @@ class AuthRepository {
       }
 
       final userCredential = await _fireAuth.signInWithCredential(credential);
-      if (userCredential.user == null) return;
 
-      final user = await _userRepository.getFullUserRemote(
+      if (userCredential.user == null) {
+        throw LogInWithGoogleException.fromCode('user_not_found');
+      }
+
+      final res = await _userRepository.getUserRemote(
         userType: userType,
         uid: userCredential.user!.uid,
-        email: userCredential.user!.email!,
-        name: userCredential.user!.displayName,
-        photo: userCredential.user!.photoURL,
-        phoneNumber: userCredential.user!.phoneNumber,
       );
-      _userStream.add(user);
-      await _userRepository.saveUserLocally(user!);
+
+      await res.fold(
+        (e) => throw LogInWithGoogleException.fromCode(e.code),
+        (user) async {
+          _userStream.add(user);
+          await _userRepository.saveUserLocally(user);
+        },
+      );
     } catch (e) {
       throw switch (e) {
         (final fire_auth.FirebaseAuthException e) => LogInWithGoogleException.fromCode(e.code),
@@ -163,12 +181,9 @@ class AuthRepository {
         _googleSignIn.signOut(),
       ]);
       _userStream.add(null);
-      await _userRepository.deleteLocallySavedUser();
+      await _userRepository.deleteLocalUser();
     } catch (_) {
-      throw const BusinessException(
-        code: '',
-        message: 'An unknown exception occurred.',
-      );
+      throw BusinessException.unkown();
     }
   }
 

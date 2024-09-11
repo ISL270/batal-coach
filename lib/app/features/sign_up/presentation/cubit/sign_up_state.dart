@@ -68,6 +68,6 @@ final class SignUpState extends Equatable with FormzMixin {
 
   String get errorMsg {
     if (!status.isFailure) return '';
-    return (status as Failure).exception.message;
+    return (status as Failure).exception.message ?? 'unkown error';
   }
 }

@@ -1,11 +1,11 @@
 /// Parent exception class that can only be inherited and not instantiated.
 sealed class GenericException implements Exception {
   final String code;
-  final String message;
+  final String? message;
 
   const GenericException({
     required this.code,
-    required this.message,
+    this.message,
   });
 }
 
@@ -14,8 +14,10 @@ class BusinessException extends GenericException {
   // here you can extend attributes and methods as needed.
   const BusinessException({
     required super.code,
-    required super.message,
+    super.message,
   });
+
+  factory BusinessException.unkown() => const BusinessException(code: 'unkown');
 }
 
 /// Exception caused by network related issues.
@@ -25,9 +27,11 @@ class NetworkException extends GenericException {
 
   const NetworkException({
     required super.code,
-    required super.message,
+    super.message,
     this.type = NetworkExceptionType.unKnown,
   });
+
+  factory NetworkException.unkown() => const NetworkException(code: 'unkown');
 }
 
 /// HTTP exceptions with status codes.

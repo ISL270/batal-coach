@@ -156,107 +156,116 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final child = Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        if (isLoading)
-          SizedBox(
-            height: density.height / 2,
-            width: density.height / 2,
-            child: CircularProgressIndicator(
-              color: _variant == _ButtonVariant.outlined
-                  ? context.colorsX.primary
-                  : context.colorsX.onPrimary,
-              strokeWidth: switch (density) {
-                ButtonDensity.compact => 2,
-                ButtonDensity.standard => 3,
-                ButtonDensity.comfortable => 4,
-              },
-            ),
-          ),
-        Opacity(opacity: isLoading ? 0 : 1, child: Text(label)),
-      ],
-    );
-    final style = FilledButton.styleFrom(
-        textStyle: context.textThemeX.small.copyWith(
-          fontSize: density.fontSize,
-          fontWeight: bold ? FontWeight.bold : null,
-        ),
-        minimumSize:
-            maxWidth ? Size.fromHeight(density.height) : Size(double.minPositive, density.height),
-        backgroundColor: _variant == _ButtonVariant.secondary ? context.colorsX.secondary : null,
-        shape: switch (shape) {
-          ButtonShape.roundedCorners => RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ButtonShape.sharp => RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(3),
-            ),
-          _ => null,
-        });
+    return AbsorbPointer(
+      absorbing: isLoading,
+      child: Builder(
+        builder: (context) {
+          final child = Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              if (isLoading)
+                SizedBox(
+                  height: density.height / 2,
+                  width: density.height / 2,
+                  child: CircularProgressIndicator(
+                    color: _variant == _ButtonVariant.outlined
+                        ? context.colorsX.primary
+                        : context.colorsX.onPrimary,
+                    strokeWidth: switch (density) {
+                      ButtonDensity.compact => 2,
+                      ButtonDensity.standard => 3,
+                      ButtonDensity.comfortable => 4,
+                    },
+                  ),
+                ),
+              Opacity(opacity: isLoading ? 0 : 1, child: Text(label)),
+            ],
+          );
+          final style = FilledButton.styleFrom(
+              textStyle: context.textThemeX.small.copyWith(
+                fontSize: density.fontSize,
+                fontWeight: bold ? FontWeight.bold : null,
+              ),
+              minimumSize: maxWidth
+                  ? Size.fromHeight(density.height)
+                  : Size(double.minPositive, density.height),
+              backgroundColor:
+                  _variant == _ButtonVariant.secondary ? context.colorsX.secondary : null,
+              shape: switch (shape) {
+                ButtonShape.roundedCorners => RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ButtonShape.sharp => RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                _ => null,
+              });
 
-    if (_variant == _ButtonVariant.outlined) {
-      if (iconWithAlignment != null) {
-        return OutlinedButton.icon(
-          key: key,
-          onPressed: onPressed,
-          onLongPress: onLongPress,
-          onHover: onHover,
-          onFocusChange: onFocusChange,
-          style: style,
-          focusNode: focusNode,
-          autofocus: autofocus,
-          clipBehavior: clipBehavior,
-          statesController: statesController,
-          label: child,
-          icon: iconWithAlignment!.icon,
-          iconAlignment: iconWithAlignment!.alignment,
-        );
-      }
-      return OutlinedButton(
-        key: key,
-        onPressed: onPressed,
-        onLongPress: onLongPress,
-        onHover: onHover,
-        onFocusChange: onFocusChange,
-        style: style,
-        focusNode: focusNode,
-        autofocus: autofocus,
-        clipBehavior: clipBehavior,
-        statesController: statesController,
-        child: child,
-      );
-    }
+          if (_variant == _ButtonVariant.outlined) {
+            if (iconWithAlignment != null) {
+              return OutlinedButton.icon(
+                key: key,
+                onPressed: onPressed,
+                onLongPress: onLongPress,
+                onHover: onHover,
+                onFocusChange: onFocusChange,
+                style: style,
+                focusNode: focusNode,
+                autofocus: autofocus,
+                clipBehavior: clipBehavior,
+                statesController: statesController,
+                label: child,
+                icon: iconWithAlignment!.icon,
+                iconAlignment: iconWithAlignment!.alignment,
+              );
+            }
+            return OutlinedButton(
+              key: key,
+              onPressed: onPressed,
+              onLongPress: onLongPress,
+              onHover: onHover,
+              onFocusChange: onFocusChange,
+              style: style,
+              focusNode: focusNode,
+              autofocus: autofocus,
+              clipBehavior: clipBehavior,
+              statesController: statesController,
+              child: child,
+            );
+          }
 
-    if (iconWithAlignment != null) {
-      return FilledButton.icon(
-        key: key,
-        onPressed: onPressed,
-        onLongPress: onLongPress,
-        onHover: onHover,
-        onFocusChange: onFocusChange,
-        style: style,
-        focusNode: focusNode,
-        autofocus: autofocus,
-        clipBehavior: clipBehavior,
-        statesController: statesController,
-        label: child,
-        icon: iconWithAlignment!.icon,
-        iconAlignment: iconWithAlignment!.alignment,
-      );
-    }
-    return FilledButton(
-      key: key,
-      onPressed: onPressed,
-      onLongPress: onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
-      style: style,
-      focusNode: focusNode,
-      autofocus: autofocus,
-      clipBehavior: clipBehavior,
-      statesController: statesController,
-      child: child,
+          if (iconWithAlignment != null) {
+            return FilledButton.icon(
+              key: key,
+              onPressed: onPressed,
+              onLongPress: onLongPress,
+              onHover: onHover,
+              onFocusChange: onFocusChange,
+              style: style,
+              focusNode: focusNode,
+              autofocus: autofocus,
+              clipBehavior: clipBehavior,
+              statesController: statesController,
+              label: child,
+              icon: iconWithAlignment!.icon,
+              iconAlignment: iconWithAlignment!.alignment,
+            );
+          }
+          return FilledButton(
+            key: key,
+            onPressed: onPressed,
+            onLongPress: onLongPress,
+            onHover: onHover,
+            onFocusChange: onFocusChange,
+            style: style,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            clipBehavior: clipBehavior,
+            statesController: statesController,
+            child: child,
+          );
+        },
+      ),
     );
   }
 }

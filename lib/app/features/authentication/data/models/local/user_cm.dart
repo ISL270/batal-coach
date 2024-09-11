@@ -7,8 +7,7 @@ abstract interface class UserCM extends CacheModel {
   final String email;
   final String name;
   final UserType userType;
-  final String? photo;
-  final String? phoneNumber;
+  final String phoneNumber;
   final String? coachEmail;
 
   UserCM({
@@ -17,7 +16,6 @@ abstract interface class UserCM extends CacheModel {
     required this.email,
     required this.name,
     required this.userType,
-    required this.photo,
     required this.phoneNumber,
     required this.coachEmail,
   });
