@@ -23,12 +23,14 @@ sealed class FireUserInfo implements UserInfoRM {
   }) =>
       switch (userType) {
         UserType.coach => FireCoachInfo(
+            userType: userType,
             uid: uid,
             email: email,
             name: name,
             phoneNumber: phoneNumber,
           ),
         UserType.trainee => FireTraineeInfo(
+            userType: userType,
             uid: uid,
             coachEmail: coachEmail,
             email: email,
@@ -40,12 +42,14 @@ sealed class FireUserInfo implements UserInfoRM {
   @override
   UserInfoRM fromDomain(User user) => switch (user) {
         Coach() => FireCoachInfo(
+            userType: userType,
             uid: user.id,
             email: user.email,
             name: user.name,
             phoneNumber: user.phoneNumber,
           ),
         Trainee() => FireTraineeInfo(
+            userType: userType,
             uid: user.id,
             email: user.email,
             name: user.name,
@@ -58,6 +62,8 @@ sealed class FireUserInfo implements UserInfoRM {
 @JsonSerializable()
 final class FireCoachInfo extends FireUserInfo {
   @override
+  final UserType userType;
+  @override
   final String uid;
   @override
   final String email;
@@ -67,6 +73,7 @@ final class FireCoachInfo extends FireUserInfo {
   final String phoneNumber;
 
   const FireCoachInfo({
+    required this.userType,
     required this.uid,
     required this.email,
     required this.name,
@@ -90,6 +97,8 @@ final class FireCoachInfo extends FireUserInfo {
 @JsonSerializable()
 final class FireTraineeInfo extends FireUserInfo {
   @override
+  final UserType userType;
+  @override
   final String uid;
   @override
   final String email;
@@ -101,6 +110,7 @@ final class FireTraineeInfo extends FireUserInfo {
   final String coachEmail;
 
   const FireTraineeInfo({
+    required this.userType,
     required this.uid,
     required this.email,
     required this.name,

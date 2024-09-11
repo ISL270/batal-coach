@@ -8,6 +8,7 @@ part of 'fire_user_info.dart';
 
 FireCoachInfo _$FireCoachInfoFromJson(Map<String, dynamic> json) =>
     FireCoachInfo(
+      userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
       uid: json['uid'] as String,
       email: json['email'] as String,
       name: json['name'] as String,
@@ -16,14 +17,21 @@ FireCoachInfo _$FireCoachInfoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FireCoachInfoToJson(FireCoachInfo instance) =>
     <String, dynamic>{
+      'userType': instance.userType,
       'uid': instance.uid,
       'email': instance.email,
       'name': instance.name,
       'phoneNumber': instance.phoneNumber,
     };
 
+const _$UserTypeEnumMap = {
+  UserType.coach: 'coach',
+  UserType.trainee: 'trainee',
+};
+
 FireTraineeInfo _$FireTraineeInfoFromJson(Map<String, dynamic> json) =>
     FireTraineeInfo(
+      userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
       uid: json['uid'] as String,
       email: json['email'] as String,
       name: json['name'] as String,
@@ -33,6 +41,7 @@ FireTraineeInfo _$FireTraineeInfoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FireTraineeInfoToJson(FireTraineeInfo instance) =>
     <String, dynamic>{
+      'userType': instance.userType,
       'uid': instance.uid,
       'email': instance.email,
       'name': instance.name,

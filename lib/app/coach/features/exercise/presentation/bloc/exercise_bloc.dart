@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/coach/features/exercise/data/repositories/exercise_repository.dart';
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/bloc_event_transformers.dart';

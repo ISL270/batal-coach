@@ -12,7 +12,7 @@ import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_algol
     as _i404;
 import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_remote_data_source.dart'
     as _i441;
-import 'package:btl/app/coach/features/exercise/data/repositories/exercise_repository.dart'
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart'
     as _i194;
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart'
     as _i883;
