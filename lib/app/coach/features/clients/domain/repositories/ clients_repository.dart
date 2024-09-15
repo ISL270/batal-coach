@@ -7,7 +7,7 @@ import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
-@LazySingleton()
+@singleton
 final class ClientsRepository implements ReactiveRepository<List<Client>> {
   final ClientsRemoteSource _remoteSource;
 

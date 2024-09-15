@@ -7,6 +7,7 @@ import 'package:btl/app/coach/features/clients/data/models/fire_client.dart';
 import 'package:btl/app/core/models/firestore_source.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
+import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
@@ -28,10 +29,12 @@ final class ClientsFirestoreSource extends FirestoreSource implements ClientsRem
   @override
   Stream<List<FireClient>> get stream => _streamCntrlr.stream;
 
-  late final StreamSubscription<QuerySnapshot<Map<String, dynamic>>> _fireClientSubscription;
+  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _fireClientSubscription;
 
   void _init() {
-    
+    // If not authintecated or user is "Trainee" then do nothing.
+    if (_authRepository.user?.isTrainee ?? true) return;
+
     _fireClientSubscription = _firestoreSvc.trainees.collection
         .where(_firestoreSvc.trainees.coachEmailField, isEqualTo: _authRepository.user!.email)
         .snapshots()
@@ -52,7 +55,7 @@ final class ClientsFirestoreSource extends FirestoreSource implements ClientsRem
   @override
   @disposeMethod
   void dispose() {
-    _fireClientSubscription.cancel();
+    _fireClientSubscription?.cancel();
     _streamCntrlr.close();
   }
 }

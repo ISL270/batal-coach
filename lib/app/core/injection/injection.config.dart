@@ -103,7 +103,7 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispose(),
     );
-    gh.lazySingleton<_i1043.ClientsRepository>(
+    gh.singleton<_i1043.ClientsRepository>(
       () => _i1043.ClientsRepository(gh<_i142.ClientsRemoteSource>()),
       dispose: (i) => i.dispose(),
     );
