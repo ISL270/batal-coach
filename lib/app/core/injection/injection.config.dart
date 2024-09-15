@@ -8,12 +8,20 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart'
+    as _i403;
+import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart'
+    as _i142;
+import 'package:btl/app/coach/features/clients/domain/repositories/%20clients_repository.dart'
+    as _i1043;
+import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
+    as _i441;
 import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
     as _i404;
 import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_remote_data_source.dart'
     as _i441;
 import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart'
-    as _i194;
+    as _i793;
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart'
     as _i883;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
@@ -64,8 +72,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i404.ExerciseAlgoliaDataSource());
     gh.singleton<_i139.UserRemoteSource>(
         () => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
-    gh.singleton<_i194.ExerciseRepository>(
-        () => _i194.ExerciseRepository(gh<_i441.ExerciseRemoteDataSource>()));
+    gh.singleton<_i793.ExerciseRepository>(
+        () => _i793.ExerciseRepository(gh<_i441.ExerciseRemoteDataSource>()));
     gh.singleton<_i623.UserLocalSource>(
         () => _i193.UserIsarSource(gh<_i898.LocalDB>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
@@ -73,7 +81,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i139.UserRemoteSource>(),
         ));
     gh.factory<_i883.ExerciseBloc>(
-        () => _i883.ExerciseBloc(gh<_i194.ExerciseRepository>()));
+        () => _i883.ExerciseBloc(gh<_i793.ExerciseRepository>()));
     await gh.singletonAsync<_i902.AuthRepository>(
       () {
         final i = _i902.AuthRepository(
@@ -88,6 +96,19 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i260.AuthBloc>(
         () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
+    gh.lazySingleton<_i142.ClientsRemoteSource>(
+      () => _i403.ClientsFirestoreSource(
+        gh<_i529.FirestoreService>(),
+        gh<_i902.AuthRepository>(),
+      ),
+      dispose: (i) => i.dispose(),
+    );
+    gh.lazySingleton<_i1043.ClientsRepository>(
+      () => _i1043.ClientsRepository(gh<_i142.ClientsRemoteSource>()),
+      dispose: (i) => i.dispose(),
+    );
+    gh.factory<_i441.ClientsBloc>(
+        () => _i441.ClientsBloc(gh<_i1043.ClientsRepository>()));
     return this;
   }
 }

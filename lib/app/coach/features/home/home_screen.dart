@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
 import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
 import 'package:btl/app/core/constants/default.dart';
@@ -57,7 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
               create: (context) => getIt.exerciseBloc,
               child: const ExercisesScreen(),
             ),
-          1 => const SettingsScreen(),
+          1 => BlocProvider(
+              create: (context) => getIt.clientsBloc,
+              child: const ClientsScreen(),
+            ),
+          2 => const SettingsScreen(),
           _ => BlocProvider(
               create: (context) => getIt.exerciseBloc,
               child: const ExercisesScreen(),

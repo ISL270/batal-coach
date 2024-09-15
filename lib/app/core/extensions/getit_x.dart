@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:btl/app/core/l10n/l10n_service.dart';
 import 'package:btl/app/core/services/local_db/i_local_db.dart';
@@ -8,6 +9,7 @@ import 'package:get_it/get_it.dart';
 extension GetItX on GetIt {
   // Blocs
   AuthBloc get authBloc => get<AuthBloc>();
+  ClientsBloc get clientsBloc => get<ClientsBloc>();
   ExerciseBloc get exerciseBloc => get<ExerciseBloc>();
 
   // Services
