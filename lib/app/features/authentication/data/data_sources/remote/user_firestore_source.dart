@@ -10,14 +10,13 @@ import 'package:injectable/injectable.dart';
 @Singleton(as: UserRemoteSource)
 final class UserFirestoreSource extends FirestoreSource implements UserRemoteSource {
   final FirestoreService _firestoreSvc;
-
   UserFirestoreSource(this._firestoreSvc);
 
   DocumentReference<Map<String, dynamic>> _userDoc(String id, UserType userType) {
     if (userType.isCoach) {
-      return _firestoreSvc.colls.coaches.doc(id);
+      return _firestoreSvc.coaches.collection.doc(id);
     }
-    return _firestoreSvc.colls.trainees.doc(id);
+    return _firestoreSvc.trainees.collection.doc(id);
   }
 
   @override

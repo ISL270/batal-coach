@@ -17,7 +17,7 @@ FireCoachInfo _$FireCoachInfoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FireCoachInfoToJson(FireCoachInfo instance) =>
     <String, dynamic>{
-      'userType': instance.userType,
+      'userType': _$UserTypeEnumMap[instance.userType]!,
       'uid': instance.uid,
       'email': instance.email,
       'name': instance.name,
@@ -41,7 +41,7 @@ FireTraineeInfo _$FireTraineeInfoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FireTraineeInfoToJson(FireTraineeInfo instance) =>
     <String, dynamic>{
-      'userType': instance.userType,
+      'userType': _$UserTypeEnumMap[instance.userType]!,
       'uid': instance.uid,
       'email': instance.email,
       'name': instance.name,

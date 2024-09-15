@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -12,7 +13,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
 @singleton
-class AuthRepository {
+final class AuthRepository implements ReactiveRepository<User?> {
   final GoogleSignIn _googleSignIn;
   final fire_auth.FirebaseAuth _fireAuth;
   final UserRepository _userRepository;
@@ -25,20 +26,17 @@ class AuthRepository {
 
   // Using BehaviorSubject, any new listeners when begin listening to the stream,
   // they immediately get the lastly emitted Stream of data.
-  final _userStream = BehaviorSubject<User?>.seeded(null);
+  final _stream = BehaviorSubject<User?>.seeded(null);
 
-  Stream<User?> getUserUpdates() => _userStream.asBroadcastStream();
+  @override
+  Stream<User?> getUpdates() => _stream.asBroadcastStream();
 
-  User? get user => _userStream.value;
+  User? get user => _stream.value;
 
   @PostConstruct(preResolve: true)
   Future<void> init() async {
-    final fireUser = _fireAuth.currentUser;
-    if (fireUser == null) return;
-    try {
-      final user = await _userRepository.geUserLocal();
-      _userStream.add(user);
-    } catch (_) {}
+    final user = await _userRepository.geUserLocal();
+    _stream.add(user);
   }
 
   /// Creates a new user with the provided [email] and [password].
@@ -74,7 +72,7 @@ class AuthRepository {
       await res.fold(
         (e) => throw SignUpWithEmailAndPasswordException.fromCode(e.code),
         (user) async {
-          _userStream.add(user);
+          _stream.add(user);
           await _userRepository.saveUserLocally(user);
         },
       );
@@ -113,7 +111,7 @@ class AuthRepository {
       await res.fold(
         (e) => throw LogInWithEmailAndPasswordException.fromCode(e.code),
         (user) async {
-          _userStream.add(user);
+          _stream.add(user);
           await _userRepository.saveUserLocally(user);
         },
       );
@@ -162,7 +160,7 @@ class AuthRepository {
       await res.fold(
         (e) => throw LogInWithGoogleException.fromCode(e.code),
         (user) async {
-          _userStream.add(user);
+          _stream.add(user);
           await _userRepository.saveUserLocally(user);
         },
       );
@@ -180,7 +178,7 @@ class AuthRepository {
         _fireAuth.signOut(),
         _googleSignIn.signOut(),
       ]);
-      _userStream.add(null);
+      _stream.add(null);
       await _userRepository.deleteLocalUser();
     } catch (_) {
       throw BusinessException.unkown();
@@ -189,6 +187,6 @@ class AuthRepository {
 
   @disposeMethod
   void dispose() {
-    _userStream.close();
+    _stream.close();
   }
 }

@@ -3,9 +3,6 @@ enum UserType {
   // Original order: 1- coach, 2- Trainee
   coach,
   trainee;
-
-  String toJson() => name;
-  static UserType fromJson(String json) => values.byName(json);
 }
 
 extension UserTypeX on UserType {

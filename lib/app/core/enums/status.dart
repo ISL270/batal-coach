@@ -6,6 +6,7 @@ sealed class Status extends Equatable {
   bool get isInitial => this is Initial;
   bool get isSuccess => this is Success;
   bool get isLoading => this is Loading;
+  bool get isPageLoading => this is PageLoading;
   bool get isFailure => this is Failure;
 
   // TODO: fix sealed classes json serialization.

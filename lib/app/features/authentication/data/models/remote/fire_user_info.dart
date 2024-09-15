@@ -59,7 +59,7 @@ sealed class FireUserInfo implements UserInfoRM {
       };
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 final class FireCoachInfo extends FireUserInfo {
   @override
   final UserType userType;
@@ -94,7 +94,7 @@ final class FireCoachInfo extends FireUserInfo {
       );
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 final class FireTraineeInfo extends FireUserInfo {
   @override
   final UserType userType;

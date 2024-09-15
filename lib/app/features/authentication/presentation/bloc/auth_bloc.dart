@@ -26,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     await emit.forEach(
-      _authRepo.getUserUpdates(),
+      _authRepo.getUpdates(),
       onData: (user) => state.success(user),
     );
   }
