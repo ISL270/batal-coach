@@ -1,6 +1,4 @@
-import 'package:btl/app/app.dart';
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
-import 'package:btl/app/coach/features/home/home_screen.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/context_x.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
@@ -10,7 +8,6 @@ import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/trainee/features/home/home_screen.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartx/dartx.dart';

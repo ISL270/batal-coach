@@ -8,41 +8,26 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart'
-    as _i403;
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart'
-    as _i142;
-import 'package:btl/app/coach/features/clients/domain/repositories/%20clients_repository.dart'
-    as _i1043;
-import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
-    as _i441;
-import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_algolia_data_source.dart'
-    as _i404;
-import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_remote_data_source.dart'
-    as _i441;
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart'
-    as _i793;
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart'
-    as _i883;
+import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart' as _i403;
+import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart' as _i142;
+import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart' as _i1043;
+import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart' as _i441;
+import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_algolia_data_source.dart' as _i404;
+import 'package:btl/app/coach/features/exercise/data/data_sources/exercise_remote_data_source.dart' as _i441;
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart' as _i793;
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart' as _i883;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
 import 'package:btl/app/core/services/firestore_service.dart' as _i529;
 import 'package:btl/app/core/services/local_db/i_local_db.dart' as _i898;
 import 'package:btl/app/core/services/local_db/isar_db.dart' as _i791;
-import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart'
-    as _i193;
-import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart'
-    as _i623;
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart'
-    as _i538;
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart'
-    as _i139;
-import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
-    as _i902;
-import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart'
-    as _i55;
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart'
-    as _i260;
+import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart' as _i193;
+import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart' as _i623;
+import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart' as _i538;
+import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart' as _i139;
+import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart' as _i902;
+import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart' as _i55;
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart' as _i260;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -68,20 +53,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i791.IsarDB.create(),
       preResolve: true,
     );
-    gh.singleton<_i441.ExerciseRemoteDataSource>(
-        () => _i404.ExerciseAlgoliaDataSource());
-    gh.singleton<_i139.UserRemoteSource>(
-        () => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
-    gh.singleton<_i793.ExerciseRepository>(
-        () => _i793.ExerciseRepository(gh<_i441.ExerciseRemoteDataSource>()));
-    gh.singleton<_i623.UserLocalSource>(
-        () => _i193.UserIsarSource(gh<_i898.LocalDB>()));
+    gh.singleton<_i441.ExerciseRemoteDataSource>(() => _i404.ExerciseAlgoliaDataSource());
+    gh.singleton<_i139.UserRemoteSource>(() => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
+    gh.singleton<_i793.ExerciseRepository>(() => _i793.ExerciseRepository(gh<_i441.ExerciseRemoteDataSource>()));
+    gh.singleton<_i623.UserLocalSource>(() => _i193.UserIsarSource(gh<_i898.LocalDB>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
           gh<_i623.UserLocalSource>(),
           gh<_i139.UserRemoteSource>(),
         ));
-    gh.factory<_i883.ExerciseBloc>(
-        () => _i883.ExerciseBloc(gh<_i793.ExerciseRepository>()));
+    gh.factory<_i883.ExerciseBloc>(() => _i883.ExerciseBloc(gh<_i793.ExerciseRepository>()));
     await gh.singletonAsync<_i902.AuthRepository>(
       () {
         final i = _i902.AuthRepository(
@@ -94,8 +74,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
       dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i260.AuthBloc>(
-        () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
+    gh.singleton<_i260.AuthBloc>(() => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     gh.lazySingleton<_i142.ClientsRemoteSource>(
       () => _i403.ClientsFirestoreSource(
         gh<_i529.FirestoreService>(),
@@ -107,8 +86,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1043.ClientsRepository(gh<_i142.ClientsRemoteSource>()),
       dispose: (i) => i.dispose(),
     );
-    gh.factory<_i441.ClientsBloc>(
-        () => _i441.ClientsBloc(gh<_i1043.ClientsRepository>()));
+    gh.factory<_i441.ClientsBloc>(() => _i441.ClientsBloc(gh<_i1043.ClientsRepository>()));
     return this;
   }
 }
