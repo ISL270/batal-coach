@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/%20clients_repository.dart';
@@ -28,12 +26,6 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       onData: (clients) => state.success(clients),
       onError: (exception, _) => state.failure(exception as GenericException),
     );
-  }
-
-  @override
-  void onChange(Change<ClientsState> change) {
-    log(change.toString());
-    super.onChange(change);
   }
 
   @override

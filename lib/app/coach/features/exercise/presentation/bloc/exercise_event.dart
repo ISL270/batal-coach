@@ -7,10 +7,6 @@ sealed class ExerciseEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class ExercisesInitialized extends ExerciseEvent {
-  String get emptySearch => '';
-}
-
 final class ExerciseSearched extends ExerciseEvent {
   final String searchTerm;
   const ExerciseSearched(this.searchTerm);

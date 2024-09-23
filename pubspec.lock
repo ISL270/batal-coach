@@ -22,38 +22,6 @@ packages:
     description: dart
     source: sdk
     version: "0.3.2"
-  algolia_client_core:
-    dependency: transitive
-    description:
-      name: algolia_client_core
-      sha256: "03a800a932f0711fd058b57d35fdb9622385800a612adea453ef321a45747d63"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.24.1"
-  algolia_client_insights:
-    dependency: transitive
-    description:
-      name: algolia_client_insights
-      sha256: c6b33fec0665dd6e249827331df1ad8d2b63203af7cb3b2e6aa42c0c816926dd
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.24.1"
-  algolia_client_search:
-    dependency: transitive
-    description:
-      name: algolia_client_search
-      sha256: a380138c494beb5db75341b785fb90d4f2b1529007155bdd84772d34292188a0
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.24.1"
-  algoliasearch:
-    dependency: "direct main"
-    description:
-      name: algoliasearch
-      sha256: "155f371490c8d7bdbd68155b429b0f68ad004ccf97c7e08786542c59fc4b1e78"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.24.1"
   analyzer:
     dependency: "direct overridden"
     description:
@@ -334,22 +302,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
-  dio:
-    dependency: transitive
-    description:
-      name: dio
-      sha256: "5598aa796bbf4699afd5c67c0f5f6e2ed542afc956884b9cd58c306966efc260"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.7.0"
-  dio_web_adapter:
-    dependency: transitive
-    description:
-      name: dio_web_adapter
-      sha256: "33259a9276d6cea88774a0000cfae0d861003497755969c92faa223108620dc8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   equatable:
     dependency: "direct main"
     description:

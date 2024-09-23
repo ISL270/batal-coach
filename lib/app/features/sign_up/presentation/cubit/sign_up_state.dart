@@ -19,7 +19,7 @@ final class SignUpState extends Equatable with FormzMixin {
   final Password password;
   final ConfirmPassword confirmPassword;
   final PhoneNumber phoneNumber;
-  final Status status;
+  final VoidStatus status;
 
   @override
   List<Object?> get props => [
@@ -41,7 +41,7 @@ final class SignUpState extends Equatable with FormzMixin {
     Password? password,
     ConfirmPassword? confirmedPassword,
     PhoneNumber? phoneNumber,
-    Status? status,
+    VoidStatus? status,
   }) {
     return SignUpState(
       userType: userType ?? this.userType,

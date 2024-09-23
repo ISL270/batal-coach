@@ -4,7 +4,7 @@ import 'package:btl/app/features/authentication/domain/models/user.dart';
 
 abstract interface class UserLocalSource {
   final LocalDB localDB;
-  UserLocalSource(this.localDB);
+  const UserLocalSource(this.localDB);
   Future<UserCM?> getSavedUser();
   Future<void> saveUser(User user);
   Future<void> deleteSavedUser();

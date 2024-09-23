@@ -1,4 +1,8 @@
-abstract class CacheModel {
-  final int cacheID;
-  const CacheModel({required this.cacheID});
+import 'package:isar/isar.dart';
+
+abstract class CacheModel<D> {
+  Id get cacheID;
+  const CacheModel();
+
+  D toDomain();
 }

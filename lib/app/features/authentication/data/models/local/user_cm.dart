@@ -2,16 +2,15 @@ import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 
-abstract interface class UserCM extends CacheModel {
-  final String uid;
-  final String email;
-  final String name;
-  final UserType userType;
-  final String phoneNumber;
-  final String? coachEmail;
+abstract interface class UserCM extends CacheModel<User> {
+  String uid;
+  String email;
+  String name;
+  UserType userType;
+  String phoneNumber;
+  String? coachEmail;
 
   UserCM({
-    required super.cacheID,
     required this.uid,
     required this.email,
     required this.name,
@@ -19,6 +18,4 @@ abstract interface class UserCM extends CacheModel {
     required this.phoneNumber,
     required this.coachEmail,
   });
-
-  User toDomain();
 }

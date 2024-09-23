@@ -46,9 +46,7 @@ final coachRouter = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
   ],
-  refreshListenable: GoRouterRefreshStream(getIt.authBloc.stream.where(
-    (success) => success.status.isSuccess,
-  )),
+  refreshListenable: GoRouterRefreshStream(getIt.authBloc.stream.where((state) => state.isSuccess)),
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter

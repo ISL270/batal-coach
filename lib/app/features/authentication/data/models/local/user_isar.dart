@@ -1,3 +1,4 @@
+import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_cm.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -8,7 +9,7 @@ part 'user_isar.g.dart';
 @collection
 final class UserIsar implements UserCM {
   @override
-  Id cacheID = Isar.autoIncrement;
+  Id get cacheID => uid.fastHash;
 
   @override
   String? coachEmail;

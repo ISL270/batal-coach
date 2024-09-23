@@ -26,9 +26,8 @@ class App extends StatelessWidget {
             BlocProvider(create: (_) => SettingsBloc()),
             BlocProvider(create: (_) => getIt.authBloc),
           ],
-          child: BlocBuilder<AuthBloc, AuthState>(
-            buildWhen: (previous, current) =>
-                previous.user?.runtimeType != current.user?.runtimeType,
+          child: BlocBuilder<AuthBloc, UserState>(
+            buildWhen: hasUserTypeChanged,
             builder: (context, authState) {
               return BlocBuilder<SettingsBloc, SettingsState>(
                 builder: (context, settingsState) {

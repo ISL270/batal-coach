@@ -185,6 +185,7 @@ final class AuthRepository implements ReactiveRepository<User?> {
     }
   }
 
+  @override
   @disposeMethod
   void dispose() {
     _stream.close();

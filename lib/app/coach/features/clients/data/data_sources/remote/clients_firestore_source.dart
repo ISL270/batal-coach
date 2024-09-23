@@ -3,44 +3,44 @@
 import 'dart:async';
 
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart';
-import 'package:btl/app/coach/features/clients/data/models/fire_client.dart';
+import 'package:btl/app/coach/features/clients/data/models/client_rm.dart';
+import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/models/firestore_source.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
-import 'package:btl/app/features/authentication/domain/models/user_x.dart';
-import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part '../../models/fire_client.dart';
+part 'clients_firestore_source.g.dart';
 
 @LazySingleton(as: ClientsRemoteSource)
 final class ClientsFirestoreSource extends FirestoreSource implements ClientsRemoteSource {
   final FirestoreService _firestoreSvc;
-  final AuthRepository _authRepository;
 
-  ClientsFirestoreSource(
-    this._firestoreSvc,
-    this._authRepository,
-  ) {
-    _init();
+  ClientsFirestoreSource(this._firestoreSvc) {
+    _createStream();
   }
 
-  final _streamCntrlr = StreamController<List<FireClient>>();
+  late StreamController<List<_FireClient>> _streamCntrlr;
 
   @override
-  Stream<List<FireClient>> get stream => _streamCntrlr.stream;
+  Stream<List<ClientRM>> get stream => _streamCntrlr.stream;
 
-  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _fireClientSubscription;
+  void _createStream() => _streamCntrlr = StreamController<List<_FireClient>>();
 
-  void _init() {
-    // If not authintecated or user is "Trainee" then do nothing.
-    if (_authRepository.user?.isTrainee ?? true) return;
+  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _clientsSubscription;
 
-    _fireClientSubscription = _firestoreSvc.trainees.collection
-        .where(_firestoreSvc.trainees.coachEmailField, isEqualTo: _authRepository.user!.email)
+  @override
+  void subToRemote(String coachEmail) {
+    if (_streamCntrlr.isClosed) _createStream();
+    _clientsSubscription = _firestoreSvc.trainees.collection
+        .where(_firestoreSvc.trainees.coachEmailField, isEqualTo: coachEmail)
         .snapshots()
         .listen(
       (jsonClients) {
-        final fireClients = jsonClients.docs.map((c) => FireClient.fromJson(c.data()));
+        final fireClients = jsonClients.docs.map((c) => _FireClient.fromJson(c.data()));
         _streamCntrlr.sink.add(fireClients.toList());
       },
       onError: (e) {
@@ -53,9 +53,16 @@ final class ClientsFirestoreSource extends FirestoreSource implements ClientsRem
   }
 
   @override
+  Future<void> cancelRemoteSub() async {
+    if (!_streamCntrlr.isClosed) {
+      await _streamCntrlr.close();
+    }
+    await _clientsSubscription?.cancel();
+  }
+
+  @override
   @disposeMethod
   void dispose() {
-    _fireClientSubscription?.cancel();
-    _streamCntrlr.close();
+    cancelRemoteSub();
   }
 }

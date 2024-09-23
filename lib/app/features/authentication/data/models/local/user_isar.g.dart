@@ -112,7 +112,6 @@ UserIsar _userIsarDeserialize(
         _UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offsets[5])] ??
             UserType.coach,
   );
-  object.cacheID = id;
   return object;
 }
 
@@ -158,9 +157,7 @@ List<IsarLinkBase<dynamic>> _userIsarGetLinks(UserIsar object) {
   return [];
 }
 
-void _userIsarAttach(IsarCollection<dynamic> col, Id id, UserIsar object) {
-  object.cacheID = id;
-}
+void _userIsarAttach(IsarCollection<dynamic> col, Id id, UserIsar object) {}
 
 extension UserIsarQueryWhereSort on QueryBuilder<UserIsar, UserIsar, QWhere> {
   QueryBuilder<UserIsar, UserIsar, QAfterWhere> anyCacheID() {

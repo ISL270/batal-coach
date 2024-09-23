@@ -15,8 +15,8 @@ final class UserIsarSource implements UserLocalSource {
   Future<UserIsar?> getSavedUser() => localDB.getFirst<UserIsar>();
 
   @override
-  Future<void> saveUser(User user) => localDB.save(UserIsar.fromDomain(user));
+  Future<void> saveUser(User user) => localDB.put(UserIsar.fromDomain(user));
 
   @override
-  Future<void> deleteSavedUser() => localDB.deleteAll<UserIsar>();
+  Future<void> deleteSavedUser() => localDB.clear<UserIsar>();
 }

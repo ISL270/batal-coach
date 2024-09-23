@@ -1,12 +1,9 @@
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/presentation/widgets/exercise_tile.dart';
 import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/scroll_controller_x.dart';
-import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/screen.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +39,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
                     IconButton(
                       icon: const Icon(Icons.cancel),
                       color: context.colorsX.onBackgroundTint,
-                      onPressed: () => _bloc.add(ExercisesInitialized()),
+                      onPressed: () => _bloc.add(const ExerciseSearched('')),
                     )
                 ],
                 hintText: 'Search exercises',
@@ -52,40 +49,20 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
               Expanded(
                 child: switch (state.status) {
                   Loading() => const Center(child: CircularProgressIndicator()),
-                  _ => state.displayedExercises.isEmpty
+                  _ => state.exercises.result.isEmpty
                       ? const Center(child: Text('No exercises found'))
                       : ListView.separated(
-                          physics: const ClampingScrollPhysics(),
                           controller: _scrollCntrlr,
-                          itemCount: state.hasReachedMax
-                              ? state.displayedExercises.length
-                              : state.displayedExercises.length + 1,
+                          itemCount: state.status.isPageLoading
+                              ? state.exercises.result.length + 1
+                              : state.exercises.result.length,
                           separatorBuilder: (_, __) => const Divider(),
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           itemBuilder: (context, i) {
-                            if (i >= state.displayedExercises.length) {
+                            if (i >= state.exercises.result.length) {
                               return const Center(child: CircularProgressIndicator());
                             }
-                            final exercise = state.displayedExercises[i];
-                            return ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              leading: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: CachedNetworkImage(
-                                  width: 57,
-                                  imageUrl:
-                                      'https://firebasestorage.googleapis.com/v0/b/btl-dev-69d91.appspot.com/o/default_exercises%2Fweighted_crunches.gif?alt=media&token=b17224d9-6542-4292-b600-fd9949a7f913',
-                                ),
-                              ),
-                              title: Text(
-                                exercise.name,
-                                style: context.textThemeX.medium.bold,
-                              ),
-                              subtitle: Text(
-                                '${exercise.level.isNotNullOrBlank ? '${exercise.level!.capitalized} - ' : ''}${exercise.primaryMuscles.first.capitalized}',
-                                style: context.textThemeX.small,
-                              ),
-                            );
+                            return ExerciseTile(state.exercises.result[i]);
                           },
                         ),
                 },

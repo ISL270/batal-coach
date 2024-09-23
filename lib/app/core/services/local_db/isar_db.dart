@@ -1,3 +1,6 @@
+// ignore_for_file: strict_raw_type
+
+import 'package:btl/app/coach/features/exercise/data/models/local/exercise_isar.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
@@ -14,19 +17,30 @@ final class IsarDB implements LocalDB {
   static Future<IsarDB> create() async {
     final dir = await getApplicationDocumentsDirectory();
     final isar = await Isar.open(
-      [UserIsarSchema],
+      [
+        UserIsarSchema,
+        ExerciseIsarSchema,
+      ],
       directory: dir.path,
     );
     return IsarDB._(isar);
   }
 
+ // Usefull to access it for custom queries.
+  Isar get isar => _isar;
+
   @override
-  Future<int> save<T extends CacheModel>(T object) async {
+  Future<int> put<T extends CacheModel>(T object) async {
     return _isar.writeTxn(() => _isar.collection<T>().put(object));
   }
 
-  int saveSync<T extends CacheModel>(T object) {
+  int putSync<T extends CacheModel>(T object) {
     return _isar.writeTxnSync(() => _isar.collection<T>().putSync(object));
+  }
+
+  @override
+  Future<List<int>> putAll<T extends CacheModel>(List<T> objects) async {
+    return _isar.writeTxn(() => _isar.collection<T>().putAll(objects));
   }
 
   @override
@@ -66,11 +80,20 @@ final class IsarDB implements LocalDB {
   }
 
   @override
-  Future<void> deleteAll<T extends CacheModel>() async {
+  Future<int> deleteAll<T extends CacheModel>(List<int> ids) async {
+    return _isar.writeTxn(() => _isar.collection<T>().deleteAll(ids));
+  }
+
+  Future<int> deleteAllSync<T extends CacheModel>(List<int> ids) async {
+    return _isar.writeTxnSync(() => _isar.collection<T>().deleteAllSync(ids));
+  }
+
+  @override
+  Future<void> clear<T extends CacheModel>() async {
     return _isar.writeTxn(() => _isar.collection<T>().clear());
   }
 
-  void deleteAllSync<T extends CacheModel>() {
+  void clearSync<T extends CacheModel>() {
     return _isar.writeTxnSync(() => _isar.collection<T>().clearSync());
   }
 }

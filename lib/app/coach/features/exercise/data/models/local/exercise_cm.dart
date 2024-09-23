@@ -1,11 +1,13 @@
 import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
+import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/force.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/mechanic.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
+import 'package:btl/app/core/models/cache_model.dart';
 
-class Exercise {
+abstract interface class ExerciseCM extends CacheModel<Exercise> {
   final String id;
   final String name;
   final Force? force;
@@ -18,17 +20,17 @@ class Exercise {
   final Muscle mainMuscle;
   final List<Muscle> secondaryMuscles;
 
-  Exercise({
+  ExerciseCM({
     required this.id,
     required this.name,
-    required this.force,
-    required this.level,
-    required this.mechanic,
-    required this.category,
-    required this.equipment,
     required this.instructions,
     required this.images,
     required this.mainMuscle,
     required this.secondaryMuscles,
+    this.force,
+    this.level,
+    this.mechanic,
+    this.category,
+    this.equipment,
   });
 }

@@ -1,11 +1,7 @@
-import 'package:btl/app/coach/features/clients/data/models/client_rm.dart';
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-part 'fire_client.g.dart';
+part of '../data_sources/remote/clients_firestore_source.dart';
 
 @JsonSerializable()
-final class FireClient implements ClientRM {
+final class _FireClient implements ClientRM {
   @override
   @JsonKey(name: 'uid')
   final String id;
@@ -16,14 +12,14 @@ final class FireClient implements ClientRM {
   @override
   final String phoneNumber;
 
-  FireClient({
+  _FireClient({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
   });
 
-  factory FireClient.fromJson(Map<String, dynamic> json) => _$FireClientFromJson(json);
+  factory _FireClient.fromJson(Map<String, dynamic> json) => _$FireClientFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$FireClientToJson(this);

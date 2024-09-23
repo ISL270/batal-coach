@@ -3,7 +3,7 @@ part of 'settings_bloc.dart';
 @JsonSerializable(explicitToJson: true)
 class SettingsState extends Equatable {
   @JsonKey(fromJson: Status.fromJson, includeToJson: false)
-  final Status status;
+  final VoidStatus status;
   final Language language;
   final ThemeMode themeMode;
 
@@ -32,7 +32,7 @@ class SettingsState extends Equatable {
 
 extension SettingsStateX on SettingsState {
   SettingsState copyWith({
-    Status? status,
+    VoidStatus? status,
     Language? language,
     ThemeMode? themeMode,
   }) {

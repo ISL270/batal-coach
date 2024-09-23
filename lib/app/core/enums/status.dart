@@ -1,7 +1,7 @@
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class Status extends Equatable {
+sealed class Status<T> extends Equatable {
   const Status();
   bool get isInitial => this is Initial;
   bool get isSuccess => this is Success;
@@ -10,37 +10,41 @@ sealed class Status extends Equatable {
   bool get isFailure => this is Failure;
 
   // TODO: fix sealed classes json serialization.
-  static Status fromJson(Map<String, dynamic>? json) => const Initial();
+  static VoidStatus fromJson(Map<String, dynamic>? json) => const Initial();
 }
 
-final class Initial extends Status {
+final class Initial<T> extends Status<T> {
   const Initial();
   @override
   List<Object?> get props => [];
 }
 
-final class Success extends Status {
-  const Success();
+final class Success<T> extends Status<T> {
+  final T result;
+  const Success(this.result);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [result];
 }
 
-final class Loading extends Status {
+final class Loading<T> extends Status<T> {
   const Loading();
   @override
   List<Object?> get props => [];
 }
 
-final class PageLoading extends Status {
+final class PageLoading<T> extends Status<T> {
   const PageLoading();
   @override
   List<Object?> get props => [];
 }
 
-final class Failure extends Status {
+final class Failure<T> extends Status<T> {
   final GenericException exception;
   const Failure(this.exception);
 
   @override
   List<Object?> get props => [exception];
 }
+
+typedef VoidStatus = Status<void>;
