@@ -22,6 +22,15 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
   late final ScrollController _scrollCntrlr;
 
   @override
+  void initState() {
+    super.initState();
+    _bloc = context.read<ExerciseBloc>();
+    _searchCntrlr = TextEditingController();
+    _scrollCntrlr = ScrollController();
+    _scrollCntrlr.addListener(_onScroll);
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Screen(
@@ -69,15 +78,6 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
 
   void _onScroll() {
     if (_scrollCntrlr.hasReachBottom) _bloc.add(ExerciseNextPageFetched());
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _bloc = context.read<ExerciseBloc>();
-    _searchCntrlr = TextEditingController();
-    _scrollCntrlr = ScrollController();
-    _scrollCntrlr.addListener(_onScroll);
   }
 
   @override
