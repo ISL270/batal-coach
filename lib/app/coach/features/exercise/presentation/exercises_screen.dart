@@ -53,17 +53,10 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
                       ? const Center(child: Text('No exercises found'))
                       : ListView.separated(
                           controller: _scrollCntrlr,
-                          itemCount: state.status.isPageLoading
-                              ? state.exercises.result.length + 1
-                              : state.exercises.result.length,
+                          itemCount: state.exercises.result.length,
                           separatorBuilder: (_, __) => const Divider(),
                           padding: const EdgeInsets.symmetric(vertical: 15),
-                          itemBuilder: (context, i) {
-                            if (i >= state.exercises.result.length) {
-                              return const Center(child: CircularProgressIndicator());
-                            }
-                            return ExerciseTile(state.exercises.result[i]);
-                          },
+                          itemBuilder: (context, i) => ExerciseTile(state.exercises.result[i]),
                         ),
                 },
               )

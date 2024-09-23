@@ -46,8 +46,6 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   ) async {
     if (state.exercises.hasReachedMax) return;
 
-    emit(state._fetchingNextPage());
-
     final searchResult = await _repository.getExercises(
       state.searchTerm,
       page: state.exercises.page + 1,

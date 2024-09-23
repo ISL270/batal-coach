@@ -6,7 +6,6 @@ sealed class Status<T> extends Equatable {
   bool get isInitial => this is Initial;
   bool get isSuccess => this is Success;
   bool get isLoading => this is Loading;
-  bool get isPageLoading => this is PageLoading;
   bool get isFailure => this is Failure;
 
   // TODO: fix sealed classes json serialization.
@@ -29,12 +28,6 @@ final class Success<T> extends Status<T> {
 
 final class Loading<T> extends Status<T> {
   const Loading();
-  @override
-  List<Object?> get props => [];
-}
-
-final class PageLoading<T> extends Status<T> {
-  const PageLoading();
   @override
   List<Object?> get props => [];
 }

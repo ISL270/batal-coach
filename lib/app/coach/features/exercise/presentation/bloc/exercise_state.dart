@@ -25,8 +25,6 @@ final class ExerciseState extends Equatable {
         searchTerm: searchTerm,
       );
 
-  ExerciseState _fetchingNextPage() => _copyWith(status: const PageLoading());
-
   ExerciseState _success({PaginatedResult<Exercise>? exercises}) => _copyWith(
         exercises: exercises,
         status: const Success(null),
