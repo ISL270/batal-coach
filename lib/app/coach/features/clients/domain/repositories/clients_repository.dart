@@ -43,7 +43,6 @@ final class ClientsRepository implements ReactiveRepository<List<Client>> {
       _remoteSource.subToRemote(user!.email);
       _remoteSource.stream.listen(
         (rmClients) => _subject.add(rmClients.map((c) => c.toDomain()).toList()),
-        // TODO: catch these somehow
         onError: (e) => throw e as GenericException,
       );
     });
