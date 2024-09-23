@@ -7,3 +7,8 @@ linter:
     sort_constructors_first: false
     require_trailing_commas: false
     lines_longer_than_80_chars: false
+
+analyzer:
+  exclude:
+    - "**.g.dart"
+    - "**/generated_plugin_registrant.dart"
