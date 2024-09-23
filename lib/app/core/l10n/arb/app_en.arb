@@ -42,5 +42,14 @@
     "trainee": "trainee",
     "yourCoachEmail": "Your coach's email",
     "name": "name",
-    "phoneNumber": "phone number"
+    "phoneNumber": "phone number",
+    "client": "{count, plural, =1{client} other{clients}}",
+    "@client": {
+    "placeholders": {
+        "count": {
+        "type": "num",
+        "format": "compact"
+        }
+      }
+    }
 }

@@ -3,6 +3,7 @@ import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.da
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
 import 'package:btl/app/core/constants/default.dart';
 import 'package:btl/app/core/extensions/bloc_x.dart';
+import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
