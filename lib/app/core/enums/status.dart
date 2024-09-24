@@ -9,7 +9,7 @@ sealed class Status<T> extends Equatable {
   bool get isFailure => this is Failure;
 
   // TODO: fix sealed classes json serialization.
-  static VoidStatus fromJson(Map<String, dynamic>? json) => const Initial();
+  static VoidStatus fromJson(String? json) => const Initial();
 }
 
 final class Initial<T> extends Status<T> {

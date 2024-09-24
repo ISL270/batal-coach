@@ -60,7 +60,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
             return TextButton.icon(
               onPressed: () {},
               label: Text(context.l10n.create.capitalized),
-              icon: const Icon(size: 25, Icons.add_circle),
+              icon: const Icon(size: 23, Icons.add_circle),
             );
           },
         ),

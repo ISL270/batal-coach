@@ -8,7 +8,7 @@ part of 'settings_bloc.dart';
 
 SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) =>
     SettingsState(
-      Status.fromJson(json['status'] as Map<String, dynamic>?),
+      Status.fromJson(json['status'] as String?),
       $enumDecode(_$LanguageEnumMap, json['language']),
       $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
     );
