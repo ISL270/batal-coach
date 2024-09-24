@@ -1,4 +1,4 @@
-class PaginatedResult<T> {
+final class PaginatedResult<T> {
   final List<T> result;
   final int page;
   final int pageSize;

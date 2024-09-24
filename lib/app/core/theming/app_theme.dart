@@ -31,7 +31,10 @@ ThemeData _themeData(ColorsX colorScheme) {
       selectionColor: colorScheme.primary.withOpacity(.4),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(textStyle: const TextStyle().bold),
+      style: TextButton.styleFrom(
+        textStyle: textTheme.small.bold,
+        foregroundColor: colorScheme.primary,
+      ),
     ),
     appBarTheme: AppBarTheme(
       color: colorScheme.background,

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart';
 import 'package:btl/app/core/enums/status.dart';
+import 'package:btl/app/core/models/bloc_event_transformers.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/models/paginated_result.dart';
 import 'package:equatable/equatable.dart';
@@ -17,7 +18,10 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
 
   ExerciseBloc(this._repository) : super(const ExerciseState._initial()) {
     on<ExerciseSearched>(_onSearched);
-    on<ExerciseNextPageFetched>(_onNextPageFetched);
+    on<ExerciseNextPageFetched>(
+      _onNextPageFetched,
+      transformer: EventTransformers.throttleDroppable(),
+    );
 
     add(const ExerciseSearched(''));
   }

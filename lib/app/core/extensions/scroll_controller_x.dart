@@ -5,6 +5,6 @@ extension ScrollControllerX on ScrollController {
     if (!hasClients) return false;
     final maxScroll = position.maxScrollExtent;
     final currentScroll = offset;
-    return currentScroll >= (maxScroll * 0.85);
+    return currentScroll >= (maxScroll * .8);
   }
 }

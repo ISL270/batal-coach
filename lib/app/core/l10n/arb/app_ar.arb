@@ -51,5 +51,8 @@
         "format": "compact"
         }
       }
-    }
+    },
+    "cancel": "الغاء",
+    "search": "بحث",
+    "create": "إنشاء"
 }

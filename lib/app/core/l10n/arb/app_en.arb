@@ -51,5 +51,8 @@
         "format": "compact"
         }
       }
-    }
+    },
+    "cancel": "cancel",
+    "search": "search",
+    "create": "create"
 }
