@@ -1,58 +1,66 @@
 {
-    "@@locale": "en",
-    "login": "login",
-    "signUp": "sign up",
-    "email": "email",
-    "password": "password",
-    "confirmPassword": "confirm password",
-    "signInWithGoogle": "sign in with google",
-    "createAccount": "create account",
-    "invalidEmail": "invalid email",
-    "invalidPassword": "invalid password",
-    "passwordsDontMatch": "passwords do not match",
-    "loginFailed": "login failed",
-    "signUpFailed": "sign up failed",
-    "theme": "theme",
-    "light": "light",
-    "dark": "dark",
-    "system": "system",
-    "language": "language",
-    "dashboard": "dashboard",
-    "settings": "settings",
-    "logout": "logout",
-    "exercise": "{count, plural, =1{exercise} other{exercises}}",
-    "@exercise": {
+  "@@locale": "en",
+  "login": "login",
+  "signUp": "sign up",
+  "email": "email",
+  "password": "password",
+  "confirmPassword": "confirm password",
+  "signInWithGoogle": "sign in with google",
+  "createAccount": "create account",
+  "invalidEmail": "invalid email",
+  "invalidPassword": "invalid password",
+  "passwordsDontMatch": "passwords do not match",
+  "loginFailed": "login failed",
+  "signUpFailed": "sign up failed",
+  "theme": "theme",
+  "light": "light",
+  "dark": "dark",
+  "system": "system",
+  "language": "language",
+  "dashboard": "dashboard",
+  "settings": "settings",
+  "logout": "logout",
+  "exercise": "{count, plural, =1{exercise} other{exercises}}",
+  "@exercise": {
     "placeholders": {
-        "count": {
+      "count": {
         "type": "num",
         "format": "compact"
-        }
       }
-    },
-    "workout": "{count, plural, =1{workout} other{workouts}}",
-    "@workout": {
+    }
+  },
+  "workout": "{count, plural, =1{workout} other{workouts}}",
+  "@workout": {
     "placeholders": {
-        "count": {
+      "count": {
         "type": "num",
         "format": "compact"
-        }
       }
-    },
-    "coach": "coach",
-    "trainee": "trainee",
-    "yourCoachEmail": "Your coach's email",
-    "name": "name",
-    "phoneNumber": "phone number",
-    "client": "{count, plural, =1{client} other{clients}}",
-    "@client": {
+    }
+  },
+  "coach": "coach",
+  "trainee": "trainee",
+  "yourCoachEmail": "Your coach's email",
+  "name": "name",
+  "phoneNumber": "phone number",
+  "client": "{count, plural, =1{client} other{clients}}",
+  "@client": {
     "placeholders": {
-        "count": {
+      "count": {
         "type": "num",
         "format": "compact"
-        }
       }
-    },
-    "cancel": "cancel",
-    "search": "search",
-    "create": "create"
+    }
+  },
+  "cancel": "cancel",
+  "search": "search",
+  "create": "create",
+  "reset": "reset",
+  "filterBy": "filter by",
+  "excercisesFrom": "excercises from",
+  "muscles": "muscles",
+  "equipment": "equipment",
+  "categories": "categories",
+  "level": "level",
+  "apply": "apply"
 }

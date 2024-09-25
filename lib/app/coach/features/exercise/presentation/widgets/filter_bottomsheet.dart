@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:btl/app/app.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
+import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/widgets/custom_chip.dart';
 import 'package:btl/app/widgets/custom_divider.dart';
@@ -137,7 +140,7 @@ class _Levels extends StatelessWidget {
       children: ExLevel.values
           .map(
             (level) => CustomChip(
-              title: level.name,
+              title: getIt.l10nSvc.trFromEnum(level, context),
               isSelected: level == ExLevel.expert,
               onTap: (val) {},
             ),
@@ -158,7 +161,7 @@ class _Categories extends StatelessWidget {
       children: ExCategory.values
           .map(
             (category) => CustomChip(
-              title: category.name,
+              title: getIt.l10nSvc.trFromEnum(category, context),
               isSelected: category == ExCategory.cardio,
               onTap: (val) {},
             ),
@@ -179,7 +182,7 @@ class _Equipments extends StatelessWidget {
       children: Equipment.values
           .map(
             (equipment) => CustomChip(
-              title: equipment.name,
+              title: getIt.l10nSvc.trFromEnum(equipment, context),
               isSelected: equipment == Equipment.bands,
               onTap: (val) {},
             ),
@@ -200,7 +203,7 @@ class _Muscles extends StatelessWidget {
       children: Muscle.values
           .map(
             (muscle) => CustomChip(
-              title: muscle.name,
+              title: getIt.l10nSvc.trFromEnum(muscle, context),
               isSelected: muscle == Muscle.abdominals,
               onTap: (val) {},
             ),
