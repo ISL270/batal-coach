@@ -1,5 +1,6 @@
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/widgets/exercise_tile.dart';
+import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
@@ -7,16 +8,19 @@ import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_cupertino_navigation_bar/super_cupertino_navigation_bar.dart';
 
-class ExercisesScreen extends StatefulWidget {
-  const ExercisesScreen({super.key});
+class WorkoutScreen extends StatefulWidget {
+  const WorkoutScreen({super.key});
+
+  static const name = 'workout';
 
   @override
-  State<ExercisesScreen> createState() => _ExercisesScreenState();
+  State<WorkoutScreen> createState() => _WorkoutScreenState();
 }
 
-class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAliveClientMixin {
+class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveClientMixin {
   late final ExerciseBloc _bloc;
   late final TextEditingController _searchCntrlr;
 
@@ -54,11 +58,11 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
                 icon: const Icon(Icons.add_circle),
                 color: context.colorsX.primary,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
               );
             }
             return TextButton.icon(
-              onPressed: () {},
+              onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
               label: Text(context.l10n.create.capitalized),
               icon: const Icon(size: 23, Icons.add_circle),
             );

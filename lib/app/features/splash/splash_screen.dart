@@ -1,6 +1,8 @@
-import 'package:btl/app/coach/features/home/home_screen.dart';
+import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +18,7 @@ class SplashScreen extends StatelessWidget {
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashSuccess) {
-          context.goNamed(HomeScreen.name);
+          context.goNamed(getIt.authBloc.homeNamedRoute);
         }
       },
       child: Scaffold(

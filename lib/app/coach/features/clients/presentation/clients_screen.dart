@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ClientsScreen extends StatelessWidget {
   const ClientsScreen({super.key});
 
+  static const name = 'clients';
+
   @override
   Widget build(BuildContext context) {
     return Screen(
