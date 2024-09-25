@@ -1,5 +1,6 @@
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/widgets/exercise_tile.dart';
+import 'package:btl/app/coach/features/exercise/presentation/widgets/filter_bottomsheet.dart';
 import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
@@ -81,7 +82,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveCl
                 icon: const Icon(Icons.tune),
                 color: context.colorsX.primary,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () => FilterBottomSheet.show<void>(context),
               ),
             )
           ],
