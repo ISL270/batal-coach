@@ -20,6 +20,7 @@ import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';
 import 'package:btl/app/features/splash/splash_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -70,7 +71,20 @@ final coachRouter = GoRouter(
                 GoRoute(
                   name: WorkoutBuilderScreen.name,
                   path: WorkoutBuilderScreen.name,
-                  builder: (context, state) => const WorkoutBuilderScreen(),
+                  // To Hide the bottom Navbar
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => CustomTransitionPage(
+                    key: state.pageKey,
+                    child: const WorkoutBuilderScreen(),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return CupertinoPageTransition(
+                        primaryRouteAnimation: animation,
+                        secondaryRouteAnimation: secondaryAnimation,
+                        linearTransition: false,
+                        child: child,
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -126,8 +140,7 @@ final coachRouter = GoRouter(
     // if the user is logged in, send them where they were going before (or
     // home if they weren't going anywhere)
     if (state.isLoggingIn) {
-      return state.uri.queryParameters['from'] ??
-          state.namedLocation(getIt.authBloc.homeNamedRoute);
+      return state.uri.queryParameters['from'] ?? state.namedLocation(getIt.authBloc.homeNamedRoute);
     }
 
     // no need to redirect at all

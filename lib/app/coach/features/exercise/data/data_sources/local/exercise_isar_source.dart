@@ -30,23 +30,10 @@ final class ExerciseIsarSource implements ExerciseLocalDataSource {
     late final List<ExerciseIsar> result;
 
     if (searchTerm.isBlank) {
-      result = await (localDB as IsarDB)
-          .isar
-          .exerciseIsars
-          .where()
-          .anyName()
-          .offset(page * pageSize)
-          .limit(pageSize)
-          .findAll();
+      result = await (localDB as IsarDB).isar.exerciseIsars.where().anyName().offset(page * pageSize).limit(pageSize).findAll();
     } else {
-      result = await (localDB as IsarDB)
-          .isar
-          .exerciseIsars
-          .where()
-          .nameStartsWith(searchTerm)
-          .offset(page * pageSize)
-          .limit(pageSize)
-          .findAll();
+      result =
+          await (localDB as IsarDB).isar.exerciseIsars.where().nameStartsWith(searchTerm).offset(page * pageSize).limit(pageSize).findAll();
     }
 
     return result;
@@ -54,4 +41,7 @@ final class ExerciseIsarSource implements ExerciseLocalDataSource {
 
   @override
   Future<void> clearExercises() => localDB.clear<ExerciseIsar>();
+
+  @override
+  Future<int> get count => (localDB as IsarDB).isar.exerciseIsars.count();
 }
