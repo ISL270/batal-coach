@@ -68,6 +68,7 @@ final coachRouter = GoRouter(
               )),
               routes: [
                 GoRoute(
+                  parentNavigatorKey: _rootNavigatorKey,
                   name: WorkoutBuilderScreen.name,
                   path: WorkoutBuilderScreen.name,
                   builder: (context, state) => const WorkoutBuilderScreen(),
