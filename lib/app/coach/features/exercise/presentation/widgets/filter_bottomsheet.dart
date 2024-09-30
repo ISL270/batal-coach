@@ -1,6 +1,4 @@
-import 'dart:math';
 
-import 'package:btl/app/app.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
