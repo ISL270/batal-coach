@@ -6,18 +6,21 @@ final class ExerciseState extends Equatable {
   final VoidStatus status;
   final String searchTerm;
   final PaginatedResult<Exercise> exercises;
+  final ExFilters filters;
 
   const ExerciseState._({
     required this.status,
     required this.exercises,
     required this.searchTerm,
+    required this.filters,
   });
 
-  const ExerciseState._initial()
+  ExerciseState._initial()
       : this._(
           searchTerm: '',
           status: const Initial(),
           exercises: const PaginatedResult(),
+          filters: ExFilters(),
         );
 
   ExerciseState _searchInProgress(String searchTerm) => _copyWith(
@@ -32,13 +35,17 @@ final class ExerciseState extends Equatable {
 
   ExerciseState _failure(GenericException exception) => _copyWith(status: Failure(exception));
 
+  ExerciseState _filter(ExFilters filters) => _copyWith(filters: filters);
+
   ExerciseState _copyWith({
     VoidStatus? status,
     String? searchTerm,
     PaginatedResult<Exercise>? exercises,
+    ExFilters? filters,
   }) {
     return ExerciseState._(
       status: status ?? this.status,
+      filters: filters ?? this.filters,
       exercises: exercises ?? this.exercises,
       searchTerm: searchTerm ?? this.searchTerm,
     );

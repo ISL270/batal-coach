@@ -181,7 +181,12 @@ class Button extends StatelessWidget {
               Opacity(opacity: isLoading ? 0 : 1, child: Text(label)),
             ],
           );
+          final padding = EdgeInsets.symmetric(
+            horizontal: density.height,
+            vertical: density.height / 5,
+          );
           final style = FilledButton.styleFrom(
+              padding: padding,
               textStyle: context.textThemeX.small.copyWith(
                 fontSize: density.fontSize,
                 fontWeight: bold ? FontWeight.bold : null,

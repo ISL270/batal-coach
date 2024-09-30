@@ -62,5 +62,7 @@
   "equipment": "equipment",
   "categories": "categories",
   "level": "level",
-  "apply": "apply"
+  "apply": "apply",
+  "btl": "BTL",
+  "personal": "personal"
 }

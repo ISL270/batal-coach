@@ -62,5 +62,7 @@
   "equipment": "أدوات",
   "categories": "تصنيفات",
   "level": "مستوى",
-  "apply": "تطبيق"
+  "apply": "تطبيق",
+  "btl": "BTL",
+  "personal": "شخصي"
 }

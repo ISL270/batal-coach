@@ -1,16 +1,31 @@
+import 'dart:developer';
+
+import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
+import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
+import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
+import 'package:btl/app/coach/features/exercise/domain/models/exercise_ownership.dart';
+import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
 import 'package:btl/app/coach/features/exercise/presentation/widgets/exercise_tile.dart';
-import 'package:btl/app/coach/features/exercise/presentation/widgets/filter_bottomsheet.dart';
 import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
+import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/widgets/button.dart';
+import 'package:btl/app/widgets/seperator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_cupertino_navigation_bar/super_cupertino_navigation_bar.dart';
+
+part 'package:btl/app/coach/features/exercise/presentation/widgets/filter_bottomsheet.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({super.key});
@@ -82,7 +97,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveCl
                 icon: const Icon(Icons.tune),
                 color: context.colorsX.primary,
                 iconSize: 30,
-                onPressed: () => FilterBottomSheet.show<void>(context),
+                onPressed: () async {
+                  final filters = await _FilterBottomSheet.show(context);
+                  if (filters == null) return;
+
+                  log('');
+                },
               ),
             )
           ],

@@ -1,0 +1,4 @@
+enum ExOwnership {
+  btl,
+  custom,
+}

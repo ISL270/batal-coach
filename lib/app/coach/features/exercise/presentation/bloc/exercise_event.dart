@@ -16,3 +16,11 @@ final class ExerciseSearched extends ExerciseEvent {
 }
 
 final class ExerciseNextPageFetched extends ExerciseEvent {}
+
+final class ExerciseFilter extends ExerciseEvent {
+  final ExFilters filters;
+  const ExerciseFilter(this.filters);
+
+  @override
+  List<Object> get props => [filters];
+}
