@@ -1,16 +1,17 @@
 part of 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 
 class _FilterBottomSheet extends StatefulWidget {
-  const _FilterBottomSheet();
+  final ExFilters currentFilters;
+  const _FilterBottomSheet(this.currentFilters);
 
-  static Future<ExFilters?> show(BuildContext context) {
+  static Future<ExFilters?> show(BuildContext context, ExFilters currentFilters) {
     return showModalBottomSheet<ExFilters>(
       context: context,
       // This value must be true in order to show the BottomSheet above the BottomNavBar
       useRootNavigator: true,
       // The Sheet has a back button and reset button so I think it's better to be inDismissible
       scrollControlDisabledMaxHeightRatio: 0.75,
-      builder: (context) => const _FilterBottomSheet(),
+      builder: (context) => _FilterBottomSheet(currentFilters),
     );
   }
 
@@ -19,7 +20,13 @@ class _FilterBottomSheet extends StatefulWidget {
 }
 
 class _FilterBottomSheetState extends State<_FilterBottomSheet> {
-  final filters = ExFilters();
+  late final ExFilters filters;
+
+  @override
+  void initState() {
+    super.initState();
+    filters = widget.currentFilters.clone();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +50,10 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       Align(child: Text('Filter by', style: context.textThemeX.large.bold)),
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
-                        child: Text(
-                          'Reset',
-                          style: context.textThemeX.small.bold.copyWith(
-                            color: context.colorsX.primary,
-                          ),
+                        child: TextButton(
+                          onPressed:
+                              widget.currentFilters.isEmpty ? null : () => context.pop(ExFilters()),
+                          child: const Text('Reset'),
                         ),
                       )
                     ],
@@ -89,6 +95,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       _Filter(
                         title: 'Muscles',
                         values: Muscle.values,
+                        initialValues: filters.muscles,
                         onSelected: (selected, v) {
                           setState(() {
                             if (selected) {
@@ -103,6 +110,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       _Filter(
                         title: 'Equipment',
                         values: Equipment.values,
+                        initialValues: filters.equipment,
                         onSelected: (selected, v) {
                           setState(() {
                             if (selected) {
@@ -117,6 +125,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       _Filter(
                         title: 'Categories',
                         values: ExCategory.values,
+                        initialValues: filters.category,
                         onSelected: (selected, v) {
                           setState(() {
                             if (selected) {
@@ -131,6 +140,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       _Filter(
                         title: 'Level',
                         values: ExLevel.values,
+                        initialValues: filters.level,
                         onSelected: (selected, v) {
                           setState(() {
                             if (selected) {
@@ -165,7 +175,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
               ),
               child: UnconstrainedBox(
                 child: Button.filled(
-                  onPressed: () => context.pop(filters),
+                  onPressed: () => context.pop(filters.isEmpty ? null : filters),
                   label: 'Apply filter',
                   density: ButtonDensity.comfortable,
                 ),
@@ -181,12 +191,14 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
 class _Filter<E extends Enum> extends StatefulWidget {
   final String title;
   final List<E> values;
+  final Set<E> initialValues;
   final void Function(bool, E) onSelected;
 
   const _Filter({
     required this.title,
     required this.values,
     required this.onSelected,
+    required this.initialValues,
   });
 
   @override
@@ -194,7 +206,13 @@ class _Filter<E extends Enum> extends StatefulWidget {
 }
 
 class _FilterState<E extends Enum> extends State<_Filter<E>> {
-  final Set<E> _selectedValues = {};
+  late final Set<E> _selectedValues;
+
+  @override
+  void initState() {
+    _selectedValues = widget.initialValues;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

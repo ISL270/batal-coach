@@ -39,6 +39,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
       final searchResult = await _repository.getExercises(
         page: 0,
         event.searchTerm,
+        state.filters,
         pageSize: state.exercises.pageSize,
       );
       emit(state._success(exercises: PaginatedResult(result: searchResult)));
@@ -54,6 +55,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
 
     final searchResult = await _repository.getExercises(
       state.searchTerm,
+      state.filters,
       page: state.exercises.page + 1,
       pageSize: state.exercises.pageSize,
     );
@@ -69,6 +71,8 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   void _onFilterUpdate(
     ExerciseFilter event,
     Emitter<ExerciseState> emit,
-  ) =>
-      emit(state._filter(event.filters));
+  ) {
+    emit(state._filter(event.filters));
+    add(ExerciseSearched(state.searchTerm));
+  }
 }

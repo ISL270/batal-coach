@@ -56,5 +56,6 @@ final class ExerciseState extends Equatable {
         status,
         exercises,
         searchTerm,
+        filters,
       ];
 }

@@ -3,6 +3,7 @@
 import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercise_local_data_source.dart';
 import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercise_remote_data_source.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
+import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
@@ -68,11 +69,12 @@ class ExerciseRepository implements ReactiveRepository<VoidStatus> {
   }
 
   Future<List<Exercise>> getExercises(
-    String searchTerm, {
+    String searchTerm,
+    ExFilters? filters, {
     required int page,
     required int pageSize,
   }) async {
-    final cmExercises = await _localSource.getExercises(searchTerm, page, pageSize);
+    final cmExercises = await _localSource.getExercises(searchTerm, filters, page, pageSize);
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 

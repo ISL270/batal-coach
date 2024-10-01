@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
@@ -98,10 +96,9 @@ class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveCl
                 color: context.colorsX.primary,
                 iconSize: 30,
                 onPressed: () async {
-                  final filters = await _FilterBottomSheet.show(context);
+                  final filters = await _FilterBottomSheet.show(context, _bloc.state.filters);
                   if (filters == null) return;
-
-                  log('');
+                  _bloc.add(ExerciseFilter(filters));
                 },
               ),
             )
