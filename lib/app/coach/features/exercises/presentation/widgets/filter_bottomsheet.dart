@@ -1,4 +1,4 @@
-part of 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
+part of 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 
 class _FilterBottomSheet extends StatefulWidget {
   const _FilterBottomSheet();

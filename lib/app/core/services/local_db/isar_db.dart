@@ -1,6 +1,6 @@
 // ignore_for_file: strict_raw_type
 
-import 'package:btl/app/coach/features/exercise/data/models/local/exercise_isar.dart';
+import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';

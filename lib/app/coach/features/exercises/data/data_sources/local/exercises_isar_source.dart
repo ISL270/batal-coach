@@ -1,9 +1,9 @@
 // ignore_for_file: inference_failure_on_function_invocation
 
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_local_data_source.dart';
-import 'package:btl/app/coach/features/exercise/data/models/local/exercise_isar.dart';
-import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
+import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_local_data_source.dart';
+import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
+import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/core/services/local_db/isar_db.dart';
 import 'package:dartx/dartx.dart';

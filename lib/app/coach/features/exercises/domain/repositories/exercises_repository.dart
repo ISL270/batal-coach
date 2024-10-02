@@ -1,9 +1,9 @@
 // ignore_for_file: inference_failure_on_untyped_parameter
 
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_local_data_source.dart';
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_remote_data_source.dart';
-import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
+import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_local_data_source.dart';
+import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exercises_remote_data_source.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
+import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';

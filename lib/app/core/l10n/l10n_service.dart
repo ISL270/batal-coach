@@ -1,7 +1,7 @@
-import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
-import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
-import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
-import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
 import 'package:btl/app/core/extensions/bloc_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';

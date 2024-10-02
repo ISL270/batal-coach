@@ -16,17 +16,17 @@ import 'package:btl/app/coach/features/clients/domain/repositories/clients_repos
     as _i1006;
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
     as _i441;
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_isar_source.dart'
+import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart'
     as _i622;
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_local_data_source.dart'
+import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_local_data_source.dart'
     as _i156;
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_firestore_source.dart'
+import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exercises_firestore_source.dart'
     as _i689;
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_remote_data_source.dart'
+import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exercises_remote_data_source.dart'
     as _i113;
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart'
+import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart'
     as _i59;
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart'
+import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart'
     as _i542;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
