@@ -33,6 +33,7 @@ final class ExercisesState extends Equatable {
         status: const Success(null),
       );
 
+  // ignore: unused_element
   ExercisesState _failure(GenericException exception) => _copyWith(status: Failure(exception));
 
   ExercisesState _filter(ExFilters filters) => _copyWith(filters: filters);

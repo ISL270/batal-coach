@@ -88,6 +88,7 @@ enum _Equipment {
         _Equipment.other => Equipment.other,
       };
 
+  // ignore: unused_element
   static _Equipment fromDomain(Equipment e) => switch (e) {
         Equipment.barbell => _Equipment.barbell,
         Equipment.dumbbell => _Equipment.dumbbell,
