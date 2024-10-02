@@ -5,7 +5,7 @@ import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart
 extension AuthBlocX on AuthBloc {
   String get homeNamedRoute {
     if (state.user?.isCoach ?? true) {
-      return WorkoutScreen.name;
+      return ExercisesScreen.name;
     }
     return throw UnimplementedError();
   }

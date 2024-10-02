@@ -2,8 +2,7 @@
 
 import 'dart:async';
 
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercise_local_data_source.dart';
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercise_remote_data_source.dart';
+import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_remote_data_source.dart';
 import 'package:btl/app/coach/features/exercise/data/models/remote/exercise_rm.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
@@ -12,7 +11,6 @@ import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dar
 import 'package:btl/app/coach/features/exercise/domain/models/force.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/mechanic.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
-import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,13 +18,13 @@ import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part '../../models/remote/fire_exercise.dart';
-part 'exercise_firestore_source.g.dart';
+part 'exercises_firestore_source.g.dart';
 
-@LazySingleton(as: ExerciseRemoteDataSource)
-class ExerciseFirestoreSource implements ExerciseRemoteDataSource {
+@LazySingleton(as: ExercisesRemoteDataSource)
+class ExercisesFirestoreSource implements ExercisesRemoteDataSource {
   final FirestoreService _firestoreSvc;
 
-  ExerciseFirestoreSource(this._firestoreSvc) {
+  ExercisesFirestoreSource(this._firestoreSvc) {
     _createStreams();
   }
 
@@ -45,11 +43,8 @@ class ExerciseFirestoreSource implements ExerciseRemoteDataSource {
   void subToRemote() {
     if (_updatedExcsCntrlr.isClosed) _createStreams();
     _exercisesSubscription = _firestoreSvc.exercises.btlExercises.snapshots().listen(
-      (event) async {
-        // I encounterd a bug that does not save the docs after login
-        // so i think we should always make sure docs count equals local items count
-        final count = await getIt.get<ExerciseLocalDataSource>().count;
-        if (event.docChanges.isNotEmpty && event.metadata.isFromCache && event.docs.length == count) {
+      (event) {
+        if (event.docChanges.isNotEmpty && event.metadata.isFromCache) {
           _updatedExcsCntrlr.addError(const BusinessException(code: 'is_from_cache'));
         } else {
           final excsToBeUpdated = <_FireExercise>[];

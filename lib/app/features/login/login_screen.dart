@@ -66,9 +66,7 @@ class LoginScreen extends StatelessWidget {
                 builder: (context, userType) => SizedBox(
                   width: double.infinity,
                   child: SegmentedButton(
-                    style: SegmentedButton.styleFrom(
-                      textStyle: context.textThemeX.small.bold,
-                    ),
+                    style: SegmentedButton.styleFrom(textStyle: context.textThemeX.small.bold),
                     expandedInsets: const EdgeInsets.all(1),
                     showSelectedIcon: false,
                     onSelectionChanged: (selection) =>

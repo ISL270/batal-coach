@@ -13,19 +13,21 @@ import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart'
     as _i142;
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart'
-    as _i1043;
-import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart' as _i441;
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercise_isar_source.dart'
-    as _i913;
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercise_local_data_source.dart'
-    as _i748;
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercise_firestore_source.dart'
-    as _i490;
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercise_remote_data_source.dart'
-    as _i851;
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart'
-    as _i793;
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart' as _i883;
+    as _i1006;
+import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
+    as _i441;
+import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_isar_source.dart'
+    as _i622;
+import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_local_data_source.dart'
+    as _i156;
+import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_firestore_source.dart'
+    as _i689;
+import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_remote_data_source.dart'
+    as _i113;
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart'
+    as _i59;
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart'
+    as _i542;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
 import 'package:btl/app/core/services/firestore_service.dart' as _i529;
@@ -39,9 +41,12 @@ import 'package:btl/app/features/authentication/data/data_sources/remote/user_fi
     as _i538;
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart'
     as _i139;
-import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart' as _i902;
-import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart' as _i55;
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart' as _i260;
+import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
+    as _i902;
+import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart'
+    as _i55;
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart'
+    as _i260;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -67,19 +72,20 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i791.IsarDB.create(),
       preResolve: true,
     );
+    gh.lazySingleton<_i113.ExercisesRemoteDataSource>(
+      () => _i689.ExercisesFirestoreSource(gh<_i529.FirestoreService>()),
+      dispose: (i) => i.dispose(),
+    );
     gh.lazySingleton<_i142.ClientsRemoteSource>(
       () => _i403.ClientsFirestoreSource(gh<_i529.FirestoreService>()),
       dispose: (i) => i.dispose(),
     );
-    gh.lazySingleton<_i851.ExerciseRemoteDataSource>(
-      () => _i490.ExerciseFirestoreSource(gh<_i529.FirestoreService>()),
-      dispose: (i) => i.dispose(),
-    );
     gh.singleton<_i139.UserRemoteSource>(
         () => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
-    gh.singleton<_i748.ExerciseLocalDataSource>(
-        () => _i913.ExerciseIsarSource(gh<_i898.LocalDB>()));
-    gh.singleton<_i623.UserLocalSource>(() => _i193.UserIsarSource(gh<_i898.LocalDB>()));
+    gh.singleton<_i156.ExercisesLocalDataSource>(
+        () => _i622.ExercisesIsarSource(gh<_i898.LocalDB>()));
+    gh.singleton<_i623.UserLocalSource>(
+        () => _i193.UserIsarSource(gh<_i898.LocalDB>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
           gh<_i623.UserLocalSource>(),
           gh<_i139.UserRemoteSource>(),
@@ -96,24 +102,27 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
       dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i260.AuthBloc>(() => _i260.AuthBloc(gh<_i902.AuthRepository>()));
-    gh.singleton<_i1043.ClientsRepository>(
-      () => _i1043.ClientsRepository(
+    gh.singleton<_i260.AuthBloc>(
+        () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
+    gh.singleton<_i1006.ClientsRepository>(
+      () => _i1006.ClientsRepository(
         gh<_i142.ClientsRemoteSource>(),
         gh<_i902.AuthRepository>(),
       ),
       dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i793.ExerciseRepository>(
-      () => _i793.ExerciseRepository(
+    gh.singleton<_i59.ExercisesRepository>(
+      () => _i59.ExercisesRepository(
         gh<_i902.AuthRepository>(),
-        gh<_i851.ExerciseRemoteDataSource>(),
-        gh<_i748.ExerciseLocalDataSource>(),
+        gh<_i113.ExercisesRemoteDataSource>(),
+        gh<_i156.ExercisesLocalDataSource>(),
       ),
       dispose: (i) => i.dispose(),
     );
-    gh.factory<_i441.ClientsBloc>(() => _i441.ClientsBloc(gh<_i1043.ClientsRepository>()));
-    gh.factory<_i883.ExerciseBloc>(() => _i883.ExerciseBloc(gh<_i793.ExerciseRepository>()));
+    gh.factory<_i441.ClientsBloc>(
+        () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
+    gh.factory<_i542.ExercisesBloc>(
+        () => _i542.ExercisesBloc(gh<_i59.ExercisesRepository>()));
     return this;
   }
 }

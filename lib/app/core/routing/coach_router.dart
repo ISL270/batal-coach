@@ -1,11 +1,10 @@
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart';
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart';
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
-import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -14,7 +13,6 @@ import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
@@ -57,16 +55,17 @@ final coachRouter = GoRouter(
       builder: (_, ___, navigationShell) => HomeScreen(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
-          navigatorKey: _workoutNavigatorKey,
+          navigatorKey: _exerecisesNavigatorKey,
           routes: [
             GoRoute(
-              name: WorkoutScreen.name,
-              path: '/${WorkoutScreen.name}',
+              name: ExercisesScreen.name,
+              path: '/${ExercisesScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
                   child: BlocProvider(
-                create: (context) => ExerciseBloc(getIt.get<ExerciseRepository>()),
-                child: const WorkoutScreen(),
+                create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
+                child: const ExercisesScreen(),
               )),
+              // ignore: prefer_const_literals_to_create_immutables
               routes: [
                 GoRoute(
                   name: WorkoutBuilderScreen.name,
@@ -110,11 +109,7 @@ final coachRouter = GoRouter(
             GoRoute(
               name: SettingsScreen.name,
               path: '/${SettingsScreen.name}',
-              pageBuilder: (context, state) => NoTransitionPage(
-                  child: BlocProvider(
-                create: (context) => SettingsBloc(),
-                child: const SettingsScreen(),
-              )),
+              pageBuilder: (context, state) => const NoTransitionPage(child: SettingsScreen()),
             ),
           ],
         ),
@@ -127,7 +122,7 @@ final coachRouter = GoRouter(
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
-    final fromloc = state.isGoingToHome ? '' : state.matchedLocation;
+    final fromloc = (state.isGoingToHome || state.isLoggingOut) ? '' : state.matchedLocation;
     if (!getIt.authBloc.state.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
@@ -140,7 +135,8 @@ final coachRouter = GoRouter(
     // if the user is logged in, send them where they were going before (or
     // home if they weren't going anywhere)
     if (state.isLoggingIn) {
-      return state.uri.queryParameters['from'] ?? state.namedLocation(getIt.authBloc.homeNamedRoute);
+      return state.uri.queryParameters['from'] ??
+          state.namedLocation(getIt.authBloc.homeNamedRoute);
     }
 
     // no need to redirect at all
@@ -152,6 +148,6 @@ final coachRouter = GoRouter(
 
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _workoutNavigatorKey = GlobalKey<NavigatorState>(debugLabel: WorkoutScreen.name);
+final _exerecisesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ExercisesScreen.name);
 final _clientsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ClientsScreen.name);
 final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: SettingsScreen.name);

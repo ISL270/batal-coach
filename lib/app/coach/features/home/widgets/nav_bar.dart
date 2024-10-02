@@ -1,5 +1,6 @@
 part of '../home_screen.dart';
 
+// ignore: unused_element
 class _NavBar extends StatelessWidget {
   final int currentIndex;
   final void Function(int)? onDestinationSelected;

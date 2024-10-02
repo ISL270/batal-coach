@@ -1,6 +1,8 @@
 import 'package:btl/app/core/extensions/bloc_x.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
+import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/extensions/text_style_x.dart';
+import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
@@ -87,7 +89,7 @@ class SettingsScreen extends StatelessWidget {
                 Button.outlined(
                   maxWidth: true,
                   density: ButtonDensity.comfortable,
-                  onPressed: () => context.authBloc.add(AuthLogoutRequested()),
+                  onPressed: () => getIt.authBloc.add(AuthLogoutRequested()),
                   label: context.l10n.logout.capitalized,
                 )
               ],

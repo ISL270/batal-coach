@@ -1,0 +1,1 @@
+enum ExOwnership { btl, personal }
