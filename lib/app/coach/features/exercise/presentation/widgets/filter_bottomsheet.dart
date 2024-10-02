@@ -170,9 +170,10 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
               child: UnconstrainedBox(
                 child: Button.filled(
                   onPressed: () {
-                    if (!filters.isEmpty) {
-                      context.read<ExercisesBloc>().add(ExFiltered(filters));
+                    if (filters.isEmpty && context.read<ExercisesBloc>().state.filters.isEmpty) {
+                      return context.pop();
                     }
+                    context.read<ExercisesBloc>().add(ExFiltered(filters));
                     context.pop();
                   },
                   label: 'Apply filter',

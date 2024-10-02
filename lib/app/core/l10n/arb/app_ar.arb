@@ -20,7 +20,7 @@
   "dashboard": "الرئيسية",
   "settings": "إعدادات",
   "logout": "تسجيل الخروج",
-  "exercise": "{count, plural, =1{تمرين} other{تمارين}}",
+  "exercise": "{count, plural, =1{تمرين} other{تمرينات}}",
   "@exercise": {
     "placeholders": {
       "count": {
