@@ -64,6 +64,7 @@ final coachRouter = GoRouter(
                 create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
                 child: const ExercisesScreen(),
               )),
+              // ignore: prefer_const_literals_to_create_immutables
               routes: [
                 //TODO(Salah): Add create exercise screen here.
                 // GoRoute(
@@ -109,7 +110,7 @@ final coachRouter = GoRouter(
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
-    final fromloc = state.isGoingToHome ? '' : state.matchedLocation;
+    final fromloc = (state.isGoingToHome || state.isLoggingOut) ? '' : state.matchedLocation;
     if (!getIt.authBloc.state.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
