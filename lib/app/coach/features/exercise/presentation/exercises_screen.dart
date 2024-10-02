@@ -6,7 +6,6 @@ import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
 import 'package:btl/app/coach/features/exercise/presentation/widgets/exercise_tile.dart';
-import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
@@ -25,16 +24,16 @@ import 'package:super_cupertino_navigation_bar/super_cupertino_navigation_bar.da
 
 part 'package:btl/app/coach/features/exercise/presentation/widgets/filter_bottomsheet.dart';
 
-class WorkoutScreen extends StatefulWidget {
-  const WorkoutScreen({super.key});
+class ExercisesScreen extends StatefulWidget {
+  const ExercisesScreen({super.key});
 
-  static const name = 'workout';
+  static const name = 'exercises';
 
   @override
-  State<WorkoutScreen> createState() => _WorkoutScreenState();
+  State<ExercisesScreen> createState() => _ExercisesScreenState();
 }
 
-class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveClientMixin {
+class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAliveClientMixin {
   late final ExerciseBloc _bloc;
   late final TextEditingController _searchCntrlr;
 
@@ -60,9 +59,9 @@ class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveCl
     return SuperScaffold(
       onCollapsed: (value) => isCollapsed.value = value,
       appBar: SuperAppBar(
-        title: Text(context.l10n.workout(0).capitalizedDefinite),
+        title: Text(context.l10n.exercise(0).capitalizedDefinite),
         backgroundColor: context.colorsX.background.withOpacity(0.85),
-        largeTitle: SuperLargeTitle(largeTitle: context.l10n.workout(0).capitalizedDefinite),
+        largeTitle: SuperLargeTitle(largeTitle: context.l10n.exercise(0).capitalizedDefinite),
         actions: ValueListenableBuilder(
           valueListenable: isCollapsed,
           builder: (context, isCollapsed, child) {
@@ -71,42 +70,47 @@ class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveCl
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 icon: const Icon(Icons.add_circle),
                 color: context.colorsX.primary,
-                iconSize: 30,
-                onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
+                iconSize: 28,
+                onPressed: () {},
               );
             }
             return TextButton.icon(
-              onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
+              onPressed: () {},
               label: Text(context.l10n.create.capitalized),
               icon: const Icon(size: 23, Icons.add_circle),
             );
           },
         ),
         searchBar: SuperSearchBar(
+          height: 45,
           searchController: _searchCntrlr,
           placeholderText: context.l10n.search,
+          scrollBehavior: SearchBarScrollBehavior.pinned,
           cancelButtonText: context.l10n.cancel.capitalized,
-          height: 45,
+          resultBehavior: SearchBarResultBehavior.neverVisible,
+          cancelTextStyle: TextStyle(color: context.colorsX.primary),
+          onChanged: (searchTerm) => _bloc.add(ExerciseSearched(searchTerm)),
           actions: [
             SuperAction(
               behavior: SuperActionBehavior.alwaysVisible,
               child: IconButton(
-                padding: const EdgeInsetsDirectional.only(start: 20, end: 5),
+                iconSize: 30,
                 icon: const Icon(Icons.tune),
                 color: context.colorsX.primary,
-                iconSize: 30,
-                onPressed: () async {
-                  final filters = await _FilterBottomSheet.show(context, _bloc.state.filters);
-                  if (filters == null) return;
-                  _bloc.add(ExerciseFilter(filters));
-                },
+                padding: const EdgeInsetsDirectional.only(start: 20, end: 5),
+                onPressed: () => showModalBottomSheet<void>(
+                  context: context,
+                  // This value must be true in order to show the BottomSheet above the BottomNavBar
+                  useRootNavigator: true,
+                  scrollControlDisabledMaxHeightRatio: 0.75,
+                  builder: (context) => BlocProvider.value(
+                    value: _bloc,
+                    child: const _FilterBottomSheet(),
+                  ),
+                ),
               ),
             )
           ],
-          cancelTextStyle: TextStyle(color: context.colorsX.primary),
-          scrollBehavior: SearchBarScrollBehavior.pinned,
-          resultBehavior: SearchBarResultBehavior.neverVisible,
-          onChanged: (searchTerm) => _bloc.add(ExerciseSearched(searchTerm)),
         ),
       ),
       body: BlocBuilder<ExerciseBloc, ExerciseState>(
@@ -125,8 +129,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with AutomaticKeepAliveCl
                   : ListView.separated(
                       shrinkWrap: true,
                       itemCount: state.exercises.result.length,
-                      physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (_, __) => const Divider(),
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 17),
                       itemBuilder: (context, i) => ExerciseTile(state.exercises.result[i]),
                     ),

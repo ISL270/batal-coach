@@ -4,8 +4,9 @@ import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dar
 import 'package:btl/app/coach/features/exercise/domain/models/force.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/mechanic.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
+import 'package:equatable/equatable.dart';
 
-class Exercise {
+class Exercise extends Equatable {
   final String id;
   final String name;
   final Force? force;
@@ -18,7 +19,7 @@ class Exercise {
   final Muscle mainMuscle;
   final List<Muscle> secondaryMuscles;
 
-  Exercise({
+  const Exercise({
     required this.id,
     required this.name,
     required this.force,
@@ -31,4 +32,19 @@ class Exercise {
     required this.mainMuscle,
     required this.secondaryMuscles,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        force,
+        level,
+        mechanic,
+        category,
+        equipment,
+        instructions,
+        images,
+        mainMuscle,
+        secondaryMuscles,
+      ];
 }

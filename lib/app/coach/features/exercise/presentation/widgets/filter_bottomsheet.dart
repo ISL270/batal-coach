@@ -1,19 +1,7 @@
 part of 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 
 class _FilterBottomSheet extends StatefulWidget {
-  final ExFilters currentFilters;
-  const _FilterBottomSheet(this.currentFilters);
-
-  static Future<ExFilters?> show(BuildContext context, ExFilters currentFilters) {
-    return showModalBottomSheet<ExFilters>(
-      context: context,
-      // This value must be true in order to show the BottomSheet above the BottomNavBar
-      useRootNavigator: true,
-      // The Sheet has a back button and reset button so I think it's better to be inDismissible
-      scrollControlDisabledMaxHeightRatio: 0.75,
-      builder: (context) => _FilterBottomSheet(currentFilters),
-    );
-  }
+  const _FilterBottomSheet();
 
   @override
   State<_FilterBottomSheet> createState() => _FilterBottomSheetState();
@@ -25,7 +13,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
   @override
   void initState() {
     super.initState();
-    filters = widget.currentFilters.clone();
+    filters = context.read<ExerciseBloc>().state.filters.clone();
   }
 
   @override
@@ -43,7 +31,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                     color: context.colorsX.secondaryBackground,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
+                  padding: const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 5),
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -51,8 +39,12 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: TextButton(
-                          onPressed:
-                              widget.currentFilters.isEmpty ? null : () => context.pop(ExFilters()),
+                          onPressed: context.read<ExerciseBloc>().state.filters.isEmpty
+                              ? null
+                              : () {
+                                  context.read<ExerciseBloc>().add(ExerciseFilter(ExFilters()));
+                                  context.pop();
+                                },
                           child: const Text('Reset'),
                         ),
                       )
@@ -74,15 +66,17 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                         selected: filters.owership,
                         showSelectedIcon: false,
                         multiSelectionEnabled: true,
-                        onSelectionChanged: (selection) =>
-                            setState(() => filters.owership = selection),
+                        onSelectionChanged: (selection) => setState(() {
+                          filters.owership.clear();
+                          filters.owership.addAll(selection);
+                        }),
                         segments: [
                           ButtonSegment(
                             value: ExOwnership.btl,
                             label: Text(context.l10n.btl),
                           ),
                           ButtonSegment(
-                            value: ExOwnership.custom,
+                            value: ExOwnership.personal,
                             label: Text(context.l10n.personal.capitalized),
                           ),
                         ],
@@ -175,7 +169,12 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
               ),
               child: UnconstrainedBox(
                 child: Button.filled(
-                  onPressed: () => context.pop(filters.isEmpty ? null : filters),
+                  onPressed: () {
+                    if (!filters.isEmpty) {
+                      context.read<ExerciseBloc>().add(ExerciseFilter(filters));
+                    }
+                    context.pop();
+                  },
                   label: 'Apply filter',
                   density: ButtonDensity.comfortable,
                 ),
@@ -225,7 +224,7 @@ class _FilterState<E extends Enum> extends State<_Filter<E>> {
         ),
         const Gap(8),
         Wrap(
-          spacing: 12,
+          spacing: 11,
           children: widget.values
               .map((v) => FilterChip(
                     label: Text(context.tr(v.name)),

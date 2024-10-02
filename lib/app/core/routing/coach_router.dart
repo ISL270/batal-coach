@@ -5,7 +5,6 @@ import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_rep
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
-import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -56,23 +55,24 @@ final coachRouter = GoRouter(
       builder: (_, ___, navigationShell) => HomeScreen(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
-          navigatorKey: _workoutNavigatorKey,
+          navigatorKey: _exerecisesNavigatorKey,
           routes: [
             GoRoute(
-              name: WorkoutScreen.name,
-              path: '/${WorkoutScreen.name}',
+              name: ExercisesScreen.name,
+              path: '/${ExercisesScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
                   child: BlocProvider(
                 create: (context) => ExerciseBloc(getIt.get<ExerciseRepository>()),
-                child: const WorkoutScreen(),
+                child: const ExercisesScreen(),
               )),
               routes: [
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  name: WorkoutBuilderScreen.name,
-                  path: WorkoutBuilderScreen.name,
-                  builder: (context, state) => const WorkoutBuilderScreen(),
-                ),
+                //TODO(Salah): Add create exercise screen here.
+                // GoRoute(
+                //   parentNavigatorKey: _rootNavigatorKey,
+                //   name: CreateExerciseScreen.name,
+                //   path: CreateExerciseScreen.name,
+                //   builder: (context, state) => const WorkoutBuilderScreen(),
+                // ),
               ],
             ),
           ],
@@ -140,6 +140,6 @@ final coachRouter = GoRouter(
 
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _workoutNavigatorKey = GlobalKey<NavigatorState>(debugLabel: WorkoutScreen.name);
+final _exerecisesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ExercisesScreen.name);
 final _clientsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ClientsScreen.name);
 final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: SettingsScreen.name);

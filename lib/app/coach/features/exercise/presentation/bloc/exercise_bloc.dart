@@ -72,6 +72,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     ExerciseFilter event,
     Emitter<ExerciseState> emit,
   ) {
+    if (state.filters == event.filters) return;
     emit(state._filter(event.filters));
     add(ExerciseSearched(state.searchTerm));
   }
