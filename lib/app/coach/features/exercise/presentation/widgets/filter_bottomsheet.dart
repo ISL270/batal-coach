@@ -13,7 +13,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
   @override
   void initState() {
     super.initState();
-    filters = context.read<ExerciseBloc>().state.filters.clone();
+    filters = context.read<ExercisesBloc>().state.filters.clone();
   }
 
   @override
@@ -39,10 +39,10 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: TextButton(
-                          onPressed: context.read<ExerciseBloc>().state.filters.isEmpty
+                          onPressed: context.read<ExercisesBloc>().state.filters.isEmpty
                               ? null
                               : () {
-                                  context.read<ExerciseBloc>().add(ExerciseFilter(ExFilters()));
+                                  context.read<ExercisesBloc>().add(ExFiltered(ExFilters()));
                                   context.pop();
                                 },
                           child: const Text('Reset'),
@@ -171,7 +171,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                 child: Button.filled(
                   onPressed: () {
                     if (!filters.isEmpty) {
-                      context.read<ExerciseBloc>().add(ExerciseFilter(filters));
+                      context.read<ExercisesBloc>().add(ExFiltered(filters));
                     }
                     context.pop();
                   },

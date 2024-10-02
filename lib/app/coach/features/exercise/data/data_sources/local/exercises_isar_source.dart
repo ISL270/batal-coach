@@ -1,6 +1,6 @@
 // ignore_for_file: inference_failure_on_function_invocation
 
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercise_local_data_source.dart';
+import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_local_data_source.dart';
 import 'package:btl/app/coach/features/exercise/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
@@ -10,12 +10,12 @@ import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 
-@Singleton(as: ExerciseLocalDataSource)
-final class ExerciseIsarSource implements ExerciseLocalDataSource {
+@Singleton(as: ExercisesLocalDataSource)
+final class ExercisesIsarSource implements ExercisesLocalDataSource {
   @override
   final LocalDB localDB;
 
-  const ExerciseIsarSource(this.localDB);
+  const ExercisesIsarSource(this.localDB);
 
   @override
   Future<List<int>> updateExercises(List<Exercise> exercises) =>

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart';
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/bloc_event_transformers.dart';
@@ -10,25 +10,25 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/transformers.dart';
 
-part 'exercise_event.dart';
-part 'exercise_state.dart';
+part 'exercises_event.dart';
+part 'exercises_state.dart';
 
 @injectable
-class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
-  final ExerciseRepository _repository;
+class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
+  final ExercisesRepository _repository;
 
-  ExerciseBloc(this._repository) : super(ExerciseState._initial()) {
-    on<ExerciseSearched>(_onSearched);
-    on<ExerciseNextPageFetched>(
+  ExercisesBloc(this._repository) : super(ExercisesState._initial()) {
+    on<ExSearched>(_onSearched);
+    on<ExNextPageFetched>(
       _onNextPageFetched,
       transformer: EventTransformers.throttleDroppable(),
     );
-    on<ExerciseFilter>(_onFilterUpdate);
+    on<ExFiltered>(_onFilterUpdate);
 
-    add(const ExerciseSearched(''));
+    add(const ExSearched(''));
   }
 
-  Future<void> _onSearched(ExerciseSearched event, Emitter<ExerciseState> emit) async {
+  Future<void> _onSearched(ExSearched event, Emitter<ExercisesState> emit) async {
     emit(state._searchInProgress(event.searchTerm));
 
     await _repository
@@ -48,8 +48,8 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   }
 
   Future<void> _onNextPageFetched(
-    ExerciseNextPageFetched event,
-    Emitter<ExerciseState> emit,
+    ExNextPageFetched event,
+    Emitter<ExercisesState> emit,
   ) async {
     if (state.exercises.hasReachedMax) return;
 
@@ -69,11 +69,11 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   }
 
   void _onFilterUpdate(
-    ExerciseFilter event,
-    Emitter<ExerciseState> emit,
+    ExFiltered event,
+    Emitter<ExercisesState> emit,
   ) {
     if (state.filters == event.filters) return;
     emit(state._filter(event.filters));
-    add(ExerciseSearched(state.searchTerm));
+    add(ExSearched(state.searchTerm));
   }
 }

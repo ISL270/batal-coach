@@ -1,8 +1,8 @@
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart';
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart';
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
@@ -62,7 +62,7 @@ final coachRouter = GoRouter(
               path: '/${ExercisesScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
                   child: BlocProvider(
-                create: (context) => ExerciseBloc(getIt.get<ExerciseRepository>()),
+                create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
                 child: const ExercisesScreen(),
               )),
               routes: [

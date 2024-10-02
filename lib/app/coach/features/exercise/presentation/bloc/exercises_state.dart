@@ -1,21 +1,21 @@
 // ignore_for_file: avoid_redundant_argument_values
 
-part of 'exercise_bloc.dart';
+part of 'exercises_bloc.dart';
 
-final class ExerciseState extends Equatable {
+final class ExercisesState extends Equatable {
   final VoidStatus status;
   final String searchTerm;
   final PaginatedResult<Exercise> exercises;
   final ExFilters filters;
 
-  const ExerciseState._({
+  const ExercisesState._({
     required this.status,
     required this.exercises,
     required this.searchTerm,
     required this.filters,
   });
 
-  ExerciseState._initial()
+  ExercisesState._initial()
       : this._(
           searchTerm: '',
           status: const Initial(),
@@ -23,27 +23,27 @@ final class ExerciseState extends Equatable {
           filters: ExFilters(),
         );
 
-  ExerciseState _searchInProgress(String searchTerm) => _copyWith(
+  ExercisesState _searchInProgress(String searchTerm) => _copyWith(
         status: const Loading(),
         searchTerm: searchTerm,
       );
 
-  ExerciseState _success({PaginatedResult<Exercise>? exercises}) => _copyWith(
+  ExercisesState _success({PaginatedResult<Exercise>? exercises}) => _copyWith(
         exercises: exercises,
         status: const Success(null),
       );
 
-  ExerciseState _failure(GenericException exception) => _copyWith(status: Failure(exception));
+  ExercisesState _failure(GenericException exception) => _copyWith(status: Failure(exception));
 
-  ExerciseState _filter(ExFilters filters) => _copyWith(filters: filters);
+  ExercisesState _filter(ExFilters filters) => _copyWith(filters: filters);
 
-  ExerciseState _copyWith({
+  ExercisesState _copyWith({
     VoidStatus? status,
     String? searchTerm,
     PaginatedResult<Exercise>? exercises,
     ExFilters? filters,
   }) {
-    return ExerciseState._(
+    return ExercisesState._(
       status: status ?? this.status,
       filters: filters ?? this.filters,
       exercises: exercises ?? this.exercises,

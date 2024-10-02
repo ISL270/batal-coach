@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field
 
-part of '../../data_sources/remote/exercise_firestore_source.dart';
+part of '../../data_sources/remote/exercises_firestore_source.dart';
 
 @JsonSerializable(explicitToJson: true)
 class _FireExercise implements ExerciseRM {

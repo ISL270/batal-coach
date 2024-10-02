@@ -3,7 +3,7 @@ import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_level.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise_ownership.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/muscle.dart';
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
 import 'package:btl/app/coach/features/exercise/presentation/widgets/exercise_tile.dart';
 import 'package:btl/app/core/enums/status.dart';
@@ -34,18 +34,18 @@ class ExercisesScreen extends StatefulWidget {
 }
 
 class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAliveClientMixin {
-  late final ExerciseBloc _bloc;
+  late final ExercisesBloc _bloc;
   late final TextEditingController _searchCntrlr;
 
   @override
   void initState() {
     super.initState();
-    _bloc = context.read<ExerciseBloc>();
+    _bloc = context.read<ExercisesBloc>();
     _searchCntrlr = TextEditingController();
     _searchCntrlr.addListener(
       () {
         if (_searchCntrlr.text.isEmpty) {
-          _bloc.add(const ExerciseSearched(''));
+          _bloc.add(const ExSearched(''));
         }
       },
     );
@@ -89,7 +89,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
           cancelButtonText: context.l10n.cancel.capitalized,
           resultBehavior: SearchBarResultBehavior.neverVisible,
           cancelTextStyle: TextStyle(color: context.colorsX.primary),
-          onChanged: (searchTerm) => _bloc.add(ExerciseSearched(searchTerm)),
+          onChanged: (searchTerm) => _bloc.add(ExSearched(searchTerm)),
           actions: [
             SuperAction(
               behavior: SuperActionBehavior.alwaysVisible,
@@ -113,12 +113,12 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
           ],
         ),
       ),
-      body: BlocBuilder<ExerciseBloc, ExerciseState>(
+      body: BlocBuilder<ExercisesBloc, ExercisesState>(
         builder: (context, state) {
           return NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               if (notification.metrics.pixels >= (notification.metrics.maxScrollExtent * .7)) {
-                _bloc.add(ExerciseNextPageFetched());
+                _bloc.add(ExNextPageFetched());
               }
               return true;
             },
