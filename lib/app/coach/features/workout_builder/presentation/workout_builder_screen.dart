@@ -47,7 +47,6 @@ class WorkoutBuilderScreen extends StatelessWidget {
                 items: ExCategory.values,
                 builder: (val) {
                   return SelectionBottomsheetItem(
-                    //TODO: replace with trFromEnum after Merge
                     title: getIt.l10nSvc.trFromStr(val.name, context),
                   );
                 },
@@ -77,7 +76,8 @@ class WorkoutBuilderScreen extends StatelessWidget {
                           ),
                           Text(
                             'Selected Value',
-                            style: context.theme.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
+                            style: context.theme.textTheme.titleMedium!
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -86,7 +86,6 @@ class WorkoutBuilderScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  //TODO: replace with customDivider after merge
                   const Divider(),
                 ],
               ),

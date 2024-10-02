@@ -4,7 +4,12 @@ import 'package:go_router/go_router.dart';
 
 class SelectionBottomsheet<T> extends StatelessWidget {
   const SelectionBottomsheet(
-      {required this.items, required this.builder, required this.onItemSelected, this.onReset, this.controller, super.key});
+      {required this.items,
+      required this.builder,
+      required this.onItemSelected,
+      this.onReset,
+      this.controller,
+      super.key});
   final List<T> items;
   final Widget Function(T) builder;
   final void Function(T) onItemSelected;
@@ -85,7 +90,6 @@ class SelectionBottomsheetItem extends StatelessWidget {
         ListTile(
           title: Text(title),
         ),
-        // TODO: Replace With custom divider after merge
         const Divider(),
       ],
     );

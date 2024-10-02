@@ -5,6 +5,7 @@ import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_re
 import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
+import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -19,7 +20,6 @@ import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';
 import 'package:btl/app/features/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
