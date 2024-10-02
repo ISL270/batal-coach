@@ -33,7 +33,7 @@ class ExercisesScreen extends StatefulWidget {
   State<ExercisesScreen> createState() => _ExercisesScreenState();
 }
 
-class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAliveClientMixin {
+class _ExercisesScreenState extends State<ExercisesScreen> {
   late final ExercisesBloc _bloc;
   late final TextEditingController _searchCntrlr;
 
@@ -55,7 +55,6 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return SuperScaffold(
       onCollapsed: (value) => isCollapsed.value = value,
       appBar: SuperAppBar(
@@ -140,9 +139,6 @@ class _ExercisesScreenState extends State<ExercisesScreen> with AutomaticKeepAli
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 
   @override
   void dispose() {
