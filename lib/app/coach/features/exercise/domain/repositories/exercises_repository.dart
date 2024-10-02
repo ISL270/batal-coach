@@ -1,8 +1,9 @@
 // ignore_for_file: inference_failure_on_untyped_parameter
 
-import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercise_local_data_source.dart';
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercise_remote_data_source.dart';
+import 'package:btl/app/coach/features/exercise/data/data_sources/local/exercises_local_data_source.dart';
+import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_remote_data_source.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
+import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
@@ -12,12 +13,12 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
 @singleton
-class ExerciseRepository implements ReactiveRepository<VoidStatus> {
+class ExercisesRepository implements ReactiveRepository<VoidStatus> {
   final AuthRepository _authRepository;
-  final ExerciseRemoteDataSource _remoteSource;
-  final ExerciseLocalDataSource _localSource;
+  final ExercisesRemoteDataSource _remoteSource;
+  final ExercisesLocalDataSource _localSource;
 
-  ExerciseRepository(
+  ExercisesRepository(
     this._authRepository,
     this._remoteSource,
     this._localSource,
@@ -68,11 +69,12 @@ class ExerciseRepository implements ReactiveRepository<VoidStatus> {
   }
 
   Future<List<Exercise>> getExercises(
-    String searchTerm, {
+    String searchTerm,
+    ExFilters? filters, {
     required int page,
     required int pageSize,
   }) async {
-    final cmExercises = await _localSource.getExercises(searchTerm, page, pageSize);
+    final cmExercises = await _localSource.getExercises(searchTerm, filters, page, pageSize);
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 

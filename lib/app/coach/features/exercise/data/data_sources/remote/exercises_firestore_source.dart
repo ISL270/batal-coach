@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercise_remote_data_source.dart';
+import 'package:btl/app/coach/features/exercise/data/data_sources/remote/exercises_remote_data_source.dart';
 import 'package:btl/app/coach/features/exercise/data/models/remote/exercise_rm.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
@@ -18,13 +18,13 @@ import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part '../../models/remote/fire_exercise.dart';
-part 'exercise_firestore_source.g.dart';
+part 'exercises_firestore_source.g.dart';
 
-@LazySingleton(as: ExerciseRemoteDataSource)
-class ExerciseFirestoreSource implements ExerciseRemoteDataSource {
+@LazySingleton(as: ExercisesRemoteDataSource)
+class ExercisesFirestoreSource implements ExercisesRemoteDataSource {
   final FirestoreService _firestoreSvc;
 
-  ExerciseFirestoreSource(this._firestoreSvc) {
+  ExercisesFirestoreSource(this._firestoreSvc) {
     _createStreams();
   }
 

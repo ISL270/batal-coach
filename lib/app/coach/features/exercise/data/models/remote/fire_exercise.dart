@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field
 
-part of '../../data_sources/remote/exercise_firestore_source.dart';
+part of '../../data_sources/remote/exercises_firestore_source.dart';
 
 @JsonSerializable(explicitToJson: true)
 class _FireExercise implements ExerciseRM {
@@ -88,6 +88,7 @@ enum _Equipment {
         _Equipment.other => Equipment.other,
       };
 
+  // ignore: unused_element
   static _Equipment fromDomain(Equipment e) => switch (e) {
         Equipment.barbell => _Equipment.barbell,
         Equipment.dumbbell => _Equipment.dumbbell,

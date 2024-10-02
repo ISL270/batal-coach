@@ -9,6 +9,8 @@ linter:
     lines_longer_than_80_chars: false
 
 analyzer:
+  errors:
+    avoid_positional_boolean_parameters: ignore
   exclude:
     - "**.g.dart"
     - "**/generated_plugin_registrant.dart"

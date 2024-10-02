@@ -139,6 +139,13 @@ ThemeData _themeData(ColorsX colorScheme) {
         borderSide: BorderSide(color: colorScheme.onBackgroundTint.withOpacity(.5)),
       ),
     ),
+    chipTheme: ChipThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      side: BorderSide.none,
+      backgroundColor: colorScheme.background,
+      showCheckmark: false,
+      selectedColor: colorScheme.primary.withOpacity(.3),
+    ),
     textTheme: TextTheme(
       bodySmall: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),
       bodyMedium: GoogleFonts.notoSansArabic(color: colorScheme.onBackground),

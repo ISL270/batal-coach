@@ -1,11 +1,10 @@
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercise_repository.dart';
-import 'package:btl/app/coach/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart';
+import 'package:btl/app/coach/features/exercise/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercise/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
-import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -55,23 +54,25 @@ final coachRouter = GoRouter(
       builder: (_, ___, navigationShell) => HomeScreen(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
-          navigatorKey: _workoutNavigatorKey,
+          navigatorKey: _exerecisesNavigatorKey,
           routes: [
             GoRoute(
-              name: WorkoutScreen.name,
-              path: '/${WorkoutScreen.name}',
+              name: ExercisesScreen.name,
+              path: '/${ExercisesScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
                   child: BlocProvider(
-                create: (context) => ExerciseBloc(getIt.get<ExerciseRepository>()),
-                child: const WorkoutScreen(),
+                create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
+                child: const ExercisesScreen(),
               )),
+              // ignore: prefer_const_literals_to_create_immutables
               routes: [
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  name: WorkoutBuilderScreen.name,
-                  path: WorkoutBuilderScreen.name,
-                  builder: (context, state) => const WorkoutBuilderScreen(),
-                ),
+                //TODO(Salah): Add create exercise screen here.
+                // GoRoute(
+                //   parentNavigatorKey: _rootNavigatorKey,
+                //   name: CreateExerciseScreen.name,
+                //   path: CreateExerciseScreen.name,
+                //   builder: (context, state) => const WorkoutBuilderScreen(),
+                // ),
               ],
             ),
           ],
@@ -109,7 +110,7 @@ final coachRouter = GoRouter(
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
-    final fromloc = state.isGoingToHome ? '' : state.matchedLocation;
+    final fromloc = (state.isGoingToHome || state.isLoggingOut) ? '' : state.matchedLocation;
     if (!getIt.authBloc.state.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
@@ -135,6 +136,6 @@ final coachRouter = GoRouter(
 
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _workoutNavigatorKey = GlobalKey<NavigatorState>(debugLabel: WorkoutScreen.name);
+final _exerecisesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ExercisesScreen.name);
 final _clientsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ClientsScreen.name);
 final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: SettingsScreen.name);

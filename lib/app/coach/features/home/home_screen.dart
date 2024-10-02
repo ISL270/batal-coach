@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                   color: context.colorsX.primary,
                 ),
                 icon: SvgAsset(Assets.icons.dumbbellOutlined),
-                label: context.l10n.workout(1).capitalized,
+                label: context.l10n.exercise(0).capitalizedDefinite,
               ),
               NavigationDestination(
                 selectedIcon: const Icon(Icons.person),
