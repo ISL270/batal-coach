@@ -14,7 +14,6 @@ import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
@@ -97,11 +96,7 @@ final coachRouter = GoRouter(
             GoRoute(
               name: SettingsScreen.name,
               path: '/${SettingsScreen.name}',
-              pageBuilder: (context, state) => NoTransitionPage(
-                  child: BlocProvider(
-                create: (context) => SettingsBloc(),
-                child: const SettingsScreen(),
-              )),
+              pageBuilder: (context, state) => const NoTransitionPage(child: SettingsScreen()),
             ),
           ],
         ),
