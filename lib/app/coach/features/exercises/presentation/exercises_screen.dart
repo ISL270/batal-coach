@@ -35,12 +35,14 @@ class ExercisesScreen extends StatefulWidget {
 
 class _ExercisesScreenState extends State<ExercisesScreen> {
   late final ExercisesBloc _bloc;
+  late final ScrollController _scrollCntrlr;
   late final TextEditingController _searchCntrlr;
   final isCollapsed = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
+    _scrollCntrlr = ScrollController();
     _bloc = context.read<ExercisesBloc>();
     _searchCntrlr = TextEditingController();
     _searchCntrlr.addListener(
@@ -50,11 +52,20 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         }
       },
     );
+    _scrollCntrlr.addListener(
+      () {
+        if (_bloc.state.status is Success && _bloc.state.exercises.result.length > 5) {
+          return;
+        }
+        _scrollCntrlr.jumpTo(0);
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return SuperScaffold(
+      scrollController: _scrollCntrlr,
       onCollapsed: (value) => isCollapsed.value = value,
       appBar: SuperAppBar(
         title: Text(context.l10n.exercise(0).capitalizedDefinite),
@@ -141,6 +152,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
 
   @override
   void dispose() {
+    _scrollCntrlr.dispose();
     _searchCntrlr.dispose();
     super.dispose();
   }
