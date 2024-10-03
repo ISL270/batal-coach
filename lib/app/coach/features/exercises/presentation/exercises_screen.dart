@@ -1,5 +1,5 @@
+import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise_ownership.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
@@ -76,17 +76,17 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           builder: (context, isCollapsed, child) {
             if (isCollapsed) {
               return IconButton(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                icon: const Icon(Icons.add_circle),
-                color: context.colorsX.primary,
                 iconSize: 28,
-                onPressed: () {},
+                color: context.colorsX.primary,
+                icon: const Icon(Icons.add_circle),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                onPressed: () => context.goNamed(ExerciseBuilderScreen.name),
               );
             }
             return TextButton.icon(
-              onPressed: () {},
               label: Text(context.l10n.create.capitalized),
               icon: const Icon(size: 23, Icons.add_circle),
+                onPressed: () => context.goNamed(ExerciseBuilderScreen.name),
             );
           },
         ),

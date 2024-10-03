@@ -1,11 +1,11 @@
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
+import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
-import 'package:btl/app/coach/features/workout_builder/presentation/workout_builder_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -65,16 +65,14 @@ final coachRouter = GoRouter(
                 create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
                 child: const ExercisesScreen(),
               )),
-              // ignore: prefer_const_literals_to_create_immutables
               routes: [
                 GoRoute(
-                  name: WorkoutBuilderScreen.name,
-                  path: WorkoutBuilderScreen.name,
-                  // To Hide the bottom Navbar
+                  name: ExerciseBuilderScreen.name,
+                  path: ExerciseBuilderScreen.name,
                   parentNavigatorKey: _rootNavigatorKey,
                   pageBuilder: (context, state) => CustomTransitionPage(
                     key: state.pageKey,
-                    child: const WorkoutBuilderScreen(),
+                    child: const ExerciseBuilderScreen(),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       return CupertinoPageTransition(
                         primaryRouteAnimation: animation,

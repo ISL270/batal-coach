@@ -117,21 +117,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                           });
                         },
                       ),
-                      const Seperator(),
-                      _Filter(
-                        title: context.l10n.categories.capitalized,
-                        values: ExCategory.values,
-                        initialValues: filters.category,
-                        onSelected: (selected, v) {
-                          setState(() {
-                            if (selected) {
-                              filters.category.add(v);
-                            } else {
-                              filters.category.remove(v);
-                            }
-                          });
-                        },
-                      ),
+                  //TODO: make it a slider.
                       const Seperator(),
                       _Filter(
                         title: context.l10n.level.capitalized,

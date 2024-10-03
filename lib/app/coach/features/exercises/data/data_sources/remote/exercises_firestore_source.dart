@@ -8,6 +8,7 @@ import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/field_type.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/force.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/mechanic.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';

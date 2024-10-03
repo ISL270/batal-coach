@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class WorkoutBuilderScreen extends StatelessWidget {
-  const WorkoutBuilderScreen({super.key});
+class ExerciseBuilderScreen extends StatelessWidget {
+  const ExerciseBuilderScreen({super.key});
 
-  static const name = 'workout_builder';
+  static const name = 'exercise_builder';
 
   @override
   Widget build(BuildContext context) {
