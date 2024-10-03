@@ -64,5 +64,6 @@
   "level": "level",
   "apply": "apply",
   "btl": "BTL",
-  "personal": "personal"
+  "personal": "personal",
+  "applyFilter": "apply filter"
 }

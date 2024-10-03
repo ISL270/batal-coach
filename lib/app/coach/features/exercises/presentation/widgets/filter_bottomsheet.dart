@@ -35,7 +35,9 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Align(child: Text('Filter by', style: context.textThemeX.large.bold)),
+                      Align(
+                          child: Text(context.l10n.filterBy.capitalized,
+                              style: context.textThemeX.large.bold)),
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: TextButton(
@@ -45,7 +47,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                                   context.read<ExercisesBloc>().add(ExFiltered(ExFilters()));
                                   context.pop();
                                 },
-                          child: const Text('Reset'),
+                          child: Text(context.l10n.reset.capitalized),
                         ),
                       )
                     ],
@@ -58,7 +60,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                   delegate: SliverChildListDelegate.fixed(
                     [
                       Text(
-                        'Excercises From',
+                        context.l10n.excercisesFrom.capitalized,
                         style: context.textThemeX.medium.bold,
                       ),
                       const Gap(5),
@@ -87,7 +89,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       ),
                       const Seperator(),
                       _Filter(
-                        title: 'Muscles',
+                        title: context.l10n.muscles.capitalized,
                         values: Muscle.values,
                         initialValues: filters.muscles,
                         onSelected: (selected, v) {
@@ -102,7 +104,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       ),
                       const Seperator(),
                       _Filter(
-                        title: 'Equipment',
+                        title: context.l10n.equipment.capitalized,
                         values: Equipment.values,
                         initialValues: filters.equipment,
                         onSelected: (selected, v) {
@@ -117,7 +119,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       ),
                       const Seperator(),
                       _Filter(
-                        title: 'Categories',
+                        title: context.l10n.categories.capitalized,
                         values: ExCategory.values,
                         initialValues: filters.category,
                         onSelected: (selected, v) {
@@ -132,7 +134,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       ),
                       const Seperator(),
                       _Filter(
-                        title: 'Level',
+                        title: context.l10n.level.capitalized,
                         values: ExLevel.values,
                         initialValues: filters.level,
                         onSelected: (selected, v) {
@@ -176,7 +178,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                     context.read<ExercisesBloc>().add(ExFiltered(filters));
                     context.pop();
                   },
-                  label: 'Apply filter',
+                  label: context.l10n.applyFilter.capitalized,
                   density: ButtonDensity.comfortable,
                 ),
               ),
