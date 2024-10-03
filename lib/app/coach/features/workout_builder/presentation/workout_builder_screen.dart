@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:btl/app/coach/features/exercise/domain/models/exercise_category.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
 import 'package:btl/app/core/extensions/context_x.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
