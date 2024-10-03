@@ -5,6 +5,8 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
+import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
+import 'package:btl/app/coach/features/workouts/presentation/workouts_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
@@ -60,10 +62,26 @@ final coachRouter = GoRouter(
               name: ExercisesScreen.name,
               path: '/${ExercisesScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
-                  child: BlocProvider(
-                create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
-                child: const ExercisesScreen(),
-              )),
+                child: BlocProvider(
+                  create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
+                  child: const ExercisesScreen(),
+                ),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _workoutsNavigatorKey,
+          routes: [
+            GoRoute(
+              name: WorkoutsScreen.name,
+              path: '/${WorkoutsScreen.name}',
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: BlocProvider(
+                  create: (context) => WorkoutsBloc(),
+                  child: const WorkoutsScreen(),
+                ),
+              ),
               // ignore: prefer_const_literals_to_create_immutables
               routes: [
                 //TODO(Salah): Add create exercise screen here.
@@ -84,10 +102,11 @@ final coachRouter = GoRouter(
               name: ClientsScreen.name,
               path: '/${ClientsScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
-                  child: BlocProvider(
-                create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
-                child: const ClientsScreen(),
-              )),
+                child: BlocProvider(
+                  create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
+                  child: const ClientsScreen(),
+                ),
+              ),
             ),
           ],
         ),
@@ -137,5 +156,6 @@ final coachRouter = GoRouter(
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _exerecisesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ExercisesScreen.name);
+final _workoutsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: WorkoutsScreen.name);
 final _clientsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ClientsScreen.name);
 final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: SettingsScreen.name);
