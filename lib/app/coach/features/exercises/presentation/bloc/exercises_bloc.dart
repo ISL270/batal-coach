@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/coach/features/exercise/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercise/domain/repositories/exercises_repository.dart';
-import 'package:btl/app/coach/features/exercise/presentation/models/exercise_filters.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
+import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
+import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/bloc_event_transformers.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
