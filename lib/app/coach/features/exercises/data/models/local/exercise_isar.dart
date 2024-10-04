@@ -3,6 +3,7 @@ import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/field_type.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/force.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/mechanic.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
@@ -22,9 +23,6 @@ final class ExerciseIsar implements ExerciseCM {
   @override
   @Index(type: IndexType.value, caseSensitive: false)
   String name;
-
-  // @Index(type: IndexType.value, caseSensitive: false)
-  // List<String> get nameWords => Isar.splitWords(name);
 
   @override
   @Enumerated(EnumType.name)
@@ -60,6 +58,9 @@ final class ExerciseIsar implements ExerciseCM {
   @Enumerated(EnumType.name)
   List<Muscle> secondaryMuscles;
 
+  @Enumerated(EnumType.name)
+  List<FieldType> fields;
+
   ExerciseIsar({
     required this.id,
     required this.name,
@@ -72,6 +73,7 @@ final class ExerciseIsar implements ExerciseCM {
     required this.instructions,
     required this.images,
     required this.secondaryMuscles,
+    required this.fields,
   });
 
   @override
@@ -87,6 +89,7 @@ final class ExerciseIsar implements ExerciseCM {
         images: images,
         mainMuscle: mainMuscle,
         secondaryMuscles: secondaryMuscles,
+        fields: fields,
       );
 
   factory ExerciseIsar.fromDomain(Exercise exc) => ExerciseIsar(
@@ -101,5 +104,32 @@ final class ExerciseIsar implements ExerciseCM {
         mechanic: exc.mechanic,
         name: exc.name,
         secondaryMuscles: exc.secondaryMuscles,
+        fields: exc.fields,
       );
 }
+
+// enum _Field {
+//   time,
+//   distance,
+//   weight,
+//   reps;
+
+//   Field toDomain() {
+//     return switch (this) {
+//       _Field.time => Time.zero(),
+//       _Field.distance => Distance.zero(),
+//       _Field.weight => Weight.zero(),
+//       _Field.reps => Reps.zero(),
+//     };
+//   }
+
+//   static _Field fromDomain(Field field) {
+//     return switch (field) {
+//       Time() => _Field.time,
+//       Distance() => _Field.distance,
+//       Weight() => _Field.weight,
+//       Reps() => _Field.reps,
+//     };
+//   }
+// }
+

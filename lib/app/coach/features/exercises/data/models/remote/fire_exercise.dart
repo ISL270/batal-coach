@@ -19,8 +19,9 @@ class _FireExercise implements ExerciseRM {
   final _Category? category;
   @override
   final List<String>? images;
+  final List<_Field>? fields;
 
-  const _FireExercise(
+  _FireExercise(
     this.id,
     this.name,
     this.force,
@@ -32,6 +33,7 @@ class _FireExercise implements ExerciseRM {
     this.instructions,
     this.category,
     this.images,
+    this.fields,
   );
 
   factory _FireExercise.fromJson(Map<String, dynamic> json) => _$FireExerciseFromJson(json);
@@ -47,10 +49,26 @@ class _FireExercise implements ExerciseRM {
         mechanic: mechanic?.toDomain(),
         equipment: equipment?.toDomain(),
         mainMuscle: primaryMuscles?.first.toDomain() ?? _Muscle.abdominals.toDomain(),
-        secondaryMuscles: (secondaryMuscles ?? []).map((e) => e.toDomain()).toList(),
+        secondaryMuscles: secondaryMuscles?.map((e) => e.toDomain()).toList() ?? [],
         instructions: instructions ?? [],
         category: category?.toDomain(),
         images: images ?? [],
+        fields: (fields ?? _getFields(category)).map((f) => f.toDomain()).toList(),
+      );
+
+  factory _FireExercise.fromDomain(Exercise exc) => _FireExercise(
+        exc.id,
+        exc.name,
+        exc.force != null ? _Force.fromDomain(exc.force!) : null,
+        exc.level != null ? _Level.fromDomain(exc.level!) : null,
+        exc.mechanic != null ? _Mechanic.fromDomain(exc.mechanic!) : null,
+        exc.equipment != null ? _Equipment.fromDomain(exc.equipment!) : null,
+        [_Muscle.fromDomain(exc.mainMuscle)],
+        exc.secondaryMuscles.map(_Muscle.fromDomain).toList(),
+        exc.instructions,
+        exc.category != null ? _Category.fromDomain(exc.category!) : null,
+        exc.images,
+        exc.fields.map(_Field.fromDomain).toList(),
       );
 }
 
@@ -73,36 +91,9 @@ enum _Equipment {
   bodyOnly,
   other;
 
-  Equipment toDomain() => switch (this) {
-        _Equipment.barbell => Equipment.barbell,
-        _Equipment.dumbbell => Equipment.dumbbell,
-        _Equipment.cable => Equipment.cable,
-        _Equipment.machine => Equipment.machine,
-        _Equipment.kettlebells => Equipment.kettlebells,
-        _Equipment.bands => Equipment.bands,
-        _Equipment.medicineBall => Equipment.medicineBall,
-        _Equipment.exerciseBall => Equipment.exerciseBall,
-        _Equipment.foamRoll => Equipment.foamRoll,
-        _Equipment.ezCurlBar => Equipment.ezCurlBar,
-        _Equipment.bodyOnly => Equipment.bodyOnly,
-        _Equipment.other => Equipment.other,
-      };
-
-  // ignore: unused_element
-  static _Equipment fromDomain(Equipment e) => switch (e) {
-        Equipment.barbell => _Equipment.barbell,
-        Equipment.dumbbell => _Equipment.dumbbell,
-        Equipment.cable => _Equipment.cable,
-        Equipment.machine => _Equipment.machine,
-        Equipment.kettlebells => _Equipment.kettlebells,
-        Equipment.bands => _Equipment.bands,
-        Equipment.medicineBall => _Equipment.medicineBall,
-        Equipment.exerciseBall => _Equipment.exerciseBall,
-        Equipment.foamRoll => _Equipment.foamRoll,
-        Equipment.ezCurlBar => _Equipment.ezCurlBar,
-        Equipment.bodyOnly => _Equipment.bodyOnly,
-        Equipment.other => _Equipment.other,
-      };
+  Equipment toDomain() => Equipment.values.firstWhere((e) => e.name == name);
+  static _Equipment fromDomain(Equipment domain) =>
+      _Equipment.values.firstWhere((e) => e.name == domain.name);
 }
 
 enum _Category {
@@ -116,15 +107,9 @@ enum _Category {
   strongman,
   cardio;
 
-  ExCategory toDomain() => switch (this) {
-        _Category.strength => ExCategory.strength,
-        _Category.stretching => ExCategory.stretching,
-        _Category.plyometrics => ExCategory.plyometrics,
-        _Category.powerLifting => ExCategory.powerLifting,
-        _Category.olympicWeightlifting => ExCategory.olympicWeightlifting,
-        _Category.strongman => ExCategory.strongman,
-        _Category.cardio => ExCategory.cardio,
-      };
+  ExCategory toDomain() => ExCategory.values.firstWhere((e) => e.name == name);
+  static _Category fromDomain(ExCategory domain) =>
+      _Category.values.firstWhere((e) => e.name == domain.name);
 }
 
 enum _Level {
@@ -132,11 +117,9 @@ enum _Level {
   intermediate,
   expert;
 
-  ExLevel toDomain() => switch (this) {
-        _Level.beginner => ExLevel.beginner,
-        _Level.intermediate => ExLevel.intermediate,
-        _Level.expert => ExLevel.expert,
-      };
+  ExLevel toDomain() => ExLevel.values.firstWhere((e) => e.name == name);
+  static _Level fromDomain(ExLevel domain) =>
+      _Level.values.firstWhere((e) => e.name == domain.name);
 }
 
 enum _Muscle {
@@ -160,25 +143,9 @@ enum _Muscle {
   abductors,
   neck;
 
-  Muscle toDomain() => switch (this) {
-        _Muscle.quadriceps => Muscle.quadriceps,
-        _Muscle.shoulders => Muscle.shoulders,
-        _Muscle.abdominals => Muscle.abdominals,
-        _Muscle.chest => Muscle.chest,
-        _Muscle.hamstrings => Muscle.hamstrings,
-        _Muscle.triceps => Muscle.triceps,
-        _Muscle.biceps => Muscle.biceps,
-        _Muscle.lats => Muscle.lats,
-        _Muscle.middleBack => Muscle.middleBack,
-        _Muscle.calves => Muscle.calves,
-        _Muscle.lowerBack => Muscle.lowerBack,
-        _Muscle.forearms => Muscle.forearms,
-        _Muscle.glutes => Muscle.glutes,
-        _Muscle.traps => Muscle.traps,
-        _Muscle.adductors => Muscle.adductors,
-        _Muscle.abductors => Muscle.abductors,
-        _Muscle.neck => Muscle.neck,
-      };
+  Muscle toDomain() => Muscle.values.firstWhere((e) => e.name == name);
+  static _Muscle fromDomain(Muscle domain) =>
+      _Muscle.values.firstWhere((e) => e.name == domain.name);
 }
 
 enum _Force {
@@ -186,19 +153,39 @@ enum _Force {
   push,
   static;
 
-  Force toDomain() => switch (this) {
-        _Force.pull => Force.pull,
-        _Force.push => Force.push,
-        _Force.static => Force.static,
-      };
+  Force toDomain() => Force.values.firstWhere((e) => e.name == name);
+  static _Force fromDomain(Force domain) => _Force.values.firstWhere((e) => e.name == domain.name);
 }
 
 enum _Mechanic {
   compound,
   isolation;
 
-  Mechanic toDomain() => switch (this) {
-        _Mechanic.compound => Mechanic.compound,
-        _Mechanic.isolation => Mechanic.isolation,
-      };
+  Mechanic toDomain() => Mechanic.values.firstWhere((e) => e.name == name);
+  static _Mechanic fromDomain(Mechanic domain) =>
+      _Mechanic.values.firstWhere((e) => e.name == domain.name);
+}
+
+enum _Field {
+  time,
+  distance,
+  weight,
+  reps;
+
+  FieldType toDomain() => FieldType.values.firstWhere((e) => e.name == name);
+  static _Field fromDomain(FieldType domain) =>
+      _Field.values.firstWhere((e) => e.name == domain.name);
+}
+
+List<_Field> _getFields(_Category? category) {
+  return switch (category) {
+    _Category.strength => [_Field.weight, _Field.reps],
+    _Category.stretching => [_Field.reps],
+    _Category.plyometrics => [_Field.reps],
+    _Category.powerLifting => [_Field.weight, _Field.reps],
+    _Category.olympicWeightlifting => [_Field.weight, _Field.reps],
+    _Category.strongman => [_Field.weight, _Field.reps],
+    _Category.cardio => [_Field.distance, _Field.time],
+    null => [],
+  };
 }

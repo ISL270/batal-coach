@@ -1,6 +1,7 @@
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
+import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
@@ -20,7 +21,7 @@ import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/features/splash/bloc/splash_bloc.dart';
 import 'package:btl/app/features/splash/splash_screen.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -67,6 +68,25 @@ final coachRouter = GoRouter(
                   child: const ExercisesScreen(),
                 ),
               ),
+              routes: [
+                GoRoute(
+                  name: ExerciseBuilderScreen.name,
+                  path: ExerciseBuilderScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => CustomTransitionPage(
+                    key: state.pageKey,
+                    child: const ExerciseBuilderScreen(),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return CupertinoPageTransition(
+                        primaryRouteAnimation: animation,
+                        secondaryRouteAnimation: secondaryAnimation,
+                        linearTransition: false,
+                        child: child,
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -82,16 +102,6 @@ final coachRouter = GoRouter(
                   child: const WorkoutsScreen(),
                 ),
               ),
-              // ignore: prefer_const_literals_to_create_immutables
-              routes: [
-                //TODO(Salah): Add create exercise screen here.
-                // GoRoute(
-                //   parentNavigatorKey: _rootNavigatorKey,
-                //   name: CreateExerciseScreen.name,
-                //   path: CreateExerciseScreen.name,
-                //   builder: (context, state) => const WorkoutBuilderScreen(),
-                // ),
-              ],
             ),
           ],
         ),

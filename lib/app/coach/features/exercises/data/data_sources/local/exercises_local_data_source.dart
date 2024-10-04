@@ -19,4 +19,6 @@ abstract interface class ExercisesLocalDataSource {
   );
 
   Future<void> clearExercises();
+
+  // Future<int> get count;
 }

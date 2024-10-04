@@ -78,4 +78,7 @@ final class ExercisesIsarSource implements ExercisesLocalDataSource {
 
   @override
   Future<void> clearExercises() => localDB.clear<ExerciseIsar>();
+
+  // @override
+  // Future<int> get count => (localDB as IsarDB).isar.exerciseIsars.count();
 }
