@@ -19,7 +19,7 @@ class _FireExercise implements ExerciseRM {
   final _Category? category;
   @override
   final List<String>? images;
-  final List<_Field> fields;
+  final List<_Field>? fields;
 
   _FireExercise(
     this.id,
@@ -35,6 +35,7 @@ class _FireExercise implements ExerciseRM {
     this.images,
     this.fields,
   );
+
   factory _FireExercise.fromJson(Map<String, dynamic> json) => _$FireExerciseFromJson(json);
 
   Map<String, dynamic> toJson() => _$FireExerciseToJson(this);
@@ -52,7 +53,7 @@ class _FireExercise implements ExerciseRM {
         instructions: instructions ?? [],
         category: category?.toDomain(),
         images: images ?? [],
-        fields: fields.map((f) => f.toDomain()).toList(),
+        fields: (fields ?? _getFields(category)).map((f) => f.toDomain()).toList(),
       );
 
   factory _FireExercise.fromDomain(Exercise exc) => _FireExercise(
@@ -174,4 +175,17 @@ enum _Field {
   FieldType toDomain() => FieldType.values.firstWhere((e) => e.name == name);
   static _Field fromDomain(FieldType domain) =>
       _Field.values.firstWhere((e) => e.name == domain.name);
+}
+
+List<_Field> _getFields(_Category? category) {
+  return switch (category) {
+    _Category.strength => [_Field.weight, _Field.reps],
+    _Category.stretching => [_Field.reps],
+    _Category.plyometrics => [_Field.reps],
+    _Category.powerLifting => [_Field.weight, _Field.reps],
+    _Category.olympicWeightlifting => [_Field.weight, _Field.reps],
+    _Category.strongman => [_Field.weight, _Field.reps],
+    _Category.cardio => [_Field.distance, _Field.time],
+    null => [],
+  };
 }

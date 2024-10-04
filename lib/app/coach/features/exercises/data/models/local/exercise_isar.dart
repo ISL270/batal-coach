@@ -133,15 +133,3 @@ final class ExerciseIsar implements ExerciseCM {
 //   }
 // }
 
-// List<_Field> _getFields(ExCategory? category) {
-//   return switch (category) {
-//     ExCategory.strength => [_Field.weight, _Field.reps],
-//     ExCategory.stretching => [_Field.reps],
-//     ExCategory.plyometrics => [_Field.reps],
-//     ExCategory.powerLifting => [_Field.weight, _Field.reps],
-//     ExCategory.olympicWeightlifting => [_Field.weight, _Field.reps],
-//     ExCategory.strongman => [_Field.weight, _Field.reps],
-//     ExCategory.cardio => [_Field.distance, _Field.time],
-//     null => [],
-//   };
-// }
