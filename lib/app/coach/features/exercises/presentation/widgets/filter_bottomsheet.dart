@@ -36,8 +36,11 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                     alignment: Alignment.center,
                     children: [
                       Align(
-                          child: Text(context.l10n.filterBy.capitalized,
-                              style: context.textThemeX.large.bold)),
+                        child: Text(
+                          context.l10n.filterBy.capitalized,
+                          style: context.textThemeX.large.bold,
+                        ),
+                      ),
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: TextButton(
@@ -104,15 +107,30 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       ),
                       const Divider(),
                       _Filter(
-                        title: context.l10n.equipment.capitalized,
-                        values: Equipment.values,
-                        initialValues: filters.equipment,
+                        title: context.l10n.type.capitalized,
+                        values: ExType.values,
+                        initialValues: filters.types,
                         onSelected: (selected, v) {
                           setState(() {
                             if (selected) {
-                              filters.equipment.add(v);
+                              filters.types.add(v);
                             } else {
-                              filters.equipment.remove(v);
+                              filters.types.remove(v);
+                            }
+                          });
+                        },
+                      ),
+                      const Divider(),
+                      _Filter(
+                        title: context.l10n.equipment.capitalized,
+                        values: Equipment.values,
+                        initialValues: filters.equipments,
+                        onSelected: (selected, v) {
+                          setState(() {
+                            if (selected) {
+                              filters.equipments.add(v);
+                            } else {
+                              filters.equipments.remove(v);
                             }
                           });
                         },
@@ -122,13 +140,13 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                       _Filter(
                         title: context.l10n.level.capitalized,
                         values: ExLevel.values,
-                        initialValues: filters.level,
+                        initialValues: filters.levels,
                         onSelected: (selected, v) {
                           setState(() {
                             if (selected) {
-                              filters.level.add(v);
+                              filters.levels.add(v);
                             } else {
-                              filters.level.remove(v);
+                              filters.levels.remove(v);
                             }
                           });
                         },

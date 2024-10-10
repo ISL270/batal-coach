@@ -66,5 +66,6 @@
   "btl": "BTL",
   "personal": "شخصي",
   "applyFilter": "تطبيق التصفية",
-  "done": "تم"
+  "done": "تم",
+  "type": "النوع"
 }

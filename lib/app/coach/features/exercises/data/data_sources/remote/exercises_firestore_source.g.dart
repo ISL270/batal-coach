@@ -24,6 +24,7 @@ _FireExercise _$FireExerciseFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as String)
           .toList(),
       $enumDecodeNullable(_$_CategoryEnumMap, json['category']),
+      $enumDecodeNullable(_$_TypeEnumMap, json['type']),
       (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       (json['fields'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$_FieldEnumMap, e))
@@ -44,6 +45,7 @@ Map<String, dynamic> _$FireExerciseToJson(_FireExercise instance) =>
           instance.secondaryMuscles?.map((e) => _$_MuscleEnumMap[e]!).toList(),
       'instructions': instance.instructions,
       'category': _$_CategoryEnumMap[instance.category],
+      'type': _$_TypeEnumMap[instance.type],
       'images': instance.images,
       'fields': instance.fields?.map((e) => _$_FieldEnumMap[e]!).toList(),
     };
@@ -108,6 +110,13 @@ const _$_CategoryEnumMap = {
   _Category.olympicWeightlifting: 'olympic weightlifting',
   _Category.strongman: 'strongman',
   _Category.cardio: 'cardio',
+};
+
+const _$_TypeEnumMap = {
+  _Type.strength: 'strength',
+  _Type.bodyWeight: 'bodyWeight',
+  _Type.timed: 'timed',
+  _Type.distance: 'distance',
 };
 
 const _$_FieldEnumMap = {

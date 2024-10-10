@@ -4,14 +4,7 @@ import 'dart:async';
 
 import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exercises_remote_data_source.dart';
 import 'package:btl/app/coach/features/exercises/data/models/remote/exercise_rm.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/field_type.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/force.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/mechanic.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
 import 'package:btl/app/core/models/generic_exception.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

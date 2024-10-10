@@ -1,39 +1,35 @@
-import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_ownership.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:equatable/equatable.dart';
 
 final class ExFilters with EquatableMixin {
   final Set<ExOwnership> owership = {ExOwnership.btl, ExOwnership.personal};
   final Set<Muscle> muscles = {};
-  final Set<Equipment> equipment = {};
-  final Set<ExCategory> category = {};
-  final Set<ExLevel> level = {};
+  final Set<Equipment> equipments = {};
+  final Set<ExType> types = {};
+  final Set<ExLevel> levels = {};
 
   bool get isEmpty =>
       owership.length == 2 &&
       muscles.isEmpty &&
-      equipment.isEmpty &&
-      category.isEmpty &&
-      level.isEmpty;
+      equipments.isEmpty &&
+      types.isEmpty &&
+      levels.isEmpty;
 
   @override
   List<Object?> get props => [
         owership,
         muscles,
-        equipment,
-        category,
-        level,
+        equipments,
+        types,
+        levels,
       ];
 
   ExFilters clone() {
     return ExFilters()
       ..owership.addAll(owership)
       ..muscles.addAll(muscles)
-      ..equipment.addAll(equipment)
-      ..category.addAll(category)
-      ..level.addAll(level);
+      ..equipments.addAll(equipments)
+      ..types.addAll(types)
+      ..levels.addAll(levels);
   }
 }

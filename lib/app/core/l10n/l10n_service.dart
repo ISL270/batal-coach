@@ -57,6 +57,9 @@ enum _Transaltions {
   foamRoll(ar: 'أسطوانة الفوم', en: 'Foam Roll'),
   ezCurlBar(ar: 'بار الزد كيرل', en: 'EZ Curl Bar'),
   bodyOnly(ar: 'تمارين بوزن الجسم فقط', en: 'Body Only'),
+  bodyWeight(ar: 'وزن الجسم', en: 'Body Weight'),
+  timed(ar: 'مؤقت', en: 'Timed'),
+  distance(ar: 'مسافة', en: 'Distance'),
   other(ar: 'أخرى', en: 'Other');
 
   final String ar;

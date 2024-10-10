@@ -1,8 +1,5 @@
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_ownership.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
 import 'package:btl/app/coach/features/exercises/presentation/widgets/exercise_tile.dart';
@@ -85,7 +82,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             return TextButton.icon(
               label: Text(context.l10n.create.capitalized),
               icon: const Icon(size: 23, Icons.add_circle),
-                onPressed: () => context.goNamed(ExerciseBuilderScreen.name),
+              onPressed: () => context.goNamed(ExerciseBuilderScreen.name),
             );
           },
         ),

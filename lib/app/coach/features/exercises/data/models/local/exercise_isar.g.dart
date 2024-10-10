@@ -17,73 +17,73 @@ const ExerciseIsarSchema = CollectionSchema(
   name: r'ExerciseIsar',
   id: -8781596793542487269,
   properties: {
-    r'category': PropertySchema(
-      id: 0,
-      name: r'category',
-      type: IsarType.string,
-      enumMap: _ExerciseIsarcategoryEnumValueMap,
-    ),
     r'equipment': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'equipment',
       type: IsarType.string,
       enumMap: _ExerciseIsarequipmentEnumValueMap,
     ),
     r'fields': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'fields',
       type: IsarType.stringList,
       enumMap: _ExerciseIsarfieldsEnumValueMap,
     ),
     r'force': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'force',
       type: IsarType.string,
       enumMap: _ExerciseIsarforceEnumValueMap,
     ),
     r'id': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'id',
       type: IsarType.string,
     ),
     r'images': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'images',
       type: IsarType.stringList,
     ),
     r'instructions': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'instructions',
       type: IsarType.stringList,
     ),
     r'level': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'level',
       type: IsarType.string,
       enumMap: _ExerciseIsarlevelEnumValueMap,
     ),
     r'mainMuscle': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'mainMuscle',
       type: IsarType.string,
       enumMap: _ExerciseIsarmainMuscleEnumValueMap,
     ),
     r'mechanic': PropertySchema(
-      id: 9,
+      id: 8,
       name: r'mechanic',
       type: IsarType.string,
       enumMap: _ExerciseIsarmechanicEnumValueMap,
     ),
     r'name': PropertySchema(
-      id: 10,
+      id: 9,
       name: r'name',
       type: IsarType.string,
     ),
     r'secondaryMuscles': PropertySchema(
-      id: 11,
+      id: 10,
       name: r'secondaryMuscles',
       type: IsarType.stringList,
       enumMap: _ExerciseIsarsecondaryMusclesEnumValueMap,
+    ),
+    r'type': PropertySchema(
+      id: 11,
+      name: r'type',
+      type: IsarType.string,
+      enumMap: _ExerciseIsartypeEnumValueMap,
     )
   },
   estimateSize: _exerciseIsarEstimateSize,
@@ -120,12 +120,6 @@ int _exerciseIsarEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.category;
-    if (value != null) {
-      bytesCount += 3 + value.name.length * 3;
-    }
-  }
   {
     final value = object.equipment;
     if (value != null) {
@@ -181,6 +175,12 @@ int _exerciseIsarEstimateSize(
       bytesCount += value.name.length * 3;
     }
   }
+  {
+    final value = object.type;
+    if (value != null) {
+      bytesCount += 3 + value.name.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -190,19 +190,19 @@ void _exerciseIsarSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.category?.name);
-  writer.writeString(offsets[1], object.equipment?.name);
-  writer.writeStringList(offsets[2], object.fields.map((e) => e.name).toList());
-  writer.writeString(offsets[3], object.force?.name);
-  writer.writeString(offsets[4], object.id);
-  writer.writeStringList(offsets[5], object.images);
-  writer.writeStringList(offsets[6], object.instructions);
-  writer.writeString(offsets[7], object.level?.name);
-  writer.writeString(offsets[8], object.mainMuscle.name);
-  writer.writeString(offsets[9], object.mechanic?.name);
-  writer.writeString(offsets[10], object.name);
+  writer.writeString(offsets[0], object.equipment?.name);
+  writer.writeStringList(offsets[1], object.fields.map((e) => e.name).toList());
+  writer.writeString(offsets[2], object.force?.name);
+  writer.writeString(offsets[3], object.id);
+  writer.writeStringList(offsets[4], object.images);
+  writer.writeStringList(offsets[5], object.instructions);
+  writer.writeString(offsets[6], object.level?.name);
+  writer.writeString(offsets[7], object.mainMuscle.name);
+  writer.writeString(offsets[8], object.mechanic?.name);
+  writer.writeString(offsets[9], object.name);
   writer.writeStringList(
-      offsets[11], object.secondaryMuscles.map((e) => e.name).toList());
+      offsets[10], object.secondaryMuscles.map((e) => e.name).toList());
+  writer.writeString(offsets[11], object.type?.name);
 }
 
 ExerciseIsar _exerciseIsarDeserialize(
@@ -212,33 +212,32 @@ ExerciseIsar _exerciseIsarDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = ExerciseIsar(
-    category:
-        _ExerciseIsarcategoryValueEnumMap[reader.readStringOrNull(offsets[0])],
     equipment:
-        _ExerciseIsarequipmentValueEnumMap[reader.readStringOrNull(offsets[1])],
+        _ExerciseIsarequipmentValueEnumMap[reader.readStringOrNull(offsets[0])],
     fields: reader
-            .readStringList(offsets[2])
+            .readStringList(offsets[1])
             ?.map((e) => _ExerciseIsarfieldsValueEnumMap[e] ?? FieldType.time)
             .toList() ??
         [],
-    force: _ExerciseIsarforceValueEnumMap[reader.readStringOrNull(offsets[3])],
-    id: reader.readString(offsets[4]),
-    images: reader.readStringList(offsets[5]) ?? [],
-    instructions: reader.readStringList(offsets[6]) ?? [],
-    level: _ExerciseIsarlevelValueEnumMap[reader.readStringOrNull(offsets[7])],
+    force: _ExerciseIsarforceValueEnumMap[reader.readStringOrNull(offsets[2])],
+    id: reader.readString(offsets[3]),
+    images: reader.readStringList(offsets[4]) ?? [],
+    instructions: reader.readStringList(offsets[5]) ?? [],
+    level: _ExerciseIsarlevelValueEnumMap[reader.readStringOrNull(offsets[6])],
     mainMuscle: _ExerciseIsarmainMuscleValueEnumMap[
-            reader.readStringOrNull(offsets[8])] ??
+            reader.readStringOrNull(offsets[7])] ??
         Muscle.quadriceps,
     mechanic:
-        _ExerciseIsarmechanicValueEnumMap[reader.readStringOrNull(offsets[9])],
-    name: reader.readString(offsets[10]),
+        _ExerciseIsarmechanicValueEnumMap[reader.readStringOrNull(offsets[8])],
+    name: reader.readString(offsets[9]),
     secondaryMuscles: reader
-            .readStringList(offsets[11])
+            .readStringList(offsets[10])
             ?.map((e) =>
                 _ExerciseIsarsecondaryMusclesValueEnumMap[e] ??
                 Muscle.quadriceps)
             .toList() ??
         [],
+    type: _ExerciseIsartypeValueEnumMap[reader.readStringOrNull(offsets[11])],
   );
   return object;
 }
@@ -251,39 +250,36 @@ P _exerciseIsarDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (_ExerciseIsarcategoryValueEnumMap[
-          reader.readStringOrNull(offset)]) as P;
-    case 1:
       return (_ExerciseIsarequipmentValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 2:
+    case 1:
       return (reader
               .readStringList(offset)
               ?.map((e) => _ExerciseIsarfieldsValueEnumMap[e] ?? FieldType.time)
               .toList() ??
           []) as P;
-    case 3:
+    case 2:
       return (_ExerciseIsarforceValueEnumMap[reader.readStringOrNull(offset)])
           as P;
-    case 4:
+    case 3:
       return (reader.readString(offset)) as P;
+    case 4:
+      return (reader.readStringList(offset) ?? []) as P;
     case 5:
       return (reader.readStringList(offset) ?? []) as P;
     case 6:
-      return (reader.readStringList(offset) ?? []) as P;
-    case 7:
       return (_ExerciseIsarlevelValueEnumMap[reader.readStringOrNull(offset)])
           as P;
-    case 8:
+    case 7:
       return (_ExerciseIsarmainMuscleValueEnumMap[
               reader.readStringOrNull(offset)] ??
           Muscle.quadriceps) as P;
-    case 9:
+    case 8:
       return (_ExerciseIsarmechanicValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 10:
+    case 9:
       return (reader.readString(offset)) as P;
-    case 11:
+    case 10:
       return (reader
               .readStringList(offset)
               ?.map((e) =>
@@ -291,29 +287,14 @@ P _exerciseIsarDeserializeProp<P>(
                   Muscle.quadriceps)
               .toList() ??
           []) as P;
+    case 11:
+      return (_ExerciseIsartypeValueEnumMap[reader.readStringOrNull(offset)])
+          as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-const _ExerciseIsarcategoryEnumValueMap = {
-  r'strength': r'strength',
-  r'stretching': r'stretching',
-  r'plyometrics': r'plyometrics',
-  r'powerLifting': r'powerLifting',
-  r'olympicWeightlifting': r'olympicWeightlifting',
-  r'strongman': r'strongman',
-  r'cardio': r'cardio',
-};
-const _ExerciseIsarcategoryValueEnumMap = {
-  r'strength': ExCategory.strength,
-  r'stretching': ExCategory.stretching,
-  r'plyometrics': ExCategory.plyometrics,
-  r'powerLifting': ExCategory.powerLifting,
-  r'olympicWeightlifting': ExCategory.olympicWeightlifting,
-  r'strongman': ExCategory.strongman,
-  r'cardio': ExCategory.cardio,
-};
 const _ExerciseIsarequipmentEnumValueMap = {
   r'barbell': r'barbell',
   r'dumbbell': r'dumbbell',
@@ -457,6 +438,18 @@ const _ExerciseIsarsecondaryMusclesValueEnumMap = {
   r'adductors': Muscle.adductors,
   r'abductors': Muscle.abductors,
   r'neck': Muscle.neck,
+};
+const _ExerciseIsartypeEnumValueMap = {
+  r'strength': r'strength',
+  r'bodyWeight': r'bodyWeight',
+  r'timed': r'timed',
+  r'distance': r'distance',
+};
+const _ExerciseIsartypeValueEnumMap = {
+  r'strength': ExType.strength,
+  r'bodyWeight': ExType.bodyWeight,
+  r'timed': ExType.timed,
+  r'distance': ExType.distance,
 };
 
 Id _exerciseIsarGetId(ExerciseIsar object) {
@@ -748,160 +741,6 @@ extension ExerciseIsarQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'category',
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'category',
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryEqualTo(
-    ExCategory? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'category',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryGreaterThan(
-    ExCategory? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'category',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryLessThan(
-    ExCategory? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'category',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryBetween(
-    ExCategory? lower,
-    ExCategory? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'category',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'category',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'category',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'category',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'category',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'category',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
-      categoryIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'category',
-        value: '',
       ));
     });
   }
@@ -2820,6 +2659,157 @@ extension ExerciseIsarQueryFilter
       );
     });
   }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'type',
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
+      typeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'type',
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeEqualTo(
+    ExType? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'type',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
+      typeGreaterThan(
+    ExType? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'type',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeLessThan(
+    ExType? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'type',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeBetween(
+    ExType? lower,
+    ExType? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'type',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
+      typeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'type',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'type',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'type',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition> typeMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'type',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
+      typeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'type',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterFilterCondition>
+      typeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'type',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension ExerciseIsarQueryObject
@@ -2830,18 +2820,6 @@ extension ExerciseIsarQueryLinks
 
 extension ExerciseIsarQuerySortBy
     on QueryBuilder<ExerciseIsar, ExerciseIsar, QSortBy> {
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> sortByCategory() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'category', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> sortByCategoryDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'category', Sort.desc);
-    });
-  }
-
   QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> sortByEquipment() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'equipment', Sort.asc);
@@ -2926,6 +2904,18 @@ extension ExerciseIsarQuerySortBy
       return query.addSortBy(r'name', Sort.desc);
     });
   }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> sortByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> sortByTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.desc);
+    });
+  }
 }
 
 extension ExerciseIsarQuerySortThenBy
@@ -2939,18 +2929,6 @@ extension ExerciseIsarQuerySortThenBy
   QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> thenByCacheIDDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'cacheID', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> thenByCategory() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'category', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> thenByCategoryDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'category', Sort.desc);
     });
   }
 
@@ -3038,17 +3016,22 @@ extension ExerciseIsarQuerySortThenBy
       return query.addSortBy(r'name', Sort.desc);
     });
   }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> thenByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QAfterSortBy> thenByTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.desc);
+    });
+  }
 }
 
 extension ExerciseIsarQueryWhereDistinct
     on QueryBuilder<ExerciseIsar, ExerciseIsar, QDistinct> {
-  QueryBuilder<ExerciseIsar, ExerciseIsar, QDistinct> distinctByCategory(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'category', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<ExerciseIsar, ExerciseIsar, QDistinct> distinctByEquipment(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -3122,6 +3105,13 @@ extension ExerciseIsarQueryWhereDistinct
       return query.addDistinctBy(r'secondaryMuscles');
     });
   }
+
+  QueryBuilder<ExerciseIsar, ExerciseIsar, QDistinct> distinctByType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'type', caseSensitive: caseSensitive);
+    });
+  }
 }
 
 extension ExerciseIsarQueryProperty
@@ -3129,12 +3119,6 @@ extension ExerciseIsarQueryProperty
   QueryBuilder<ExerciseIsar, int, QQueryOperations> cacheIDProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'cacheID');
-    });
-  }
-
-  QueryBuilder<ExerciseIsar, ExCategory?, QQueryOperations> categoryProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'category');
     });
   }
 
@@ -3204,6 +3188,12 @@ extension ExerciseIsarQueryProperty
       secondaryMusclesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'secondaryMuscles');
+    });
+  }
+
+  QueryBuilder<ExerciseIsar, ExType?, QQueryOperations> typeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'type');
     });
   }
 }

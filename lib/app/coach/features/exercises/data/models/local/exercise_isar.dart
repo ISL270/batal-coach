@@ -1,12 +1,5 @@
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_cm.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/field_type.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/force.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/mechanic.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:isar/isar.dart';
 
@@ -38,7 +31,7 @@ final class ExerciseIsar implements ExerciseCM {
 
   @override
   @Enumerated(EnumType.name)
-  ExCategory? category;
+  ExType? type;
 
   @override
   @Enumerated(EnumType.name)
@@ -67,7 +60,7 @@ final class ExerciseIsar implements ExerciseCM {
     required this.force,
     required this.level,
     required this.mechanic,
-    required this.category,
+    required this.type,
     required this.equipment,
     required this.mainMuscle,
     required this.instructions,
@@ -83,7 +76,7 @@ final class ExerciseIsar implements ExerciseCM {
         force: force,
         level: level,
         mechanic: mechanic,
-        category: category,
+        type: type,
         equipment: equipment,
         instructions: instructions,
         images: images,
@@ -94,7 +87,7 @@ final class ExerciseIsar implements ExerciseCM {
 
   factory ExerciseIsar.fromDomain(Exercise exc) => ExerciseIsar(
         id: exc.id,
-        category: exc.category,
+        type: exc.type,
         equipment: exc.equipment,
         force: exc.force,
         images: exc.images,
@@ -107,29 +100,3 @@ final class ExerciseIsar implements ExerciseCM {
         fields: exc.fields,
       );
 }
-
-// enum _Field {
-//   time,
-//   distance,
-//   weight,
-//   reps;
-
-//   Field toDomain() {
-//     return switch (this) {
-//       _Field.time => Time.zero(),
-//       _Field.distance => Distance.zero(),
-//       _Field.weight => Weight.zero(),
-//       _Field.reps => Reps.zero(),
-//     };
-//   }
-
-//   static _Field fromDomain(Field field) {
-//     return switch (field) {
-//       Time() => _Field.time,
-//       Distance() => _Field.distance,
-//       Weight() => _Field.weight,
-//       Reps() => _Field.reps,
-//     };
-//   }
-// }
-

@@ -1,10 +1,4 @@
-import 'package:btl/app/coach/features/exercises/domain/models/equipment.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_level.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/force.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/mechanic.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 
 abstract interface class ExerciseCM extends CacheModel<Exercise> {
@@ -13,7 +7,7 @@ abstract interface class ExerciseCM extends CacheModel<Exercise> {
   final Force? force;
   final ExLevel? level;
   final Mechanic? mechanic;
-  final ExCategory? category;
+  final ExType? type;
   final Equipment? equipment;
   final List<String> instructions;
   final List<String> images;
@@ -30,7 +24,7 @@ abstract interface class ExerciseCM extends CacheModel<Exercise> {
     this.force,
     this.level,
     this.mechanic,
-    this.category,
+    this.type,
     this.equipment,
   });
 }

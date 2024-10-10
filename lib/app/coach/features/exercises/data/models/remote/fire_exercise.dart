@@ -17,6 +17,7 @@ class _FireExercise implements ExerciseRM {
   @override
   final List<String>? instructions;
   final _Category? category;
+  final _Type? type;
   @override
   final List<String>? images;
   final List<_Field>? fields;
@@ -32,6 +33,7 @@ class _FireExercise implements ExerciseRM {
     this.secondaryMuscles,
     this.instructions,
     this.category,
+    this.type,
     this.images,
     this.fields,
   );
@@ -51,9 +53,9 @@ class _FireExercise implements ExerciseRM {
         mainMuscle: primaryMuscles?.first.toDomain() ?? _Muscle.abdominals.toDomain(),
         secondaryMuscles: secondaryMuscles?.map((e) => e.toDomain()).toList() ?? [],
         instructions: instructions ?? [],
-        category: category?.toDomain(),
+        type: category?.typeFromCat(),
         images: images ?? [],
-        fields: (fields ?? _getFields(category)).map((f) => f.toDomain()).toList(),
+        fields: _getFields().map((f) => f.toDomain()).toList(),
       );
 
   factory _FireExercise.fromDomain(Exercise exc) => _FireExercise(
@@ -66,10 +68,18 @@ class _FireExercise implements ExerciseRM {
         [_Muscle.fromDomain(exc.mainMuscle)],
         exc.secondaryMuscles.map(_Muscle.fromDomain).toList(),
         exc.instructions,
-        exc.category != null ? _Category.fromDomain(exc.category!) : null,
+        null,
+        exc.type != null ? _Type.fromDomain(exc.type!) : null,
         exc.images,
         exc.fields.map(_Field.fromDomain).toList(),
       );
+
+  List<_Field> _getFields() {
+    if (fields != null) return fields!;
+    if (category != null) return _getFieldsByCategory(category!);
+    if (type != null) return _getFieldsByType(type!);
+    return [];
+  }
 }
 
 enum _Equipment {
@@ -107,9 +117,24 @@ enum _Category {
   strongman,
   cardio;
 
-  ExCategory toDomain() => ExCategory.values.firstWhere((e) => e.name == name);
-  static _Category fromDomain(ExCategory domain) =>
-      _Category.values.firstWhere((e) => e.name == domain.name);
+  ExType typeFromCat() => switch (this) {
+        _Category.strength => ExType.strength,
+        _Category.stretching => ExType.bodyWeight,
+        _Category.plyometrics => ExType.bodyWeight,
+        _Category.powerLifting => ExType.strength,
+        _Category.olympicWeightlifting => ExType.strength,
+        _Category.strongman => ExType.strength,
+        _Category.cardio => ExType.bodyWeight,
+      };
+}
+
+enum _Type {
+  strength,
+  bodyWeight,
+  timed,
+  distance;
+
+  static _Type fromDomain(ExType domain) => _Type.values.firstWhere((e) => e.name == domain.name);
 }
 
 enum _Level {
@@ -177,7 +202,7 @@ enum _Field {
       _Field.values.firstWhere((e) => e.name == domain.name);
 }
 
-List<_Field> _getFields(_Category? category) {
+List<_Field> _getFieldsByCategory(_Category category) {
   return switch (category) {
     _Category.strength => [_Field.weight, _Field.reps],
     _Category.stretching => [_Field.reps],
@@ -186,6 +211,14 @@ List<_Field> _getFields(_Category? category) {
     _Category.olympicWeightlifting => [_Field.weight, _Field.reps],
     _Category.strongman => [_Field.weight, _Field.reps],
     _Category.cardio => [_Field.distance, _Field.time],
-    null => [],
+  };
+}
+
+List<_Field> _getFieldsByType(_Type type) {
+  return switch (type) {
+    _Type.strength => [_Field.weight, _Field.reps],
+    _Type.bodyWeight => [_Field.reps],
+    _Type.timed => [_Field.time],
+    _Type.distance => [_Field.distance],
   };
 }

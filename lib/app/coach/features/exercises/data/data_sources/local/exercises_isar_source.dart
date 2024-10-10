@@ -44,23 +44,23 @@ final class ExercisesIsarSource implements ExercisesLocalDataSource {
           ),
         )
         .optional(
-          filters?.equipment.isNotEmpty ?? false,
+          filters?.equipments.isNotEmpty ?? false,
           (ex) => ex.anyOf(
-            filters!.equipment,
+            filters!.equipments,
             (ex, equipment) => ex.equipmentEqualTo(equipment),
           ),
         )
         .optional(
-          filters?.category.isNotEmpty ?? false,
+          filters?.types.isNotEmpty ?? false,
           (ex) => ex.anyOf(
-            filters!.category,
-            (ex, category) => ex.categoryEqualTo(category),
+            filters!.types,
+            (ex, category) => ex.typeEqualTo(category),
           ),
         )
         .optional(
-          filters?.level.isNotEmpty ?? false,
+          filters?.levels.isNotEmpty ?? false,
           (ex) => ex.anyOf(
-            filters!.level,
+            filters!.levels,
             (ex, level) => ex.levelEqualTo(level),
           ),
         )

@@ -66,5 +66,6 @@
   "btl": "BTL",
   "personal": "personal",
   "applyFilter": "apply filter",
-  "done": "Done"
+  "done": "Done",
+  "type": "Type"
 }

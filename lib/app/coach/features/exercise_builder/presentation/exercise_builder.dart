@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:btl/app/coach/features/exercises/domain/models/exercise_category.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/core/extensions/context_x.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
@@ -44,7 +44,7 @@ class ExerciseBuilderScreen extends StatelessWidget {
           GestureDetector(
             onTap: () {
               SelectionBottomsheet(
-                items: ExCategory.values,
+                items: ExType.values,
                 builder: (val) {
                   return SelectionBottomsheetItem(
                     title: getIt.l10nSvc.trFromStr(val.name, context),

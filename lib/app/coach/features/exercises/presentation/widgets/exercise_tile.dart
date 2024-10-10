@@ -26,7 +26,7 @@ class ExerciseTile extends StatelessWidget {
         style: context.textThemeX.medium.bold,
       ),
       subtitle: Text(
-        '${context.tr(exercise.mainMuscle.name)} - ${context.tr(exercise.equipment?.name ?? '')} - ${context.tr(exercise.category?.name ?? '')} - ${context.tr(exercise.level?.name ?? '')}',
+        '${context.tr(exercise.mainMuscle.name)} - ${context.tr(exercise.equipment?.name ?? '')} - ${context.tr(exercise.type?.name ?? '')} - ${context.tr(exercise.level?.name ?? '')}',
         style: context.textThemeX.small,
       ),
     );

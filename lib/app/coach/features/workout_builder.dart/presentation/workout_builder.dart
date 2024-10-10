@@ -1,5 +1,4 @@
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/exercises/domain/models/field_type.dart';
 import 'package:btl/app/coach/features/workout_builder.dart/presentation/bloc/wk_builder_bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/duration_x.dart';
