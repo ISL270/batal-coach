@@ -31,3 +31,10 @@ class Reps extends Field {
   const Reps(this.value);
   factory Reps.zero() => const Reps(0);
 }
+
+extension FieldX on Field {
+  bool get isTime => this is Time;
+  bool get isDistance => this is Distance;
+  bool get isWeight => this is Weight;
+  bool get isReps => this is Reps;
+}

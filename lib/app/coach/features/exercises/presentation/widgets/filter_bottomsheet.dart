@@ -87,7 +87,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                           visualDensity: VisualDensity.compact,
                         ),
                       ),
-                      const Seperator(),
+                      const Divider(),
                       _Filter(
                         title: context.l10n.muscles.capitalized,
                         values: Muscle.values,
@@ -102,7 +102,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                           });
                         },
                       ),
-                      const Seperator(),
+                      const Divider(),
                       _Filter(
                         title: context.l10n.equipment.capitalized,
                         values: Equipment.values,
@@ -117,8 +117,8 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                           });
                         },
                       ),
-                  //TODO: make it a slider.
-                      const Seperator(),
+                      //TODO: make it a slider.
+                      const Divider(),
                       _Filter(
                         title: context.l10n.level.capitalized,
                         values: ExLevel.values,

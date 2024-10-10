@@ -1,3 +1,6 @@
+// ignore_for_file: unused_field
+
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
@@ -5,6 +8,7 @@ import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_cupertino_navigation_bar/super_cupertino_navigation_bar.dart';
 
 class WorkoutsScreen extends StatefulWidget {
@@ -48,17 +52,17 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
           builder: (context, isCollapsed, child) {
             if (isCollapsed) {
               return IconButton(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                icon: const Icon(Icons.add_circle),
-                color: context.colorsX.primary,
                 iconSize: 28,
-                onPressed: () {},
+                color: context.colorsX.primary,
+                icon: const Icon(Icons.add_circle),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
               );
             }
             return TextButton.icon(
-              onPressed: () {},
               label: Text(context.l10n.create.capitalized),
               icon: const Icon(size: 23, Icons.add_circle),
+              onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
             );
           },
         ),

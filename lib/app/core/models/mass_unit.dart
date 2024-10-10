@@ -1,15 +1,24 @@
 sealed class Mass {
-  const Mass();
+  final double value;
+  const Mass(this.value);
 }
 
 class Kilogram extends Mass {
-  final double value;
   static const symbol = 'kg';
-  const Kilogram(this.value);
+  const Kilogram(super.value);
+
+  @override
+  String toString() {
+    return '$value $symbol';
+  }
 }
 
 class Pound extends Mass {
-  final double value;
   static const symbol = 'lb';
-  const Pound(this.value);
+  const Pound(super.value);
+
+  @override
+  String toString() {
+    return '$value $symbol';
+  }
 }

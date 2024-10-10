@@ -1,6 +1,7 @@
 // ignore_for_file: strict_raw_type
 
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
+import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
@@ -26,7 +27,7 @@ final class IsarDB implements LocalDB {
     return IsarDB._(isar);
   }
 
- // Usefull to access it for custom queries.
+  // Usefull to access it for custom queries.
   Isar get isar => _isar;
 
   @override
@@ -44,8 +45,8 @@ final class IsarDB implements LocalDB {
   }
 
   @override
-  Future<T?> get<T extends CacheModel>(int id) async {
-    return _isar.txn(() => _isar.collection<T>().get(id));
+  Future<T?> get<T extends CacheModel>(String id) async {
+    return _isar.txn(() => _isar.collection<T>().get(id.fastHash));
   }
 
   T? getSync<T extends CacheModel>(int id) {
@@ -80,8 +81,9 @@ final class IsarDB implements LocalDB {
   }
 
   @override
-  Future<int> deleteAll<T extends CacheModel>(List<int> ids) async {
-    return _isar.writeTxn(() => _isar.collection<T>().deleteAll(ids));
+  Future<int> deleteAll<T extends CacheModel>(List<String> ids) async {
+    return _isar
+        .writeTxn(() => _isar.collection<T>().deleteAll(ids.map((e) => e.fastHash).toList()));
   }
 
   Future<int> deleteAllSync<T extends CacheModel>(List<int> ids) async {
@@ -95,5 +97,22 @@ final class IsarDB implements LocalDB {
 
   void clearSync<T extends CacheModel>() {
     return _isar.writeTxnSync(() => _isar.collection<T>().clearSync());
+  }
+
+  @override
+  Future<List<T>> getAllByIDs<T extends CacheModel>(List<String> ids) async {
+    return _isar.txn(() async {
+      final docs = await _isar.collection<T>().getAll(ids.map((e) => e.fastHash).toList());
+      // Remove nulls.
+      return docs.whereType<T>().toList();
+    });
+  }
+
+  List<T> getAllByIDsSync<T extends CacheModel>(List<String> ids) {
+    return _isar.txnSync(() {
+      final docs = _isar.collection<T>().getAllSync(ids.map((e) => e.fastHash).toList());
+      // Remove nulls.
+      return docs.whereType<T>().toList();
+    });
   }
 }

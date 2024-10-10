@@ -9,7 +9,7 @@ abstract interface class ExercisesLocalDataSource {
 
   Future<List<int>> updateExercises(List<Exercise> exercises);
 
-  Future<int> deleteExercises(List<int> ids);
+  Future<int> deleteExercises(List<String> ids);
 
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
@@ -20,5 +20,7 @@ abstract interface class ExercisesLocalDataSource {
 
   Future<void> clearExercises();
 
-  // Future<int> get count;
+  Future<List<ExerciseIsar>> getExercisesByIDs(List<String> ids);
+
+  Future<ExerciseIsar?> getExercise(String id);
 }

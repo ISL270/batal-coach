@@ -22,7 +22,7 @@ final class ExercisesIsarSource implements ExercisesLocalDataSource {
       localDB.putAll<ExerciseIsar>(exercises.map(ExerciseIsar.fromDomain).toList());
 
   @override
-  Future<int> deleteExercises(List<int> ids) => localDB.deleteAll<ExerciseIsar>(ids);
+  Future<int> deleteExercises(List<String> ids) => localDB.deleteAll<ExerciseIsar>(ids);
 
   @override
   Future<List<ExerciseIsar>> getExercises(
@@ -79,6 +79,13 @@ final class ExercisesIsarSource implements ExercisesLocalDataSource {
   @override
   Future<void> clearExercises() => localDB.clear<ExerciseIsar>();
 
-  // @override
-  // Future<int> get count => (localDB as IsarDB).isar.exerciseIsars.count();
+  @override
+  Future<List<ExerciseIsar>> getExercisesByIDs(List<String> ids) async {
+    return localDB.getAllByIDs<ExerciseIsar>(ids);
+  }
+
+  @override
+  Future<ExerciseIsar?> getExercise(String id) async {
+    return localDB.get<ExerciseIsar>(id);
+  }
 }

@@ -27,7 +27,7 @@ class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
   @override
   final Color onBackgroundTint;
   @override
-  final Color error = AppColors.primary;
+  final Color error = const Color(0xFFFF3232);
 
   ColorsX({
     required this.background,

@@ -78,6 +78,16 @@ class ExercisesRepository implements ReactiveRepository<VoidStatus> {
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 
+  Future<List<Exercise>> getExcsByIDs(List<String> ids) async {
+    final cmExercises = await _localSource.getExercisesByIDs(ids);
+    return cmExercises.map((e) => e.toDomain()).toList();
+  }
+
+  Future<Exercise?> getExercise(String id) async {
+    final cmExercise = await _localSource.getExercise(id);
+    return cmExercise?.toDomain();
+  }
+
   @override
   @disposeMethod
   void dispose() {

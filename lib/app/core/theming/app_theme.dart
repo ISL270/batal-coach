@@ -25,6 +25,7 @@ ThemeData _themeData(ColorsX colorScheme) {
     scaffoldBackgroundColor: colorScheme.background,
     iconTheme: IconThemeData(color: colorScheme.onBackground),
     progressIndicatorTheme: ProgressIndicatorThemeData(color: colorScheme.primary),
+    dividerTheme: const DividerThemeData(space: 35),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: colorScheme.primary,
       selectionHandleColor: colorScheme.primary,
@@ -83,7 +84,7 @@ ThemeData _themeData(ColorsX colorScheme) {
         selectedForegroundColor: colorScheme.onPrimary,
       ),
     ),
-    listTileTheme: ListTileThemeData(textColor: colorScheme.onBackground),
+    listTileTheme: ListTileThemeData(textColor: colorScheme.onBackground, horizontalTitleGap: 5),
     searchBarTheme: SearchBarThemeData(
       backgroundColor: WidgetStatePropertyAll(colorScheme.secondaryBackground),
       hintStyle: WidgetStatePropertyAll(textTheme.medium.copyWith(

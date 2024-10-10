@@ -5,6 +5,7 @@ import 'package:btl/app/coach/features/exercises/domain/models/field_type.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/force.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/mechanic.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/muscle.dart';
+import 'package:btl/app/core/models/field.dart';
 import 'package:equatable/equatable.dart';
 
 class Exercise extends Equatable {
@@ -51,4 +52,20 @@ class Exercise extends Equatable {
         instructions,
         secondaryMuscles,
       ];
+}
+
+extension ExerciseX on Exercise {
+  List<Field> initialFields() {
+    return fields
+        .map((f) => switch (f) {
+              FieldType.time => Time.zero(),
+              FieldType.distance => Distance.zero(),
+              FieldType.weight => Weight.zero(),
+              FieldType.reps => Reps.zero(),
+            })
+        .toList();
+  }
+
+  String get mockImage =>
+      'https://firebasestorage.googleapis.com/v0/b/btl-dev-69d91.appspot.com/o/default_exercises%2Fweighted_crunches.gif?alt=media&token=b17224d9-6542-4292-b600-fd9949a7f913';
 }

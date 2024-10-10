@@ -6,6 +6,8 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/bloc/wk_builder_bloc.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/coach/features/workouts/presentation/workouts_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
@@ -73,18 +75,7 @@ final coachRouter = GoRouter(
                   name: ExerciseBuilderScreen.name,
                   path: ExerciseBuilderScreen.name,
                   parentNavigatorKey: _rootNavigatorKey,
-                  pageBuilder: (context, state) => CustomTransitionPage(
-                    key: state.pageKey,
-                    child: const ExerciseBuilderScreen(),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return CupertinoPageTransition(
-                        primaryRouteAnimation: animation,
-                        secondaryRouteAnimation: secondaryAnimation,
-                        linearTransition: false,
-                        child: child,
-                      );
-                    },
-                  ),
+                  builder: (context, state) => const ExerciseBuilderScreen(),
                 ),
               ],
             ),
@@ -94,15 +85,25 @@ final coachRouter = GoRouter(
           navigatorKey: _workoutsNavigatorKey,
           routes: [
             GoRoute(
-              name: WorkoutsScreen.name,
-              path: '/${WorkoutsScreen.name}',
-              pageBuilder: (context, state) => NoTransitionPage(
-                child: BlocProvider(
-                  create: (context) => WorkoutsBloc(),
-                  child: const WorkoutsScreen(),
-                ),
-              ),
-            ),
+                name: WorkoutsScreen.name,
+                path: '/${WorkoutsScreen.name}',
+                pageBuilder: (context, state) => NoTransitionPage(
+                      child: BlocProvider(
+                        create: (context) => WorkoutsBloc(),
+                        child: const WorkoutsScreen(),
+                      ),
+                    ),
+                routes: [
+                  GoRoute(
+                    name: WorkoutBuilderScreen.name,
+                    path: WorkoutBuilderScreen.name,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) => BlocProvider(
+                      create: (context) => WkBuilderBloc(getIt.get<ExercisesRepository>()),
+                      child: const WorkoutBuilderScreen(),
+                    ),
+                  ),
+                ]),
           ],
         ),
         StatefulShellBranch(

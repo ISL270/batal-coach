@@ -1,15 +1,24 @@
 sealed class Length {
-  const Length();
+  final double value;
+  const Length(this.value);
 }
 
 class Meter extends Length {
-  final double value;
   static const symbol = 'm';
-  const Meter(this.value);
+  const Meter(super.value);
+
+  @override
+  String toString() {
+    return '$value $symbol';
+  }
 }
 
 class Kilometer extends Length {
-  final double value;
   static const symbol = 'km';
-  const Kilometer(this.value);
+  const Kilometer(super.value);
+
+  @override
+  String toString() {
+    return '$value $symbol';
+  }
 }
