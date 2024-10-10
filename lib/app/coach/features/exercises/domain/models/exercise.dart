@@ -1,4 +1,4 @@
-import 'package:btl/app/core/models/field.dart';
+import 'package:btl/app/core/models/domain/field.dart';
 import 'package:equatable/equatable.dart';
 
 class Exercise extends Equatable {

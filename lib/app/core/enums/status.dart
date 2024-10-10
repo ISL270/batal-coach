@@ -1,4 +1,4 @@
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class Status<T> extends Equatable {

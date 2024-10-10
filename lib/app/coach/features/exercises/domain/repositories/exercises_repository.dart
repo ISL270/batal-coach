@@ -5,7 +5,7 @@ import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exerci
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';

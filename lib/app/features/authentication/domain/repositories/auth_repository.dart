@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';

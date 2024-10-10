@@ -1,4 +1,4 @@
-import 'package:btl/app/core/models/length_unit.dart';
+import 'package:btl/app/core/models/domain/length_unit.dart';
 import 'package:btl/app/core/models/mass_unit.dart';
 
 sealed class Field {

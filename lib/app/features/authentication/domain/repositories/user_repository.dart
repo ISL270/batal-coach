@@ -1,4 +1,4 @@
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart';
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';

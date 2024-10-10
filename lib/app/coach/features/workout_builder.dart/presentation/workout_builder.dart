@@ -3,10 +3,10 @@ import 'package:btl/app/coach/features/workout_builder.dart/presentation/bloc/wk
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/duration_x.dart';
 import 'package:btl/app/core/extensions/text_style_x.dart';
-import 'package:btl/app/core/models/field.dart';
-import 'package:btl/app/core/models/length_unit.dart';
-import 'package:btl/app/core/models/mass_unit.dart';
-import 'package:btl/app/core/models/set.dart';
+import 'package:btl/app/core/models/domain/field.dart';
+import 'package:btl/app/core/models/domain/length_unit.dart';
+import 'package:btl/app/core/models/domain/mass_unit.dart';
+import 'package:btl/app/core/models/domain/set.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/number_picker_bs.dart';

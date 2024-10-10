@@ -6,7 +6,7 @@ import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_
 import 'package:btl/app/coach/features/clients/data/models/client_rm.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/models/firestore_source.dart';
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';

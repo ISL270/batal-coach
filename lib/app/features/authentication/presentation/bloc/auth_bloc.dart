@@ -2,7 +2,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';

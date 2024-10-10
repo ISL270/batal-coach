@@ -4,8 +4,8 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/bloc_event_transformers.dart';
-import 'package:btl/app/core/models/generic_exception.dart';
-import 'package:btl/app/core/models/paginated_result.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
+import 'package:btl/app/core/models/domain/paginated_result.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/transformers.dart';

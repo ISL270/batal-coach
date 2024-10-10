@@ -2,7 +2,7 @@
 
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';

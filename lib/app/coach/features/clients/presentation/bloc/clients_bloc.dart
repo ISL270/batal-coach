@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
-import 'package:btl/app/core/models/generic_exception.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 

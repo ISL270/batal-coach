@@ -1,7 +1,6 @@
-import 'package:btl/app/core/models/domain_model.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class User extends Equatable implements DomainModel {
+sealed class User extends Equatable {
   const User({
     required this.id,
     required this.email,
