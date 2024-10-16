@@ -51,7 +51,7 @@ class _Exercise extends StatefulWidget {
 }
 
 class _ExerciseState extends State<_Exercise> {
-  Map<Set, List<Field>> _fields = {};
+  Map<SET, List<Field>> _fields = {};
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _ExerciseState extends State<_Exercise> {
   }
 
   void resetSetsOrder() {
-    final newFields = <Set, List<Field>>{};
+    final newFields = <SET, List<Field>>{};
     for (var i = 0; i < _fields.length; i++) {
       newFields[_fields.entries.elementAt(i).key.copyWith(i + 1)] =
           _fields.entries.elementAt(i).value;

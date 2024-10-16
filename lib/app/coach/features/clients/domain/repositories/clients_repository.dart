@@ -34,8 +34,7 @@ final class ClientsRepository implements ReactiveRepository<List<Client>> {
   void _init() {
     _authRepository.getUpdates().listen((user) {
       if (user?.isTrainee ?? true) {
-        _remoteSource.cancelRemoteSub();
-        _closeSubject();
+        dispose();
         return;
       }
       

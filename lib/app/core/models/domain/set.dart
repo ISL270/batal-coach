@@ -1,11 +1,11 @@
-sealed class Set {
+sealed class SET {
   final int value;
-  const Set(this.value);
+  const SET(this.value);
 
-  Set copyWith(int value);
+  SET copyWith(int value);
 }
 
-class Regular extends Set {
+class Regular extends SET {
   const Regular(super.value);
   factory Regular.first() => const Regular(1);
 
@@ -13,7 +13,7 @@ class Regular extends Set {
   Regular copyWith(int value) => Regular(value);
 }
 
-class WarmUp extends Set {
+class WarmUp extends SET {
   const WarmUp(super.value);
   factory WarmUp.first() => const WarmUp(1);
 
@@ -21,7 +21,7 @@ class WarmUp extends Set {
   WarmUp copyWith(int value) => WarmUp(value);
 }
 
-class DropSet extends Set {
+class DropSet extends SET {
   const DropSet(super.value);
   factory DropSet.first() => const DropSet(1);
 
@@ -29,7 +29,7 @@ class DropSet extends Set {
   DropSet copyWith(int value) => DropSet(value);
 }
 
-class Failure extends Set {
+class Failure extends SET {
   const Failure(super.value);
   factory Failure.first() => const Failure(1);
 
