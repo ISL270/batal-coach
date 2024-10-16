@@ -44,13 +44,13 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     _searchCntrlr.addListener(
       () {
         if (_searchCntrlr.text.isEmpty) {
-          _bloc.add(const ExSearched(''));
+          _bloc.add(const ExcSearched(''));
         }
       },
     );
     _scrollCntrlr.addListener(
       () {
-        if (_bloc.state.status is Success && _bloc.state.exercises.result.length > 5) {
+        if (_bloc.state.status.isSuccess && _bloc.state.exercises.result.length > 5) {
           return;
         }
         _scrollCntrlr.jumpTo(0);
@@ -64,7 +64,6 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       scrollController: _scrollCntrlr,
       onCollapsed: (value) => isCollapsed.value = value,
       appBar: SuperAppBar(
-        title: Text(context.l10n.exercise(0).capitalizedDefinite),
         backgroundColor: context.colorsX.background.withOpacity(0.85),
         largeTitle: SuperLargeTitle(largeTitle: context.l10n.exercise(0).capitalizedDefinite),
         actions: ValueListenableBuilder(
@@ -94,7 +93,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           cancelButtonText: context.l10n.cancel.capitalized,
           resultBehavior: SearchBarResultBehavior.neverVisible,
           cancelTextStyle: TextStyle(color: context.colorsX.primary),
-          onChanged: (searchTerm) => _bloc.add(ExSearched(searchTerm)),
+          onChanged: (searchTerm) => _bloc.add(ExcSearched(searchTerm)),
           actions: [
             SuperAction(
               behavior: SuperActionBehavior.alwaysVisible,
@@ -110,7 +109,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   scrollControlDisabledMaxHeightRatio: 0.75,
                   builder: (context) => BlocProvider.value(
                     value: _bloc,
-                    child: const _FilterBottomSheet(),
+                    child: const ExcFilterBottomSheet(),
                   ),
                 ),
               ),
@@ -123,7 +122,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           return NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               if (notification.metrics.pixels >= (notification.metrics.maxScrollExtent * .7)) {
-                _bloc.add(ExNextPageFetched());
+                _bloc.add(ExcNextPageFetched());
               }
               return true;
             },

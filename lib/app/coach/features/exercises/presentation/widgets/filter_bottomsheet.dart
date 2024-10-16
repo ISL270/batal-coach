@@ -1,14 +1,14 @@
 part of 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 
-class _FilterBottomSheet extends StatefulWidget {
-  const _FilterBottomSheet();
+class ExcFilterBottomSheet extends StatefulWidget {
+  const ExcFilterBottomSheet({super.key});
 
   @override
-  State<_FilterBottomSheet> createState() => _FilterBottomSheetState();
+  State<ExcFilterBottomSheet> createState() => _ExcFilterBottomSheetState();
 }
 
-class _FilterBottomSheetState extends State<_FilterBottomSheet> {
-  late final ExFilters filters;
+class _ExcFilterBottomSheetState extends State<ExcFilterBottomSheet> {
+  late final ExcFilters filters;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                           onPressed: context.read<ExercisesBloc>().state.filters.isEmpty
                               ? null
                               : () {
-                                  context.read<ExercisesBloc>().add(ExFiltered(ExFilters()));
+                                  context.read<ExercisesBloc>().add(ExcFiltered(ExcFilters()));
                                   context.pop();
                                 },
                           child: Text(context.l10n.reset.capitalized),
@@ -179,7 +179,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
                     if (filters.isEmpty && context.read<ExercisesBloc>().state.filters.isEmpty) {
                       return context.pop();
                     }
-                    context.read<ExercisesBloc>().add(ExFiltered(filters));
+                    context.read<ExercisesBloc>().add(ExcFiltered(filters));
                     context.pop();
                   },
                   label: context.l10n.applyFilter.capitalized,

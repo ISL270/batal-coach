@@ -27,7 +27,7 @@ final class ExercisesIsarSource implements ExercisesLocalDataSource {
   @override
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
-    ExFilters? filters,
+    ExcFilters? filters,
     int page,
     int pageSize,
   ) async {

@@ -1,4 +1,6 @@
-sealed class Mass {
+import 'package:equatable/equatable.dart';
+
+sealed class Mass extends Equatable {
   final double value;
   const Mass(this.value);
 }
@@ -11,6 +13,9 @@ class Kilogram extends Mass {
   String toString() {
     return '$value $symbol';
   }
+
+  @override
+  List<Object?> get props => [symbol, value];
 }
 
 class Pound extends Mass {
@@ -21,4 +26,7 @@ class Pound extends Mass {
   String toString() {
     return '$value $symbol';
   }
+
+  @override
+  List<Object?> get props => [symbol, value];
 }

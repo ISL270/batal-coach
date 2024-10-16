@@ -62,14 +62,14 @@ ThemeData _themeData(ColorsX colorScheme) {
         }),
         foregroundColor: WidgetStateProperty.resolveWith((state) {
           if (state.isDisabled) {
-            return colorScheme.onBackgroundTint.withOpacity(.4);
+            return colorScheme.onBackgroundTint35;
           }
           return colorScheme.primary;
         }),
         minimumSize: const WidgetStatePropertyAll(Size(double.minPositive, 45)),
         side: WidgetStateProperty.resolveWith((state) {
           if (state.isDisabled) {
-            return BorderSide(color: colorScheme.onBackgroundTint.withOpacity(.3));
+            return BorderSide(color: colorScheme.onBackgroundTint35);
           }
           return BorderSide(color: colorScheme.primary);
         }),
@@ -137,7 +137,7 @@ ThemeData _themeData(ColorsX colorScheme) {
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: colorScheme.onBackgroundTint.withOpacity(.5)),
+        borderSide: BorderSide(color: colorScheme.onBackgroundTint35),
       ),
     ),
     chipTheme: ChipThemeData(

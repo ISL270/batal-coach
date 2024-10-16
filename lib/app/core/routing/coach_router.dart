@@ -6,8 +6,8 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
-import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_details.dart/cubit/workout_details_cubit.dart';
-import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_details.dart/workout_details_screen.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/cubit/workout_builder_cubit.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder_screen.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/coach/features/workouts/presentation/workouts_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
@@ -94,22 +94,13 @@ final coachRouter = GoRouter(
                       ),
                     ),
                 routes: [
-                  // GoRoute(
-                  //   name: WorkoutBuilderScreen.name,
-                  //   path: WorkoutBuilderScreen.name,
-                  //   parentNavigatorKey: _rootNavigatorKey,
-                  //   builder: (context, state) => BlocProvider(
-                  //     create: (context) => WkBuilderBloc(getIt.get<ExercisesRepository>()),
-                  //     child: const WorkoutBuilderScreen(),
-                  //   ),
-                  // ),
                   GoRoute(
-                    name: WorkoutDetailsScreen.name,
-                    path: WorkoutDetailsScreen.name,
+                    name: WorkoutBuilderScreen.name,
+                    path: WorkoutBuilderScreen.name,
                     parentNavigatorKey: _rootNavigatorKey,
                     builder: (context, state) => BlocProvider(
-                      create: (context) => WorkoutDetailsCubit(),
-                      child: const WorkoutDetailsScreen(),
+                      create: (context) => WorkoutBuilderCubit(),
+                      child: const WorkoutBuilderScreen(),
                     ),
                   ),
                 ]),

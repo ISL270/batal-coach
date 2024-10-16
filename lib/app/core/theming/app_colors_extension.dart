@@ -29,6 +29,8 @@ class ColorsX extends ThemeExtension<ColorsX> with _$ColorsXTailorMixin {
   @override
   final Color error = const Color(0xFFFF3232);
 
+  Color get onBackgroundTint35 => onBackgroundTint.withOpacity(.35);
+
   ColorsX({
     required this.background,
     required this.secondaryBackground,

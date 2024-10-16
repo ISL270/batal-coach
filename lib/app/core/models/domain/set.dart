@@ -1,8 +1,13 @@
-sealed class SET {
+import 'package:equatable/equatable.dart';
+
+sealed class SET extends Equatable {
   final int value;
   const SET(this.value);
 
   SET copyWith(int value);
+
+  @override
+  List<Object?> get props => [value];
 }
 
 class Regular extends SET {

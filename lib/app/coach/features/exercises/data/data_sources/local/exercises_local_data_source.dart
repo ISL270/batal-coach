@@ -13,7 +13,7 @@ abstract interface class ExercisesLocalDataSource {
 
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
-    ExFilters? filters,
+    ExcFilters? filters,
     int page,
     int pageSize,
   );

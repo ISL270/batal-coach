@@ -70,7 +70,7 @@ class ExercisesRepository implements ReactiveRepository<VoidStatus> {
 
   Future<List<Exercise>> getExercises(
     String searchTerm,
-    ExFilters? filters, {
+    ExcFilters? filters, {
     required int page,
     required int pageSize,
   }) async {

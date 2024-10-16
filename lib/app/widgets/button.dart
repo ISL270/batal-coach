@@ -286,9 +286,9 @@ enum _ButtonVariant { filled, secondary, outlined }
 enum ButtonShape { circular, roundedCorners, sharp }
 
 enum ButtonDensity {
-  compact(height: 30, fontSize: 12),
-  standard(height: 38, fontSize: 14),
-  comfortable(height: 46, fontSize: 16);
+  compact(height: 32, fontSize: 13),
+  standard(height: 40, fontSize: 15),
+  comfortable(height: 48, fontSize: 17);
 
   final double height;
   final double fontSize;

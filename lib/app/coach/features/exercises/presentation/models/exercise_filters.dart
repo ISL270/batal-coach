@@ -1,7 +1,7 @@
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:equatable/equatable.dart';
 
-final class ExFilters with EquatableMixin {
+final class ExcFilters with EquatableMixin {
   final Set<ExOwnership> owership = {ExOwnership.btl, ExOwnership.personal};
   final Set<Muscle> muscles = {};
   final Set<Equipment> equipments = {};
@@ -24,8 +24,8 @@ final class ExFilters with EquatableMixin {
         levels,
       ];
 
-  ExFilters clone() {
-    return ExFilters()
+  ExcFilters clone() {
+    return ExcFilters()
       ..owership.addAll(owership)
       ..muscles.addAll(muscles)
       ..equipments.addAll(equipments)

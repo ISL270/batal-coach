@@ -6,6 +6,7 @@ class Screen extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final SafeAreaValues safeAreaValues;
   final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   const Screen({
     required this.body,
@@ -14,6 +15,7 @@ class Screen extends StatelessWidget {
     super.key,
     this.safeAreaValues = const SafeAreaValues(),
     this.floatingActionButton,
+    this.floatingActionButtonLocation,
   });
 
   @override
@@ -33,7 +35,7 @@ class Screen extends StatelessWidget {
           ),
         ),
         floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: floatingActionButtonLocation,
       ),
     );
   }
@@ -51,4 +53,7 @@ final class SafeAreaValues {
     this.left = true,
     this.right = true,
   });
+
+  factory SafeAreaValues.none() =>
+      const SafeAreaValues(top: false, bottom: false, left: false, right: false);
 }

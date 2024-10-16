@@ -1,4 +1,6 @@
-sealed class Length {
+import 'package:equatable/equatable.dart';
+
+sealed class Length extends Equatable {
   final double value;
   const Length(this.value);
 }
@@ -11,6 +13,9 @@ class Meter extends Length {
   String toString() {
     return '$value $symbol';
   }
+
+  @override
+  List<Object?> get props => [symbol, value];
 }
 
 class Kilometer extends Length {
@@ -21,4 +26,7 @@ class Kilometer extends Length {
   String toString() {
     return '$value $symbol';
   }
+
+  @override
+  List<Object?> get props => [symbol, value];
 }

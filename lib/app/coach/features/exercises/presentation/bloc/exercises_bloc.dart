@@ -18,17 +18,17 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
   final ExercisesRepository _repository;
 
   ExercisesBloc(this._repository) : super(ExercisesState._initial()) {
-    on<ExSearched>(_onSearched);
-    on<ExNextPageFetched>(
+    on<ExcSearched>(_onSearched);
+    on<ExcNextPageFetched>(
       _onNextPageFetched,
       transformer: EventTransformers.throttleDroppable(),
     );
-    on<ExFiltered>(_onFilterUpdate);
+    on<ExcFiltered>(_onFilterUpdate);
 
-    add(const ExSearched(''));
+    add(const ExcSearched(''));
   }
 
-  Future<void> _onSearched(ExSearched event, Emitter<ExercisesState> emit) async {
+  Future<void> _onSearched(ExcSearched event, Emitter<ExercisesState> emit) async {
     emit(state._searchInProgress(event.searchTerm));
 
     await _repository
@@ -48,7 +48,7 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
   }
 
   Future<void> _onNextPageFetched(
-    ExNextPageFetched event,
+    ExcNextPageFetched event,
     Emitter<ExercisesState> emit,
   ) async {
     if (state.exercises.hasReachedMax) return;
@@ -69,11 +69,11 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
   }
 
   void _onFilterUpdate(
-    ExFiltered event,
+    ExcFiltered event,
     Emitter<ExercisesState> emit,
   ) {
     if (state.filters == event.filters) return;
     emit(state._filter(event.filters));
-    add(ExSearched(state.searchTerm));
+    add(ExcSearched(state.searchTerm));
   }
 }

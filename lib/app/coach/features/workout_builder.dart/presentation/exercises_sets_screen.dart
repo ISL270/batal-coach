@@ -1,43 +1,36 @@
-import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/coach/features/workout_builder.dart/presentation/bloc/wk_builder_bloc.dart';
-import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/extensions/duration_x.dart';
-import 'package:btl/app/core/extensions/text_style_x.dart';
-import 'package:btl/app/core/models/domain/field.dart';
-import 'package:btl/app/core/models/domain/length_unit.dart';
-import 'package:btl/app/core/models/domain/mass_unit.dart';
-import 'package:btl/app/core/models/domain/set.dart';
-import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/widgets/number_picker_bs.dart';
-import 'package:btl/app/widgets/screen.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:duration_picker/duration_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+part of 'workout_builder_screen.dart';
 
-class WorkoutBuilderScreen extends StatelessWidget {
-  static const name = 'workout_builder';
-
-  const WorkoutBuilderScreen({super.key});
+class _ExercisesSetsScreen extends StatelessWidget {
+  const _ExercisesSetsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Screen(
-      appBar: AppBar(),
-      body: BlocBuilder<WkBuilderBloc, WkBuilderState>(
-        builder: (context, state) => switch (state.status) {
-          Loading<void>() => const Center(child: CircularProgressIndicator()),
-          Success<void>() => ListView.separated(
-              itemCount: state.exercises.length,
-              itemBuilder: (context, i) => _Exercise(state.exercises[i]),
-              separatorBuilder: (context, index) =>
-                  const Divider(indent: 15, endIndent: 15, height: 50),
+    return BlocBuilder<WorkoutBuilderCubit, WorkoutBuilderState>(
+      builder: (context, state) {
+        return Screen(
+          appBar: AppBar(
+            title: const Text('Name'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.keyboard_arrow_up),
+                onPressed: () => context
+                    .read<WorkoutBuilderCubit>()
+                    .pageController
+                    .previousPage(duration: Default.duration, curve: Default.curve),
+              )
+            ],
+          ),
+          body: ListView.separated(
+            itemCount: state.exercises.length,
+            itemBuilder: (context, i) => _Exercise(state.exercises[i]),
+            separatorBuilder: (context, index) => const Divider(
+              indent: 15,
+              endIndent: 15,
+              height: 50,
             ),
-          _ => const SizedBox.shrink(),
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
