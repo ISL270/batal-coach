@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field
 
-import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_details.dart/workout_details_screen.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
@@ -56,13 +56,13 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                 color: context.colorsX.primary,
                 icon: const Icon(Icons.add_circle),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
+                onPressed: () => context.goNamed(WorkoutDetailsScreen.name),
               );
             }
             return TextButton.icon(
               label: Text(context.l10n.create.capitalized),
               icon: const Icon(size: 23, Icons.add_circle),
-              onPressed: () => context.goNamed(WorkoutBuilderScreen.name),
+              onPressed: () => context.goNamed(WorkoutDetailsScreen.name),
             );
           },
         ),

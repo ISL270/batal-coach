@@ -5,6 +5,7 @@ class Screen extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final EdgeInsetsGeometry? padding;
   final SafeAreaValues safeAreaValues;
+  final Widget? floatingActionButton;
 
   const Screen({
     required this.body,
@@ -12,6 +13,7 @@ class Screen extends StatelessWidget {
     this.padding,
     super.key,
     this.safeAreaValues = const SafeAreaValues(),
+    this.floatingActionButton,
   });
 
   @override
@@ -30,6 +32,8 @@ class Screen extends StatelessWidget {
             child: body,
           ),
         ),
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
