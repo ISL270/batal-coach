@@ -27,7 +27,10 @@ class _WkDetails extends StatelessWidget {
               label: 'Continue',
               density: ButtonDensity.comfortable,
               onPressed: () async {
-                context.read<WorkoutBuilderCubit>().pageController.jumpToPage(1);
+                await context.read<WorkoutBuilderCubit>().pageController.nextPage(
+                      duration: Default.duration,
+                      curve: Default.curve,
+                    );
               },
             )
           : Button.filled(
