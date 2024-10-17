@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
+import 'package:btl/app/core/models/domain/field.dart';
+import 'package:btl/app/core/models/domain/set.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,7 +13,24 @@ class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
   final pageController = PageController();
 
   void addExercises(List<Exercise> exercises) {
-    final newExercises = List<Exercise>.from(state.exercises)..addAll(exercises);
-    emit(state.copyWith(exercises: newExercises));
+    emit(state.copyWith(exercises: exercises.map(ExerciseDetails.new).toList()));
+  }
+
+  void removeSet(int excIndex, SET set) {
+    final updatedExc = state.exercises[excIndex].removeSet(set);
+    final updatedExercises = List<ExerciseDetails>.from(state.exercises)..[excIndex] = updatedExc;
+    emit(state.copyWith(exercises: updatedExercises));
+  }
+
+  void addSet(int excIndex) {
+    final updatedExc = state.exercises[excIndex].addSet();
+    final updatedExercises = List<ExerciseDetails>.from(state.exercises)..[excIndex] = updatedExc;
+    emit(state.copyWith(exercises: updatedExercises));
+  }
+
+  void updateField<F extends Field>(int excIndex, SET set, F field) {
+    final updatedExc = state.exercises[excIndex].updateField(set, field);
+    final updatedExercises = List<ExerciseDetails>.from(state.exercises)..[excIndex] = updatedExc;
+    emit(state.copyWith(exercises: updatedExercises));
   }
 }

@@ -22,16 +22,15 @@ class _WkDetails extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: context.read<WorkoutBuilderCubit>().state.exercises.isNotEmpty
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: context.wkBuilderCubit.state.exercises.isNotEmpty
           ? Button.filled(
               label: 'Continue',
               density: ButtonDensity.comfortable,
-              onPressed: () async {
-                await context.read<WorkoutBuilderCubit>().pageController.nextPage(
-                      duration: Default.duration,
-                      curve: Default.curve,
-                    );
-              },
+              onPressed: () => context.wkBuilderCubit.pageController.nextPage(
+                duration: Default.duration,
+                curve: Default.curve,
+              ),
             )
           : Button.filled(
               label: 'Add Exercises',
@@ -39,11 +38,10 @@ class _WkDetails extends StatelessWidget {
               onPressed: () async {
                 final exercises = await ExercisePicker.show(context);
                 if (exercises == null || !context.mounted) return;
-                context.read<WorkoutBuilderCubit>().addExercises(exercises);
-                context.read<WorkoutBuilderCubit>().pageController.jumpToPage(1);
+                context.wkBuilderCubit.addExercises(exercises);
+                context.wkBuilderCubit.pageController.jumpToPage(1);
               },
             ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -82,7 +82,7 @@ final class ExerciseIsar implements ExerciseCM {
         images: images,
         mainMuscle: mainMuscle,
         secondaryMuscles: secondaryMuscles,
-        fields: fields,
+        fieldTypes: fields,
       );
 
   factory ExerciseIsar.fromDomain(Exercise exc) => ExerciseIsar(
@@ -97,6 +97,6 @@ final class ExerciseIsar implements ExerciseCM {
         mechanic: exc.mechanic,
         name: exc.name,
         secondaryMuscles: exc.secondaryMuscles,
-        fields: exc.fields,
+        fields: exc.fieldTypes,
       );
 }

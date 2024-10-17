@@ -55,7 +55,7 @@ class _FireExercise implements ExerciseRM {
         instructions: instructions ?? [],
         type: category?.typeFromCat(),
         images: images ?? [],
-        fields: _getFields().map((f) => f.toDomain()).toList(),
+        fieldTypes: _getFields().map((f) => f.toDomain()).toList(),
       );
 
   factory _FireExercise.fromDomain(Exercise exc) => _FireExercise(
@@ -71,7 +71,7 @@ class _FireExercise implements ExerciseRM {
         null,
         exc.type != null ? _Type.fromDomain(exc.type!) : null,
         exc.images,
-        exc.fields.map(_Field.fromDomain).toList(),
+        exc.fieldTypes.map(_Field.fromDomain).toList(),
       );
 
   List<_Field> _getFields() {

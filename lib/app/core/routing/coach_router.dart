@@ -98,9 +98,12 @@ final coachRouter = GoRouter(
                     name: WorkoutBuilderScreen.name,
                     path: WorkoutBuilderScreen.name,
                     parentNavigatorKey: _rootNavigatorKey,
-                    builder: (context, state) => BlocProvider(
-                      create: (context) => WorkoutBuilderCubit(),
-                      child: const WorkoutBuilderScreen(),
+                    pageBuilder: (context, state) => CupertinoPage(
+                      fullscreenDialog: true,
+                      child: BlocProvider(
+                        create: (context) => WorkoutBuilderCubit(),
+                        child: const WorkoutBuilderScreen(),
+                      ),
                     ),
                   ),
                 ]),
