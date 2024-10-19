@@ -11,9 +11,11 @@ class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
   WorkoutBuilderCubit() : super(const WorkoutBuilderState());
 
   final pageController = PageController();
+  final TextEditingController workoutName = TextEditingController();
+  final TextEditingController workoutDesc = TextEditingController();
 
   void addExercises(List<Exercise> exercises) {
-    emit(state.copyWith(exercises: exercises.map(ExerciseDetails.new).toList()));
+    emit(state.copyWith(exercises: exercises.map(ExerciseDetails.new).toList(), name: workoutName.text));
   }
 
   void removeSet(int excIndex, SET set) {

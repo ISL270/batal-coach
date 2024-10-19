@@ -9,16 +9,18 @@ class _WkDetails extends StatelessWidget {
       appBar: AppBar(
         title: const Text('New Workout'),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Gap(30),
+          const Gap(30),
           TextField(
-            decoration: InputDecoration(labelText: 'Name'),
+            controller: context.wkBuilderCubit.workoutName,
+            decoration: const InputDecoration(labelText: 'Name'),
           ),
-          Gap(30),
+          const Gap(30),
           TextField(
             maxLines: 5,
-            decoration: InputDecoration(labelText: 'Description'),
+            controller: context.wkBuilderCubit.workoutDesc,
+            decoration: const InputDecoration(labelText: 'Description'),
           ),
         ],
       ),

@@ -9,8 +9,7 @@ class _ExerciseDetailsScreen extends StatelessWidget {
       builder: (context, state) {
         return Screen(
           appBar: AppBar(
-            // state.name
-            title: const Text('Name'),
+            title: Text(state.name),
             leading: const SizedBox.shrink(),
             actions: [
               IconButton(
@@ -98,8 +97,7 @@ class _Exercise extends StatelessWidget {
               for (final row in excDetails.fields.entries)
                 Dismissible(
                   key: UniqueKey(),
-                  direction:
-                      row.key.value == 1 ? DismissDirection.none : DismissDirection.endToStart,
+                  direction: row.key.value == 1 ? DismissDirection.none : DismissDirection.endToStart,
                   onDismissed: (direction) => context.wkBuilderCubit.removeSet(excIndex, row.key),
                   background: Container(
                     color: context.colorsX.error,
@@ -115,8 +113,7 @@ class _Exercise extends StatelessWidget {
                           Time() => _Cell(
                               field.value.toHHMM(),
                               onTap: () async {
-                                final duration = await showDurationPicker(
-                                    context: context, initialTime: field.value);
+                                final duration = await showDurationPicker(context: context, initialTime: field.value);
                                 if (duration == null || !context.mounted) return;
                                 context.wkBuilderCubit.updateField(
                                   excIndex,

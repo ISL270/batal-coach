@@ -2,13 +2,16 @@ part of 'workout_builder_cubit.dart';
 
 final class WorkoutBuilderState extends Equatable {
   final List<ExerciseDetails> exercises;
-  const WorkoutBuilderState({this.exercises = const []});
+  final String name;
+  const WorkoutBuilderState({this.exercises = const [], this.name = ''});
 
   WorkoutBuilderState copyWith({
     List<ExerciseDetails>? exercises,
+    String? name,
   }) {
     return WorkoutBuilderState(
       exercises: exercises ?? this.exercises,
+      name: name ?? this.name,
     );
   }
 
@@ -32,8 +35,7 @@ class ExerciseDetails extends Equatable {
     final fieldsClone = Map<SET, List<Field>>.from(fields)..remove(set);
     final newFields = <SET, List<Field>>{};
     for (var i = 0; i < fieldsClone.length; i++) {
-      newFields[fieldsClone.entries.elementAt(i).key.copyWith(i + 1)] =
-          fieldsClone.entries.elementAt(i).value;
+      newFields[fieldsClone.entries.elementAt(i).key.copyWith(i + 1)] = fieldsClone.entries.elementAt(i).value;
     }
     return ExerciseDetails(exercise, fields: newFields);
   }
@@ -51,8 +53,7 @@ class ExerciseDetails extends Equatable {
     final fieldsClone = List<Field>.from(fields[set]!);
     final i = fieldsClone.indexWhere((f) => f is F);
     fieldsClone[i] = field;
-    return ExerciseDetails(exercise,
-        fields: Map<SET, List<Field>>.from(fields)..update(set, (_) => fieldsClone));
+    return ExerciseDetails(exercise, fields: Map<SET, List<Field>>.from(fields)..update(set, (_) => fieldsClone));
   }
 
   @override
