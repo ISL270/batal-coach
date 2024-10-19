@@ -3,20 +3,23 @@ part of 'workout_builder_cubit.dart';
 final class WorkoutBuilderState extends Equatable {
   final List<ExerciseDetails> exercises;
   final String name;
-  const WorkoutBuilderState({this.exercises = const [], this.name = ''});
+  final bool reordering;
+  const WorkoutBuilderState({this.exercises = const [], this.name = '', this.reordering = false});
 
   WorkoutBuilderState copyWith({
     List<ExerciseDetails>? exercises,
     String? name,
+    bool? reordering,
   }) {
     return WorkoutBuilderState(
       exercises: exercises ?? this.exercises,
       name: name ?? this.name,
+      reordering: reordering ?? this.reordering,
     );
   }
 
   @override
-  List<Object> get props => [exercises];
+  List<Object> get props => [exercises, reordering];
 }
 
 class ExerciseDetails extends Equatable {

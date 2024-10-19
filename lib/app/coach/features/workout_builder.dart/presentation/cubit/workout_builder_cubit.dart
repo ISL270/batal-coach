@@ -35,4 +35,12 @@ class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
     final updatedExercises = List<ExerciseDetails>.from(state.exercises)..[excIndex] = updatedExc;
     emit(state.copyWith(exercises: updatedExercises));
   }
+
+  void startOrderingExc() {
+    emit(state.copyWith(reordering: true));
+  }
+
+  void finishOrderingExc() {
+    emit(state.copyWith(reordering: false));
+  }
 }
