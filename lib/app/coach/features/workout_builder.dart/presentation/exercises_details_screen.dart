@@ -69,7 +69,8 @@ class _Exercise extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 15, top: 15, right: 15, bottom: reordering ? 15 : 25),
+                      margin: EdgeInsets.only(
+                          left: 15, top: 15, right: 15, bottom: reordering ? 15 : 25),
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         color: context.colorsX.background,
@@ -119,8 +120,11 @@ class _Exercise extends StatelessWidget {
                       for (final row in excDetails.fields.entries)
                         Dismissible(
                           key: UniqueKey(),
-                          direction: row.key.value == 1 ? DismissDirection.none : DismissDirection.endToStart,
-                          onDismissed: (direction) => context.wkBuilderCubit.removeSet(excIndex, row.key),
+                          direction: row.key.value == 1
+                              ? DismissDirection.none
+                              : DismissDirection.endToStart,
+                          onDismissed: (direction) =>
+                              context.wkBuilderCubit.removeSet(excIndex, row.key),
                           background: Container(
                             color: context.colorsX.error,
                             alignment: Alignment.centerRight,
@@ -135,7 +139,8 @@ class _Exercise extends StatelessWidget {
                                   Time() => _Cell(
                                       field.value.toHHMM(),
                                       onTap: () async {
-                                        final duration = await showDurationPicker(context: context, initialTime: field.value);
+                                        final duration = await showDurationPicker(
+                                            context: context, initialTime: field.value);
                                         if (duration == null || !context.mounted) return;
                                         context.wkBuilderCubit.updateField(
                                           excIndex,

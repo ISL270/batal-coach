@@ -6,6 +6,13 @@ sealed class SET extends Equatable {
 
   SET copyWith(int value);
 
+  Map<String, dynamic> toJson();
+
+  static SET fromJson(Map<String, dynamic> json) => switch (json['type'] as String) {
+        Regular.key => Regular((json['value'] as num).toInt()),
+        _ => throw UnimplementedError('Unkonwn set type'),
+      };
+
   @override
   List<Object?> get props => [value];
 }
@@ -16,28 +23,38 @@ class Regular extends SET {
 
   @override
   Regular copyWith(int value) => Regular(value);
-}
-
-class WarmUp extends SET {
-  const WarmUp(super.value);
-  factory WarmUp.first() => const WarmUp(1);
 
   @override
-  WarmUp copyWith(int value) => WarmUp(value);
+  Map<String, dynamic> toJson() => {
+        'type': key,
+        'value': value,
+      };
+
+  static const key = 'regular';
 }
 
-class DropSet extends SET {
-  const DropSet(super.value);
-  factory DropSet.first() => const DropSet(1);
+// We'll need the code below when we introduce other SET types.
 
-  @override
-  DropSet copyWith(int value) => DropSet(value);
-}
+// class WarmUp extends SET {
+//   const WarmUp(super.value);
+//   factory WarmUp.first() => const WarmUp(1);
 
-class Failure extends SET {
-  const Failure(super.value);
-  factory Failure.first() => const Failure(1);
+//   @override
+//   WarmUp copyWith(int value) => WarmUp(value);
+// }
 
-  @override
-  Failure copyWith(int value) => Failure(value);
-}
+// class DropSet extends SET {
+//   const DropSet(super.value);
+//   factory DropSet.first() => const DropSet(1);
+
+//   @override
+//   DropSet copyWith(int value) => DropSet(value);
+// }
+
+// class Failure extends SET {
+//   const Failure(super.value);
+//   factory Failure.first() => const Failure(1);
+
+//   @override
+//   Failure copyWith(int value) => Failure(value);
+// }

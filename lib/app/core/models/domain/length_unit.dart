@@ -5,14 +5,14 @@ sealed class Length extends Equatable {
   const Length(this.value);
 
   Map<String, dynamic> toJson();
+
   static Length fromJson(Map<String, dynamic> json) => switch (json['unit'] as String) {
-        'km' => Kilometer((json['value'] as num).toDouble()),
-        _ => throw Exception('Unkonwn length unit'),
+        Kilometer.symbol => Kilometer((json['value'] as num).toDouble()),
+        _ => throw UnimplementedError('Unkonwn length unit'),
       };
 }
 
 class Kilometer extends Length {
-  static const symbol = 'km';
   const Kilometer(super.value);
 
   @override
@@ -22,7 +22,14 @@ class Kilometer extends Length {
       };
 
   @override
+  String toString() {
+    return '$value $symbol';
+  }
+
+  @override
   List<Object?> get props => [symbol, value];
+
+  static const symbol = 'km';
 }
 
 // We'll need the code below when we introduce more length units.

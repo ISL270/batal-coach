@@ -5,14 +5,14 @@ sealed class Mass extends Equatable {
   const Mass(this.value);
 
   Map<String, dynamic> toJson();
+
   static Mass fromJson(Map<String, dynamic> json) => switch (json['unit'] as String) {
-        'km' => Kilogram((json['value'] as num).toDouble()),
-        _ => throw UnimplementedError('Unkonwn unit'),
+        Kilogram.symbol => Kilogram((json['value'] as num).toDouble()),
+        _ => throw UnimplementedError('Unkonwn mass unit'),
       };
 }
 
 class Kilogram extends Mass {
-  static const symbol = 'kg';
   const Kilogram(super.value);
 
   @override
@@ -22,7 +22,14 @@ class Kilogram extends Mass {
       };
 
   @override
+  String toString() {
+    return '$value $symbol';
+  }
+
+  @override
   List<Object?> get props => [symbol, value];
+
+  static const symbol = 'kg';
 }
 
 // We'll need the code below when we introduce more mass units.

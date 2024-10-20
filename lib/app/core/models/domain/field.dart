@@ -6,13 +6,13 @@ sealed class Field extends Equatable {
   const Field();
 
   Map<String, dynamic> toJson();
-  
+
   static Field fromJson(Map<String, dynamic> json) => switch (json['type']) {
         Time.key => Time.fromJson(json),
         Reps.key => Reps.fromJson(json),
         Weight.key => Weight.fromJson(json),
         Distance.key => Distance.fromJson(json),
-        _ => throw Exception('Unknown field type'),
+        _ => throw UnimplementedError('Unknown field type'),
       };
 }
 
