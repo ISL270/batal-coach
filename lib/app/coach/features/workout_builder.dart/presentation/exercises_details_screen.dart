@@ -33,6 +33,12 @@ class _ExerciseDetailsScreen extends StatelessWidget {
               endIndent: 15,
             ),
           ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+          floatingActionButton: Button.filled(
+            density: ButtonDensity.comfortable,
+            onPressed: () {},
+            label: 'Save',
+          ),
         );
       },
     );
