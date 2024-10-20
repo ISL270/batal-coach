@@ -7,7 +7,7 @@ sealed class Length extends Equatable {
   Map<String, dynamic> toJson();
   static Length fromJson(Map<String, dynamic> json) => switch (json['unit'] as String) {
         'km' => Kilometer((json['value'] as num).toDouble()),
-        _ => throw UnimplementedError('Unkonwn unit'),
+        _ => throw Exception('Unkonwn length unit'),
       };
 }
 

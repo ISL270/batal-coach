@@ -4,6 +4,16 @@ import 'package:equatable/equatable.dart';
 
 sealed class Field extends Equatable {
   const Field();
+
+  Map<String, dynamic> toJson();
+  
+  static Field fromJson(Map<String, dynamic> json) => switch (json['type']) {
+        Time.key => Time.fromJson(json),
+        Reps.key => Reps.fromJson(json),
+        Weight.key => Weight.fromJson(json),
+        Distance.key => Distance.fromJson(json),
+        _ => throw Exception('Unknown field type'),
+      };
 }
 
 class Time extends Field {
@@ -13,7 +23,19 @@ class Time extends Field {
   factory Time.zero() => const Time(Duration.zero);
 
   @override
+  Map<String, dynamic> toJson() => {
+        'type': key,
+        'value': value.inSeconds,
+      };
+
+  factory Time.fromJson(Map<String, dynamic> json) {
+    return Time(Duration(seconds: (json['value'] as num).toInt()));
+  }
+
+  @override
   List<Object?> get props => [value];
+
+  static const key = 'time';
 }
 
 class Distance extends Field {
@@ -23,7 +45,17 @@ class Distance extends Field {
   factory Distance.zero() => const Distance(Kilometer(0));
 
   @override
+  Map<String, dynamic> toJson() => {
+        'type': key,
+        'value': value.toJson(),
+      };
+
+  factory Distance.fromJson(Map<String, dynamic> json) => Distance(Length.fromJson(json));
+
+  @override
   List<Object?> get props => [value];
+
+  static const key = 'distance';
 }
 
 class Weight extends Field {
@@ -33,7 +65,17 @@ class Weight extends Field {
   factory Weight.zero() => const Weight(Kilogram(0));
 
   @override
+  Map<String, dynamic> toJson() => {
+        'type': key,
+        'value': value.toJson(),
+      };
+
+  factory Weight.fromJson(Map<String, dynamic> json) => Weight(Mass.fromJson(json));
+
+  @override
   List<Object?> get props => [value];
+
+  static const key = 'weight';
 }
 
 class Reps extends Field {
@@ -42,12 +84,24 @@ class Reps extends Field {
   factory Reps.zero() => const Reps(0);
 
   @override
+  Map<String, dynamic> toJson() => {
+        'type': key,
+        'value': value,
+      };
+
+  factory Reps.fromJson(Map<String, dynamic> json) {
+    return Reps((json['value'] as num).toInt());
+  }
+
+  @override
   List<Object?> get props => [value];
+
+  static const key = 'reps';
 }
 
 extension FieldX on Field {
   bool get isTime => this is Time;
-  bool get isDistance => this is Distance;
-  bool get isWeight => this is Weight;
   bool get isReps => this is Reps;
+  bool get isWeight => this is Weight;
+  bool get isDistance => this is Distance;
 }
