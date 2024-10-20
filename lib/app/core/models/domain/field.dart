@@ -20,7 +20,7 @@ class Distance extends Field {
   final Length value;
   const Distance(this.value);
 
-  factory Distance.zero() => const Distance(Meter(0));
+  factory Distance.zero() => const Distance(Kilometer(0));
 
   @override
   List<Object?> get props => [value];
