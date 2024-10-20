@@ -1,5 +1,5 @@
 import 'package:btl/app/core/models/domain/length_unit.dart';
-import 'package:btl/app/core/models/mass_unit.dart';
+import 'package:btl/app/core/models/domain/mass_unit.dart';
 
 sealed class Field {
   const Field();

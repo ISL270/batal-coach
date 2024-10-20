@@ -1,5 +1,5 @@
-import 'package:btl/app/core/models/firestore_source.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
+import 'package:btl/app/core/models/firestore_source.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart';
 import 'package:btl/app/features/authentication/data/models/remote/fire_user_info.dart';
