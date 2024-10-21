@@ -1,0 +1,9 @@
+{
+    "dart.lineLength": 100,
+    "search.exclude": {
+        "**.g.dart": true
+    },
+    "files.watcherExclude": {
+        "**.g.dart": true
+    }
+}
