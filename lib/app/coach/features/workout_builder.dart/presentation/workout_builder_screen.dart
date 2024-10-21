@@ -15,6 +15,7 @@ import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/number_picker_bs.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dartx/dartx.dart';
 import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,24 +37,20 @@ class WorkoutBuilderScreen extends StatefulWidget {
 class _WorkoutBuilderScreenState extends State<WorkoutBuilderScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WorkoutBuilderCubit, WorkoutBuilderState>(
-      builder: (context, state) {
-        return PageView(
-          scrollDirection: Axis.vertical,
-          controller: context.wkBuilderCubit.pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            BlocProvider.value(
-              value: context.wkBuilderCubit,
-              child: const _WkDetails(),
-            ),
-            BlocProvider.value(
-              value: context.wkBuilderCubit,
-              child: const _ExerciseDetailsScreen(),
-            )
-          ],
-        );
-      },
+    return PageView(
+      scrollDirection: Axis.vertical,
+      controller: context.wkBuilderCubit.pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        BlocProvider.value(
+          value: context.wkBuilderCubit,
+          child: const _WkDetails(),
+        ),
+        BlocProvider.value(
+          value: context.wkBuilderCubit,
+          child: const _ExerciseDetailsScreen(),
+        )
+      ],
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/set.dart';
+import 'package:btl/app/core/models/optional.dart';
+import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,11 +13,15 @@ class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
   WorkoutBuilderCubit() : super(const WorkoutBuilderState());
 
   final pageController = PageController();
-  final TextEditingController workoutName = TextEditingController();
-  final TextEditingController workoutDesc = TextEditingController();
+
+  void updateName(String name) => emit(state.copyWith(name: name));
+
+  void updateDescription(String description) => emit(state.copyWith(
+        description: description.isBlank ? const Optional.value(null) : Optional.value(description),
+      ));
 
   void addExercises(List<Exercise> exercises) {
-    emit(state.copyWith(exercises: exercises.map(ExerciseDetails.new).toList(), name: workoutName.text));
+    emit(state.copyWith(exercises: exercises.map(ExerciseDetails.new).toList()));
   }
 
   void removeSet(int excIndex, SET set) {

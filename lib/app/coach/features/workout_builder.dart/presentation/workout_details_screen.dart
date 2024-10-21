@@ -12,38 +12,57 @@ class _WkDetails extends StatelessWidget {
       body: Column(
         children: [
           const Gap(30),
-          TextField(
-            controller: context.wkBuilderCubit.workoutName,
-            decoration: const InputDecoration(labelText: 'Name'),
+          BlocSelector<WorkoutBuilderCubit, WorkoutBuilderState, String>(
+            selector: (state) => state.name,
+            builder: (context, name) {
+              return TextField(
+                onChanged: context.wkBuilderCubit.updateName,
+                decoration: const InputDecoration(labelText: 'Name'),
+              );
+            },
           ),
           const Gap(30),
-          TextField(
-            maxLines: 5,
-            controller: context.wkBuilderCubit.workoutDesc,
-            decoration: const InputDecoration(labelText: 'Description'),
+          BlocSelector<WorkoutBuilderCubit, WorkoutBuilderState, String?>(
+            selector: (state) => state.description.value,
+            builder: (context, description) {
+              return TextField(
+                maxLines: 5,
+                onChanged: context.wkBuilderCubit.updateDescription,
+                decoration: const InputDecoration(labelText: 'Description'),
+              );
+            },
           ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: context.wkBuilderCubit.state.exercises.isNotEmpty
-          ? Button.filled(
+      floatingActionButton: BlocBuilder<WorkoutBuilderCubit, WorkoutBuilderState>(
+        builder: (context, state) {
+          if (state.exercises.isNotEmpty) {
+            return Button.filled(
               label: 'Continue',
               density: ButtonDensity.comfortable,
-              onPressed: () => context.wkBuilderCubit.pageController.nextPage(
-                duration: Default.duration,
-                curve: Default.curve,
-              ),
-            )
-          : Button.filled(
-              label: 'Add Exercises',
-              density: ButtonDensity.comfortable,
-              onPressed: () async {
-                final exercises = await ExercisePicker.show(context);
-                if (exercises == null || !context.mounted) return;
-                context.wkBuilderCubit.addExercises(exercises);
-                context.wkBuilderCubit.pageController.jumpToPage(1);
-              },
-            ),
+              onPressed: state.name.isBlank
+                  ? null
+                  : () => context.wkBuilderCubit.pageController.nextPage(
+                        duration: Default.duration,
+                        curve: Default.curve,
+                      ),
+            );
+          }
+          return Button.filled(
+            label: 'Add Exercises',
+            density: ButtonDensity.comfortable,
+            onPressed: state.name.isBlank
+                ? null
+                : () async {
+                    final exercises = await ExercisePicker.show(context);
+                    if (exercises == null || !context.mounted) return;
+                    context.wkBuilderCubit.addExercises(exercises);
+                    context.wkBuilderCubit.pageController.jumpToPage(1);
+                  },
+          );
+        },
+      ),
     );
   }
 }
