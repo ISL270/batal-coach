@@ -1,4 +1,4 @@
-class Optional<T> {
+final class Optional<T> {
   final T? _value;
 
   /// Gets the Optional value, or `null` if there is none.
