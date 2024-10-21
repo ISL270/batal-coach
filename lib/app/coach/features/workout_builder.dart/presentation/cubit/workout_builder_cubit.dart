@@ -49,4 +49,10 @@ class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
   void finishOrderingExc() {
     emit(state.copyWith(reordering: false));
   }
+
+  @override
+  Future<void> close() {
+    pageController.dispose();
+    return super.close();
+  }
 }
