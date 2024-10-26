@@ -6,13 +6,6 @@ sealed class SET extends Equatable {
 
   SET copyWith(int value);
 
-  Map<String, dynamic> toJson();
-
-  static SET fromJson(Map<String, dynamic> json) => switch (json['type'] as String) {
-        Regular.key => Regular((json['value'] as num).toInt()),
-        _ => throw UnimplementedError('Unkonwn set type'),
-      };
-
   @override
   List<Object?> get props => [value];
 }
@@ -23,12 +16,6 @@ class Regular extends SET {
 
   @override
   Regular copyWith(int value) => Regular(value);
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'type': key,
-        'value': value,
-      };
 
   static const key = 'regular';
 }
