@@ -1,3 +1,4 @@
+/// read: https://shrktna.atlassian.net/wiki/x/A4ABAg
 final class Optional<T> {
   final T? _value;
 

@@ -3,6 +3,7 @@ import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/set.dart';
 import 'package:btl/app/core/models/optional.dart';
+import 'package:btl/app/core/models/workout/domain/exercise_details.dart';
 import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
