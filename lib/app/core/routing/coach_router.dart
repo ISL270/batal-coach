@@ -8,6 +8,7 @@ import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.d
 import 'package:btl/app/coach/features/home/home_screen.dart';
 import 'package:btl/app/coach/features/workout_builder.dart/presentation/cubit/workout_builder_cubit.dart';
 import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder_screen.dart';
+import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/coach/features/workouts/presentation/workouts_screen.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
@@ -101,7 +102,7 @@ final coachRouter = GoRouter(
                     pageBuilder: (context, state) => CupertinoPage(
                       fullscreenDialog: true,
                       child: BlocProvider(
-                        create: (context) => WorkoutBuilderCubit(),
+                        create: (context) => WorkoutBuilderCubit(getIt.get<WorkoutRepository>()),
                         child: const WorkoutBuilderScreen(),
                       ),
                     ),

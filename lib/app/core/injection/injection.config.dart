@@ -28,6 +28,12 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
     as _i611;
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart'
     as _i450;
+import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar_source.dart'
+    as _i25;
+import 'package:btl/app/coach/features/workouts/data/sources/remote/workout_firestore_source.dart'
+    as _i389;
+import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart'
+    as _i820;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
 import 'package:btl/app/core/services/firestore_service.dart' as _i529;
@@ -74,6 +80,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i440.ExercisesLocalDataSource>(
         () => _i714.ExercisesIsarSource(gh<_i898.LocalDB>()));
+    gh.lazySingleton<_i25.WorkoutIsarSource>(
+        () => _i25.WorkoutIsarSource(gh<_i898.LocalDB>()));
+    gh.lazySingleton<_i389.WorkoutFirestoreSource>(
+        () => _i389.WorkoutFirestoreSource(gh<_i529.FirestoreService>()));
     gh.lazySingleton<_i142.ClientsRemoteSource>(
       () => _i403.ClientsFirestoreSource(gh<_i529.FirestoreService>()),
       dispose: (i) => i.dispose(),
@@ -119,6 +129,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispose(),
     );
+    gh.lazySingleton<_i820.WorkoutRepository>(() => _i820.WorkoutRepository(
+          gh<_i902.AuthRepository>(),
+          gh<_i389.WorkoutFirestoreSource>(),
+          gh<_i25.WorkoutIsarSource>(),
+        ));
     gh.factory<_i441.ClientsBloc>(
         () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
     gh.factory<_i450.ExercisesBloc>(
