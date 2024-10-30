@@ -9,7 +9,7 @@ import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/length_unit.dart';
 import 'package:btl/app/core/models/domain/mass_unit.dart';
-import 'package:btl/app/core/models/workout/domain/exercise_details.dart';
+import 'package:btl/app/core/models/domain/workout.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/button.dart';
@@ -22,8 +22,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
-part 'exercises_details_screen.dart';
+part 'exercises_sets_screen.dart';
 part 'workout_details_screen.dart';
 
 class WorkoutBuilderScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class _WorkoutBuilderScreenState extends State<WorkoutBuilderScreen> {
         ),
         BlocProvider.value(
           value: context.wkBuilderCubit,
-          child: const _ExerciseDetailsScreen(),
+          child: const _ExercisesSetsScreen(),
         )
       ],
     );

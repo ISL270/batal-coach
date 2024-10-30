@@ -15,7 +15,8 @@ class _WkDetails extends StatelessWidget {
           BlocSelector<WorkoutBuilderCubit, WorkoutBuilderState, String>(
             selector: (state) => state.name,
             builder: (context, name) {
-              return TextField(
+              return TextFormField(
+                initialValue: name,
                 onChanged: context.wkBuilderCubit.updateName,
                 decoration: const InputDecoration(labelText: 'Name'),
               );
@@ -25,8 +26,9 @@ class _WkDetails extends StatelessWidget {
           BlocSelector<WorkoutBuilderCubit, WorkoutBuilderState, String?>(
             selector: (state) => state.description.value,
             builder: (context, description) {
-              return TextField(
+              return TextFormField(
                 maxLines: 5,
+                initialValue: description,
                 onChanged: context.wkBuilderCubit.updateDescription,
                 decoration: const InputDecoration(labelText: 'Description'),
               );
@@ -37,7 +39,7 @@ class _WkDetails extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BlocBuilder<WorkoutBuilderCubit, WorkoutBuilderState>(
         builder: (context, state) {
-          if (state.exercises.isNotEmpty) {
+          if (state.exercisesSets.isNotEmpty) {
             return Button.filled(
               label: 'Continue',
               density: ButtonDensity.comfortable,
