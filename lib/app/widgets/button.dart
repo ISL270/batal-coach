@@ -19,6 +19,7 @@ class Button extends StatelessWidget {
   final bool bold;
   final ButtonDensity density;
   final bool isLoading;
+  final double? height;
 
   const Button._({
     required this.onPressed,
@@ -38,6 +39,7 @@ class Button extends StatelessWidget {
     required this.bold,
     required this.density,
     required this.isLoading,
+    required this.height,
   }) : _variant = variant;
 
   factory Button.filled({
@@ -57,6 +59,7 @@ class Button extends StatelessWidget {
     bool? bold,
     ButtonDensity? density,
     bool? isLoading,
+    double? height,
   }) =>
       Button._(
         iconWithAlignment: iconWithAlignment,
@@ -76,6 +79,7 @@ class Button extends StatelessWidget {
         bold: bold ?? true,
         density: density ?? ButtonDensity.standard,
         isLoading: isLoading ?? false,
+        height: height,
       );
 
   factory Button.outlined({
@@ -95,6 +99,7 @@ class Button extends StatelessWidget {
     bool? bold,
     ButtonDensity? density,
     bool? isLoading,
+    double? height,
   }) =>
       Button._(
         iconWithAlignment: iconWithAlignment,
@@ -114,6 +119,7 @@ class Button extends StatelessWidget {
         bold: bold ?? true,
         density: density ?? ButtonDensity.standard,
         isLoading: isLoading ?? false,
+        height: height,
       );
 
   factory Button.secondary({
@@ -133,6 +139,7 @@ class Button extends StatelessWidget {
     bool? bold,
     ButtonDensity? density,
     bool? isLoading,
+    double? height,
   }) =>
       Button._(
         iconWithAlignment: iconWithAlignment,
@@ -152,10 +159,12 @@ class Button extends StatelessWidget {
         bold: bold ?? true,
         density: density ?? ButtonDensity.standard,
         isLoading: isLoading ?? false,
+        height: height,
       );
 
   @override
   Widget build(BuildContext context) {
+    final height = this.height ?? density.height;
     return AbsorbPointer(
       absorbing: isLoading,
       child: Builder(
@@ -165,8 +174,8 @@ class Button extends StatelessWidget {
             children: [
               if (isLoading)
                 SizedBox(
-                  height: density.height / 2,
-                  width: density.height / 2,
+                  height: height / 2,
+                  width: height / 2,
                   child: CircularProgressIndicator(
                     color: _variant == _ButtonVariant.outlined
                         ? context.colorsX.primary
@@ -182,8 +191,8 @@ class Button extends StatelessWidget {
             ],
           );
           final padding = EdgeInsets.symmetric(
-            horizontal: density.height,
-            vertical: density.height / 5,
+            horizontal: height,
+            vertical: height / 5,
           );
           final style = FilledButton.styleFrom(
               padding: padding,
@@ -191,9 +200,7 @@ class Button extends StatelessWidget {
                 fontSize: density.fontSize,
                 fontWeight: bold ? FontWeight.bold : null,
               ),
-              minimumSize: maxWidth
-                  ? Size.fromHeight(density.height)
-                  : Size(double.minPositive, density.height),
+              minimumSize: maxWidth ? Size.fromHeight(height) : Size(double.minPositive, height),
               backgroundColor:
                   _variant == _ButtonVariant.secondary ? context.colorsX.secondary : null,
               shape: switch (shape) {

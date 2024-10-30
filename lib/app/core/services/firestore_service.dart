@@ -3,16 +3,14 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 final class FirestoreService {
-  final coaches = _Coaches(FirebaseFirestore.instance);
-  final trainees = _Trainees(FirebaseFirestore.instance);
-  final exercises = _Exercises(FirebaseFirestore.instance);
+  final coaches = _Coaches();
+  final trainees = _Trainees();
+  final exercises = _Exercises();
+  final workouts = _Workouts();
 }
 
 final class _Coaches {
-  final FirebaseFirestore _firestore;
-  _Coaches(this._firestore);
-
-  late final collection = _firestore.collection('coaches');
+  late final collection = FirebaseFirestore.instance.collection('coaches');
 
   late final idField = 'id';
   late final emailField = 'email';
@@ -21,10 +19,7 @@ final class _Coaches {
 }
 
 final class _Trainees {
-  final FirebaseFirestore _firestore;
-  _Trainees(this._firestore);
-
-  late final collection = _firestore.collection('trainees');
+  late final collection = FirebaseFirestore.instance.collection('trainees');
 
   late final idField = 'id';
   late final emailField = 'email';
@@ -34,11 +29,18 @@ final class _Trainees {
 }
 
 final class _Exercises {
-  final FirebaseFirestore _firestore;
-  _Exercises(this._firestore);
-
-  late final btlExercises = _firestore.collection('btl_exercises');
+  late final btlExercises = FirebaseFirestore.instance.collection('btl_exercises');
 
   CollectionReference<Map<String, dynamic>> coachExercises(String uid) =>
-      _firestore.collection('coaches').doc(uid).collection('exercises');
+      FirebaseFirestore.instance.collection('coaches').doc(uid).collection('exercises');
+}
+
+final class _Workouts {
+  late final collection = FirebaseFirestore.instance.collection('workouts');
+
+  late final coachIdField = 'coachID';
+  late final nameField = 'name';
+  late final descriptionField = 'description';
+  late final exercisesSetsField = 'exercisesSets';
+  late final createdAtField = 'createdAt';
 }

@@ -2,6 +2,7 @@ import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract base class FirestoreSource {
+  const FirestoreSource();
   Future<T> firestoreOperationHandler<T>(Future<T> Function() firestoreOperation) async {
     try {
       return await firestoreOperation();
