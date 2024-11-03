@@ -3,21 +3,20 @@ import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar_
 import 'package:btl/app/coach/features/workouts/data/sources/remote/workout_firestore_source.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/domain/workout.dart';
-import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
-final class WorkoutRepository {
-  final AuthRepository _authRepository;
-  final WorkoutFirestoreSource _remoteSource;
-  final WorkoutIsarSource _localSource;
+@singleton
+final class WorkoutRepository extends ReactiveRepository<Workout, WorkoutFM, WorkoutIsar> {
+  final WorkoutFirestoreSource wksRemoteSource;
+  final WorkoutIsarSource wksLocalSource;
 
-  const WorkoutRepository(
-    this._authRepository,
-    this._remoteSource,
-    this._localSource,
-  );
+  WorkoutRepository(
+    super.authRepository,
+    this.wksRemoteSource,
+    this.wksLocalSource,
+  ) : super(localSource: wksLocalSource, remoteSource: wksRemoteSource);
 
   Future<EitherException<Workout>> saveWorkout({
     required String name,
@@ -25,20 +24,23 @@ final class WorkoutRepository {
     required List<ExerciseSets> exercisesSets,
   }) async {
     try {
-      final workoutFS = await _remoteSource.saveWorkout(
-        coachID: _authRepository.user!.id,
+      final workoutFS = await wksRemoteSource.saveWorkout(
+        coachID: authRepository.user!.id,
         name: name,
         description: description,
-        exercisesSets: exercisesSets.map(ExerciseSetsFS.fromDomain).toList(),
+        exercisesSets: exercisesSets.map(ExerciseSetsFM.fromDomain).toList(),
       );
 
       final workout = workoutFS.toDomain(exercisesSets);
 
-      await _localSource.putWorkout(WorkoutIsar.fromDomain(workout));
+      await wksLocalSource.putWorkout(WorkoutIsar.fromDomain(workout));
 
       return right(workout);
     } catch (e) {
       return left(e as GenericException);
     }
   }
+
+  @disposeMethod
+  void dispMethod() => dispose();
 }

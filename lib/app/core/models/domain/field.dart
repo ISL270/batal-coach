@@ -70,7 +70,8 @@ class Weight extends Field {
         'value': value.toJson(),
       };
 
-  factory Weight.fromJson(Map<String, dynamic> json) => Weight(Mass.fromJson(json));
+  factory Weight.fromJson(Map<String, dynamic> json) =>
+      Weight(Mass.fromJson(json['value'] as Map<String, dynamic>));
 
   @override
   List<Object?> get props => [value];

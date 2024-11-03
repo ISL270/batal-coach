@@ -1,30 +1,30 @@
-import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/core/models/cache_model.dart';
+// import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
+// import 'package:btl/app/core/models/cache_model.dart';
 
-abstract interface class ExerciseCM extends CacheModel<Exercise> {
-  final String id;
-  final String name;
-  final Force? force;
-  final ExLevel? level;
-  final Mechanic? mechanic;
-  final ExType? type;
-  final Equipment? equipment;
-  final List<String> instructions;
-  final List<String> images;
-  final Muscle mainMuscle;
-  final List<Muscle> secondaryMuscles;
+// abstract interface class ExerciseCM extends CacheModel<Exercise> {
+//   final String id;
+//   final String name;
+//   final Force? force;
+//   final ExLevel? level;
+//   final Mechanic? mechanic;
+//   final ExType? type;
+//   final Equipment? equipment;
+//   final List<String> instructions;
+//   final List<String> images;
+//   final Muscle mainMuscle;
+//   final List<Muscle> secondaryMuscles;
 
-  ExerciseCM({
-    required this.id,
-    required this.name,
-    required this.instructions,
-    required this.images,
-    required this.mainMuscle,
-    required this.secondaryMuscles,
-    this.force,
-    this.level,
-    this.mechanic,
-    this.type,
-    this.equipment,
-  });
-}
+//   ExerciseCM({
+//     required this.id,
+//     required this.name,
+//     required this.instructions,
+//     required this.images,
+//     required this.mainMuscle,
+//     required this.secondaryMuscles,
+//     this.force,
+//     this.level,
+//     this.mechanic,
+//     this.type,
+//     this.equipment,
+//   });
+// }

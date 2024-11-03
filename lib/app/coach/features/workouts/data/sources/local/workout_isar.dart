@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart';
 import 'package:btl/app/coach/features/workouts/data/exercise_details_serializer.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/set.dart';
@@ -47,14 +49,24 @@ final class WorkoutIsar extends CacheModel<Workout> {
       );
 
   @override
-  Workout toDomain() => Workout(
-        id: id,
-        coachID: coachID,
-        name: name,
-        description: description,
-        exercisesSets: const [], //TODO: fix this
-        createdAt: createdAt,
-      );
+  Workout toDomain() {
+    final domainExercisesSets = <ExerciseSets>[];
+    final isarExercisesSets = exercisesSets.map(ExerciseSetsIsar.fromJson);
+
+    for (final e in isarExercisesSets) {
+      final exc = getIt.get<ExercisesIsarSource>().getExerciseSync(e.excID);
+      domainExercisesSets.add(ExerciseSets(exc!.toDomain(), fields: e.fields));
+    }
+
+    return Workout(
+      id: id,
+      coachID: coachID,
+      name: name,
+      description: description,
+      exercisesSets: domainExercisesSets,
+      createdAt: createdAt,
+    );
+  }
 }
 
 final class ExerciseSetsIsar with ExerciseSetsSerializer {
@@ -64,6 +76,12 @@ final class ExerciseSetsIsar with ExerciseSetsSerializer {
   ExerciseSetsIsar(this.excID, this.fields);
 
   String get encoded => jsonEncode(toMap(excID, fields));
+
+  factory ExerciseSetsIsar.fromJson(String encodedJson) {
+    final (excID, fields) =
+        ExerciseSetsSerializer.fromMap(jsonDecode(encodedJson) as Map<String, dynamic>);
+    return ExerciseSetsIsar(excID, fields);
+  }
 
   factory ExerciseSetsIsar.fromDomain(ExerciseSets exerciseSets) =>
       ExerciseSetsIsar(exerciseSets.exercise.id, exerciseSets.fields);

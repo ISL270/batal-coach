@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:btl/app/core/models/domain/generic_exception.dart';
-import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -13,7 +12,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
 @singleton
-final class AuthRepository implements ReactiveRepository<User?> {
+final class AuthRepository {
   final GoogleSignIn _googleSignIn;
   final fire_auth.FirebaseAuth _fireAuth;
   final UserRepository _userRepository;
@@ -28,7 +27,6 @@ final class AuthRepository implements ReactiveRepository<User?> {
   // they immediately get the lastly emitted Stream of data.
   final _stream = BehaviorSubject<User?>.seeded(null);
 
-  @override
   Stream<User?> getUpdates() => _stream.asBroadcastStream();
 
   User? get user => _stream.value;
@@ -185,7 +183,6 @@ final class AuthRepository implements ReactiveRepository<User?> {
     }
   }
 
-  @override
   @disposeMethod
   void dispose() {
     _stream.close();

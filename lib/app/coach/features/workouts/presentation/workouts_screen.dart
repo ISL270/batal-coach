@@ -2,6 +2,7 @@
 
 import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder_screen.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
+import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
@@ -97,6 +98,29 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
               ),
             )
           ],
+        ),
+      ),
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (notification) {
+          if (notification.metrics.pixels >= (notification.metrics.maxScrollExtent * .7)) {
+            // _bloc.add(ExcNextPageFetched());
+          }
+          return true;
+        },
+        child: BlocBuilder<WorkoutsBloc, WorkoutsState>(
+          builder: (context, state) => switch (state.status) {
+            Loading() => const Center(child: CircularProgressIndicator()),
+            _ => state.workouts.isEmpty
+                ? const Center(child: Text('No workouts found'))
+                : ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: state.workouts.length,
+                    separatorBuilder: (_, __) => const Divider(),
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 17),
+                    itemBuilder: (context, i) => ListTile(title: Text(state.workouts[i].name)),
+                  ),
+          },
         ),
       ),
     );

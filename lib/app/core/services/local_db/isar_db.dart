@@ -4,14 +4,13 @@ import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:btl/app/core/models/cache_model.dart';
-import 'package:btl/app/core/services/local_db/i_local_db.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-@Singleton(as: LocalDB)
-final class IsarDB implements LocalDB {
+@singleton
+final class IsarDB {
   final Isar _isar;
   const IsarDB._(this._isar);
 
@@ -30,9 +29,8 @@ final class IsarDB implements LocalDB {
   }
 
   // Usefull to access it for custom queries.
-  Isar get isar => _isar;
+  Isar get instance => _isar;
 
-  @override
   Future<int> put<T extends CacheModel>(T object) async {
     return _isar.writeTxn(() => _isar.collection<T>().put(object));
   }
@@ -41,21 +39,18 @@ final class IsarDB implements LocalDB {
     return _isar.writeTxnSync(() => _isar.collection<T>().putSync(object));
   }
 
-  @override
   Future<List<int>> putAll<T extends CacheModel>(List<T> objects) async {
     return _isar.writeTxn(() => _isar.collection<T>().putAll(objects));
   }
 
-  @override
   Future<T?> get<T extends CacheModel>(String id) async {
     return _isar.txn(() => _isar.collection<T>().get(id.fastHash));
   }
 
-  T? getSync<T extends CacheModel>(int id) {
-    return _isar.txnSync(() => _isar.collection<T>().getSync(id));
+  T? getSync<T extends CacheModel>(String id) {
+    return _isar.txnSync(() => _isar.collection<T>().getSync(id.fastHash));
   }
 
-  @override
   Future<T?> getFirst<T extends CacheModel>() async {
     return _isar.txn(() => _isar.collection<T>().where().findFirst());
   }
@@ -64,7 +59,6 @@ final class IsarDB implements LocalDB {
     return _isar.txnSync(() => _isar.collection<T>().where().findFirstSync());
   }
 
-  @override
   Future<List<T>> getAll<T extends CacheModel>() async {
     return _isar.txn(() => _isar.collection<T>().where().findAll());
   }
@@ -73,7 +67,6 @@ final class IsarDB implements LocalDB {
     return _isar.txnSync(() => _isar.collection<T>().where().findAllSync());
   }
 
-  @override
   Future<bool> delete<T extends CacheModel>(T object) async {
     return _isar.writeTxn(() => _isar.collection<T>().delete(object.cacheID));
   }
@@ -82,7 +75,6 @@ final class IsarDB implements LocalDB {
     return _isar.writeTxnSync(() => _isar.collection<T>().deleteSync(object.cacheID));
   }
 
-  @override
   Future<int> deleteAll<T extends CacheModel>(List<String> ids) async {
     return _isar
         .writeTxn(() => _isar.collection<T>().deleteAll(ids.map((e) => e.fastHash).toList()));
@@ -92,7 +84,6 @@ final class IsarDB implements LocalDB {
     return _isar.writeTxnSync(() => _isar.collection<T>().deleteAllSync(ids));
   }
 
-  @override
   Future<void> clear<T extends CacheModel>() async {
     return _isar.writeTxn(() => _isar.collection<T>().clear());
   }
@@ -101,7 +92,6 @@ final class IsarDB implements LocalDB {
     return _isar.writeTxnSync(() => _isar.collection<T>().clearSync());
   }
 
-  @override
   Future<List<T>> getAllByIDs<T extends CacheModel>(List<String> ids) async {
     return _isar.txn(() async {
       final docs = await _isar.collection<T>().getAll(ids.map((e) => e.fastHash).toList());

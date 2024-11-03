@@ -6,3 +6,5 @@ sealed class WorkoutsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+final class _WorkoutsSubscriptionRequested extends WorkoutsEvent {}

@@ -1,8 +1,11 @@
+// ignore_for_file: inference_failure_on_untyped_parameter
+
+import 'dart:async';
+
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-abstract base class FirestoreSource {
-  const FirestoreSource();
+mixin FirestoreSource {
   Future<T> firestoreOperationHandler<T>(Future<T> Function() firestoreOperation) async {
     try {
       return await firestoreOperation();

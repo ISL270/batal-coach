@@ -1,17 +1,16 @@
 // ignore_for_file: inference_failure_on_untyped_parameter
 
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_remote_source.dart';
+import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
-import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
 @singleton
-final class ClientsRepository implements ReactiveRepository<List<Client>> {
-  final ClientsRemoteSource _remoteSource;
+final class ClientsRepository {
+  final ClientsFirestoreSource _remoteSource;
   final AuthRepository _authRepository;
 
   ClientsRepository(this._remoteSource, this._authRepository) {
@@ -28,7 +27,6 @@ final class ClientsRepository implements ReactiveRepository<List<Client>> {
     _subject.close();
   }
 
-  @override
   Stream<List<Client>> getUpdates() => _subject.asBroadcastStream();
 
   void _init() {
@@ -37,17 +35,16 @@ final class ClientsRepository implements ReactiveRepository<List<Client>> {
         dispose();
         return;
       }
-      
+
       if (_subject.isClosed) _createSubject();
-      _remoteSource.subToRemote(user!.email);
-      _remoteSource.stream.listen(
+      _remoteSource.subToRemote(user!);
+      _remoteSource.listToBeUpdated.listen(
         (rmClients) => _subject.add(rmClients.map((c) => c.toDomain()).toList()),
         onError: (e) => throw e as GenericException,
       );
     });
   }
 
-  @override
   @disposeMethod
   void dispose() {
     _remoteSource.dispose();

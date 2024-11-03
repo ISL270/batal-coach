@@ -90,7 +90,7 @@ final coachRouter = GoRouter(
                 path: '/${WorkoutsScreen.name}',
                 pageBuilder: (context, state) => NoTransitionPage(
                       child: BlocProvider(
-                        create: (context) => WorkoutsBloc(),
+                        create: (context) => WorkoutsBloc(getIt.get<WorkoutRepository>()),
                         child: const WorkoutsScreen(),
                       ),
                     ),

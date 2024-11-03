@@ -32,9 +32,9 @@ const WorkoutIsarSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'excsSets': PropertySchema(
+    r'exercisesSets': PropertySchema(
       id: 3,
-      name: r'excsSets',
+      name: r'exercisesSets',
       type: IsarType.stringList,
     ),
     r'id': PropertySchema(
@@ -75,10 +75,10 @@ int _workoutIsarEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.excsSets.length * 3;
+  bytesCount += 3 + object.exercisesSets.length * 3;
   {
-    for (var i = 0; i < object.excsSets.length; i++) {
-      final value = object.excsSets[i];
+    for (var i = 0; i < object.exercisesSets.length; i++) {
+      final value = object.exercisesSets[i];
       bytesCount += value.length * 3;
     }
   }
@@ -96,7 +96,7 @@ void _workoutIsarSerialize(
   writer.writeString(offsets[0], object.coachID);
   writer.writeDateTime(offsets[1], object.createdAt);
   writer.writeString(offsets[2], object.description);
-  writer.writeStringList(offsets[3], object.excsSets);
+  writer.writeStringList(offsets[3], object.exercisesSets);
   writer.writeString(offsets[4], object.id);
   writer.writeString(offsets[5], object.name);
 }
@@ -111,7 +111,7 @@ WorkoutIsar _workoutIsarDeserialize(
     coachID: reader.readString(offsets[0]),
     createdAt: reader.readDateTime(offsets[1]),
     description: reader.readStringOrNull(offsets[2]),
-    excsSets: reader.readStringList(offsets[3]) ?? [],
+    exercisesSets: reader.readStringList(offsets[3]) ?? [],
     id: reader.readString(offsets[4]),
     name: reader.readString(offsets[5]),
   );
@@ -635,13 +635,13 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementEqualTo(
+      exercisesSetsElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -649,7 +649,7 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementGreaterThan(
+      exercisesSetsElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -657,7 +657,7 @@ extension WorkoutIsarQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -665,7 +665,7 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementLessThan(
+      exercisesSetsElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -673,7 +673,7 @@ extension WorkoutIsarQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -681,7 +681,7 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementBetween(
+      exercisesSetsElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -690,7 +690,7 @@ extension WorkoutIsarQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'excsSets',
+        property: r'exercisesSets',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -701,13 +701,13 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementStartsWith(
+      exercisesSetsElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -715,13 +715,13 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementEndsWith(
+      exercisesSetsElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -729,10 +729,10 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementContains(String value, {bool caseSensitive = true}) {
+      exercisesSetsElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -740,10 +740,10 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementMatches(String pattern, {bool caseSensitive = true}) {
+      exercisesSetsElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'excsSets',
+        property: r'exercisesSets',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -751,30 +751,30 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementIsEmpty() {
+      exercisesSetsElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: '',
       ));
     });
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsElementIsNotEmpty() {
+      exercisesSetsElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'excsSets',
+        property: r'exercisesSets',
         value: '',
       ));
     });
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsLengthEqualTo(int length) {
+      exercisesSetsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'excsSets',
+        r'exercisesSets',
         length,
         true,
         length,
@@ -784,10 +784,10 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsIsEmpty() {
+      exercisesSetsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'excsSets',
+        r'exercisesSets',
         0,
         true,
         0,
@@ -797,10 +797,10 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsIsNotEmpty() {
+      exercisesSetsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'excsSets',
+        r'exercisesSets',
         0,
         false,
         999999,
@@ -810,13 +810,13 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsLengthLessThan(
+      exercisesSetsLengthLessThan(
     int length, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'excsSets',
+        r'exercisesSets',
         0,
         true,
         length,
@@ -826,13 +826,13 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsLengthGreaterThan(
+      exercisesSetsLengthGreaterThan(
     int length, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'excsSets',
+        r'exercisesSets',
         length,
         include,
         999999,
@@ -842,7 +842,7 @@ extension WorkoutIsarQueryFilter
   }
 
   QueryBuilder<WorkoutIsar, WorkoutIsar, QAfterFilterCondition>
-      excsSetsLengthBetween(
+      exercisesSetsLengthBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -850,7 +850,7 @@ extension WorkoutIsarQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'excsSets',
+        r'exercisesSets',
         lower,
         includeLower,
         upper,
@@ -1287,9 +1287,9 @@ extension WorkoutIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<WorkoutIsar, WorkoutIsar, QDistinct> distinctByExcsSets() {
+  QueryBuilder<WorkoutIsar, WorkoutIsar, QDistinct> distinctByExercisesSets() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'excsSets');
+      return query.addDistinctBy(r'exercisesSets');
     });
   }
 
@@ -1334,9 +1334,10 @@ extension WorkoutIsarQueryProperty
     });
   }
 
-  QueryBuilder<WorkoutIsar, List<String>, QQueryOperations> excsSetsProperty() {
+  QueryBuilder<WorkoutIsar, List<String>, QQueryOperations>
+      exercisesSetsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'excsSets');
+      return query.addPropertyName(r'exercisesSets');
     });
   }
 

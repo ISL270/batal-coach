@@ -1,14 +1,13 @@
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/firestore_source.dart';
 import 'package:btl/app/core/services/firestore_service.dart';
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart';
 import 'package:btl/app/features/authentication/data/models/remote/fire_user_info.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: UserRemoteSource)
-final class UserFirestoreSource extends FirestoreSource implements UserRemoteSource {
+@singleton
+final class UserFirestoreSource with FirestoreSource{
   final FirestoreService _firestoreSvc;
   UserFirestoreSource(this._firestoreSvc);
 
@@ -19,7 +18,6 @@ final class UserFirestoreSource extends FirestoreSource implements UserRemoteSou
     return _firestoreSvc.trainees.collection.doc(id);
   }
 
-  @override
   Future<FireUserInfo> getUserInfo(UserType userType, String uid) async {
     return firestoreOperationHandler(() async {
       final userInfoJson = (await _userDoc(uid, userType).get()).data();
@@ -28,7 +26,6 @@ final class UserFirestoreSource extends FirestoreSource implements UserRemoteSou
     });
   }
 
-  @override
   Future<FireUserInfo> saveUserInfo(
     UserType userType, {
     required String uid,

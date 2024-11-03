@@ -1,53 +1,42 @@
-import 'package:btl/app/coach/features/exercises/data/models/local/exercise_cm.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/models/cache_model.dart';
 import 'package:isar/isar.dart';
 
 part 'exercise_isar.g.dart';
 
 @collection
-final class ExerciseIsar implements ExerciseCM {
+final class ExerciseIsar implements CacheModel<Exercise> {
   @override
   Id get cacheID => id.fastHash;
 
-  @override
   String id;
 
-  @override
   @Index(type: IndexType.value, caseSensitive: false)
   String name;
 
-  @override
   @Enumerated(EnumType.name)
   Force? force;
 
-  @override
   @Enumerated(EnumType.name)
   ExLevel? level;
 
-  @override
   @Enumerated(EnumType.name)
   Mechanic? mechanic;
 
-  @override
   @Enumerated(EnumType.name)
   ExType? type;
 
-  @override
   @Enumerated(EnumType.name)
   Equipment? equipment;
 
-  @override
   @Enumerated(EnumType.name)
   Muscle mainMuscle;
 
-  @override
   List<String> instructions;
 
-  @override
   List<String> images;
 
-  @override
   @Enumerated(EnumType.name)
   List<Muscle> secondaryMuscles;
 

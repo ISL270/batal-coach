@@ -1,11 +1,7 @@
-import 'package:btl/app/coach/features/exercises/data/models/remote/exercise_rm.dart';
+// import 'package:btl/app/coach/features/exercises/data/models/remote/exercise_rm.dart';
+// import 'package:btl/app/core/models/reactive_firestore_source.dart';
 
-abstract interface class ExercisesRemoteDataSource {
-  Stream<List<ExerciseRM>> get excsToBeUpdated;
-
-  void subToRemote();
-
-  Future<void> cancelRemoteSub();
-
-  void dispose();
-}
+// @Deprecated('we might delete this')
+// abstract base class ExercisesRemoteDataSource extends ReactiveFirestoreSource<ExerciseFM> {
+//   ExercisesRemoteDataSource(super.firestoreSvc);
+// }
