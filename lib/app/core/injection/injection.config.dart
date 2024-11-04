@@ -108,14 +108,6 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i820.WorkoutRepository>(
-      () => _i820.WorkoutRepository(
-        gh<_i902.AuthRepository>(),
-        gh<_i389.WorkoutFirestoreSource>(),
-        gh<_i25.WorkoutIsarSource>(),
-      ),
-      dispose: (i) => i.dispMethod(),
-    );
     gh.singleton<_i611.ExercisesRepository>(
       () => _i611.ExercisesRepository(
         gh<_i902.AuthRepository>(),
@@ -128,6 +120,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     gh.factory<_i441.ClientsBloc>(
         () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
+    gh.singleton<_i820.WorkoutRepository>(
+      () => _i820.WorkoutRepository(
+        gh<_i902.AuthRepository>(),
+        gh<_i389.WorkoutFirestoreSource>(),
+        gh<_i25.WorkoutIsarSource>(),
+        gh<_i611.ExercisesRepository>(),
+      ),
+      dispose: (i) => i.dispMethod(),
+    );
     gh.factory<_i450.ExercisesBloc>(
         () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     return this;

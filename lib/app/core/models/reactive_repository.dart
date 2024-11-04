@@ -21,7 +21,7 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
 
   ReactiveRepository(this.authRepository, {required this.remoteSource, required this.localSource}) {
     _createSubject();
-    _init();
+    _initialize();
   }
 
   late BehaviorSubject<Status<List<D>>> _subject;
@@ -34,6 +34,16 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
   }
 
   Stream<Status<List<D>>> getUpdates() => _subject.asBroadcastStream();
+
+  Future<void>? get toBeAwaited => null;
+
+  void _initialize() {
+    if (toBeAwaited != null) {
+      toBeAwaited!.whenComplete(_init);
+    } else {
+      _init();
+    }
+  }
 
   void _init() {
     authRepository.getUpdates().listen((user) {

@@ -50,7 +50,7 @@ class Distance extends Field {
         'value': value.toJson(),
       };
 
-  factory Distance.fromJson(Map<String, dynamic> json) => Distance(Length.fromJson(json));
+  factory Distance.fromJson(Map<String, dynamic> json) => Distance(Length.fromJson(json['value'] as Map<String, dynamic>));
 
   @override
   List<Object?> get props => [value];

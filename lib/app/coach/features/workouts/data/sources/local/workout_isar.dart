@@ -50,20 +50,14 @@ final class WorkoutIsar extends CacheModel<Workout> {
 
   @override
   Workout toDomain() {
-    final domainExercisesSets = <ExerciseSets>[];
-    final isarExercisesSets = exercisesSets.map(ExerciseSetsIsar.fromJson);
-
-    for (final e in isarExercisesSets) {
-      final exc = getIt.get<ExercisesIsarSource>().getExerciseSync(e.excID);
-      domainExercisesSets.add(ExerciseSets(exc!.toDomain(), fields: e.fields));
-    }
+    final encodedExercisesSets = exercisesSets.map(ExerciseSetsIsar.fromJson);
 
     return Workout(
       id: id,
       coachID: coachID,
       name: name,
       description: description,
-      exercisesSets: domainExercisesSets,
+      exercisesSets: encodedExercisesSets.map((e) => e.toDomain()).toList(),
       createdAt: createdAt,
     );
   }
@@ -85,4 +79,9 @@ final class ExerciseSetsIsar with ExerciseSetsSerializer {
 
   factory ExerciseSetsIsar.fromDomain(ExerciseSets exerciseSets) =>
       ExerciseSetsIsar(exerciseSets.exercise.id, exerciseSets.fields);
+
+  ExerciseSets toDomain() {
+    final excIsar = getIt.get<ExercisesIsarSource>().getExerciseSync(excID);
+    return ExerciseSets(excIsar!.toDomain(), fields: fields);
+  }
 }

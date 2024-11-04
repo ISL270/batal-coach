@@ -1,13 +1,11 @@
 part of 'workout_builder_cubit.dart';
 
-typedef WorkoutStatus = Status<Workout>;
-
 final class WorkoutBuilderState extends Equatable {
   final String name;
   final Optional<String> description;
   final bool reordering;
   final List<ExerciseSets> exercisesSets;
-  final WorkoutStatus status;
+  final VoidStatus status;
 
   const WorkoutBuilderState({
     this.exercisesSets = const [],
@@ -22,7 +20,7 @@ final class WorkoutBuilderState extends Equatable {
     String? name,
     Optional<String>? description,
     bool? reordering,
-    WorkoutStatus? status,
+    VoidStatus? status,
   }) {
     return WorkoutBuilderState(
       exercisesSets: exercisesSets ?? this.exercisesSets,

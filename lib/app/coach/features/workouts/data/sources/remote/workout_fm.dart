@@ -25,16 +25,16 @@ final class WorkoutFM implements RemoteModel<Workout> {
         exercisesSets: (json['exercisesSets'] as List<dynamic>)
             .map((e) => ExerciseSetsFM.fromJson(jsonDecode(e as String) as Map<String, dynamic>))
             .toList(),
-        createdAt: DateTime.parse(json['createdAt'] as String),
+        createdAt: (json['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       );
 
   @override
-  Workout toDomain([List<ExerciseSets>? exercisesSets]) => Workout(
+  Workout toDomain([List<ExerciseSets>? domainExcsSets]) => Workout(
         id: id,
         coachID: coachID,
         name: name,
         description: description,
-        exercisesSets: exercisesSets!,
+        exercisesSets: domainExcsSets ?? exercisesSets.map((e) => e.toDomain()).toList(),
         createdAt: createdAt,
       );
 }
@@ -55,5 +55,10 @@ final class ExerciseSetsFM with ExerciseSetsSerializer {
   factory ExerciseSetsFM.fromJson(Map<String, dynamic> json) {
     final (excID, fields) = ExerciseSetsSerializer.fromMap(json);
     return ExerciseSetsFM(excID, fields);
+  }
+
+  ExerciseSets toDomain() {
+    final excIsar = getIt.get<ExercisesIsarSource>().getExerciseSync(excID);
+    return ExerciseSets(excIsar!.toDomain(), fields: fields);
   }
 }
