@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
+import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -23,8 +24,11 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   ) async {
     await emit.forEach(
       _repository.getUpdates(),
-      onData: (clients) => state.success(clients),
-      onError: (exception, _) => state.failure(exception as GenericException),
+      onData: (status) => switch (status) {
+        Success<List<Client>>(:final result) => state.success(result),
+        Failure<List<Client>>(:final exception) => state.failure(exception),
+        _ => state,
+      },
     );
   }
 

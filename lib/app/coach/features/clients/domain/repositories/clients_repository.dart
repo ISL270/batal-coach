@@ -2,6 +2,7 @@
 
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
@@ -18,16 +19,17 @@ final class ClientsRepository {
     _init();
   }
 
-  late BehaviorSubject<List<Client>> _subject;
+  late BehaviorSubject<Status<List<Client>>> _subject;
 
-  void _createSubject() => _subject = BehaviorSubject<List<Client>>.seeded([]);
+  void _createSubject() =>
+      _subject = BehaviorSubject<Status<List<Client>>>.seeded(const Initial<List<Client>>());
 
   void _closeSubject() {
     if (_subject.isClosed) return;
     _subject.close();
   }
 
-  Stream<List<Client>> getUpdates() => _subject.asBroadcastStream();
+  Stream<Status<List<Client>>> getUpdates() => _subject.asBroadcastStream();
 
   void _init() {
     _authRepository.getUpdates().listen((user) {
@@ -39,8 +41,8 @@ final class ClientsRepository {
       if (_subject.isClosed) _createSubject();
       _remoteSource.subToRemote(user!);
       _remoteSource.listToBeUpdated.listen(
-        (rmClients) => _subject.add(rmClients.map((c) => c.toDomain()).toList()),
-        onError: (e) => throw e as GenericException,
+        (rmClients) => _subject.add(Success(rmClients.map((c) => c.toDomain()).toList())),
+        onError: (e) => _subject.add(Failure(e as GenericException)),
       );
     });
   }
