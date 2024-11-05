@@ -13,19 +13,19 @@ import 'package:rxdart/transformers.dart';
 
 @singleton
 final class WorkoutRepository extends ReactiveRepository<Workout, WorkoutFM, WorkoutIsar> {
-  final WorkoutFirestoreSource _wksRemoteSource;
-  final WorkoutIsarSource _wksLocalSource;
+  final WorkoutFirestoreSource _remoteSource;
+  final WorkoutIsarSource _localSource;
   final ExercisesRepository _excsRepository;
 
   WorkoutRepository(
     super.authRepository,
-    this._wksRemoteSource,
-    this._wksLocalSource,
+    this._remoteSource,
+    this._localSource,
     this._excsRepository,
-  ) : super(localSource: _wksLocalSource, remoteSource: _wksRemoteSource);
+  ) : super(localSource: _localSource, remoteSource: _remoteSource);
 
   @override
-  Future<void>? get toBeAwaited =>
+  Future<void> toBeAwaited() =>
       _excsRepository.getUpdates().takeWhileInclusive((status) => !status.isSuccess).last;
 
   Future<EitherException<void>> saveWorkout({
@@ -34,7 +34,7 @@ final class WorkoutRepository extends ReactiveRepository<Workout, WorkoutFM, Wor
     required List<ExerciseSets> exercisesSets,
   }) async {
     try {
-      await _wksRemoteSource.saveWorkout(
+      await _remoteSource.saveWorkout(
         coachID: authRepository.user!.id,
         name: name,
         description: description,
@@ -44,6 +44,15 @@ final class WorkoutRepository extends ReactiveRepository<Workout, WorkoutFM, Wor
     } catch (e) {
       return left(e as GenericException);
     }
+  }
+
+  Future<List<Workout>> searchWorkouts(
+    String searchTerm, {
+    required int page,
+    required int pageSize,
+  }) async {
+    final cms = await _localSource.getWorkouts(searchTerm, page: page, pageSize: pageSize);
+    return cms.map((e) => e.toDomain()).toList();
   }
 
   @disposeMethod

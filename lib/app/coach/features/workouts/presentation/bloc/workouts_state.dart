@@ -3,18 +3,18 @@ part of 'workouts_bloc.dart';
 final class WorkoutsState extends Equatable {
   final VoidStatus status;
   final String searchTerm;
-  final List<Workout> workouts;
+  final PaginatedResult<Workout> workouts;
 
   const WorkoutsState({
-    this.status = const Initial(),
     this.searchTerm = '',
-    this.workouts = const [],
+    this.status = const Initial(),
+    this.workouts = const PaginatedResult(),
   });
 
   WorkoutsState copyWith({
     VoidStatus? status,
     String? searchTerm,
-    List<Workout>? workouts,
+    PaginatedResult<Workout>? workouts,
   }) {
     return WorkoutsState(
       status: status ?? this.status,

@@ -21,6 +21,7 @@ final class WorkoutIsar extends CacheModel<Workout> {
 
   String coachID;
 
+  @Index(type: IndexType.value, caseSensitive: false)
   String name;
 
   String? description;
