@@ -8,7 +8,6 @@ import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/domain/paginated_result.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:rxdart/transformers.dart';
 
 part 'exercises_event.dart';
 part 'exercises_state.dart';
@@ -18,42 +17,52 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
   final ExercisesRepository _repository;
 
   ExercisesBloc(this._repository) : super(ExercisesState._initial()) {
-    on<ExcSearched>(_onSearched);
-    on<ExcNextPageFetched>(
+    on<_ExcsSubscriptionRequested>(_onSubscriptionRequested);
+    on<ExcsSearched>(_onSearched);
+    on<ExcsNextPageFetched>(
       _onNextPageFetched,
       transformer: EventTransformers.throttleDroppable(),
     );
-    on<ExcFiltered>(_onFilterUpdate);
+    on<ExcsFiltered>(_onFilterUpdate);
 
-    add(const ExcSearched(''));
+    add(_ExcsSubscriptionRequested());
   }
 
-  Future<void> _onSearched(ExcSearched event, Emitter<ExercisesState> emit) async {
+  Future<void> _onSubscriptionRequested(
+    _ExcsSubscriptionRequested event,
+    Emitter<ExercisesState> emit,
+  ) async {
+    await emit.forEach(
+      _repository.getUpdates(),
+      onData: (status) {
+        if (status.isSuccess) {
+          add(ExcsSearched(state.searchTerm));
+        }
+        return state;
+      },
+    );
+  }
+
+  Future<void> _onSearched(ExcsSearched event, Emitter<ExercisesState> emit) async {
     emit(state._searchInProgress(event.searchTerm));
 
-    await _repository
-        .getUpdates()
-        .takeWhileInclusive((status) => !status.isSuccess)
-        .last
-        .whenComplete(() async {
-      final searchResult = await _repository.getExercises(
-        page: 0,
-        event.searchTerm,
-        state.filters,
-        pageSize: state.exercises.pageSize,
-      );
-      emit(state._success(exercises: PaginatedResult(result: searchResult)));
-    });
-    //TODO: catch errors
+    final searchResult = await _repository.searchExercises(
+      event.searchTerm,
+      state.filters,
+      page: 0,
+      pageSize: state.exercises.pageSize,
+    );
+
+    emit(state._success(exercises: PaginatedResult(result: searchResult)));
   }
 
   Future<void> _onNextPageFetched(
-    ExcNextPageFetched event,
+    ExcsNextPageFetched event,
     Emitter<ExercisesState> emit,
   ) async {
     if (state.exercises.hasReachedMax) return;
 
-    final searchResult = await _repository.getExercises(
+    final searchResult = await _repository.searchExercises(
       state.searchTerm,
       state.filters,
       page: state.exercises.page + 1,
@@ -69,11 +78,11 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
   }
 
   void _onFilterUpdate(
-    ExcFiltered event,
+    ExcsFiltered event,
     Emitter<ExercisesState> emit,
   ) {
     if (state.filters == event.filters) return;
     emit(state._filter(event.filters));
-    add(ExcSearched(state.searchTerm));
+    add(ExcsSearched(state.searchTerm));
   }
 }

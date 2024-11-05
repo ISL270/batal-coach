@@ -1,4 +1,4 @@
-// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: inference_failure_on_untyped_parameter, unused_field
 
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart';
 import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exercises_firestore_source.dart';
@@ -11,39 +11,38 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 final class ExercisesRepository extends ReactiveRepository<Exercise, ExerciseFM, ExerciseIsar> {
-  final ExercisesFirestoreSource excsRemoteSource;
-  final ExercisesIsarSource excsLocalSource;
+  final ExercisesFirestoreSource _remoteSource;
+  final ExercisesIsarSource _localSource;
 
   ExercisesRepository(
     super.authRepository,
-    this.excsRemoteSource,
-    this.excsLocalSource,
-  ) : super(localSource: excsLocalSource, remoteSource: excsRemoteSource);
+    this._remoteSource,
+    this._localSource,
+  ) : super(localSource: _localSource, remoteSource: _remoteSource);
 
-  Future<List<Exercise>> getExercises(
+  Future<List<Exercise>> searchExercises(
     String searchTerm,
     ExcFilters? filters, {
     required int page,
     required int pageSize,
   }) async {
-    final cmExercises = await excsLocalSource.getExercises(searchTerm, filters, page, pageSize);
+    final cmExercises = await _localSource.getExercises(searchTerm, filters, page, pageSize);
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 
   Future<List<Exercise>> getExcsByIDs(List<String> ids) async {
-    final cmExercises = await excsLocalSource.getExercisesByIDs(ids);
+    final cmExercises = await _localSource.getExercisesByIDs(ids);
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 
   Future<Exercise?> getExercise(String id) async {
-    final cmExercise = await excsLocalSource.getExercise(id);
+    final cmExercise = await _localSource.getExercise(id);
     return cmExercise?.toDomain();
   }
 
-  Future<void> clearLocalDB() => excsLocalSource.clear();
+  Future<void> clearLocalDB() => _localSource.clear();
 
-  Future<List<int>> updateLocalDB(List<Exercise> domainModels) =>
-      excsLocalSource.putAll(domainModels);
+  Future<List<int>> updateLocalDB(List<Exercise> domainModels) => _localSource.putAll(domainModels);
 
   @disposeMethod
   void dispMethod() => dispose();

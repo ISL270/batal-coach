@@ -47,7 +47,7 @@ class _ExcFilterBottomSheetState extends State<ExcFilterBottomSheet> {
                           onPressed: context.read<ExercisesBloc>().state.filters.isEmpty
                               ? null
                               : () {
-                                  context.read<ExercisesBloc>().add(ExcFiltered(ExcFilters()));
+                                  context.read<ExercisesBloc>().add(ExcsFiltered(ExcFilters()));
                                   context.pop();
                                 },
                           child: Text(context.l10n.reset.capitalized),
@@ -179,7 +179,7 @@ class _ExcFilterBottomSheetState extends State<ExcFilterBottomSheet> {
                     if (filters.isEmpty && context.read<ExercisesBloc>().state.filters.isEmpty) {
                       return context.pop();
                     }
-                    context.read<ExercisesBloc>().add(ExcFiltered(filters));
+                    context.read<ExercisesBloc>().add(ExcsFiltered(filters));
                     context.pop();
                   },
                   label: context.l10n.applyFilter.capitalized,

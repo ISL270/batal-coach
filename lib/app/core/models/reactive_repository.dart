@@ -1,5 +1,7 @@
 // ignore_for_file: inference_failure_on_untyped_parameter
 
+import 'dart:async';
+
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
@@ -19,9 +21,13 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
   @protected
   final IsarSource<D, C> localSource;
 
-  ReactiveRepository(this.authRepository, {required this.remoteSource, required this.localSource}) {
+  ReactiveRepository(
+    this.authRepository, {
+    required this.remoteSource,
+    required this.localSource,
+  }) {
     _createSubject();
-    _initialize();
+    _init();
   }
 
   late BehaviorSubject<Status<List<D>>> _subject;
@@ -35,26 +41,20 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
 
   Stream<Status<List<D>>> getUpdates() => _subject.asBroadcastStream();
 
-  Future<void>? get toBeAwaited => null;
-
-  void _initialize() {
-    if (toBeAwaited != null) {
-      toBeAwaited!.whenComplete(_init);
-    } else {
-      _init();
-    }
-  }
+  @protected
+  Future<void> toBeAwaited() => Future.value();
 
   void _init() {
-    authRepository.getUpdates().listen((user) {
+    authRepository.getUpdates().listen((user) async {
       if (user?.isTrainee ?? true) {
-        remoteSource.cancelRemoteSub();
-        localSource.clear();
+        unawaited(remoteSource.cancelRemoteSub());
+        unawaited(localSource.clear());
         _closeSubject();
         return;
       }
       if (_subject.isClosed) _createSubject();
       _subject.add(const Loading());
+      await toBeAwaited();
       remoteSource.subToRemote(user!);
       remoteSource.listToBeUpdated.listen(
         (remoteModels) async {

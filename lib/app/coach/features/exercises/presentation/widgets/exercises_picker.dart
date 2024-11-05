@@ -53,7 +53,7 @@ class _ExercisePickerState extends State<ExercisePicker> {
     _searchCntrlr.addListener(
       () {
         if (_searchCntrlr.text.isEmpty) {
-          _bloc.add(const ExcSearched(''));
+          _bloc.add(const ExcsSearched(''));
         }
       },
     );
@@ -85,7 +85,7 @@ class _ExercisePickerState extends State<ExercisePicker> {
                     height: 40,
                     child: CupertinoSearchTextField(
                       controller: _searchCntrlr,
-                      onChanged: (searchTerm) => _bloc.add(ExcSearched(searchTerm)),
+                      onChanged: (searchTerm) => _bloc.add(ExcsSearched(searchTerm)),
                       prefixIcon: Icon(
                         CupertinoIcons.search,
                         color: CupertinoColors.black.withOpacity(0.6),
@@ -122,7 +122,7 @@ class _ExercisePickerState extends State<ExercisePicker> {
           return NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               if (notification.metrics.pixels >= (notification.metrics.maxScrollExtent * .7)) {
-                _bloc.add(ExcNextPageFetched());
+                _bloc.add(ExcsNextPageFetched());
               }
               return true;
             },

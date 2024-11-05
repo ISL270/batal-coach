@@ -44,7 +44,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     _searchCntrlr.addListener(
       () {
         if (_searchCntrlr.text.isEmpty) {
-          _bloc.add(const ExcSearched(''));
+          _bloc.add(const ExcsSearched(''));
         }
       },
     );
@@ -93,7 +93,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           cancelButtonText: context.l10n.cancel.capitalized,
           resultBehavior: SearchBarResultBehavior.neverVisible,
           cancelTextStyle: TextStyle(color: context.colorsX.primary),
-          onChanged: (searchTerm) => _bloc.add(ExcSearched(searchTerm)),
+          onChanged: (searchTerm) => _bloc.add(ExcsSearched(searchTerm)),
           actions: [
             SuperAction(
               behavior: SuperActionBehavior.alwaysVisible,
@@ -122,7 +122,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           return NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               if (notification.metrics.pixels >= (notification.metrics.maxScrollExtent * .7)) {
-                _bloc.add(ExcNextPageFetched());
+                _bloc.add(ExcsNextPageFetched());
               }
               return true;
             },

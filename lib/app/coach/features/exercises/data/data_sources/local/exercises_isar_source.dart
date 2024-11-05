@@ -10,9 +10,9 @@ import 'package:isar/isar.dart';
 
 @singleton
 final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
-  const ExercisesIsarSource(super.localDB);
+  const ExercisesIsarSource(super.isarService);
 
-  Future<int> deleteExercises(List<String> ids) => localDB.deleteAll<ExerciseIsar>(ids);
+  Future<int> deleteExercises(List<String> ids) => isarService.deleteAll<ExerciseIsar>(ids);
 
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
@@ -20,11 +20,11 @@ final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
     int page,
     int pageSize,
   ) async {
-    final exFilter = switch (searchTerm.isNotBlank) {
-      true => localDB.instance.exerciseIsars.where().nameStartsWith(searchTerm).filter(),
-      false => localDB.instance.exerciseIsars.where().anyName().filter(),
+    final query = switch (searchTerm.isNotBlank) {
+      true => isarService.instance.exerciseIsars.where().nameStartsWith(searchTerm).filter(),
+      false => isarService.instance.exerciseIsars.where().anyName().filter(),
     };
-    return exFilter
+    return query
         .optional(
           filters?.muscles.isNotEmpty ?? false,
           (ex) => ex.anyOf(
@@ -66,15 +66,15 @@ final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
   }
 
   Future<List<ExerciseIsar>> getExercisesByIDs(List<String> ids) async {
-    return localDB.getAllByIDs<ExerciseIsar>(ids);
+    return isarService.getAllByIDs<ExerciseIsar>(ids);
   }
 
   Future<ExerciseIsar?> getExercise(String id) async {
-    return localDB.get<ExerciseIsar>(id);
+    return isarService.get<ExerciseIsar>(id);
   }
 
-  ExerciseIsar? getExerciseSync(String id) => localDB.getSync<ExerciseIsar>(id);
+  ExerciseIsar? getExerciseSync(String id) => isarService.getSync<ExerciseIsar>(id);
 
   @override
-  ExerciseIsar fromDomain(Exercise domain) => ExerciseIsar.fromDomain(domain);
+  ExerciseIsar fromDomain(Exercise dm) => ExerciseIsar.fromDomain(dm);
 }
