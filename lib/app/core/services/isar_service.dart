@@ -10,12 +10,12 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
 @singleton
-final class IsarDB {
+final class IsarService {
   final Isar _isar;
-  const IsarDB._(this._isar);
+  const IsarService._(this._isar);
 
   @FactoryMethod(preResolve: true)
-  static Future<IsarDB> create() async {
+  static Future<IsarService> create() async {
     final dir = await getApplicationDocumentsDirectory();
     final isar = await Isar.open(
       [
@@ -25,7 +25,7 @@ final class IsarDB {
       ],
       directory: dir.path,
     );
-    return IsarDB._(isar);
+    return IsarService._(isar);
   }
 
   // Usefull to access it for custom queries.

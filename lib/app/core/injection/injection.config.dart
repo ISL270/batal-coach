@@ -31,7 +31,7 @@ import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart'
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
 import 'package:btl/app/core/services/firestore_service.dart' as _i529;
-import 'package:btl/app/core/services/local_db/isar_db.dart' as _i791;
+import 'package:btl/app/core/services/isar_service.dart' as _i102;
 import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart'
     as _i193;
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart'
@@ -63,8 +63,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
     gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     gh.singleton<_i529.FirestoreService>(() => _i529.FirestoreService());
-    await gh.singletonAsync<_i791.IsarDB>(
-      () => _i791.IsarDB.create(),
+    await gh.singletonAsync<_i102.IsarService>(
+      () => _i102.IsarService.create(),
       preResolve: true,
     );
     gh.singleton<_i403.ClientsFirestoreSource>(
@@ -80,11 +80,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i538.UserFirestoreSource>(
         () => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
     gh.singleton<_i193.UserIsarSource>(
-        () => _i193.UserIsarSource(gh<_i791.IsarDB>()));
+        () => _i193.UserIsarSource(gh<_i102.IsarService>()));
     gh.singleton<_i25.WorkoutIsarSource>(
-        () => _i25.WorkoutIsarSource(gh<_i791.IsarDB>()));
+        () => _i25.WorkoutIsarSource(gh<_i102.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
-        () => _i714.ExercisesIsarSource(gh<_i791.IsarDB>()));
+        () => _i714.ExercisesIsarSource(gh<_i102.IsarService>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
           gh<_i193.UserIsarSource>(),
           gh<_i538.UserFirestoreSource>(),
@@ -108,6 +108,8 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispose(),
     );
+    gh.singleton<_i260.AuthBloc>(
+        () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     gh.singleton<_i611.ExercisesRepository>(
       () => _i611.ExercisesRepository(
         gh<_i902.AuthRepository>(),
@@ -116,10 +118,10 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispMethod(),
     );
-    gh.singleton<_i260.AuthBloc>(
-        () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     gh.factory<_i441.ClientsBloc>(
         () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
+    gh.factory<_i450.ExercisesBloc>(
+        () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     gh.singleton<_i820.WorkoutRepository>(
       () => _i820.WorkoutRepository(
         gh<_i902.AuthRepository>(),
@@ -129,8 +131,6 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispMethod(),
     );
-    gh.factory<_i450.ExercisesBloc>(
-        () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     return this;
   }
 }
