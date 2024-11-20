@@ -9,7 +9,6 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 part 'auth_event.dart';
-part 'auth_state.dart';
 
 @singleton
 class AuthBloc extends Bloc<AuthEvent, UserState> {
