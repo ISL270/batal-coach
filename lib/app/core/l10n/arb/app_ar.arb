@@ -67,5 +67,11 @@
   "personal": "شخصي",
   "applyFilter": "تطبيق التصفية",
   "done": "تم",
-  "type": "النوع"
+  "type": "النوع",
+  "changepassword":"تغيير كلمة المرور",
+  "notifications":"الإشعارات",
+  "units":"الوحدات",
+  "technicalsupport":"الدعم الفني",
+  "aboutapp":"حول التطبيق",
+  "profile":"الحساب الشخصي"
 }

@@ -67,5 +67,11 @@
   "personal": "personal",
   "applyFilter": "apply filter",
   "done": "Done",
-  "type": "Type"
+  "type": "Type",
+  "changepassword":"change password",
+  "notifications":"notifications",
+  "units":"units",
+  "technicalsupport":"technical support",
+  "aboutapp":"about app",
+  "profile":"profile"
 }
