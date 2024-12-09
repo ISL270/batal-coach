@@ -14,6 +14,7 @@ import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -41,22 +42,27 @@ class SettingsScreen extends StatelessWidget {
                 const AvatarLabelRow(),
                 const Gap(30),
                 SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.lock,
                   label: context.l10n.changepassword.capitalized,
                 ),
                 const Gap(30),
                 SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.bell,
                   label: context.l10n.notifications.capitalized,
                 ),
                 const Gap(30),
                 SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.listNumeric,
                   label: context.l10n.units.capitalized,
                 ),
                 const Gap(30),
                 SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.headset,
                   label: context.l10n.technicalsupport.capitalized,
                 ),
                 const Gap(30),
                 SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.mobileScreenButton,
                   label: context.l10n.aboutapp.capitalized,
                 ),
                 const Spacer(),
