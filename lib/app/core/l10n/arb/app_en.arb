@@ -67,5 +67,14 @@
   "personal": "personal",
   "applyFilter": "apply filter",
   "done": "Done",
-  "type": "Type"
+  "type": "Type",
+  "regcontinue":"Continue",
+  "alreadyhaveaccount":"Already have an account?",
+  "signin":"Sign in",
+  "selectrole":"Select a coach role",
+  "fitness":"Fitness Coach",
+  "nutrition":"Nutrition Coach",
+  "manager":"Manager",
+  "company":"Company Name (optional)",
+  "createaccount":"Create \nAccount."
 }

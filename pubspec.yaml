@@ -23,7 +23,7 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.10+1
-  font_awesome_flutter: ^10.7.0
+  font_awesome_flutter: ^10.8.0
   form_inputs:
     git: https://github.com/ISL270/form_inputs
   formz: ^0.8.0
@@ -60,12 +60,10 @@ dev_dependencies:
 
 dependency_overrides:
   analyzer: ^6.3.0
-  
 
 flutter_gen:
   output: lib/app/core/assets_gen/
   line_length: 100
-
 
 flutter:
   uses-material-design: true
