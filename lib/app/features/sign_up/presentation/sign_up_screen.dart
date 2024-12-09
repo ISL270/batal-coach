@@ -33,56 +33,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedRole;
   bool loading = false;
 
-  late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-  late TextEditingController confirmPasswordController;
-  late TextEditingController companyController;
-  late TextEditingController phoneNumberController;
-
   late PageController pageController;
-
-  late FocusNode nameFocusNode;
-  late FocusNode emailFocusNode;
-  late FocusNode passwordFocusNode;
-  late FocusNode confirmPasswordFocusNode;
 
   GlobalKey<FormState> formKey = GlobalKey();
   GlobalKey<FormState> formKey2 = GlobalKey();
 
   @override
   void initState() {
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
-    companyController = TextEditingController();
-    phoneNumberController = TextEditingController();
-
     pageController = PageController();
-
-    nameFocusNode = FocusNode();
-    emailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
-    confirmPasswordFocusNode = FocusNode();
     super.initState();
   }
 
   @override
   void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    companyController.dispose();
-    phoneNumberController.dispose();
-
     pageController.dispose();
-
-    nameFocusNode.dispose();
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
-    confirmPasswordFocusNode.dispose();
     super.dispose();
   }
 
@@ -133,176 +97,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
                   child: PageView(controller: pageController, children: [
-                    SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
-                        child: Form(
-                          key: formKey,
-                          child: Column(
-                            children: [
-                              CustomTextFormField(
-                                textEditingController: nameController,
-                                focusNode: nameFocusNode,
-                                validator: AppValidators.displayNamevalidator,
-                                textInputAction: TextInputAction.next,
-                                labelText: context.l10n.name,
-                                onChanged: (v) {
-                                  nameController.text = v!;
-                                  setState(() {});
-                                },
-                              ),
-                              const Gap(25),
-                              CustomTextFormField(
-                                textEditingController: emailController,
-                                focusNode: emailFocusNode,
-                                validator: AppValidators.emailValidator,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.emailAddress,
-                                labelText: context.l10n.email,
-                                onChanged: (v) {
-                                  emailController.text = v!;
-                                  setState(() {});
-                                },
-                              ),
-                              const Gap(25),
-                              CustomTextFormField(
-                                textEditingController: passwordController,
-                                focusNode: passwordFocusNode,
-                                validator: AppValidators.passwordValidator,
-                                textInputAction: TextInputAction.next,
-                                labelText: context.l10n.password,
-                                onChanged: (v) {
-                                  passwordController.text = v!;
-                                  setState(() {});
-                                },
-                              ),
-                              const Gap(25),
-                              CustomTextFormField(
-                                textEditingController: confirmPasswordController,
-                                focusNode: confirmPasswordFocusNode,
-                                validator: (v) {
-                                  return AppValidators.repeatPasswordValidator(
-                                    password: passwordController.text,
-                                    value: v,
-                                  );
-                                },
-                                labelText: context.l10n.confirmPassword,
-                                onChanged: (v) {
-                                  confirmPasswordController.text = v!;
-                                  setState(() {});
-                                },
-                              ),
-                              const Gap(25),
-                              CustomIconElevatedButton(
-                                text: context.l10n.regcontinue,
-                                infoFilled: infoFill(),
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    pageController.nextPage(
-                                      duration: const Duration(milliseconds: 600),
-                                      curve: Curves.easeIn,
-                                    );
-                                  }
-                                },
-                              ),
-                              const Gap(20),
-                              const AlreadyHaveAnAccount(),
-                              const Gap(20),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
-                        child: Form(
-                          key: formKey2,
-                          child: Column(
-                            children: [
-                              Center(
-                                child: DropdownButtonFormField<String>(
-                                  decoration: InputDecoration(
-                                    border: CustomDropDownBorder(context),
-                                    enabledBorder: CustomDropDownBorder(context),
-                                    disabledBorder: CustomDropDownBorder(context),
-                                    focusedBorder: CustomDropDownBorder(context),
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                  isExpanded: true,
-                                  value: selectedRole,
-                                  dropdownColor: AppColors.lightTint,
-                                  hint: Text(
-                                    context.l10n.selectrole,
-                                    style: TextStyle(
-                                      color: context.settingsBloc.state.isThemeDark
-                                          ? AppColors.dark
-                                          : AppColors.light,
-                                    ),
-                                  ),
-                                  items: roles.map((role) {
-                                    return DropdownMenuItem<String>(
-                                      value: role,
-                                      child: Text(
-                                        role,
-                                        style: TextStyle(
-                                          color: context.settingsBloc.state.isThemeDark
-                                              ? AppColors.dark
-                                              : AppColors.light,
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedRole = value;
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please select a role';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              const Gap(25),
-                              CustomTextFormField(
-                                labelText: context.l10n.company,
-                                focusNode: FocusNode(),
-                                onChanged: (p0) {},
-                                textEditingController: companyController,
-                                validator: (v) {
-                                  return null;
-                                },
-                              ),
-                              const Gap(25),
-                              CustomTextFormField(
-                                labelText: context.l10n.phoneNumber,
-                                focusNode: FocusNode(),
-                                onChanged: (p0) {},
-                                textEditingController: phoneNumberController,
-                                validator: AppValidators.phoneNumber,
-                                keyboardType: TextInputType.number,
-                              ),
-                              const Gap(105),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 48,
-                                child: Button.filled(
-                                  onPressed: () {
-                                    if (formKey2.currentState!.validate()) {}
-                                  },
-                                  label: context.l10n.createAccount.capitalized,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    FirstPageView(formKey: formKey, pageController: pageController),
+                    SecondPageView(roles: roles, selectedRole: selectedRole ?? '')
                   ]),
                 ),
               ],
@@ -312,162 +108,163 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-
-  bool infoFill() {
-    if (nameController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
-        confirmPasswordController.text.isNotEmpty) {
-      return true;
-    }
-    return false;
-  }
-
-  OutlineInputBorder CustomDropDownBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(12)),
-      borderSide: BorderSide(
-        color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
-      ),
-    );
-  }
 }
 
-class _CoachEmailField extends StatelessWidget {
-  const _CoachEmailField();
+class SecondPageView extends StatefulWidget {
+  const SecondPageView({
+    required this.selectedRole,
+    required this.roles,
+    super.key,
+  });
+
+  final String selectedRole;
+  final List<String> roles;
+
+  @override
+  State<SecondPageView> createState() => _SecondPageViewState();
+}
+
+class _SecondPageViewState extends State<SecondPageView> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  GlobalKey<FormState> formKey2 = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.coachEmail != current.coachEmail,
-      builder: (context, state) {
-        return TextFormField(
-          initialValue: state.coachEmail.value,
-          key: const Key('signUpForm_coachEmailInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            labelText: context.l10n.yourCoachEmail.capitalized,
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+    super.build(context);
+    return SingleChildScrollView(
+      key: const PageStorageKey('Second_page'),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
+        child: Form(
+          key: formKey2,
+          child: Column(
+            children: [
+              Center(
+                child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    border: customDropDownBorder(context),
+                    enabledBorder: customDropDownBorder(context),
+                    disabledBorder: customDropDownBorder(context),
+                    focusedBorder: customDropDownBorder(context),
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  isExpanded: true,
+                  value: widget.roles.first,
+                  dropdownColor: AppColors.lightTint,
+                  hint: Text(
+                    context.l10n.selectrole,
+                    style: TextStyle(
+                      color:
+                          context.settingsBloc.state.isThemeDark ? AppColors.dark : AppColors.light,
+                    ),
+                  ),
+                  items: widget.roles.map((role) {
+                    return DropdownMenuItem<String>(
+                      value: role,
+                      child: Text(
+                        role,
+                        style: TextStyle(
+                          color: context.settingsBloc.state.isThemeDark
+                              ? AppColors.dark
+                              : AppColors.light,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    String? selectRole = widget.selectedRole;
+
+                    setState(() {
+                      selectRole = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select a role';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const Gap(25),
+              _CompanyField(),
+              const Gap(25),
+              _PhoneNumberField(),
+              const Gap(105),
+              _SignUpButton(),
+            ],
           ),
-        );
-      },
-    );
-  }
-}
-
-class _EmailField extends StatelessWidget {
-  const _EmailField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.email != current.email,
-      builder: (context, state) {
-        return TextField(
-          key: const Key('signUpForm_emailInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            labelText: context.l10n.email.capitalized,
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _NameField extends StatelessWidget {
-  const _NameField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, Name>(
-      selector: (state) => state.name,
-      builder: (context, name) => TextField(
-        key: const Key('signUpForm_nameInput_textField'),
-        onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
-        keyboardType: TextInputType.name,
-        decoration: InputDecoration(
-          labelText: context.l10n.name.capitalized,
-          errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
         ),
       ),
     );
   }
 }
 
-class _PhoneNumberField extends StatelessWidget {
-  const _PhoneNumberField();
+OutlineInputBorder customDropDownBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(
+      color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+    ),
+  );
+}
+
+class FirstPageView extends StatefulWidget {
+  const FirstPageView({
+    required this.formKey,
+    required this.pageController,
+    super.key,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final PageController pageController;
+
+  @override
+  State<FirstPageView> createState() => _FirstPageViewState();
+}
+
+class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
-      selector: (state) => state.phoneNumber,
-      builder: (context, phoneNumber) => TextField(
-        key: const Key('signUpForm_phoneInput_textField'),
-        onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
-        keyboardType: TextInputType.phone,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(15),
-        ],
-        decoration: InputDecoration(
-          labelText: context.l10n.phoneNumber.capitalized,
-          errorText:
-              phoneNumber.displayError == null ? null : context.tr(phoneNumber.displayError!.name),
+    super.build(context);
+    return SingleChildScrollView(
+      key: const PageStorageKey('First_page'),
+      physics: const BouncingScrollPhysics(),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
+        child: Form(
+          key: widget.formKey,
+          child: Column(
+            children: [
+              const _NameFormField(),
+              const Gap(25),
+              const _EmailField(),
+              const Gap(25),
+              const _PasswordField(),
+              const Gap(25),
+              const _ConfirmPasswordField(),
+              const Gap(25),
+              _NextPageViewButton(pageController: widget.pageController),
+              const Gap(20),
+              const AlreadyHaveAnAccount(),
+              const Gap(20),
+            ],
+          ),
         ),
       ),
-    );
-  }
-}
-
-class _PasswordField extends StatelessWidget {
-  const _PasswordField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.password != current.password,
-      builder: (context, state) {
-        return TextField(
-          key: const Key('signUpForm_passwordInput_textField'),
-          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: context.l10n.password.capitalized,
-            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _ConfirmPasswordField extends StatelessWidget {
-  const _ConfirmPasswordField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) =>
-          previous.password != current.password ||
-          previous.confirmPassword != current.confirmPassword,
-      builder: (context, state) {
-        return TextField(
-          key: const Key('signUpForm_confirmedPasswordInput_textField'),
-          onChanged: (confirmPassword) =>
-              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: context.l10n.confirmPassword.capitalized,
-            errorText:
-                state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
-          ),
-        );
-      },
     );
   }
 }
 
 class _SignUpButton extends StatelessWidget {
   const _SignUpButton();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpCubit, SignUpState>(
@@ -480,14 +277,160 @@ class _SignUpButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Button.filled(
-          key: const Key('signUpForm_button'),
-          maxWidth: true,
-          shape: ButtonShape.roundedCorners,
-          isLoading: state.status.isLoading,
-          density: ButtonDensity.comfortable,
-          onPressed: state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
-          label: context.l10n.signUp.capitalized,
+        return SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: Button.filled(
+            key: const Key('signUpForm_button'),
+            maxWidth: true,
+            shape: ButtonShape.roundedCorners,
+            isLoading: state.status.isLoading,
+            density: ButtonDensity.comfortable,
+            // onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
+            onPressed:
+                state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
+            label: context.l10n.signUp.capitalized,
+            height: 0,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _PhoneNumberField extends StatelessWidget {
+  const _PhoneNumberField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
+      selector: (state) => state.phoneNumber,
+      builder: (context, phoneNumber) {
+        return CustomTextFormField(
+          key: const Key('signUpForm_phoneInput_textField'),
+          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
+          inputFormatter: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(15),
+          ],
+          keyboardType: TextInputType.phone,
+          labelText: context.l10n.phoneNumber.capitalized,
+        );
+      },
+    );
+  }
+}
+
+class _CompanyField extends StatelessWidget {
+  const _CompanyField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomTextFormField(
+      labelText: context.l10n.company,
+      onChanged: (p0) {},
+    );
+  }
+}
+
+class _NextPageViewButton extends StatelessWidget {
+  const _NextPageViewButton({
+    required this.pageController,
+  });
+
+  final PageController pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomIconElevatedButton(
+      text: context.l10n.regcontinue,
+      onPressed: () {
+        pageController.nextPage(
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeIn,
+        );
+      },
+    );
+  }
+}
+
+class _ConfirmPasswordField extends StatelessWidget {
+  const _ConfirmPasswordField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) =>
+          previous.password != current.password ||
+          previous.confirmPassword != current.confirmPassword,
+      builder: (context, state) {
+        return CustomTextFormField(
+          key: const Key('signUpForm_confirmedPasswordInput_textField'),
+          labelText: context.l10n.confirmPassword,
+          isPasswordField: true,
+          onChanged: (confirmPassword) =>
+              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
+        );
+      },
+    );
+  }
+}
+
+class _PasswordField extends StatelessWidget {
+  const _PasswordField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.password != current.password,
+      builder: (context, state) {
+        return CustomTextFormField(
+          key: const Key('signUpForm_passwordInput_textField'),
+          textInputAction: TextInputAction.next,
+          labelText: context.l10n.password,
+          isPasswordField: true,
+          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
+        );
+      },
+    );
+  }
+}
+
+class _EmailField extends StatelessWidget {
+  const _EmailField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.coachEmail != current.coachEmail,
+      builder: (context, state) {
+        return CustomTextFormField(
+          key: const Key('signUpForm_coachEmailInput_textField'),
+          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.emailAddress,
+          labelText: context.l10n.email,
+          onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
+        );
+      },
+    );
+  }
+}
+
+class _NameFormField extends StatelessWidget {
+  const _NameFormField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SignUpCubit, SignUpState, Name>(
+      selector: (state) => state.name,
+      builder: (context, state) {
+        return CustomTextFormField(
+          key: const Key('signUpForm_nameInput_textField'),
+          textInputAction: TextInputAction.next,
+          labelText: context.l10n.name,
+          onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
         );
       },
     );

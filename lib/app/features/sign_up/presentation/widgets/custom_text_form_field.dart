@@ -5,37 +5,36 @@ import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     required this.labelText,
-    required this.textEditingController,
-    required this.focusNode,
-    required this.validator,
     required this.onChanged,
     this.onFieldSubmitted,
     this.textInputAction = TextInputAction.done,
     this.keyboardType = TextInputType.text,
+    this.isPasswordField = false,
+    this.inputFormatter,
     super.key,
   });
 
-  final TextEditingController textEditingController;
-  final FocusNode focusNode;
   final String labelText;
-  final String? Function(String?)? validator;
+
   final void Function(String?)? onFieldSubmitted;
-  final void Function(String?)? onChanged;
+  final void Function(String) onChanged;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
+  final bool isPasswordField;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: textEditingController,
-      focusNode: focusNode,
-      validator: validator,
       onFieldSubmitted: onFieldSubmitted,
+      obscureText: isPasswordField,
       onChanged: onChanged,
+      inputFormatters: [],
       textInputAction: textInputAction,
       keyboardType: keyboardType,
       style: TextStyle(

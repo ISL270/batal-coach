@@ -6,13 +6,14 @@ class CustomIconElevatedButton extends StatelessWidget {
   const CustomIconElevatedButton({
     required this.text,
     this.onPressed,
-    this.infoFilled = false,
+    this.loading = false,
     super.key,
   });
 
   final String text;
   final void Function()? onPressed;
-  final bool infoFilled;
+
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +22,23 @@ class CustomIconElevatedButton extends StatelessWidget {
       height: 48,
       child: ElevatedButton.icon(
         style: TextButton.styleFrom(
-          backgroundColor: infoFilled ? AppColors.primary : AppColors.disabledButton,
+          backgroundColor: AppColors.primary,
         ),
-        label: Center(
-          child: Text(
-            '       $text',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
+        label: loading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.light,
+                ),
+              )
+            : Center(
+                child: Text(
+                  '       $text',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
         icon: const Icon(
           Icons.navigate_next_sharp,
           color: AppColors.onDark,
