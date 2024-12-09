@@ -1,5 +1,5 @@
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/core/extensions/text_style_x.dart';
+import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';

@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
 import 'package:btl/app/features/login/login_screen.dart';

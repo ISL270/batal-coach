@@ -2,7 +2,7 @@
 
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:injectable/injectable.dart';

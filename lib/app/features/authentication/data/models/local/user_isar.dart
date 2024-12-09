@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_cm.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';

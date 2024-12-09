@@ -1,5 +1,5 @@
-import 'package:btl/app/core/extensions/arabic_x.dart';
-import 'package:btl/app/core/extensions/english_x.dart';
+import 'package:btl/app/core/extension_methods/arabic_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
 
 extension StringX on String {
   /// Adds definite Alif Lam if Arabic,

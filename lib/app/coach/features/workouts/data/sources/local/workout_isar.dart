@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart';
 import 'package:btl/app/coach/features/workouts/data/exercise_details_serializer.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/models/domain/field.dart';
