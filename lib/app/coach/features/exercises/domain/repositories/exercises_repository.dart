@@ -6,6 +6,7 @@ import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar
 import 'package:btl/app/coach/features/exercises/data/models/remote/exercise_fm.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,12 +32,12 @@ final class ExercisesRepository extends ReactiveRepository<Exercise, ExerciseFM,
   }
 
   Future<List<Exercise>> getExcsByIDs(List<String> ids) async {
-    final cmExercises = await _localSource.getExercisesByIDs(ids);
+    final cmExercises = await _localSource.getExercisesByIDs(ids.map(StringID.new).toList());
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 
   Future<Exercise?> getExercise(String id) async {
-    final cmExercise = await _localSource.getExercise(id);
+    final cmExercise = await _localSource.getExercise(StringID(id));
     return cmExercise?.toDomain();
   }
 

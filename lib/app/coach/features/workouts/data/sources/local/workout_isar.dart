@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart';
 import 'package:btl/app/coach/features/workouts/data/exercise_details_serializer.dart';
-import 'package:btl/app/core/extension_methods/string_x.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/core/models/domain/field.dart';
@@ -17,7 +17,7 @@ final class WorkoutIsar extends CacheModel<Workout> {
   @override
   Id get cacheID => id.fastHash;
 
-  String id;
+  StringID id;
 
   String coachID;
 
@@ -40,7 +40,7 @@ final class WorkoutIsar extends CacheModel<Workout> {
   });
 
   factory WorkoutIsar.fromDomain(Workout domain) => WorkoutIsar(
-        id: domain.id,
+        id: StringID(domain.id),
         coachID: domain.coachID,
         name: domain.name,
         createdAt: domain.createdAt,
@@ -54,7 +54,7 @@ final class WorkoutIsar extends CacheModel<Workout> {
     final encodedExercisesSets = exercisesSets.map(ExerciseSetsIsar.fromJson);
 
     return Workout(
-      id: id,
+      id: id.value,
       coachID: coachID,
       name: name,
       description: description,
@@ -65,21 +65,21 @@ final class WorkoutIsar extends CacheModel<Workout> {
 }
 
 final class ExerciseSetsIsar with ExerciseSetsSerializer {
-  final String excID;
+  final StringID excID;
   final Map<SET, List<Field>> fields;
 
   ExerciseSetsIsar(this.excID, this.fields);
 
-  String get encoded => jsonEncode(toMap(excID, fields));
+  String get encoded => jsonEncode(toMap(excID.value, fields));
 
   factory ExerciseSetsIsar.fromJson(String encodedJson) {
     final (excID, fields) =
         ExerciseSetsSerializer.fromMap(jsonDecode(encodedJson) as Map<String, dynamic>);
-    return ExerciseSetsIsar(excID, fields);
+    return ExerciseSetsIsar(StringID(excID), fields);
   }
 
   factory ExerciseSetsIsar.fromDomain(ExerciseSets exerciseSets) =>
-      ExerciseSetsIsar(exerciseSets.exercise.id, exerciseSets.fields);
+      ExerciseSetsIsar(StringID(exerciseSets.exercise.id), exerciseSets.fields);
 
   ExerciseSets toDomain() {
     final excIsar = getIt.get<ExercisesIsarSource>().getExerciseSync(excID);

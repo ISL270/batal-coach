@@ -2,7 +2,7 @@
 
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
-import 'package:btl/app/core/extension_methods/string_x.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:injectable/injectable.dart';
@@ -43,11 +43,11 @@ final class IsarService {
     return _isar.writeTxn(() => _isar.collection<T>().putAll(objects));
   }
 
-  Future<T?> get<T extends CacheModel>(String id) async {
+  Future<T?> get<T extends CacheModel>(StringID id) async {
     return _isar.txn(() => _isar.collection<T>().get(id.fastHash));
   }
 
-  T? getSync<T extends CacheModel>(String id) {
+  T? getSync<T extends CacheModel>(StringID id) {
     return _isar.txnSync(() => _isar.collection<T>().getSync(id.fastHash));
   }
 
@@ -75,7 +75,7 @@ final class IsarService {
     return _isar.writeTxnSync(() => _isar.collection<T>().deleteSync(object.cacheID));
   }
 
-  Future<int> deleteAll<T extends CacheModel>(List<String> ids) async {
+  Future<int> deleteAll<T extends CacheModel>(List<StringID> ids) async {
     return _isar
         .writeTxn(() => _isar.collection<T>().deleteAll(ids.map((e) => e.fastHash).toList()));
   }
@@ -92,7 +92,7 @@ final class IsarService {
     return _isar.writeTxnSync(() => _isar.collection<T>().clearSync());
   }
 
-  Future<List<T>> getAllByIDs<T extends CacheModel>(List<String> ids) async {
+  Future<List<T>> getAllByIDs<T extends CacheModel>(List<StringID> ids) async {
     return _isar.txn(() async {
       final docs = await _isar.collection<T>().getAll(ids.map((e) => e.fastHash).toList());
       // Remove nulls.
@@ -100,7 +100,7 @@ final class IsarService {
     });
   }
 
-  List<T> getAllByIDsSync<T extends CacheModel>(List<String> ids) {
+  List<T> getAllByIDsSync<T extends CacheModel>(List<StringID> ids) {
     return _isar.txnSync(() {
       final docs = _isar.collection<T>().getAllSync(ids.map((e) => e.fastHash).toList());
       // Remove nulls.

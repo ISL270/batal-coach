@@ -3,6 +3,7 @@
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/models/isar_source.dart';
 import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
@@ -12,7 +13,7 @@ import 'package:isar/isar.dart';
 final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
   const ExercisesIsarSource(super.isarService);
 
-  Future<int> deleteExercises(List<String> ids) => isarService.deleteAll<ExerciseIsar>(ids);
+  Future<int> deleteExercises(List<StringID> ids) => isarService.deleteAll<ExerciseIsar>(ids);
 
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
@@ -65,15 +66,15 @@ final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
         .findAll();
   }
 
-  Future<List<ExerciseIsar>> getExercisesByIDs(List<String> ids) async {
+  Future<List<ExerciseIsar>> getExercisesByIDs(List<StringID> ids) async {
     return isarService.getAllByIDs<ExerciseIsar>(ids);
   }
 
-  Future<ExerciseIsar?> getExercise(String id) async {
+  Future<ExerciseIsar?> getExercise(StringID id) async {
     return isarService.get<ExerciseIsar>(id);
   }
 
-  ExerciseIsar? getExerciseSync(String id) => isarService.getSync<ExerciseIsar>(id);
+  ExerciseIsar? getExerciseSync(StringID id) => isarService.getSync<ExerciseIsar>(id);
 
   @override
   ExerciseIsar fromDomain(Exercise dm) => ExerciseIsar.fromDomain(dm);

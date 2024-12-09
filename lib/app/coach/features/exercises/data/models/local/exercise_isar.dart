@@ -1,5 +1,5 @@
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/core/extension_methods/string_x.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:isar/isar.dart';
 
@@ -10,7 +10,7 @@ final class ExerciseIsar implements CacheModel<Exercise> {
   @override
   Id get cacheID => id.fastHash;
 
-  String id;
+  StringID id;
 
   @Index(type: IndexType.value, caseSensitive: false)
   String name;
@@ -60,7 +60,7 @@ final class ExerciseIsar implements CacheModel<Exercise> {
 
   @override
   Exercise toDomain() => Exercise(
-        id: id,
+        id: id.value,
         name: name,
         force: force,
         level: level,
@@ -75,7 +75,7 @@ final class ExerciseIsar implements CacheModel<Exercise> {
       );
 
   factory ExerciseIsar.fromDomain(Exercise exc) => ExerciseIsar(
-        id: exc.id,
+        id: StringID(exc.id),
         type: exc.type,
         equipment: exc.equipment,
         force: exc.force,

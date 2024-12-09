@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extension_methods/string_x.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_cm.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -18,7 +18,7 @@ final class UserIsar implements UserCM {
   String email;
 
   @override
-  String uid;
+  StringID uid;
 
   @override
   String name;
@@ -42,13 +42,13 @@ final class UserIsar implements UserCM {
   @override
   User toDomain() => switch (userType) {
         UserType.coach => Coach(
-            id: uid,
+            id: uid.value,
             email: email,
             name: name,
             phoneNumber: phoneNumber,
           ),
         UserType.trainee => Trainee(
-            id: uid,
+            id: uid.value,
             email: email,
             coachEmail: coachEmail!,
             name: name,
@@ -58,14 +58,14 @@ final class UserIsar implements UserCM {
 
   factory UserIsar.fromDomain(User user) => switch (user) {
         Coach() => UserIsar(
-            uid: user.id,
+            uid: StringID(user.id),
             name: user.name,
             email: user.email,
             phoneNumber: user.phoneNumber,
             userType: UserType.coach,
           ),
         Trainee() => UserIsar(
-            uid: user.id,
+            uid: StringID(user.id),
             name: user.name,
             email: user.email,
             phoneNumber: user.phoneNumber,

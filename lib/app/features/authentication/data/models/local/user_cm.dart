@@ -1,9 +1,10 @@
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/models/cache_model.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 
 abstract interface class UserCM extends CacheModel<User> {
-  String uid;
+  StringID uid;
   String email;
   String name;
   UserType userType;
