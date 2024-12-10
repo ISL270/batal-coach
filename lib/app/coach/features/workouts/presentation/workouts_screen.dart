@@ -3,8 +3,8 @@
 import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder_screen.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/extensions/english_x.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
+import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';

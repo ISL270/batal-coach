@@ -1,8 +1,7 @@
-import 'package:btl/app/core/constants/app_colors.dart';
-import 'package:btl/app/core/constants/app_validators.dart';
-import 'package:btl/app/core/extensions/bloc_x.dart';
-import 'package:btl/app/core/extensions/context_x.dart';
-import 'package:btl/app/core/extensions/english_x.dart';
+import 'package:btl/app/core/extension_methods/bloc_x.dart';
+import 'package:btl/app/core/extension_methods/context_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
+import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';

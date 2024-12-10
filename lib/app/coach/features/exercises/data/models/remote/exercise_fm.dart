@@ -1,7 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/core/models/remote_model.dart';
+import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'exercise_fm.g.dart';
