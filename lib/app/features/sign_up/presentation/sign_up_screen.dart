@@ -100,6 +100,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 }
 
+// Sign up Fields.
+class FirstPageView extends StatefulWidget {
+  const FirstPageView({
+    required this.pageController,
+    super.key,
+  });
+
+  final PageController pageController;
+
+  @override
+  State<FirstPageView> createState() => _FirstPageViewState();
+}
+
+class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return SingleChildScrollView(
+      key: const PageStorageKey('First_page'),
+      physics: const BouncingScrollPhysics(),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
+        child: Column(
+          children: [
+            const _NameFormField(),
+            const Gap(25),
+            const _EmailField(),
+            const Gap(25),
+            const _PasswordField(),
+            const Gap(25),
+            const _ConfirmPasswordField(),
+            const Gap(25),
+            _NextPageViewButton(pageController: widget.pageController),
+            const Gap(20),
+            const _AlreadyHaveAnAccount(),
+            const Gap(20),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class SecondPageView extends StatefulWidget {
   const SecondPageView({
     required this.selectedRole,
@@ -184,243 +231,24 @@ class _SecondPageViewState extends State<SecondPageView> with AutomaticKeepAlive
   }
 }
 
-OutlineInputBorder customDropDownBorder(BuildContext context) {
-  return OutlineInputBorder(
-    borderRadius: const BorderRadius.all(Radius.circular(12)),
-    borderSide: BorderSide(
-      color: context.colorsX.background,
-    ),
-  );
-}
-
-class FirstPageView extends StatefulWidget {
-  const FirstPageView({
-    required this.pageController,
-    super.key,
-  });
-
-  final PageController pageController;
-
-  @override
-  State<FirstPageView> createState() => _FirstPageViewState();
-}
-
-class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
+class _NameFormField extends StatelessWidget {
+  const _NameFormField();
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return SingleChildScrollView(
-      key: const PageStorageKey('First_page'),
-      physics: const BouncingScrollPhysics(),
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
-        child: Column(
-          children: [
-            const _NameFormField(),
-            const Gap(25),
-            const _EmailField(),
-            const Gap(25),
-            const _PasswordField(),
-            const Gap(25),
-            const _ConfirmPasswordField(),
-            const Gap(25),
-            _NextPageViewButton(pageController: widget.pageController),
-            const Gap(20),
-            const _AlreadyHaveAnAccount(),
-            const Gap(20),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SignUpButton extends StatelessWidget {
-  const _SignUpButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<SignUpCubit, SignUpState>(
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: (context, state) {
-        if (state.status.isFailure) {
-          context.scaffoldMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(state.errorMsg)));
-        }
-      },
-      builder: (context, state) {
-        return SizedBox(
-          width: double.infinity,
-          height: 48,
-          child: Button.filled(
-            key: const Key('signUpForm_button'),
-            maxWidth: true,
-            shape: ButtonShape.roundedCorners,
-            isLoading: state.status.isLoading,
-            density: ButtonDensity.comfortable,
-            // onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
-            onPressed:
-                state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
-            label: context.l10n.signUp.capitalized,
-            height: 0,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _PhoneNumberField extends StatelessWidget {
-  const _PhoneNumberField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
-      selector: (state) => state.phoneNumber,
-      builder: (context, phoneNumber) {
-        return TextFormField(
-          key: const Key('signUpForm_phoneInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(15),
-          ],
-          keyboardType: TextInputType.phone,
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
-          decoration: InputDecoration(
-            label: FormFieldText(
-              label: context.l10n.phoneNumber.capitalized,
-            ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _CompanyField extends StatelessWidget {
-  const _CompanyField();
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      style: TextStyle(
-        color: context.colorsX.background,
-      ),
-      decoration: InputDecoration(
-        label: FormFieldText(
-          label: context.l10n.company.capitalized,
-        ),
-        border: textFormFieldBorder(context),
-        disabledBorder: textFormFieldBorder(context),
-        enabledBorder: textFormFieldBorder(context),
-        focusedBorder: textFormFieldBorder(context),
-      ),
-      onChanged: (p0) {},
-    );
-  }
-}
-
-class _NextPageViewButton extends StatelessWidget {
-  const _NextPageViewButton({
-    required this.pageController,
-  });
-
-  final PageController pageController;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 48,
-      child: Button.filled(
-        height: 0,
-        // iconWithAlignment: IconWithAlignment(
-        //   Icon(
-        //     FontAwesomeIcons.forward,
-        //     size: 18,
-        //     color: context.colorsX.onBackground,
-        //   ),
-        //   alignment: IconAlignment.end,
-        // ),
-        label: context.l10n.regcontinue,
-        onPressed: () {
-          pageController.nextPage(
-            duration: const Duration(milliseconds: 600),
-            curve: Curves.easeIn,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _ConfirmPasswordField extends StatelessWidget {
-  const _ConfirmPasswordField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) =>
-          previous.password != current.password ||
-          previous.confirmPassword != current.confirmPassword,
+    return BlocSelector<SignUpCubit, SignUpState, Name>(
+      selector: (state) => state.name,
       builder: (context, state) {
         return TextFormField(
-          key: const Key('signUpForm_confirmedPasswordInput_textField'),
-          obscureText: true,
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
-          decoration: InputDecoration(
-            errorText:
-                state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
-            label: FormFieldText(
-              label: context.l10n.confirmPassword.capitalized,
-            ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
-          ),
-          onChanged: (confirmPassword) =>
-              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
-        );
-      },
-    );
-  }
-}
-
-class _PasswordField extends StatelessWidget {
-  const _PasswordField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.password != current.password,
-      builder: (context, state) {
-        return TextFormField(
-          key: const Key('signUpForm_passwordInput_textField'),
+          key: const Key('signUpForm_nameInput_textField'),
           textInputAction: TextInputAction.next,
-          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
+          onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
           style: TextStyle(
             color: context.colorsX.background,
           ),
-          obscureText: true,
           decoration: InputDecoration(
-            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
             label: FormFieldText(
-              label: context.l10n.password.capitalized,
+              label: context.l10n.name.capitalized,
             ),
             border: textFormFieldBorder(context),
             disabledBorder: textFormFieldBorder(context),
@@ -465,29 +293,194 @@ class _EmailField extends StatelessWidget {
   }
 }
 
-class _NameFormField extends StatelessWidget {
-  const _NameFormField();
+class _PasswordField extends StatelessWidget {
+  const _PasswordField();
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, Name>(
-      selector: (state) => state.name,
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return TextFormField(
-          key: const Key('signUpForm_nameInput_textField'),
+          key: const Key('signUpForm_passwordInput_textField'),
           textInputAction: TextInputAction.next,
-          onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
+          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           style: TextStyle(
             color: context.colorsX.background,
           ),
+          obscureText: true,
           decoration: InputDecoration(
+            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
             label: FormFieldText(
-              label: context.l10n.name.capitalized,
+              label: context.l10n.password.capitalized,
             ),
             border: textFormFieldBorder(context),
             disabledBorder: textFormFieldBorder(context),
             enabledBorder: textFormFieldBorder(context),
             focusedBorder: textFormFieldBorder(context),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ConfirmPasswordField extends StatelessWidget {
+  const _ConfirmPasswordField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) =>
+          previous.password != current.password ||
+          previous.confirmPassword != current.confirmPassword,
+      builder: (context, state) {
+        return TextFormField(
+          key: const Key('signUpForm_confirmedPasswordInput_textField'),
+          obscureText: true,
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            errorText:
+                state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
+            label: FormFieldText(
+              label: context.l10n.confirmPassword.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
+          onChanged: (confirmPassword) =>
+              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
+        );
+      },
+    );
+  }
+}
+
+class _NextPageViewButton extends StatelessWidget {
+  const _NextPageViewButton({
+    required this.pageController,
+  });
+
+  final PageController pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 48,
+      child: Button.filled(
+        height: 0,
+        // iconWithAlignment: IconWithAlignment(
+        //   Icon(
+        //     FontAwesomeIcons.forward,
+        //     size: 18,
+        //     color: context.colorsX.onBackground,
+        //   ),
+        //   alignment: IconAlignment.end,
+        // ),
+        label: context.l10n.regcontinue,
+        onPressed: () {
+          pageController.nextPage(
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeIn,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CompanyField extends StatelessWidget {
+  const _CompanyField();
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      style: TextStyle(
+        color: context.colorsX.background,
+      ),
+      decoration: InputDecoration(
+        label: FormFieldText(
+          label: context.l10n.company.capitalized,
+        ),
+        border: textFormFieldBorder(context),
+        disabledBorder: textFormFieldBorder(context),
+        enabledBorder: textFormFieldBorder(context),
+        focusedBorder: textFormFieldBorder(context),
+      ),
+      onChanged: (p0) {},
+    );
+  }
+}
+
+class _PhoneNumberField extends StatelessWidget {
+  const _PhoneNumberField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
+      selector: (state) => state.phoneNumber,
+      builder: (context, phoneNumber) {
+        return TextFormField(
+          key: const Key('signUpForm_phoneInput_textField'),
+          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(15),
+          ],
+          keyboardType: TextInputType.phone,
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            label: FormFieldText(
+              label: context.l10n.phoneNumber.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// Widgets
+class _SignUpButton extends StatelessWidget {
+  const _SignUpButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        if (state.status.isFailure) {
+          context.scaffoldMessenger
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(state.errorMsg)));
+        }
+      },
+      builder: (context, state) {
+        return SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: Button.filled(
+            key: const Key('signUpForm_button'),
+            maxWidth: true,
+            shape: ButtonShape.roundedCorners,
+            isLoading: state.status.isLoading,
+            density: ButtonDensity.comfortable,
+            // onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
+            onPressed:
+                state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
+            label: context.l10n.signUp.capitalized,
+            height: 0,
           ),
         );
       },
@@ -513,15 +506,6 @@ class FormFieldText extends StatelessWidget {
       ),
     );
   }
-}
-
-OutlineInputBorder textFormFieldBorder(BuildContext context) {
-  return OutlineInputBorder(
-    borderRadius: const BorderRadius.all(Radius.circular(12)),
-    borderSide: BorderSide(
-      color: context.colorsX.background,
-    ),
-  );
 }
 
 class _AlreadyHaveAnAccount extends StatelessWidget {
@@ -572,4 +556,23 @@ class _SignUpContainerShapeWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+// Components.
+OutlineInputBorder textFormFieldBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(
+      color: context.colorsX.background,
+    ),
+  );
+}
+
+OutlineInputBorder customDropDownBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(
+      color: context.colorsX.background,
+    ),
+  );
 }
