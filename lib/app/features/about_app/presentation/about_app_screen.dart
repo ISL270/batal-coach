@@ -2,7 +2,6 @@ import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/features/about_app/presentation/widgets/about_app_item_widget.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -53,15 +52,47 @@ class AboutAppScreen extends StatelessWidget {
             ],
           ),
           const Gap(30),
-          AboutAppItemWidget(
+          _AboutAppItemWidget(
             label: context.l10n.privacypolicy.capitalized,
           ),
           const Gap(30),
-          AboutAppItemWidget(
+          _AboutAppItemWidget(
             label: context.l10n.termsofservice.capitalized,
           ),
         ],
       ),
+    );
+  }
+}
+
+class _AboutAppItemWidget extends StatelessWidget {
+  const _AboutAppItemWidget({
+    required this.label,
+    // ignore: unused_element
+    this.onPressed,
+  });
+
+  final String label;
+  final void Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          label,
+          style: context.textThemeX.medium,
+        ),
+        const Spacer(),
+        GestureDetector(
+          onTap: onPressed,
+          child: Icon(
+            context.l10n.localeName == 'ar'
+                ? Icons.keyboard_arrow_left_sharp
+                : Icons.keyboard_arrow_right_sharp,
+          ),
+        )
+      ],
     );
   }
 }
