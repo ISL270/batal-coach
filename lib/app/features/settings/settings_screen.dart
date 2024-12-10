@@ -8,8 +8,6 @@ import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
-import 'package:btl/app/features/settings/widgets/avatar_label_row.dart';
-import 'package:btl/app/features/settings/widgets/settings_section_widget.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
@@ -39,29 +37,30 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AvatarLabelRow(),
+                const _AvatarLabelRow(),
                 const Gap(30),
-                SettingsSectionWidget(
+                _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.lock,
                   label: context.l10n.changepassword.capitalized,
                 ),
                 const Gap(30),
-                SettingsSectionWidget(
+                _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.bell,
                   label: context.l10n.notifications.capitalized,
                 ),
                 const Gap(30),
-                SettingsSectionWidget(
+                _SettingsSectionWidget(
+                  // ignore: deprecated_member_use
                   iconData: FontAwesomeIcons.listNumeric,
                   label: context.l10n.units.capitalized,
                 ),
                 const Gap(30),
-                SettingsSectionWidget(
+                _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.headset,
                   label: context.l10n.technicalsupport.capitalized,
                 ),
                 const Gap(30),
-                SettingsSectionWidget(
+                _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.mobileScreenButton,
                   label: context.l10n.aboutapp.capitalized,
                 ),
@@ -135,6 +134,73 @@ class SettingsScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _AvatarLabelRow extends StatelessWidget {
+  const _AvatarLabelRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      textBaseline: TextBaseline.ideographic,
+      children: [
+        const CircleAvatar(radius: 18),
+        const SizedBox(
+          width: 15,
+        ),
+        Text(
+          context.l10n.profile.capitalized,
+          style: context.textThemeX.medium.copyWith(
+            textBaseline: TextBaseline.ideographic,
+          ),
+        ),
+        const Spacer(),
+        const Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 18,
+        )
+      ],
+    );
+  }
+}
+
+class _SettingsSectionWidget extends StatelessWidget {
+  const _SettingsSectionWidget({
+    required this.label,
+    required this.iconData,
+    // ignore: unused_element
+    this.onPressed,
+  });
+
+  final String label;
+  final void Function()? onPressed;
+  final IconData iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Row(
+        children: [
+          const Gap(5),
+          Icon(iconData),
+          const Gap(20),
+          Text(
+            label,
+            style: context.textThemeX.medium.copyWith(
+              textBaseline: TextBaseline.ideographic,
+            ),
+          ),
+          const Spacer(),
+          const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 18,
+          )
+        ],
       ),
     );
   }
