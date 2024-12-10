@@ -15,6 +15,7 @@ import 'package:btl/app/core/extensions/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
+import 'package:btl/app/features/about_app/presentation/about_app_screen.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
 import 'package:btl/app/features/edit_profile/presentation/edit_profile_screen.dart';
@@ -140,7 +141,13 @@ final coachRouter = GoRouter(
                   parentNavigatorKey: _rootNavigatorKey,
                   pageBuilder: (context, state) =>
                       const NoTransitionPage(child: EditProfileScreen()),
-                )
+                ),
+                GoRoute(
+                  name: AboutAppScreen.name,
+                  path: AboutAppScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => const NoTransitionPage(child: AboutAppScreen()),
+                ),
               ],
             ),
           ],

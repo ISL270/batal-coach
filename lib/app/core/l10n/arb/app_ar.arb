@@ -85,5 +85,8 @@
   "enterbirthdate":"حدد تاريخ ميلادك",
   "entergender":"غير محدد",
   "enteremail":"أدخل عنوان بريدك الإلكتروني",
-  "save":"حفظ"
+  "save":"حفظ",
+  "privacypolicy":"سياسة الخصوصية",
+  "termsofservice":"بنود الخدمة",
+  "version":"الإصدار"
 }

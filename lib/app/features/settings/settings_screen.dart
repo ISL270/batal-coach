@@ -9,6 +9,7 @@ import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/about_app/presentation/about_app_screen.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/edit_profile/presentation/edit_profile_screen.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
@@ -73,6 +74,9 @@ class SettingsScreen extends StatelessWidget {
                 SettingsSectionWidget(
                   iconData: FontAwesomeIcons.mobileScreenButton,
                   label: context.l10n.aboutapp.capitalized,
+                  onPressed: () {
+                    context.pushNamed(AboutAppScreen.name);
+                  },
                 ),
                 const Spacer(),
                 const Gap(25),

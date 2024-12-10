@@ -85,5 +85,8 @@
   "enterbirthdate":"select your birthday",
   "entergender":"not selected",
   "enteremail":"enter your email address",
-  "save":"save"
+  "save":"save",
+  "privacypolicy":"privacy policy",
+  "termsofservice":"terms of service",
+  "version":"version"
 }
