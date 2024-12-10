@@ -1,6 +1,4 @@
-import 'package:btl/app/core/constants/app_colors.dart';
-import 'package:btl/app/core/extension_methods/bloc_x.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 class SignUpContainerShapeWidget extends StatelessWidget {
@@ -13,7 +11,7 @@ class SignUpContainerShapeWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: context.settingsBloc.state.isThemeDark ? AppColors.onDark : AppColors.onLight,
+        color: context.colorsX.onBackground,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(74),
         ),

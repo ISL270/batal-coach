@@ -76,5 +76,6 @@
   "nutrition":"Nutrition Coach",
   "manager":"Manager",
   "company":"Company Name (optional)",
-  "createaccount":"Create \nAccount."
+  "createaccount":"Create \nAccount.",
+  "profile":"profile"
 }

@@ -1,8 +1,7 @@
-import 'package:btl/app/core/constants/app_colors.dart';
-import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AlreadyHaveAnAccount extends StatelessWidget {
   const AlreadyHaveAnAccount({
@@ -17,16 +16,21 @@ class AlreadyHaveAnAccount extends StatelessWidget {
         Text(
           context.l10n.alreadyhaveaccount,
           style: TextStyle(
-            color: context.settingsBloc.state.isThemeDark ? AppColors.dark : AppColors.lightTint,
+            color: context.colorsX.background,
           ),
         ),
         const SizedBox(
           width: 5,
         ),
-        Text(
-          context.l10n.signin,
-          style: const TextStyle(
-            color: AppColors.primary,
+        GestureDetector(
+          onTap: () {
+            context.pop();
+          },
+          child: Text(
+            context.l10n.signin,
+            style: TextStyle(
+              color: context.colorsX.primary,
+            ),
           ),
         ),
       ],

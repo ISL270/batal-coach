@@ -3,6 +3,7 @@ import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/already_have_an_account.dart';
@@ -129,6 +130,8 @@ class _SecondPageViewState extends State<SecondPageView> with AutomaticKeepAlive
 
   GlobalKey<FormState> formKey2 = GlobalKey();
 
+  Color? color;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -150,24 +153,17 @@ class _SecondPageViewState extends State<SecondPageView> with AutomaticKeepAlive
                   ),
                   borderRadius: BorderRadius.circular(12),
                   isExpanded: true,
+                  iconEnabledColor: context.colorsX.secondaryBackground,
                   value: widget.roles.first,
-                  dropdownColor: AppColors.lightTint,
-                  hint: Text(
-                    context.l10n.selectrole,
-                    style: TextStyle(
-                      color:
-                          context.settingsBloc.state.isThemeDark ? AppColors.dark : AppColors.light,
-                    ),
-                  ),
+                  dropdownColor: context.colorsX.secondary,
+                  enableFeedback: true,
                   items: widget.roles.map((role) {
                     return DropdownMenuItem<String>(
                       value: role,
                       child: Text(
                         role,
                         style: TextStyle(
-                          color: context.settingsBloc.state.isThemeDark
-                              ? AppColors.dark
-                              : AppColors.light,
+                          color: context.colorsX.background,
                         ),
                       ),
                     );
@@ -205,7 +201,7 @@ OutlineInputBorder customDropDownBorder(BuildContext context) {
   return OutlineInputBorder(
     borderRadius: const BorderRadius.all(Radius.circular(12)),
     borderSide: BorderSide(
-      color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+      color: context.colorsX.background,
     ),
   );
 }
@@ -321,9 +317,7 @@ class _PhoneNumberField extends StatelessWidget {
 }
 
 class _CompanyField extends StatelessWidget {
-  const _CompanyField({
-    super.key,
-  });
+  const _CompanyField();
 
   @override
   Widget build(BuildContext context) {

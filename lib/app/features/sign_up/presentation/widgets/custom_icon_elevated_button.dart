@@ -1,4 +1,4 @@
-import 'package:btl/app/core/constants/app_colors.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconElevatedButton extends StatelessWidget {
@@ -21,26 +21,26 @@ class CustomIconElevatedButton extends StatelessWidget {
       height: 48,
       child: ElevatedButton.icon(
         style: TextButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: context.colorsX.primary,
         ),
         label: loading
-            ? const Center(
+            ? Center(
                 child: CircularProgressIndicator(
-                  color: AppColors.light,
+                  color: context.colorsX.background,
                 ),
               )
             : Center(
                 child: Text(
                   '       $text',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: context.colorsX.onBackground,
                   ),
                 ),
               ),
-        icon: const Icon(
+        icon: Icon(
           Icons.navigate_next_sharp,
-          color: AppColors.onDark,
+          color: context.colorsX.onBackground,
         ),
         iconAlignment: IconAlignment.end,
         onPressed: onPressed,

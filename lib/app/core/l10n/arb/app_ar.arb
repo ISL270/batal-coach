@@ -76,5 +76,6 @@
   "nutrition":"مدرب التغذية",
   "manager":"إداري",
   "company":"اسم الشركة (اختياري)",
-  "createaccount":"إنشاء حساب."
+  "createaccount":"إنشاء حساب.",
+  "profile":"الحساب الشخصي"
 }

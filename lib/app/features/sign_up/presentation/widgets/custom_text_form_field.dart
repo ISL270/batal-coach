@@ -1,7 +1,5 @@
-import 'package:btl/app/core/constants/app_colors.dart';
-import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,24 +34,24 @@ class CustomTextFormField extends StatelessWidget {
       textInputAction: textInputAction,
       keyboardType: keyboardType,
       style: TextStyle(
-        color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+        color: context.colorsX.background,
       ),
       decoration: InputDecoration(
         label: Text(
           labelText.capitalized,
           style: TextStyle(
             fontSize: 16,
-            color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+            color: context.colorsX.background,
           ),
         ),
         floatingLabelStyle: TextStyle(
-          color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+          color: context.colorsX.background,
         ),
         labelStyle: TextStyle(
-          color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+          color: context.colorsX.background,
         ),
         hintStyle: TextStyle(
-          color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+          color: context.colorsX.background,
         ),
         border: customBorder(context),
         disabledBorder: customBorder(context),
@@ -67,7 +65,7 @@ class CustomTextFormField extends StatelessWidget {
     return OutlineInputBorder(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       borderSide: BorderSide(
-        color: context.settingsBloc.state.isThemeDark ? AppColors.onLight : AppColors.onDark,
+        color: context.colorsX.background,
       ),
     );
   }
