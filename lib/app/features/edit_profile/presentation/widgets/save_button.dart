@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extensions/english_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:flutter/material.dart';

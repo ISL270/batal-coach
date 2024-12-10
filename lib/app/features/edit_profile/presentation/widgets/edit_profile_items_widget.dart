@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extensions/text_style_x.dart';
+import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

@@ -1,7 +1,6 @@
-import 'package:btl/app/core/extensions/english_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class AvatarLabelRow extends StatelessWidget {

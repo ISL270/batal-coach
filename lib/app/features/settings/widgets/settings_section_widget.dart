@@ -1,6 +1,5 @@
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 class SettingsSectionWidget extends StatelessWidget {

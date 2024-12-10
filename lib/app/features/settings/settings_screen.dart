@@ -1,3 +1,4 @@
+import 'package:btl/app/core/extension_methods/arabic_x.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/getit_x.dart';
