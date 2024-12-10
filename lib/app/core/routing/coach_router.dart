@@ -11,7 +11,7 @@ import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout
 import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/coach/features/workouts/presentation/workouts_screen.dart';
-import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';

@@ -1,27 +1,18 @@
-import 'package:btl/app/core/extensions/arabic_x.dart';
-import 'package:btl/app/core/extensions/bloc_x.dart';
-import 'package:btl/app/core/extensions/english_x.dart';
-import 'package:btl/app/core/extensions/getit_x.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
-import 'package:btl/app/core/extensions/text_style_x.dart';
-import 'package:btl/app/core/extensions/validator.dart';
+import 'package:btl/app/core/extension_methods/bloc_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
+import 'package:btl/app/core/extension_methods/getit_x.dart';
+import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/features/about_app/presentation/about_app_screen.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
-import 'package:btl/app/features/edit_profile/presentation/edit_profile_screen.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
-import 'package:btl/app/features/settings/widgets/avatar_label_row.dart';
-import 'package:btl/app/features/settings/widgets/settings_section_widget.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -45,41 +36,6 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AvatarLabelRow(
-                  onPressed: () {
-                    context.pushNamed(EditProfileScreen.name);
-                  },
-                ),
-                const Gap(30),
-                SettingsSectionWidget(
-                  iconData: FontAwesomeIcons.lock,
-                  label: context.l10n.changepassword.capitalized,
-                ),
-                const Gap(30),
-                SettingsSectionWidget(
-                  iconData: FontAwesomeIcons.bell,
-                  label: context.l10n.notifications.capitalized,
-                ),
-                const Gap(30),
-                SettingsSectionWidget(
-                  iconData: FontAwesomeIcons.listNumeric,
-                  label: context.l10n.units.capitalized,
-                ),
-                const Gap(30),
-                SettingsSectionWidget(
-                  iconData: FontAwesomeIcons.headset,
-                  label: context.l10n.technicalsupport.capitalized,
-                ),
-                const Gap(30),
-                SettingsSectionWidget(
-                  iconData: FontAwesomeIcons.mobileScreenButton,
-                  label: context.l10n.aboutapp.capitalized,
-                  onPressed: () {
-                    context.pushNamed(AboutAppScreen.name);
-                  },
-                ),
-                const Spacer(),
-                const Gap(25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

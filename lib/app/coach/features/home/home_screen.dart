@@ -1,6 +1,6 @@
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
-import 'package:btl/app/core/extensions/english_x.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
+import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/widgets/svg_asset.dart';

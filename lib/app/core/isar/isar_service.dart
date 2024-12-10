@@ -2,15 +2,15 @@
 
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
-import 'package:btl/app/core/models/cache_model.dart';
+import 'package:btl/app/core/isar/cache_model.dart';
+import 'package:btl/app/core/isar/isar_helper.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
 @singleton
-final class IsarService {
+final class IsarService with IsarHelper {
   final Isar _isar;
   const IsarService._(this._isar);
 
@@ -44,11 +44,11 @@ final class IsarService {
   }
 
   Future<T?> get<T extends CacheModel>(String id) async {
-    return _isar.txn(() => _isar.collection<T>().get(id.fastHash));
+    return _isar.txn(() => _isar.collection<T>().get(toIntID(id)));
   }
 
   T? getSync<T extends CacheModel>(String id) {
-    return _isar.txnSync(() => _isar.collection<T>().getSync(id.fastHash));
+    return _isar.txnSync(() => _isar.collection<T>().getSync(toIntID(id)));
   }
 
   Future<T?> getFirst<T extends CacheModel>() async {
@@ -76,8 +76,7 @@ final class IsarService {
   }
 
   Future<int> deleteAll<T extends CacheModel>(List<String> ids) async {
-    return _isar
-        .writeTxn(() => _isar.collection<T>().deleteAll(ids.map((e) => e.fastHash).toList()));
+    return _isar.writeTxn(() => _isar.collection<T>().deleteAll(ids.map(toIntID).toList()));
   }
 
   Future<int> deleteAllSync<T extends CacheModel>(List<int> ids) async {
@@ -94,7 +93,7 @@ final class IsarService {
 
   Future<List<T>> getAllByIDs<T extends CacheModel>(List<String> ids) async {
     return _isar.txn(() async {
-      final docs = await _isar.collection<T>().getAll(ids.map((e) => e.fastHash).toList());
+      final docs = await _isar.collection<T>().getAll(ids.map(toIntID).toList());
       // Remove nulls.
       return docs.whereType<T>().toList();
     });
@@ -102,7 +101,7 @@ final class IsarService {
 
   List<T> getAllByIDsSync<T extends CacheModel>(List<String> ids) {
     return _isar.txnSync(() {
-      final docs = _isar.collection<T>().getAllSync(ids.map((e) => e.fastHash).toList());
+      final docs = _isar.collection<T>().getAllSync(ids.map(toIntID).toList());
       // Remove nulls.
       return docs.whereType<T>().toList();
     });
