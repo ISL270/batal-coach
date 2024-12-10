@@ -6,6 +6,7 @@ import 'package:btl/app/core/extensions/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/edit_profile/presentation/widgets/edit_profile_items_widget.dart';
+import 'package:btl/app/features/edit_profile/presentation/widgets/save_button.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -170,16 +171,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ),
-          SizedBox(
-            width: 175,
-            height: 55,
-            child: Button.filled(
-              label: context.l10n.save.capitalized,
-              onPressed: () {
-                context.pop();
-              },
-            ),
-          ),
+          const SaveButton(),
           const Gap(20),
         ],
       ),
