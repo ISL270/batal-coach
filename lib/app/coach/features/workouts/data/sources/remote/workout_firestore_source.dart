@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart';
 import 'package:btl/app/coach/features/workouts/data/exercise_details_serializer.dart';
+import 'package:btl/app/core/firestore/firestore_helper.dart';
+import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
+import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/set.dart';
 import 'package:btl/app/core/models/domain/workout.dart';
-import 'package:btl/app/core/models/firestore_source.dart';
-import 'package:btl/app/core/models/reactive_firestore_source.dart';
-import 'package:btl/app/core/models/remote_model.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
@@ -16,7 +16,7 @@ import 'package:injectable/injectable.dart';
 part 'workout_fm.dart';
 
 @singleton
-final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> with FirestoreSource {
+final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> with FirestoreHelper {
   WorkoutFirestoreSource(super.firestoreSvc);
 
   Future<void> saveWorkout({

@@ -1,5 +1,5 @@
-import 'package:btl/app/core/models/cache_model.dart';
-import 'package:btl/app/core/services/isar_service.dart';
+import 'package:btl/app/core/isar/cache_model.dart';
+import 'package:btl/app/core/isar/isar_service.dart';
 import 'package:flutter/foundation.dart';
 
 abstract base class IsarSource<D, C extends CacheModel<D>> {

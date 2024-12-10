@@ -1,5 +1,4 @@
-import 'package:btl/app/core/extensions/string_x.dart';
-import 'package:btl/app/features/authentication/data/models/local/user_cm.dart';
+import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:isar/isar.dart';
@@ -7,31 +6,23 @@ import 'package:isar/isar.dart';
 part 'user_isar.g.dart';
 
 @collection
-final class UserIsar implements UserCM {
-  @override
-  Id get cacheID => uid.fastHash;
-
-  @override
+final class UserIsar extends CacheModel<User> {
   String? coachEmail;
 
-  @override
   String email;
 
   @override
-  String uid;
+  String id;
 
-  @override
   String name;
 
-  @override
   String phoneNumber;
 
-  @override
   @enumerated
   UserType userType;
 
   UserIsar({
-    required this.uid,
+    required this.id,
     required this.email,
     required this.name,
     required this.userType,
@@ -42,13 +33,13 @@ final class UserIsar implements UserCM {
   @override
   User toDomain() => switch (userType) {
         UserType.coach => Coach(
-            id: uid,
+            id: id,
             email: email,
             name: name,
             phoneNumber: phoneNumber,
           ),
         UserType.trainee => Trainee(
-            id: uid,
+            id: id,
             email: email,
             coachEmail: coachEmail!,
             name: name,
@@ -58,14 +49,14 @@ final class UserIsar implements UserCM {
 
   factory UserIsar.fromDomain(User user) => switch (user) {
         Coach() => UserIsar(
-            uid: user.id,
+            id: user.id,
             name: user.name,
             email: user.email,
             phoneNumber: user.phoneNumber,
             userType: UserType.coach,
           ),
         Trainee() => UserIsar(
-            uid: user.id,
+            id: user.id,
             name: user.name,
             email: user.email,
             phoneNumber: user.phoneNumber,

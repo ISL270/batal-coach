@@ -1,15 +1,12 @@
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
-import 'package:btl/app/core/extensions/string_x.dart';
-import 'package:btl/app/core/models/cache_model.dart';
+import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:isar/isar.dart';
 
 part 'exercise_isar.g.dart';
 
 @collection
-final class ExerciseIsar implements CacheModel<Exercise> {
+final class ExerciseIsar extends CacheModel<Exercise> {
   @override
-  Id get cacheID => id.fastHash;
-
   String id;
 
   @Index(type: IndexType.value, caseSensitive: false)

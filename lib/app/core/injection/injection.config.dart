@@ -28,10 +28,10 @@ import 'package:btl/app/coach/features/workouts/data/sources/remote/workout_fire
     as _i389;
 import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart'
     as _i820;
+import 'package:btl/app/core/firestore/firestore_service.dart' as _i997;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
+import 'package:btl/app/core/isar/isar_service.dart' as _i26;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
-import 'package:btl/app/core/services/firestore_service.dart' as _i529;
-import 'package:btl/app/core/services/isar_service.dart' as _i102;
 import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart'
     as _i193;
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart'
@@ -59,32 +59,32 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final authModule = _$AuthModule();
-    gh.singleton<_i222.L10nService>(() => _i222.L10nService());
-    gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
-    gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
-    gh.singleton<_i529.FirestoreService>(() => _i529.FirestoreService());
-    await gh.singletonAsync<_i102.IsarService>(
-      () => _i102.IsarService.create(),
+    await gh.singletonAsync<_i26.IsarService>(
+      () => _i26.IsarService.create(),
       preResolve: true,
     );
+    gh.singleton<_i222.L10nService>(() => _i222.L10nService());
+    gh.singleton<_i997.FirestoreService>(() => _i997.FirestoreService());
+    gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
+    gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
+    gh.singleton<_i538.UserFirestoreSource>(
+        () => _i538.UserFirestoreSource(gh<_i997.FirestoreService>()));
+    gh.singleton<_i193.UserIsarSource>(
+        () => _i193.UserIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i25.WorkoutIsarSource>(
+        () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i714.ExercisesIsarSource>(
+        () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i403.ClientsFirestoreSource>(
-      () => _i403.ClientsFirestoreSource(gh<_i529.FirestoreService>()),
+      () => _i403.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
     );
     gh.singleton<_i389.WorkoutFirestoreSource>(
-        () => _i389.WorkoutFirestoreSource(gh<_i529.FirestoreService>()));
+        () => _i389.WorkoutFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i577.ExercisesFirestoreSource>(
-      () => _i577.ExercisesFirestoreSource(gh<_i529.FirestoreService>()),
+      () => _i577.ExercisesFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
     );
-    gh.singleton<_i538.UserFirestoreSource>(
-        () => _i538.UserFirestoreSource(gh<_i529.FirestoreService>()));
-    gh.singleton<_i193.UserIsarSource>(
-        () => _i193.UserIsarSource(gh<_i102.IsarService>()));
-    gh.singleton<_i25.WorkoutIsarSource>(
-        () => _i25.WorkoutIsarSource(gh<_i102.IsarService>()));
-    gh.singleton<_i714.ExercisesIsarSource>(
-        () => _i714.ExercisesIsarSource(gh<_i102.IsarService>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
           gh<_i193.UserIsarSource>(),
           gh<_i538.UserFirestoreSource>(),

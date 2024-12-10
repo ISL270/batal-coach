@@ -1,4 +1,4 @@
-import 'package:btl/app/core/models/isar_source.dart';
+import 'package:btl/app/core/isar/isar_source.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:injectable/injectable.dart';
