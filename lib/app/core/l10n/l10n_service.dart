@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extensions/bloc_x.dart';
+import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:dartx/dartx.dart';

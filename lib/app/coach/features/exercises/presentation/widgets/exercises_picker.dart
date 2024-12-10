@@ -3,7 +3,7 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/extensions/text_style_x.dart';
+import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
