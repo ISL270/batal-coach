@@ -11,5 +11,4 @@ abstract final class AppColors {
   static const darkTint = Color(0xA6000000);
   static const onDark = Color(0xDDFFFFFF);
   static const onLight = Color(0xC6000000);
-  static const disabledButton = Color(0xffcbcacb);
 }
