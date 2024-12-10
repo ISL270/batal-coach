@@ -1,14 +1,10 @@
-import 'package:btl/app/core/constants/app_colors.dart';
-import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/already_have_an_account.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/custom_icon_elevated_button.dart';
-import 'package:btl/app/features/sign_up/presentation/widgets/custom_text_form_field.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/sign_up_shape_container_widget.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
@@ -34,9 +30,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool loading = false;
 
   late PageController pageController;
-
-  GlobalKey<FormState> formKey = GlobalKey();
-  GlobalKey<FormState> formKey2 = GlobalKey();
 
   @override
   void initState() {
@@ -97,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
                   child: PageView(controller: pageController, children: [
-                    FirstPageView(formKey: formKey, pageController: pageController),
+                    FirstPageView(pageController: pageController),
                     SecondPageView(roles: roles, selectedRole: selectedRole ?? '')
                   ]),
                 ),
@@ -139,58 +132,55 @@ class _SecondPageViewState extends State<SecondPageView> with AutomaticKeepAlive
       key: const PageStorageKey('Second_page'),
       child: Padding(
         padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
-        child: Form(
-          key: formKey2,
-          child: Column(
-            children: [
-              Center(
-                child: DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    border: customDropDownBorder(context),
-                    enabledBorder: customDropDownBorder(context),
-                    disabledBorder: customDropDownBorder(context),
-                    focusedBorder: customDropDownBorder(context),
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                  isExpanded: true,
-                  iconEnabledColor: context.colorsX.secondaryBackground,
-                  value: widget.roles.first,
-                  dropdownColor: context.colorsX.secondary,
-                  enableFeedback: true,
-                  items: widget.roles.map((role) {
-                    return DropdownMenuItem<String>(
-                      value: role,
-                      child: Text(
-                        role,
-                        style: TextStyle(
-                          color: context.colorsX.background,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    String? selectRole = widget.selectedRole;
-
-                    setState(() {
-                      selectRole = value;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please select a role';
-                    }
-                    return null;
-                  },
+        child: Column(
+          children: [
+            Center(
+              child: DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  border: customDropDownBorder(context),
+                  enabledBorder: customDropDownBorder(context),
+                  disabledBorder: customDropDownBorder(context),
+                  focusedBorder: customDropDownBorder(context),
                 ),
+                borderRadius: BorderRadius.circular(12),
+                isExpanded: true,
+                iconEnabledColor: context.colorsX.secondaryBackground,
+                value: widget.roles.first,
+                dropdownColor: context.colorsX.secondary,
+                enableFeedback: true,
+                items: widget.roles.map((role) {
+                  return DropdownMenuItem<String>(
+                    value: role,
+                    child: Text(
+                      role,
+                      style: TextStyle(
+                        color: context.colorsX.background,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  String? selectRole = widget.selectedRole;
+
+                  setState(() {
+                    selectRole = value;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select a role';
+                  }
+                  return null;
+                },
               ),
-              const Gap(25),
-              const _CompanyField(),
-              const Gap(25),
-              const _PhoneNumberField(),
-              const Gap(105),
-              const _SignUpButton(),
-            ],
-          ),
+            ),
+            const Gap(25),
+            const _CompanyField(),
+            const Gap(25),
+            const _PhoneNumberField(),
+            const Gap(105),
+            const _SignUpButton(),
+          ],
         ),
       ),
     );
@@ -208,12 +198,10 @@ OutlineInputBorder customDropDownBorder(BuildContext context) {
 
 class FirstPageView extends StatefulWidget {
   const FirstPageView({
-    required this.formKey,
     required this.pageController,
     super.key,
   });
 
-  final GlobalKey<FormState> formKey;
   final PageController pageController;
 
   @override
@@ -233,24 +221,21 @@ class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveCl
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
         padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
-        child: Form(
-          key: widget.formKey,
-          child: Column(
-            children: [
-              const _NameFormField(),
-              const Gap(25),
-              const _EmailField(),
-              const Gap(25),
-              const _PasswordField(),
-              const Gap(25),
-              const _ConfirmPasswordField(),
-              const Gap(25),
-              _NextPageViewButton(pageController: widget.pageController),
-              const Gap(20),
-              const AlreadyHaveAnAccount(),
-              const Gap(20),
-            ],
-          ),
+        child: Column(
+          children: [
+            const _NameFormField(),
+            const Gap(25),
+            const _EmailField(),
+            const Gap(25),
+            const _PasswordField(),
+            const Gap(25),
+            const _ConfirmPasswordField(),
+            const Gap(25),
+            _NextPageViewButton(pageController: widget.pageController),
+            const Gap(20),
+            const AlreadyHaveAnAccount(),
+            const Gap(20),
+          ],
         ),
       ),
     );
@@ -301,15 +286,26 @@ class _PhoneNumberField extends StatelessWidget {
     return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
       selector: (state) => state.phoneNumber,
       builder: (context, phoneNumber) {
-        return CustomTextFormField(
+        return TextFormField(
           key: const Key('signUpForm_phoneInput_textField'),
           onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
-          inputFormatter: [
+          inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(15),
           ],
           keyboardType: TextInputType.phone,
-          labelText: context.l10n.phoneNumber.capitalized,
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            label: FormFieldText(
+              label: context.l10n.phoneNumber.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
         );
       },
     );
@@ -321,8 +317,19 @@ class _CompanyField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextFormField(
-      labelText: context.l10n.company,
+    return TextFormField(
+      style: TextStyle(
+        color: context.colorsX.background,
+      ),
+      decoration: InputDecoration(
+        label: FormFieldText(
+          label: context.l10n.company.capitalized,
+        ),
+        border: textFormFieldBorder(context),
+        disabledBorder: textFormFieldBorder(context),
+        enabledBorder: textFormFieldBorder(context),
+        focusedBorder: textFormFieldBorder(context),
+      ),
       onChanged: (p0) {},
     );
   }
@@ -359,10 +366,23 @@ class _ConfirmPasswordField extends StatelessWidget {
           previous.password != current.password ||
           previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
-        return CustomTextFormField(
+        return TextFormField(
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
-          labelText: context.l10n.confirmPassword,
-          isPasswordField: true,
+          obscureText: true,
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            errorText:
+                state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
+            label: FormFieldText(
+              label: context.l10n.confirmPassword.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
           onChanged: (confirmPassword) =>
               context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
         );
@@ -379,12 +399,24 @@ class _PasswordField extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return CustomTextFormField(
+        return TextFormField(
           key: const Key('signUpForm_passwordInput_textField'),
           textInputAction: TextInputAction.next,
-          labelText: context.l10n.password,
-          isPasswordField: true,
           onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          obscureText: true,
+          decoration: InputDecoration(
+            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
+            label: FormFieldText(
+              label: context.l10n.password.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
         );
       },
     );
@@ -399,12 +431,24 @@ class _EmailField extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.coachEmail != current.coachEmail,
       builder: (context, state) {
-        return CustomTextFormField(
+        return TextFormField(
           key: const Key('signUpForm_coachEmailInput_textField'),
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
-          labelText: context.l10n.email,
           onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+            label: FormFieldText(
+              label: context.l10n.email.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
         );
       },
     );
@@ -419,13 +463,53 @@ class _NameFormField extends StatelessWidget {
     return BlocSelector<SignUpCubit, SignUpState, Name>(
       selector: (state) => state.name,
       builder: (context, state) {
-        return CustomTextFormField(
+        return TextFormField(
           key: const Key('signUpForm_nameInput_textField'),
           textInputAction: TextInputAction.next,
-          labelText: context.l10n.name,
           onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            label: FormFieldText(
+              label: context.l10n.name.capitalized,
+            ),
+            border: textFormFieldBorder(context),
+            disabledBorder: textFormFieldBorder(context),
+            enabledBorder: textFormFieldBorder(context),
+            focusedBorder: textFormFieldBorder(context),
+          ),
         );
       },
     );
   }
+}
+
+class FormFieldText extends StatelessWidget {
+  const FormFieldText({
+    required this.label,
+    super.key,
+  });
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label,
+      style: TextStyle(
+        fontSize: 16,
+        color: context.colorsX.background,
+      ),
+    );
+  }
+}
+
+OutlineInputBorder textFormFieldBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(
+      color: context.colorsX.background,
+    ),
+  );
 }
