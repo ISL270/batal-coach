@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/routing/coach_router.dart';

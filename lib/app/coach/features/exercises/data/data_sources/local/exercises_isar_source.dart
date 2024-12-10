@@ -3,7 +3,7 @@
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
-import 'package:btl/app/core/models/isar_source.dart';
+import 'package:btl/app/core/isar/isar_source.dart';
 import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';

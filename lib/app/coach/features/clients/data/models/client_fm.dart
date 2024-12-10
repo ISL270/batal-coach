@@ -1,5 +1,5 @@
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
-import 'package:btl/app/core/models/remote_model.dart';
+import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'client_fm.g.dart';
