@@ -3,7 +3,6 @@ import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
-import 'package:btl/app/features/sign_up/presentation/widgets/custom_icon_elevated_button.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/sign_up_shape_container_widget.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
@@ -343,14 +342,27 @@ class _NextPageViewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomIconElevatedButton(
-      text: context.l10n.regcontinue,
-      onPressed: () {
-        pageController.nextPage(
-          duration: const Duration(milliseconds: 600),
-          curve: Curves.easeIn,
-        );
-      },
+    return SizedBox(
+      width: double.infinity,
+      height: 48,
+      child: Button.filled(
+        height: 0,
+        // iconWithAlignment: IconWithAlignment(
+        //   Icon(
+        //     FontAwesomeIcons.forward,
+        //     size: 18,
+        //     color: context.colorsX.onBackground,
+        //   ),
+        //   alignment: IconAlignment.end,
+        // ),
+        label: context.l10n.regcontinue,
+        onPressed: () {
+          pageController.nextPage(
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeIn,
+          );
+        },
+      ),
     );
   }
 }
