@@ -3,7 +3,6 @@ import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
-import 'package:btl/app/features/sign_up/presentation/widgets/already_have_an_account.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/custom_icon_elevated_button.dart';
 import 'package:btl/app/features/sign_up/presentation/widgets/sign_up_shape_container_widget.dart';
 import 'package:btl/app/widgets/button.dart';
@@ -233,7 +232,7 @@ class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveCl
             const Gap(25),
             _NextPageViewButton(pageController: widget.pageController),
             const Gap(20),
-            const AlreadyHaveAnAccount(),
+            const _AlreadyHaveAnAccount(),
             const Gap(20),
           ],
         ),
@@ -512,4 +511,37 @@ OutlineInputBorder textFormFieldBorder(BuildContext context) {
       color: context.colorsX.background,
     ),
   );
+}
+
+class _AlreadyHaveAnAccount extends StatelessWidget {
+  const _AlreadyHaveAnAccount();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          context.l10n.alreadyhaveaccount,
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        GestureDetector(
+          onTap: () {
+            context.pop();
+          },
+          child: Text(
+            context.l10n.signin,
+            style: TextStyle(
+              color: context.colorsX.primary,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
