@@ -233,7 +233,7 @@ class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveCl
             const Gap(25),
             _NextPageViewButton(pageController: widget.pageController),
             const Gap(20),
-            const AlreadyHaveAnAccount(),
+            const _AlreadyHaveAnAccount(),
             const Gap(20),
           ],
         ),
@@ -512,4 +512,37 @@ OutlineInputBorder textFormFieldBorder(BuildContext context) {
       color: context.colorsX.background,
     ),
   );
+}
+
+class _AlreadyHaveAnAccount extends StatelessWidget {
+  const _AlreadyHaveAnAccount();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          context.l10n.alreadyhaveaccount,
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        GestureDetector(
+          onTap: () {
+            context.pop();
+          },
+          child: Text(
+            context.l10n.signin,
+            style: TextStyle(
+              color: context.colorsX.primary,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
