@@ -3,7 +3,6 @@ import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
-import 'package:btl/app/features/sign_up/presentation/widgets/sign_up_shape_container_widget.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             padding: const EdgeInsets.only(top: 280),
             child: Stack(
               children: [
-                const SignUpContainerShapeWidget(),
+                const _SignUpContainerShapeWidget(),
                 ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
                   child: PageView(controller: pageController, children: [
@@ -554,6 +553,23 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _SignUpContainerShapeWidget extends StatelessWidget {
+  const _SignUpContainerShapeWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: context.colorsX.onBackground,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(74),
+        ),
+      ),
     );
   }
 }
