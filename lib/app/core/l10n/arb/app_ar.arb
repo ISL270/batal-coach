@@ -73,5 +73,17 @@
   "units":"الوحدات",
   "technicalsupport":"الدعم الفني",
   "aboutapp":"حول التطبيق",
-  "profile":"الحساب الشخصي"
+  "profile":"الحساب الشخصي",
+  "firstname":"الاسم الأول",
+  "lastname":"الاسم الأخير",
+  "mobile":"رقم الهاتف المحمول",
+  "birthdate":"تاريخ الميلاد",
+  "gender":"الجنس",
+  "enterfname":"أدخل اسمك الأول",
+  "enterlname":"أدخل اسمك الأخير",
+  "enteryourmobile":"أدخل رقم هاتفك المحمول",
+  "enterbirthdate":"حدد تاريخ ميلادك",
+  "entergender":"غير محدد",
+  "enteremail":"أدخل عنوان بريدك الإلكتروني",
+  "save":"حفظ"
 }

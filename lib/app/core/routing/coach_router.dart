@@ -17,6 +17,7 @@ import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
+import 'package:btl/app/features/edit_profile/presentation/edit_profile_screen.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
@@ -132,6 +133,15 @@ final coachRouter = GoRouter(
               name: SettingsScreen.name,
               path: '/${SettingsScreen.name}',
               pageBuilder: (context, state) => const NoTransitionPage(child: SettingsScreen()),
+              routes: [
+                GoRoute(
+                  name: EditProfileScreen.name,
+                  path: EditProfileScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) =>
+                      const NoTransitionPage(child: EditProfileScreen()),
+                )
+              ],
             ),
           ],
         ),

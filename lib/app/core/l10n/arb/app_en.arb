@@ -73,5 +73,17 @@
   "units":"units",
   "technicalsupport":"technical support",
   "aboutapp":"about app",
-  "profile":"profile"
+  "profile":"profile",
+  "firstname":"first name",
+  "lastname":"last name",
+  "mobile":"mobile number",
+  "birthdate":"birth date",
+  "gender":"gender",
+  "enterfname":"enter your first name",
+  "enterlname":"enter your last name",
+  "enteryourmobile":"enter your mobile number",
+  "enterbirthdate":"select your birthday",
+  "entergender":"not selected",
+  "enteremail":"enter your email address",
+  "save":"save"
 }

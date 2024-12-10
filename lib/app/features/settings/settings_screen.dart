@@ -1,12 +1,16 @@
+import 'package:btl/app/core/extensions/arabic_x.dart';
 import 'package:btl/app/core/extensions/bloc_x.dart';
 import 'package:btl/app/core/extensions/english_x.dart';
 import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/extensions/string_x.dart';
 import 'package:btl/app/core/extensions/text_style_x.dart';
+import 'package:btl/app/core/extensions/validator.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:btl/app/features/edit_profile/presentation/edit_profile_screen.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/settings/widgets/avatar_label_row.dart';
 import 'package:btl/app/features/settings/widgets/settings_section_widget.dart';
@@ -16,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -28,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          context.l10n.settings.capitalized,
+          context.l10n.settings.capitalized.definite,
           style: context.textThemeX.large.bold,
         ),
       ),
@@ -39,7 +44,11 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AvatarLabelRow(),
+                AvatarLabelRow(
+                  onPressed: () {
+                    context.pushNamed(EditProfileScreen.name);
+                  },
+                ),
                 const Gap(30),
                 SettingsSectionWidget(
                   iconData: FontAwesomeIcons.lock,
