@@ -1,5 +1,4 @@
 import 'package:btl/app/core/constants/app_colors.dart';
-import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconElevatedButton extends StatelessWidget {
