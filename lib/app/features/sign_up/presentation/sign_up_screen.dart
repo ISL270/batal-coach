@@ -43,19 +43,13 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconButton(
-                  icon: const Icon(
-                    FontAwesomeIcons.arrowLeftLong,
-                  ),
-                  onPressed: () {
-                    context.pop();
-                  },
+                  icon: const Icon(FontAwesomeIcons.arrowLeftLong),
+                  onPressed: () => context.pop(),
                 ),
                 const Gap(15),
                 Text(
                   context.l10n.createaccount,
-                  style: const TextStyle(
-                    fontSize: 42,
-                  ),
+                  style: const TextStyle(fontSize: 42),
                 ),
               ],
             ),
