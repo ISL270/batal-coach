@@ -1,11 +1,7 @@
 part of '../sign_up_screen.dart';
 
 class _SecondPageView extends StatefulWidget {
-  const _SecondPageView({
-    required this.roles,
-  });
-
-  final List<String> roles;
+  const _SecondPageView();
 
   @override
   State<_SecondPageView> createState() => _SecondPageViewState();
@@ -32,7 +28,7 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
               selector: (state) => state.coachType,
               builder: (context, coachType) {
                 return Center(
-                  child: DropdownButtonFormField<String>(
+                  child: DropdownButtonFormField<CoachType>(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -62,27 +58,33 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
                     borderRadius: BorderRadius.circular(12),
                     isExpanded: true,
                     iconEnabledColor: context.colorsX.secondaryBackground,
-                    value: widget.roles.first,
+                    value: coachType,
                     dropdownColor: context.colorsX.secondary,
                     enableFeedback: true,
-                    items: widget.roles.map((role) {
-                      return DropdownMenuItem<String>(
-                        value: role,
-                        child: Text(
-                          role,
-                          style: TextStyle(
+                    items: CoachType.values.map((coachType) {
+                      return DropdownMenuItem<CoachType>(
+                        value: coachType,
+                        child: DefaultTextStyle(
+                          style: context.textThemeX.small.copyWith(
                             color: context.colorsX.background,
+                          ),
+                          child: Text(
+                            coachType == CoachType.fitness
+                                ? context.l10n.fitness
+                                : coachType == CoachType.nutrition
+                                    ? context.l10n.nutrition
+                                    : context.l10n.manager,
                           ),
                         ),
                       );
                     }).toList(),
-                    onChanged: (value) {
-                      // CoachType.values
-                      //     .firstWhere((type) => type.name == value!.contains(type.name));
-                      setState(() {});
+                    onChanged: (CoachType? selectedType) {
+                      if (selectedType != null) {
+                        context.read<SignUpCubit>().coachTypeChanged(selectedType);
+                      }
                     },
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null) {
                         return 'Please select a role';
                       }
                       return null;

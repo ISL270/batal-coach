@@ -6,6 +6,7 @@ import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
+import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
@@ -27,12 +28,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final roles = <String>[
-      context.l10n.fitness,
-      context.l10n.nutrition,
-      context.l10n.manager,
-    ];
-
     return Screen(
       padding: EdgeInsets.zero,
       body: Stack(
@@ -67,9 +62,9 @@ class SignUpScreen extends StatelessWidget {
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
                   child: PageView(
                     controller: context.read<SignUpCubit>().pageController,
-                    children: [
-                      const _FirstPageView(),
-                      _SecondPageView(roles: roles),
+                    children: const [
+                      _FirstPageView(),
+                      _SecondPageView(),
                     ],
                   ),
                 ),
@@ -81,8 +76,6 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
-// Sign up Fields.
 
 class _SignUpContainerShapeWidget extends StatelessWidget {
   const _SignUpContainerShapeWidget();
