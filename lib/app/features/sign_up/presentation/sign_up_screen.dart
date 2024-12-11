@@ -2,6 +2,7 @@ import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
@@ -23,9 +24,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String? selectedRole;
-  bool loading = false;
-
   late PageController pageController;
 
   @override
@@ -88,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
                   child: PageView(controller: pageController, children: [
                     FirstPageView(pageController: pageController),
-                    SecondPageView(roles: roles, selectedRole: selectedRole ?? '')
+                    SecondPageView(roles: roles),
                   ]),
                 ),
               ],
@@ -149,12 +147,10 @@ class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveCl
 
 class SecondPageView extends StatefulWidget {
   const SecondPageView({
-    required this.selectedRole,
     required this.roles,
     super.key,
   });
 
-  final String selectedRole;
   final List<String> roles;
 
   @override
@@ -178,45 +174,68 @@ class _SecondPageViewState extends State<SecondPageView> with AutomaticKeepAlive
         padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
         child: Column(
           children: [
-            Center(
-              child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  border: customDropDownBorder(context),
-                  enabledBorder: customDropDownBorder(context),
-                  disabledBorder: customDropDownBorder(context),
-                  focusedBorder: customDropDownBorder(context),
-                ),
-                borderRadius: BorderRadius.circular(12),
-                isExpanded: true,
-                iconEnabledColor: context.colorsX.secondaryBackground,
-                value: widget.roles.first,
-                dropdownColor: context.colorsX.secondary,
-                enableFeedback: true,
-                items: widget.roles.map((role) {
-                  return DropdownMenuItem<String>(
-                    value: role,
-                    child: Text(
-                      role,
-                      style: TextStyle(
-                        color: context.colorsX.background,
+            BlocSelector<SignUpCubit, SignUpState, CoachType>(
+              selector: (state) => state.coachType,
+              builder: (context, coachType) {
+                return Center(
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                        borderSide: BorderSide(
+                          color: context.colorsX.background,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                        borderSide: BorderSide(
+                          color: context.colorsX.background,
+                        ),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                        borderSide: BorderSide(
+                          color: context.colorsX.background,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(12)),
+                        borderSide: BorderSide(
+                          color: context.colorsX.background,
+                        ),
                       ),
                     ),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  String? selectRole = widget.selectedRole;
-
-                  setState(() {
-                    selectRole = value;
-                  });
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please select a role';
-                  }
-                  return null;
-                },
-              ),
+                    borderRadius: BorderRadius.circular(12),
+                    isExpanded: true,
+                    iconEnabledColor: context.colorsX.secondaryBackground,
+                    value: widget.roles.first,
+                    dropdownColor: context.colorsX.secondary,
+                    enableFeedback: true,
+                    items: widget.roles.map((role) {
+                      return DropdownMenuItem<String>(
+                        value: role,
+                        child: Text(
+                          role,
+                          style: TextStyle(
+                            color: context.colorsX.background,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      // CoachType.values
+                      //     .firstWhere((type) => type.name == value!.contains(type.name));
+                      setState(() {});
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a role';
+                      }
+                      return null;
+                    },
+                  ),
+                );
+              },
             ),
             const Gap(25),
             const _CompanyField(),
@@ -238,7 +257,7 @@ class _NameFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<SignUpCubit, SignUpState, Name>(
       selector: (state) => state.name,
-      builder: (context, state) {
+      builder: (context, name) {
         return TextFormField(
           key: const Key('signUpForm_nameInput_textField'),
           textInputAction: TextInputAction.next,
@@ -250,10 +269,31 @@ class _NameFormField extends StatelessWidget {
             label: FormFieldText(
               label: context.l10n.name.capitalized,
             ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
           ),
         );
       },
@@ -271,6 +311,7 @@ class _EmailField extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('signUpForm_coachEmailInput_textField'),
+          initialValue: state.coachEmail.value,
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
           onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
@@ -282,10 +323,30 @@ class _EmailField extends StatelessWidget {
             label: FormFieldText(
               label: context.l10n.email.capitalized,
             ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
           ),
         );
       },
@@ -314,10 +375,30 @@ class _PasswordField extends StatelessWidget {
             label: FormFieldText(
               label: context.l10n.password.capitalized,
             ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
           ),
         );
       },
@@ -347,10 +428,30 @@ class _ConfirmPasswordField extends StatelessWidget {
             label: FormFieldText(
               label: context.l10n.confirmPassword.capitalized,
             ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
           ),
           onChanged: (confirmPassword) =>
               context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
@@ -407,10 +508,30 @@ class _CompanyField extends StatelessWidget {
         label: FormFieldText(
           label: context.l10n.company.capitalized,
         ),
-        border: textFormFieldBorder(context),
-        disabledBorder: textFormFieldBorder(context),
-        enabledBorder: textFormFieldBorder(context),
-        focusedBorder: textFormFieldBorder(context),
+        border: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          borderSide: BorderSide(
+            color: context.colorsX.background,
+          ),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          borderSide: BorderSide(
+            color: context.colorsX.background,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          borderSide: BorderSide(
+            color: context.colorsX.background,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          borderSide: BorderSide(
+            color: context.colorsX.background,
+          ),
+        ),
       ),
       onChanged: (p0) {},
     );
@@ -440,10 +561,30 @@ class _PhoneNumberField extends StatelessWidget {
             label: FormFieldText(
               label: context.l10n.phoneNumber.capitalized,
             ),
-            border: textFormFieldBorder(context),
-            disabledBorder: textFormFieldBorder(context),
-            enabledBorder: textFormFieldBorder(context),
-            focusedBorder: textFormFieldBorder(context),
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(
+                color: context.colorsX.background,
+              ),
+            ),
           ),
         );
       },
@@ -556,23 +697,4 @@ class _SignUpContainerShapeWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-// Components.
-OutlineInputBorder textFormFieldBorder(BuildContext context) {
-  return OutlineInputBorder(
-    borderRadius: const BorderRadius.all(Radius.circular(12)),
-    borderSide: BorderSide(
-      color: context.colorsX.background,
-    ),
-  );
-}
-
-OutlineInputBorder customDropDownBorder(BuildContext context) {
-  return OutlineInputBorder(
-    borderRadius: const BorderRadius.all(Radius.circular(12)),
-    borderSide: BorderSide(
-      color: context.colorsX.background,
-    ),
-  );
 }

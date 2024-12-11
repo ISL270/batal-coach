@@ -3,6 +3,7 @@ part of 'sign_up_cubit.dart';
 final class SignUpState extends Equatable with FormzMixin {
   const SignUpState({
     this.userType = UserType.coach,
+    this.coachType = CoachType.fitness,
     this.name = const Name.pure(),
     this.email = const Email.pure(),
     this.coachEmail = const Email.pure(),
@@ -13,6 +14,7 @@ final class SignUpState extends Equatable with FormzMixin {
   });
 
   final UserType userType;
+  final CoachType coachType;
   final Name name;
   final Email email;
   final Email coachEmail;
@@ -24,6 +26,7 @@ final class SignUpState extends Equatable with FormzMixin {
   @override
   List<Object?> get props => [
         userType,
+        coachType,
         name,
         email,
         coachEmail,
@@ -35,6 +38,7 @@ final class SignUpState extends Equatable with FormzMixin {
 
   SignUpState copyWith({
     UserType? userType,
+    CoachType? coachType,
     Name? name,
     Email? email,
     Email? coachEmail,
@@ -45,6 +49,7 @@ final class SignUpState extends Equatable with FormzMixin {
   }) {
     return SignUpState(
       userType: userType ?? this.userType,
+      coachType: coachType ?? this.coachType,
       name: name ?? this.name,
       email: email ?? this.email,
       coachEmail: coachEmail ?? this.coachEmail,

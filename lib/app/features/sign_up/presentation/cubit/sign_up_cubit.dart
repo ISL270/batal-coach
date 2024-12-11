@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -59,4 +60,6 @@ class SignUpCubit extends Cubit<SignUpState> {
       emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));
     }
   }
+
+  void coachTypeChanged(CoachType coachType) => emit(state.copyWith(coachType: coachType));
 }
