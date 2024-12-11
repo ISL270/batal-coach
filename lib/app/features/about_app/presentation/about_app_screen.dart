@@ -1,7 +1,10 @@
+import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -18,21 +21,17 @@ class AboutAppScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            context.l10n.localeName == 'ar'
+            context.settingsBloc.state.language.isArabic
                 ? Icons.keyboard_arrow_right_sharp
                 : Icons.keyboard_arrow_left_sharp,
             size: 28,
           ),
-          onPressed: () {
-            context.pop();
-          },
+          onPressed: () => context.pop(),
         ),
         centerTitle: true,
         title: Text(
           context.l10n.aboutapp.capitalized,
-          style: context.textThemeX.medium.bold.copyWith(
-            fontSize: 20,
-          ),
+          style: context.textThemeX.medium.bold.copyWith(fontSize: 20),
         ),
       ),
       body: Column(
@@ -45,20 +44,13 @@ class AboutAppScreen extends StatelessWidget {
                 style: context.textThemeX.medium,
               ),
               const Spacer(),
-              Text(
-                '0.0.1',
-                style: context.textThemeX.medium.bold,
-              ),
+              Text('0.0.1', style: context.textThemeX.medium.bold),
             ],
           ),
           const Gap(30),
-          _AboutAppItemWidget(
-            label: context.l10n.privacypolicy.capitalized,
-          ),
+          _AboutAppItemWidget(label: context.l10n.privacypolicy.capitalized),
           const Gap(30),
-          _AboutAppItemWidget(
-            label: context.l10n.termsofservice.capitalized,
-          ),
+          _AboutAppItemWidget(label: context.l10n.termsofservice.capitalized),
         ],
       ),
     );
@@ -87,11 +79,11 @@ class _AboutAppItemWidget extends StatelessWidget {
         GestureDetector(
           onTap: onPressed,
           child: Icon(
-            context.l10n.localeName == 'ar'
+            context.settingsBloc.state.isArabic
                 ? Icons.keyboard_arrow_left_sharp
                 : Icons.keyboard_arrow_right_sharp,
           ),
-        )
+        ),
       ],
     );
   }

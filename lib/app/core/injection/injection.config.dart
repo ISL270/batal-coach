@@ -12,22 +12,19 @@ import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_
     as _i403;
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart'
     as _i1006;
-import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
-    as _i441;
+import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart' as _i441;
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart'
     as _i714;
 import 'package:btl/app/coach/features/exercises/data/data_sources/remote/exercises_firestore_source.dart'
     as _i577;
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart'
     as _i611;
-import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart'
-    as _i450;
+import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart' as _i450;
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar_source.dart'
     as _i25;
 import 'package:btl/app/coach/features/workouts/data/sources/remote/workout_firestore_source.dart'
     as _i389;
-import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart'
-    as _i820;
+import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart' as _i820;
 import 'package:btl/app/core/firestore/firestore_service.dart' as _i997;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/isar/isar_service.dart' as _i26;
@@ -36,12 +33,9 @@ import 'package:btl/app/features/authentication/data/data_sources/local/user_isa
     as _i193;
 import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart'
     as _i538;
-import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
-    as _i902;
-import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart'
-    as _i55;
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart'
-    as _i260;
+import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart' as _i902;
+import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart' as _i55;
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart' as _i260;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -69,10 +63,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     gh.singleton<_i538.UserFirestoreSource>(
         () => _i538.UserFirestoreSource(gh<_i997.FirestoreService>()));
-    gh.singleton<_i193.UserIsarSource>(
-        () => _i193.UserIsarSource(gh<_i26.IsarService>()));
-    gh.singleton<_i25.WorkoutIsarSource>(
-        () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i193.UserIsarSource>(() => _i193.UserIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i25.WorkoutIsarSource>(() => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i403.ClientsFirestoreSource>(
@@ -108,8 +100,7 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispose(),
     );
-    gh.singleton<_i260.AuthBloc>(
-        () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
+    gh.singleton<_i260.AuthBloc>(() => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     gh.singleton<_i611.ExercisesRepository>(
       () => _i611.ExercisesRepository(
         gh<_i902.AuthRepository>(),
@@ -118,10 +109,8 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispMethod(),
     );
-    gh.factory<_i441.ClientsBloc>(
-        () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
-    gh.factory<_i450.ExercisesBloc>(
-        () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
+    gh.factory<_i441.ClientsBloc>(() => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
+    gh.factory<_i450.ExercisesBloc>(() => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     gh.singleton<_i820.WorkoutRepository>(
       () => _i820.WorkoutRepository(
         gh<_i902.AuthRepository>(),
