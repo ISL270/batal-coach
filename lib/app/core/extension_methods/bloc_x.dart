@@ -7,4 +7,3 @@ extension Blocs on BuildContext {
   SettingsBloc get settingsBloc => read<SettingsBloc>();
   WorkoutBuilderCubit get wkBuilderCubit => read<WorkoutBuilderCubit>();
 }
-
