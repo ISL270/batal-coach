@@ -1,7 +1,9 @@
+import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
+import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/widgets/button.dart';
@@ -266,8 +268,11 @@ class _NameFormField extends StatelessWidget {
             color: context.colorsX.background,
           ),
           decoration: InputDecoration(
-            label: FormFieldText(
-              label: context.l10n.name.capitalized,
+            label: Text(
+              context.l10n.name.capitalized,
+              style: context.textThemeX.small.copyWith(
+                color: context.colorsX.background,
+              ),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -320,8 +325,11 @@ class _EmailField extends StatelessWidget {
           ),
           decoration: InputDecoration(
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
-            label: FormFieldText(
-              label: context.l10n.email.capitalized,
+            label: Text(
+              context.l10n.email.capitalized,
+              style: context.textThemeX.small.copyWith(
+                color: context.colorsX.background,
+              ),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -372,8 +380,11 @@ class _PasswordField extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
-            label: FormFieldText(
-              label: context.l10n.password.capitalized,
+            label: Text(
+              context.l10n.password.capitalized,
+              style: context.textThemeX.small.copyWith(
+                color: context.colorsX.background,
+              ),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -425,8 +436,11 @@ class _ConfirmPasswordField extends StatelessWidget {
           decoration: InputDecoration(
             errorText:
                 state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
-            label: FormFieldText(
-              label: context.l10n.confirmPassword.capitalized,
+            label: Text(
+              context.l10n.confirmPassword.capitalized,
+              style: context.textThemeX.small.copyWith(
+                color: context.colorsX.background,
+              ),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -505,8 +519,11 @@ class _CompanyField extends StatelessWidget {
         color: context.colorsX.background,
       ),
       decoration: InputDecoration(
-        label: FormFieldText(
-          label: context.l10n.company.capitalized,
+        label: Text(
+          context.l10n.company.capitalized,
+          style: context.textThemeX.small.copyWith(
+            color: context.colorsX.background,
+          ),
         ),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -558,8 +575,11 @@ class _PhoneNumberField extends StatelessWidget {
             color: context.colorsX.background,
           ),
           decoration: InputDecoration(
-            label: FormFieldText(
-              label: context.l10n.phoneNumber.capitalized,
+            label: Text(
+              context.l10n.phoneNumber.capitalized,
+              style: context.textThemeX.small.copyWith(
+                color: context.colorsX.background,
+              ),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -625,26 +645,6 @@ class _SignUpButton extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class FormFieldText extends StatelessWidget {
-  const FormFieldText({
-    required this.label,
-    super.key,
-  });
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: TextStyle(
-        fontSize: 16,
-        color: context.colorsX.background,
-      ),
     );
   }
 }
