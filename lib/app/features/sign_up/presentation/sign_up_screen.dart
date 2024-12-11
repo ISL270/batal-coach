@@ -16,29 +16,10 @@ import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   static const name = 'signup';
-
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  late PageController pageController;
-
-  @override
-  void initState() {
-    pageController = PageController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +67,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const _SignUpContainerShapeWidget(),
                 ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
-                  child: PageView(controller: pageController, children: [
-                    FirstPageView(pageController: pageController),
-                    SecondPageView(roles: roles),
-                  ]),
+                  child: PageView(
+                    controller: context.read<SignUpCubit>().pageController,
+                    children: [
+                      const FirstPageView(),
+                      SecondPageView(roles: roles),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -103,11 +87,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 // Sign up Fields.
 class FirstPageView extends StatefulWidget {
   const FirstPageView({
-    required this.pageController,
     super.key,
   });
-
-  final PageController pageController;
 
   @override
   State<FirstPageView> createState() => _FirstPageViewState();
@@ -136,7 +117,7 @@ class _FirstPageViewState extends State<FirstPageView> with AutomaticKeepAliveCl
             const Gap(25),
             const _ConfirmPasswordField(),
             const Gap(25),
-            _NextPageViewButton(pageController: widget.pageController),
+            _NextPageViewButton(pageController: context.read<SignUpCubit>().pageController),
             const Gap(20),
             const _AlreadyHaveAnAccount(),
             const Gap(20),
