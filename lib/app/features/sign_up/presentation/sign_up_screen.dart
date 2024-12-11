@@ -27,12 +27,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final roles = <String>[
-      context.l10n.fitness,
-      context.l10n.nutrition,
-      context.l10n.manager,
-    ];
-
     return Screen(
       padding: EdgeInsets.zero,
       body: Stack(
@@ -67,9 +61,9 @@ class SignUpScreen extends StatelessWidget {
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
                   child: PageView(
                     controller: context.read<SignUpCubit>().pageController,
-                    children: [
-                      const _FirstPageView(),
-                      _SecondPageView(roles: roles),
+                    children: const [
+                      _FirstPageView(),
+                      _SecondPageView(),
                     ],
                   ),
                 ),
