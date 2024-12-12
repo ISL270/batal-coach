@@ -1,15 +1,20 @@
+import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
+import 'package:btl/app/core/extension_methods/string_x.dart';
+import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/core/l10n/l10n_service.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
+import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +25,7 @@ import 'package:go_router/go_router.dart';
 
 part 'widgets/first_page_view.dart';
 part 'widgets/second_page_view.dart';
+part 'widgets/third_page_view.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -53,23 +59,30 @@ class SignUpScreen extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 280),
-            child: Stack(
-              children: [
-                const _SignUpContainerShapeWidget(),
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
-                  child: PageView(
-                    controller: context.read<SignUpCubit>().pageController,
-                    children: const [
-                      _FirstPageView(),
-                      _SecondPageView(),
-                    ],
-                  ),
+          BlocSelector<SignUpCubit, SignUpState, UserType>(
+            selector: (state) => state.userType,
+            builder: (context, userType) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 280),
+                child: Stack(
+                  children: [
+                    const _SignUpContainerShapeWidget(),
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
+                      child: PageView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: context.read<SignUpCubit>().pageController,
+                        children: [
+                          const _FirstPageView(),
+                          if (userType.isCoach) const _SecondPageView(),
+                          if (userType.isTrainee) const _ThirdPageView(),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ],
       ),

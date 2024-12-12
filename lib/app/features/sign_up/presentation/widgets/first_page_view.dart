@@ -16,7 +16,6 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
     super.build(context);
     return SingleChildScrollView(
       key: const PageStorageKey('First_page'),
-      physics: const BouncingScrollPhysics(),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
         padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
@@ -24,11 +23,58 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
           children: [
             const _NameFormField(),
             const Gap(25),
-            const _EmailField(),
+            BlocSelector<SignUpCubit, SignUpState, UserType>(
+              selector: (state) => state.userType,
+              builder: (context, userType) {
+                if (userType.isCoach) {
+                  return const _CoachEmailField();
+                } else {
+                  return const _TraineeEmailField();
+                }
+              },
+            ),
             const Gap(25),
             const _PasswordField(),
             const Gap(25),
             const _ConfirmPasswordField(),
+            const Gap(25),
+            BlocSelector<SignUpCubit, SignUpState, UserType>(
+              selector: (state) => state.userType,
+              builder: (context, userType) {
+                return SegmentedButton(
+                  style: SegmentedButton.styleFrom(textStyle: context.textThemeX.small.bold),
+                  expandedInsets: const EdgeInsets.all(1),
+                  showSelectedIcon: false,
+                  onSelectionChanged: (selection) =>
+                      context.read<SignUpCubit>().changeUserType(selection.first),
+                  segments: [
+                    ButtonSegment(
+                      value: UserType.coach,
+                      label: Text(
+                        context.l10n.coach.capitalized,
+                        style: context.textThemeX.small.bold.copyWith(
+                          color: userType.isCoach
+                              ? context.colorsX.onBackground
+                              : context.colorsX.background,
+                        ),
+                      ),
+                    ),
+                    ButtonSegment(
+                      value: UserType.trainee,
+                      label: Text(
+                        context.l10n.trainee.capitalized,
+                        style: context.textThemeX.small.bold.copyWith(
+                          color: userType.isTrainee
+                              ? context.colorsX.onBackground
+                              : context.colorsX.background,
+                        ),
+                      ),
+                    ),
+                  ],
+                  selected: {userType},
+                );
+              },
+            ),
             const Gap(25),
             _NextPageViewButton(pageController: context.read<SignUpCubit>().pageController),
             const Gap(20),
@@ -59,33 +105,23 @@ class _NameFormField extends StatelessWidget {
           decoration: InputDecoration(
             label: Text(
               context.l10n.name.capitalized,
-              style: context.textThemeX.small.copyWith(
-                color: context.colorsX.background,
-              ),
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
           ),
@@ -95,8 +131,54 @@ class _NameFormField extends StatelessWidget {
   }
 }
 
-class _EmailField extends StatelessWidget {
-  const _EmailField();
+class _TraineeEmailField extends StatelessWidget {
+  const _TraineeEmailField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.email != current.email,
+      builder: (context, state) {
+        return TextFormField(
+          key: const Key('signUpForm_emailInput_textField'),
+          initialValue: state.email.value,
+          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.emailAddress,
+          onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
+          style: TextStyle(
+            color: context.colorsX.background,
+          ),
+          decoration: InputDecoration(
+            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+            label: Text(
+              context.l10n.email.capitalized,
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(color: context.colorsX.background),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(color: context.colorsX.background),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(color: context.colorsX.background),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(color: context.colorsX.background),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _CoachEmailField extends StatelessWidget {
+  const _CoachEmailField();
 
   @override
   Widget build(BuildContext context) {
@@ -115,34 +197,24 @@ class _EmailField extends StatelessWidget {
           decoration: InputDecoration(
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
             label: Text(
-              context.l10n.email.capitalized,
-              style: context.textThemeX.small.copyWith(
-                color: context.colorsX.background,
-              ),
+              context.l10n.coachemail.capitalized,
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
           ),
         );
@@ -273,27 +345,24 @@ class _NextPageViewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 48,
-      child: Button.filled(
-        height: 0,
-        // iconWithAlignment: IconWithAlignment(
-        //   Icon(
-        //     FontAwesomeIcons.forward,
-        //     size: 18,
-        //     color: context.colorsX.onBackground,
-        //   ),
-        //   alignment: IconAlignment.end,
-        // ),
-        label: context.l10n.regcontinue,
-        onPressed: () {
-          pageController.nextPage(
-            duration: const Duration(milliseconds: 600),
-            curve: Curves.easeIn,
-          );
-        },
-      ),
+    return BlocSelector<SignUpCubit, SignUpState, UserType>(
+      selector: (state) => state.userType,
+      builder: (context, state) {
+        return SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: Button.filled(
+            height: 0,
+            label: context.l10n.regcontinue,
+            onPressed: () {
+              pageController.nextPage(
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeIn,
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

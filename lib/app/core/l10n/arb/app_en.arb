@@ -77,5 +77,6 @@
   "manager":"Manager",
   "company":"Company Name (optional)",
   "createaccount":"Create \nAccount.",
-  "profile":"profile"
+  "profile":"profile",
+  "coachemail":"coach email"
 }
