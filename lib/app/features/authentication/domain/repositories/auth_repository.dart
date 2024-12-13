@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:btl/app/core/models/domain/generic_exception.dart';
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -41,14 +40,13 @@ final class AuthRepository {
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpWithEmailAndPasswordException] if an exception occurs.
-  Future<void> signUp(
-    UserType userType, {
-    required String coachEmail,
-    required String email,
-    required String name,
-    required String phoneNumber,
-    required String password,
-  }) async {
+  Future<void> signUp(UserType userType,
+      {required String coachEmail,
+      required String email,
+      required String name,
+      required String phoneNumber,
+      required String password,
+      required String coachType}) async {
     try {
       final userCredential = await _fireAuth.createUserWithEmailAndPassword(
         email: email,
@@ -66,6 +64,7 @@ final class AuthRepository {
         email: email,
         name: name,
         phoneNumber: phoneNumber,
+        coachType: coachType,
       );
 
       await res.fold(

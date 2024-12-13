@@ -4,7 +4,6 @@ import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';

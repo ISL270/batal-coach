@@ -20,6 +20,7 @@ sealed class FireUserInfo implements UserInfoRM {
     required String email,
     required String name,
     required String phoneNumber,
+    required String coachType,
   }) =>
       switch (userType) {
         UserType.coach => FireCoachInfo(
@@ -28,6 +29,7 @@ sealed class FireUserInfo implements UserInfoRM {
             email: email,
             name: name,
             phoneNumber: phoneNumber,
+            coachType: coachType,
           ),
         UserType.trainee => FireTraineeInfo(
             userType: userType,
@@ -47,6 +49,7 @@ sealed class FireUserInfo implements UserInfoRM {
             email: user.email,
             name: user.name,
             phoneNumber: user.phoneNumber,
+            coachType: user.coachType!,
           ),
         Trainee() => FireTraineeInfo(
             userType: userType,
@@ -61,6 +64,7 @@ sealed class FireUserInfo implements UserInfoRM {
 
 @JsonSerializable(explicitToJson: true)
 final class FireCoachInfo extends FireUserInfo {
+  final String? coachType;
   @override
   final UserType userType;
   @override
@@ -78,6 +82,7 @@ final class FireCoachInfo extends FireUserInfo {
     required this.email,
     required this.name,
     required this.phoneNumber,
+    required this.coachType,
   });
 
   factory FireCoachInfo.fromJson(Map<String, dynamic> json) => _$FireCoachInfoFromJson(json);
@@ -86,12 +91,8 @@ final class FireCoachInfo extends FireUserInfo {
   Map<String, dynamic> toJson() => _$FireCoachInfoToJson(this);
 
   @override
-  Coach toDomain() => Coach(
-        id: uid,
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-      );
+  Coach toDomain() =>
+      Coach(id: uid, name: name, email: email, phoneNumber: phoneNumber, coachType: coachType);
 }
 
 @JsonSerializable(explicitToJson: true)

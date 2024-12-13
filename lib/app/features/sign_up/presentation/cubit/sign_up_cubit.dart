@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
@@ -63,6 +61,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           name: state.name.value,
           phoneNumber: state.phoneNumber.value,
           password: state.password.value,
+          coachType: state.coachType.toStringValue(),
         );
       } else {
         await _authRepository.signUp(
@@ -72,6 +71,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           name: state.name.value,
           phoneNumber: state.phoneNumber.value,
           password: state.password.value,
+          coachType: '', // no coach type field needed here
         );
       }
     } catch (e) {

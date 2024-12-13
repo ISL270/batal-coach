@@ -33,14 +33,14 @@ final class UserRepository {
     }
   }
 
-  Future<Either<GenericException, User>> saveUserInfoRemote({
-    required String uid,
-    required UserType userType,
-    required String coachEmail,
-    required String email,
-    required String name,
-    required String phoneNumber,
-  }) async {
+  Future<Either<GenericException, User>> saveUserInfoRemote(
+      {required String uid,
+      required UserType userType,
+      required String coachEmail,
+      required String email,
+      required String name,
+      required String phoneNumber,
+      required String coachType}) async {
     try {
       final userInfoRM = await _remoteSource.saveUserInfo(
         userType,
@@ -49,6 +49,7 @@ final class UserRepository {
         email: email,
         name: name,
         phoneNumber: phoneNumber,
+        coachType: coachType,
       );
       return right(userInfoRM.toDomain());
     } catch (e) {

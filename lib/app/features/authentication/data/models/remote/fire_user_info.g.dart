@@ -13,10 +13,12 @@ FireCoachInfo _$FireCoachInfoFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       name: json['name'] as String,
       phoneNumber: json['phoneNumber'] as String,
+      coachType: json['coachType'] as String?,
     );
 
 Map<String, dynamic> _$FireCoachInfoToJson(FireCoachInfo instance) =>
     <String, dynamic>{
+      'coachType': instance.coachType,
       'userType': _$UserTypeEnumMap[instance.userType]!,
       'uid': instance.uid,
       'email': instance.email,

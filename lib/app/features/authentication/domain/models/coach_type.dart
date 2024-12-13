@@ -5,7 +5,18 @@ enum CoachType {
 
   fitness,
   nutrition,
-  manager,
+  manager;
+
+  String toStringValue() {
+    switch (this) {
+      case CoachType.fitness:
+        return 'fitness';
+      case CoachType.nutrition:
+        return 'nutrition';
+      case CoachType.manager:
+        return 'manager';
+    }
+  }
 }
 
 extension CoachTypeX on CoachType {
