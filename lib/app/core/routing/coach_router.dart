@@ -6,11 +6,12 @@ import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_r
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
 import 'package:btl/app/coach/features/home/home_screen.dart';
-import 'package:btl/app/coach/features/workout_builder.dart/presentation/bloc/wk_builder_bloc.dart';
-import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/cubit/workout_builder_cubit.dart';
+import 'package:btl/app/coach/features/workout_builder.dart/presentation/workout_builder_screen.dart';
+import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart';
 import 'package:btl/app/coach/features/workouts/presentation/bloc/workouts_bloc.dart';
 import 'package:btl/app/coach/features/workouts/presentation/workouts_screen.dart';
-import 'package:btl/app/core/extensions/getit_x.dart';
+import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
@@ -89,7 +90,7 @@ final coachRouter = GoRouter(
                 path: '/${WorkoutsScreen.name}',
                 pageBuilder: (context, state) => NoTransitionPage(
                       child: BlocProvider(
-                        create: (context) => WorkoutsBloc(),
+                        create: (context) => WorkoutsBloc(getIt.get<WorkoutRepository>()),
                         child: const WorkoutsScreen(),
                       ),
                     ),
@@ -98,9 +99,12 @@ final coachRouter = GoRouter(
                     name: WorkoutBuilderScreen.name,
                     path: WorkoutBuilderScreen.name,
                     parentNavigatorKey: _rootNavigatorKey,
-                    builder: (context, state) => BlocProvider(
-                      create: (context) => WkBuilderBloc(getIt.get<ExercisesRepository>()),
-                      child: const WorkoutBuilderScreen(),
+                    pageBuilder: (context, state) => CupertinoPage(
+                      fullscreenDialog: true,
+                      child: BlocProvider(
+                        create: (context) => WorkoutBuilderCubit(getIt.get<WorkoutRepository>()),
+                        child: const WorkoutBuilderScreen(),
+                      ),
                     ),
                   ),
                 ]),

@@ -11,7 +11,7 @@ class Exercise extends Equatable {
   final Mechanic? mechanic;
   final List<String> images;
   final Equipment? equipment;
-  final List<FieldType> fields;
+  final List<FieldType> fieldTypes;
   final List<String> instructions;
   final List<Muscle> secondaryMuscles;
 
@@ -21,7 +21,7 @@ class Exercise extends Equatable {
     required this.force,
     required this.level,
     required this.images,
-    required this.fields,
+    required this.fieldTypes,
     required this.mechanic,
     required this.type,
     required this.equipment,
@@ -38,7 +38,7 @@ class Exercise extends Equatable {
         force,
         level,
         images,
-        fields,
+        fieldTypes,
         mechanic,
         equipment,
         mainMuscle,
@@ -49,7 +49,7 @@ class Exercise extends Equatable {
 
 extension ExerciseX on Exercise {
   List<Field> initialFields() {
-    return fields
+    return fieldTypes
         .map((f) => switch (f) {
               FieldType.time => Time.zero(),
               FieldType.distance => Distance.zero(),

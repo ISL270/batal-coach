@@ -1,6 +1,6 @@
 import 'package:btl/app/core/models/domain/generic_exception.dart';
-import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart';
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_remote_source.dart';
+import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart';
+import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:fpdart/fpdart.dart';
@@ -8,8 +8,8 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 final class UserRepository {
-  final UserLocalSource _localSource;
-  final UserRemoteSource _remoteSource;
+  final UserIsarSource _localSource;
+  final UserFirestoreSource _remoteSource;
 
   UserRepository(this._localSource, this._remoteSource);
 

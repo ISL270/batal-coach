@@ -48,12 +48,14 @@ class _NumberPickerBSState extends State<NumberPickerBS> {
                       value: _currentValue,
                       minValue: 0,
                       maxValue: 100,
+                      haptics: true,
                       onChanged: (value) => setState(() => _currentValue = value),
                     )
                   : NumberPicker(
                       value: _currentValue.toInt(),
                       minValue: 0,
                       maxValue: 100,
+                      haptics: true,
                       onChanged: (value) => setState(() => _currentValue = value.toDouble()),
                     ),
             ),

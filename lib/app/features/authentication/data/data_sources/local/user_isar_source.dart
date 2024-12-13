@@ -1,22 +1,18 @@
-import 'package:btl/app/core/services/local_db/i_local_db.dart';
-import 'package:btl/app/features/authentication/data/data_sources/local/user_local_source.dart';
+import 'package:btl/app/core/isar/isar_source.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: UserLocalSource)
-final class UserIsarSource implements UserLocalSource {
-  @override
-  final LocalDB localDB;
+@singleton
+final class UserIsarSource extends IsarSource<User, UserIsar> {
+  const UserIsarSource(super.isarService);
 
-  const UserIsarSource(this.localDB);
+  Future<UserIsar?> getSavedUser() => isarService.getFirst<UserIsar>();
 
-  @override
-  Future<UserIsar?> getSavedUser() => localDB.getFirst<UserIsar>();
+  Future<void> saveUser(User user) => isarService.put(UserIsar.fromDomain(user));
 
-  @override
-  Future<void> saveUser(User user) => localDB.put(UserIsar.fromDomain(user));
+  Future<void> deleteSavedUser() => isarService.clear<UserIsar>();
 
   @override
-  Future<void> deleteSavedUser() => localDB.clear<UserIsar>();
+  UserIsar fromDomain(User dm) => UserIsar.fromDomain(dm);
 }

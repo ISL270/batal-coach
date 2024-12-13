@@ -1,3 +1,5 @@
+import 'package:fpdart/fpdart.dart';
+
 /// Parent exception class that can only be inherited and not instantiated.
 sealed class GenericException implements Exception {
   final String code;
@@ -8,6 +10,9 @@ sealed class GenericException implements Exception {
     this.message,
   });
 }
+
+/// Short for [Either<GenericException, T>]
+typedef EitherException<T> = Either<GenericException, T>;
 
 /// Business Exception.
 class BusinessException extends GenericException {

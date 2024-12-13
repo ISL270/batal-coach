@@ -1,20 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'clients_firestore_source.dart';
+part of 'client_fm.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_FireClient _$FireClientFromJson(Map<String, dynamic> json) => _FireClient(
+ClientFM _$ClientFMFromJson(Map<String, dynamic> json) => ClientFM(
       id: json['uid'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
       phoneNumber: json['phoneNumber'] as String,
     );
 
-Map<String, dynamic> _$FireClientToJson(_FireClient instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ClientFMToJson(ClientFM instance) => <String, dynamic>{
       'uid': instance.id,
       'name': instance.name,
       'email': instance.email,

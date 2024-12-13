@@ -18,6 +18,7 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
   Color get onBackground;
   Color get onBackgroundTint;
   Color get error;
+  Color get onBackgroundTint35;
 
   @override
   ColorsX copyWith({
@@ -30,6 +31,7 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
     Color? onBackground,
     Color? onBackgroundTint,
     Color? error,
+    Color? onBackgroundTint35,
   }) {
     return ColorsX(
       background: background ?? this.background,
@@ -70,7 +72,9 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
                 .equals(onBackground, other.onBackground) &&
             const DeepCollectionEquality()
                 .equals(onBackgroundTint, other.onBackgroundTint) &&
-            const DeepCollectionEquality().equals(error, other.error));
+            const DeepCollectionEquality().equals(error, other.error) &&
+            const DeepCollectionEquality()
+                .equals(onBackgroundTint35, other.onBackgroundTint35));
   }
 
   @override
@@ -86,6 +90,7 @@ mixin _$ColorsXTailorMixin on ThemeExtension<ColorsX> {
       const DeepCollectionEquality().hash(onBackground),
       const DeepCollectionEquality().hash(onBackgroundTint),
       const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(onBackgroundTint35),
     );
   }
 }

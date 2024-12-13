@@ -6,3 +6,15 @@ sealed class WorkoutsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+final class _WkSubscriptionRequested extends WorkoutsEvent {}
+
+final class WkSearched extends WorkoutsEvent {
+  final String searchTerm;
+  const WkSearched(this.searchTerm);
+
+  @override
+  List<Object> get props => [searchTerm];
+}
+
+final class WkNextPageFetched extends WorkoutsEvent {}

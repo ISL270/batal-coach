@@ -7,19 +7,21 @@ sealed class ExercisesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class ExSearched extends ExercisesEvent {
+final class _ExcsSubscriptionRequested extends ExercisesEvent {}
+
+final class ExcsSearched extends ExercisesEvent {
   final String searchTerm;
-  const ExSearched(this.searchTerm);
+  const ExcsSearched(this.searchTerm);
 
   @override
   List<Object> get props => [searchTerm];
 }
 
-final class ExNextPageFetched extends ExercisesEvent {}
+final class ExcsNextPageFetched extends ExercisesEvent {}
 
-final class ExFiltered extends ExercisesEvent {
-  final ExFilters filters;
-  const ExFiltered(this.filters);
+final class ExcsFiltered extends ExercisesEvent {
+  final ExcFilters filters;
+  const ExcsFiltered(this.filters);
 
   @override
   List<Object> get props => [filters];
