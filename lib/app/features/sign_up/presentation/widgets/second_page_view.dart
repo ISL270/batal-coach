@@ -225,21 +225,15 @@ class _SignUpButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return SizedBox(
-          width: double.infinity,
-          height: 48,
-          child: Button.filled(
-            key: const Key('signUpForm_button'),
-            maxWidth: true,
-            shape: ButtonShape.roundedCorners,
-            isLoading: state.status.isLoading,
-            density: ButtonDensity.comfortable,
-            // onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
-            onPressed:
-                state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
-            label: context.l10n.signUp.capitalized,
-            height: 0,
-          ),
+        return Button.filled(
+          key: const Key('signUpForm_button'),
+          maxWidth: true,
+          shape: ButtonShape.roundedCorners,
+          isLoading: state.status.isLoading,
+          density: ButtonDensity.comfortable,
+          onPressed: state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
+          label: context.l10n.signUp.capitalized,
+          height: 40,
         );
       },
     );

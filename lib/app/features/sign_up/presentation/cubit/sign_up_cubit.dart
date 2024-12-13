@@ -21,6 +21,8 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void changeUserType(UserType userType) => emit(state.copyWith(userType: userType));
 
+  void coachTypeChanged(CoachType coachType) => emit(state.copyWith(coachType: coachType));
+
   void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
   void nameChanged(String value) => emit(state.copyWith(name: Name.dirty(value)));
@@ -77,6 +79,17 @@ class SignUpCubit extends Cubit<SignUpState> {
     }
   }
 
+  bool mainInfoValid() {
+    if (state.email.isValid &&
+        state.name.isValid &&
+        state.password.isValid &&
+        state.confirmPassword.isValid) {
+      // take first page view info of user
+      return true;
+    }
+    return false;
+  }
+
   // Future<void> signUpFormSubmitted() async {
   //   emit(state.copyWith(status: const Loading()));
   //   try {
@@ -92,6 +105,4 @@ class SignUpCubit extends Cubit<SignUpState> {
   //     emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));
   //   }
   // }
-
-  void coachTypeChanged(CoachType coachType) => emit(state.copyWith(coachType: coachType));
 }

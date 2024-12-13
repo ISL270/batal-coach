@@ -22,7 +22,7 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
         child: Column(
           children: [
             const _NameFormField(),
-            Gap(25),
+            const Gap(25),
             const _TraineeEmailField(),
             // BlocSelector<SignUpCubit, SignUpState, UserType>(
             //   selector: (state) => state.userType,
@@ -346,8 +346,8 @@ class _NextPageViewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, UserType>(
-      selector: (state) => state.userType,
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      // selector: (state) => state.userType,
       builder: (context, state) {
         return SizedBox(
           width: double.infinity,
@@ -355,12 +355,10 @@ class _NextPageViewButton extends StatelessWidget {
           child: Button.filled(
             height: 0,
             label: context.l10n.regcontinue,
-            onPressed: () {
-              pageController.nextPage(
-                duration: const Duration(milliseconds: 600),
-                curve: Curves.easeIn,
-              );
-            },
+            onPressed: context.read<SignUpCubit>().mainInfoValid()
+                ? () => pageController.nextPage(
+                    duration: const Duration(milliseconds: 600), curve: Curves.easeIn)
+                : null,
           ),
         );
       },
