@@ -52,18 +52,46 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> signUpFormSubmitted() async {
     emit(state.copyWith(status: const Loading()));
     try {
-      await _authRepository.signUp(
-        state.userType,
-        coachEmail: state.coachEmail.value,
-        email: state.email.value,
-        name: state.name.value,
-        phoneNumber: state.phoneNumber.value,
-        password: state.password.value,
-      );
+      if (state.userType.isCoach) {
+        state.coachEmail.isValid;
+        await _authRepository.signUp(
+          state.userType,
+          coachEmail: '', // no coach field needed here
+          email: state.email.value,
+          name: state.name.value,
+          phoneNumber: state.phoneNumber.value,
+          password: state.password.value,
+        );
+      } else {
+        await _authRepository.signUp(
+          state.userType,
+          coachEmail: state.coachEmail.value,
+          email: state.email.value,
+          name: state.name.value,
+          phoneNumber: state.phoneNumber.value,
+          password: state.password.value,
+        );
+      }
     } catch (e) {
       emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));
     }
   }
+
+  // Future<void> signUpFormSubmitted() async {
+  //   emit(state.copyWith(status: const Loading()));
+  //   try {
+  //     await _authRepository.signUp(
+  //       state.userType,
+  //       coachEmail: state.coachEmail.value,
+  //       email: state.email.value,
+  //       name: state.name.value,
+  //       phoneNumber: state.phoneNumber.value,
+  //       password: state.password.value,
+  //     );
+  //   } catch (e) {
+  //     emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));
+  //   }
+  // }
 
   void coachTypeChanged(CoachType coachType) => emit(state.copyWith(coachType: coachType));
 }

@@ -23,11 +23,10 @@ final class UserRepository {
   Future<void> deleteLocalUser() => _localSource.deleteSavedUser();
 
   Future<Either<GenericException, User>> getUserRemote({
-    required UserType userType,
     required String uid,
   }) async {
     try {
-      final userInfoRM = await _remoteSource.getUserInfo(userType, uid);
+      final userInfoRM = await _remoteSource.getUserInfo(uid);
       return right(userInfoRM.toDomain());
     } catch (e) {
       return left(e as GenericException);

@@ -22,17 +22,18 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
         child: Column(
           children: [
             const _NameFormField(),
-            const Gap(25),
-            BlocSelector<SignUpCubit, SignUpState, UserType>(
-              selector: (state) => state.userType,
-              builder: (context, userType) {
-                if (userType.isCoach) {
-                  return const _CoachEmailField();
-                } else {
-                  return const _TraineeEmailField();
-                }
-              },
-            ),
+            Gap(25),
+            const _TraineeEmailField(),
+            // BlocSelector<SignUpCubit, SignUpState, UserType>(
+            //   selector: (state) => state.userType,
+            //   builder: (context, userType) {
+            //     if (userType.isCoach) {
+            //       return const _CoachEmailField();
+            //     } else {
+
+            //     }
+            //   },
+            // ),
             const Gap(25),
             const _PasswordField(),
             const Gap(25),

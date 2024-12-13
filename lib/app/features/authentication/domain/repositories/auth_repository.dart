@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:btl/app/core/models/domain/generic_exception.dart';
+import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
@@ -100,9 +101,10 @@ final class AuthRepository {
       if (userCredential.user == null) {
         throw LogInWithEmailAndPasswordException.fromCode('user_not_found');
       }
+      // userType = await isUidExists(userCredential.user!.uid);
 
       final res = await _userRepository.getUserRemote(
-        userType: userType,
+        // userType: await isCoacheOrTrainee(userCredential.user!.uid),
         uid: userCredential.user!.uid,
       );
 
@@ -151,7 +153,7 @@ final class AuthRepository {
       }
 
       final res = await _userRepository.getUserRemote(
-        userType: userType,
+        // userType: userType,
         uid: userCredential.user!.uid,
       );
 
