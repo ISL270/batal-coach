@@ -17,13 +17,16 @@ class ThirdPageView extends State<_ThirdPageView> with AutomaticKeepAliveClientM
     return const SingleChildScrollView(
       key: PageStorageKey('third_page'),
       child: Padding(
-        padding: EdgeInsets.only(top: 80, right: 20, left: 20),
+        padding: EdgeInsets.only(top: 50, right: 20, left: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _ArrowBackPageView(),
+            Gap(25),
             _CoachEmailField(),
             Gap(25),
             _PhoneNumberField(),
-            Gap(180),
+            Gap(186),
             _SignUpButton(),
           ],
         ),

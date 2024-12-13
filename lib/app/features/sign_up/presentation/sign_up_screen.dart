@@ -106,3 +106,50 @@ class _SignUpContainerShapeWidget extends StatelessWidget {
     );
   }
 }
+
+class _ArrowBackPageView extends StatelessWidget {
+  const _ArrowBackPageView();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton.outlined(
+      icon: const Icon(FontAwesomeIcons.arrowLeft),
+      color: context.colorsX.background,
+      style: IconButton.styleFrom(side: BorderSide(color: context.colorsX.background)),
+      onPressed: () => context
+          .read<SignUpCubit>()
+          .pageController
+          .previousPage(duration: const Duration(milliseconds: 600), curve: Curves.decelerate),
+    );
+  }
+}
+
+class _SignUpButton extends StatelessWidget {
+  const _SignUpButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        if (state.status.isFailure) {
+          context.scaffoldMessenger
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(state.errorMsg)));
+        }
+      },
+      builder: (context, state) {
+        return Button.filled(
+          key: const Key('signUpForm_button'),
+          maxWidth: true,
+          shape: ButtonShape.roundedCorners,
+          isLoading: state.status.isLoading,
+          density: ButtonDensity.comfortable,
+          onPressed: state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
+          label: context.l10n.signUp.capitalized,
+          height: 40,
+        );
+      },
+    );
+  }
+}

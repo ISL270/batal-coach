@@ -21,9 +21,12 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
     return SingleChildScrollView(
       key: const PageStorageKey('Second_page'),
       child: Padding(
-        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
+        padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _ArrowBackPageView(),
+            const Gap(25),
             BlocSelector<SignUpCubit, SignUpState, CoachType>(
               selector: (state) => state.coachType,
               builder: (context, coachType) {
@@ -174,33 +177,23 @@ class _PhoneNumberField extends StatelessWidget {
           decoration: InputDecoration(
             label: Text(
               context.l10n.phoneNumber.capitalized,
-              style: context.textThemeX.small.copyWith(
-                color: context.colorsX.background,
-              ),
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              borderSide: BorderSide(color: context.colorsX.background),
             ),
           ),
         );
@@ -210,32 +203,3 @@ class _PhoneNumberField extends StatelessWidget {
 }
 
 // Widgets
-class _SignUpButton extends StatelessWidget {
-  const _SignUpButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<SignUpCubit, SignUpState>(
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: (context, state) {
-        if (state.status.isFailure) {
-          context.scaffoldMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(state.errorMsg)));
-        }
-      },
-      builder: (context, state) {
-        return Button.filled(
-          key: const Key('signUpForm_button'),
-          maxWidth: true,
-          shape: ButtonShape.roundedCorners,
-          isLoading: state.status.isLoading,
-          density: ButtonDensity.comfortable,
-          onPressed: state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
-          label: context.l10n.signUp.capitalized,
-          height: 40,
-        );
-      },
-    );
-  }
-}

@@ -357,7 +357,7 @@ class _NextPageViewButton extends StatelessWidget {
             label: context.l10n.regcontinue,
             onPressed: context.read<SignUpCubit>().mainInfoValid()
                 ? () => pageController.nextPage(
-                    duration: const Duration(milliseconds: 600), curve: Curves.easeIn)
+                    duration: const Duration(milliseconds: 600), curve: Curves.decelerate)
                 : null,
           ),
         );
