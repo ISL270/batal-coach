@@ -2,6 +2,7 @@ import 'package:btl/app/coach/features/clients/domain/repositories/clients_repos
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
+import 'package:btl/app/coach/features/exercise_details/presentation/exercise_details_screen.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
@@ -77,6 +78,12 @@ final coachRouter = GoRouter(
                   path: ExerciseBuilderScreen.name,
                   parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ExerciseBuilderScreen(),
+                ),
+                GoRoute(
+                  name: ExerciseDetailsScreen.name,
+                  path: ExerciseDetailsScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (context, state) => const ExerciseDetailsScreen(),
                 ),
               ],
             ),

@@ -16,6 +16,7 @@ dependencies:
   equatable: ^2.0.5
   firebase_auth: ^5.3.0
   firebase_core: ^3.3.0
+  timelines: ^0.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
@@ -60,12 +61,10 @@ dev_dependencies:
 
 dependency_overrides:
   analyzer: ^6.3.0
-  
 
 flutter_gen:
   output: lib/app/core/assets_gen/
   line_length: 100
-
 
 flutter:
   uses-material-design: true
