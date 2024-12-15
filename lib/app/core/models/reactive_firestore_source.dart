@@ -2,8 +2,8 @@
 
 import 'dart:async';
 
-import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/firestore/firestore_service.dart';
+import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
