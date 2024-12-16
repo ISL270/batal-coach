@@ -1,18 +1,15 @@
 // ignore_for_file: camel_case_types
 import 'dart:async';
-import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
-part 'widgets/first_page_view.dart';
-part 'widgets/second_page_view.dart';
+part 'widgets/exercise_details_body.dart';
 
 class ExerciseDetailsScreen extends StatefulWidget {
   const ExerciseDetailsScreen({super.key});
@@ -41,7 +38,6 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
   }
 
   final PageController pageController = PageController();
-  final PageController pageViewController = PageController();
 
   Timer? timer;
 
@@ -105,7 +101,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
           Stack(
             children: [
               SizedBox(
-                height: 410,
+                height: 370,
                 width: double.infinity,
                 child: PageView.builder(
                   controller: pageController,
@@ -157,19 +153,16 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 380),
+          const Padding(
+            padding: EdgeInsets.only(top: 340),
             child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
               child: Stack(
                 children: [
-                  const _ContainerShapeWidget(),
+                  _ContainerShapeWidget(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: PageView(controller: pageViewController, children: [
-                      FirstPageView(pageViewController: pageViewController),
-                      SecondPageView(setupLines: setupLines)
-                    ]),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: _ExerciseDetailsBody(),
                   ),
                 ],
               ),
@@ -177,137 +170,6 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
           )
         ],
       ),
-    );
-  }
-}
-
-class _titleWithASubTitleBehind extends StatelessWidget {
-  const _titleWithASubTitleBehind({required this.title, required this.subTitle});
-
-  final String title;
-  final String subTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
-      children: [
-        Text(
-          title,
-          style: context.textThemeX.large.bold.copyWith(fontSize: 24),
-        ),
-        const Gap(10),
-        Text(
-          subTitle,
-          style: context.textThemeX.medium.bold
-              .copyWith(color: Colors.grey, textBaseline: TextBaseline.ideographic),
-        ),
-      ],
-    );
-  }
-}
-
-class _exerciseDtailsBodySubTitle extends StatelessWidget {
-  const _exerciseDtailsBodySubTitle(this.label);
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: context.textThemeX.medium.bold.copyWith(color: context.colorsX.onBackground),
-    );
-  }
-}
-
-class _generatedCircularContainer extends StatelessWidget {
-  const _generatedCircularContainer({
-    required this.options,
-    required this.activeOption,
-  });
-
-  final List<String> options;
-  final int activeOption;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      runSpacing: 12,
-      spacing: 12,
-      children: List.generate(
-        options.length,
-        (index) => _circularContainer(
-          label: options[index].capitalized,
-          isActive: index == activeOption,
-        ),
-      ),
-    );
-  }
-}
-
-class _circularContainer extends StatelessWidget {
-  const _circularContainer({
-    required this.label,
-    this.isActive = false,
-    // ignore: unused_element
-    this.width = 110,
-  });
-
-  final String label;
-  final bool isActive;
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: label.length >= 10 ? width + 10 : width,
-      decoration: BoxDecoration(
-        color: isActive ? context.colorsX.primary : context.colorsX.onBackground.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(12),
-        border: Border(
-          bottom: BorderSide(color: context.colorsX.onBackground),
-          top: BorderSide(color: context.colorsX.onBackground),
-          left: BorderSide(color: context.colorsX.onBackground),
-          right: BorderSide(color: context.colorsX.onBackground),
-        ),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 2,
-            blurStyle: BlurStyle.outer,
-            color: context.colorsX.onBackgroundTint35,
-          ),
-        ],
-      ),
-      child: SizedBox(
-        height: 50,
-        // width: isActive ? width + 10 : width,
-        child: Center(
-          child: Text(
-            label,
-            style: context.textThemeX.medium.bold
-                .copyWith(color: context.colorsX.background, fontSize: isActive ? 17 : 16),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _exerciseDetailsBodyTitle extends StatelessWidget {
-  const _exerciseDetailsBodyTitle({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      textAlign: TextAlign.center,
-      style: context.textThemeX.large.bold,
     );
   }
 }
