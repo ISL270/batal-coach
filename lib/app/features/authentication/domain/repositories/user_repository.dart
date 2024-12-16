@@ -33,14 +33,15 @@ final class UserRepository {
     }
   }
 
-  Future<Either<GenericException, User>> saveUserInfoRemote(
-      {required String uid,
-      required UserType userType,
-      required String coachEmail,
-      required String email,
-      required String name,
-      required String phoneNumber,
-      required String coachType}) async {
+  Future<Either<GenericException, User>> saveUserInfoRemote({
+    required String uid,
+    required UserType userType,
+    required String coachEmail,
+    required String email,
+    required String name,
+    required String phoneNumber,
+    required String coachType,
+  }) async {
     try {
       final userInfoRM = await _remoteSource.saveUserInfo(
         userType,

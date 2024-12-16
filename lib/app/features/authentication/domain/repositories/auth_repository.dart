@@ -40,13 +40,15 @@ final class AuthRepository {
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpWithEmailAndPasswordException] if an exception occurs.
-  Future<void> signUp(UserType userType,
-      {required String coachEmail,
-      required String email,
-      required String name,
-      required String phoneNumber,
-      required String password,
-      required String coachType}) async {
+  Future<void> signUp(
+    UserType userType, {
+    required String coachEmail,
+    required String email,
+    required String name,
+    required String phoneNumber,
+    required String password,
+    required String coachType,
+  }) async {
     try {
       final userCredential = await _fireAuth.createUserWithEmailAndPassword(
         email: email,
