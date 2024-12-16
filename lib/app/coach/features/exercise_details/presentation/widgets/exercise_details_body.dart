@@ -18,6 +18,8 @@ class _ExerciseDetailsBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Gap(5),
+          // GestureDetector(onTap: () {}, child: const _DragIndicator()),
           const Gap(20),
           const _TitleWithASubTitleBehind(
             title: 'Main Muscle',
@@ -143,6 +145,27 @@ class _ExerciseDetailsBodyTitle extends StatelessWidget {
       text,
       textAlign: TextAlign.center,
       style: context.textThemeX.large.bold,
+    );
+  }
+}
+
+class _DragIndicator extends StatelessWidget {
+  const _DragIndicator();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Center(
+        child: Container(
+          height: 6,
+          width: 80,
+          decoration: BoxDecoration(
+            color: context.colorsX.onBackground,
+            borderRadius: BorderRadius.circular(32),
+          ),
+        ),
+      ),
     );
   }
 }

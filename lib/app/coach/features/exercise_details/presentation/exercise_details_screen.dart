@@ -39,6 +39,9 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
 
   final PageController pageController = PageController();
 
+  final DraggableScrollableController draggableScrollableController =
+      DraggableScrollableController();
+
   Timer? timer;
 
   @override
@@ -100,9 +103,10 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
         children: [
           Stack(
             children: [
-              SizedBox(
-                height: 370,
+              Container(
+                height: 360,
                 width: double.infinity,
+                color: Colors.white,
                 child: PageView.builder(
                   controller: pageController,
                   onPageChanged: (value) {
@@ -154,7 +158,7 @@ class _ExerciseDetailsScreenState extends State<ExerciseDetailsScreen> {
             ],
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 340),
+            padding: EdgeInsets.only(top: 330),
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
               child: Stack(
@@ -182,12 +186,10 @@ class _ImageWithPlaceHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      width: double.infinity,
-      fit: BoxFit.fill,
+      // width: double.infinity,
+      fit: BoxFit.contain,
       imageUrl: image,
-      placeholder: (context, url) => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
       errorWidget: (context, url, error) => const Center(child: Icon(FontAwesomeIcons.image)),
     );
   }
