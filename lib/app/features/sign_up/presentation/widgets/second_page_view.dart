@@ -62,7 +62,7 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
                     },
                     validator: (value) {
                       if (value == null) {
-                        return 'Please select a role';
+                        return context.l10n.selectrole;
                       }
                       return null;
                     },
