@@ -2,6 +2,7 @@ import 'package:btl/app/core/firestore/firestore_helper.dart';
 import 'package:btl/app/core/firestore/firestore_service.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/data/models/remote/fire_user_info.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
@@ -39,7 +40,7 @@ final class UserFirestoreSource with FirestoreHelper {
     required String email,
     required String name,
     required String phoneNumber,
-    required String coachType,
+    required CoachType coachType,
   }) async {
     final userInfo = FireUserInfo.fromUserType(
       userType,

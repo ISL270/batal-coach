@@ -61,30 +61,6 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // BlocSelector<LoginCubit, LoginState, UserType>(
-              //   selector: (state) => state.userType,
-              //   builder: (context, userType) => SizedBox(
-              //     width: double.infinity,
-              //     child: SegmentedButton(
-              //       style: SegmentedButton.styleFrom(textStyle: context.textThemeX.small.bold),
-              //       expandedInsets: const EdgeInsets.all(1),
-              //       showSelectedIcon: false,
-              //       onSelectionChanged: (selection) =>
-              //           context.read<LoginCubit>().changeUserType(selection.first),
-              //       segments: [
-              //         ButtonSegment(
-              //           value: UserType.coach,
-              //           label: Text(context.l10n.coach.capitalized),
-              //         ),
-              //         ButtonSegment(
-              //           value: UserType.trainee,
-              //           label: Text(context.l10n.trainee.capitalized),
-              //         ),
-              //       ],
-              //       selected: {userType},
-              //     ),
-              //   ),
-              // ),
               Center(
                 child: Text(
                   context.l10n.btl,

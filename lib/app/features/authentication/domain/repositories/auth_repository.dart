@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart';
@@ -47,7 +48,7 @@ final class AuthRepository {
     required String name,
     required String phoneNumber,
     required String password,
-    required String coachType,
+    CoachType? coachType,
   }) async {
     try {
       final userCredential = await _fireAuth.createUserWithEmailAndPassword(
@@ -66,7 +67,7 @@ final class AuthRepository {
         email: email,
         name: name,
         phoneNumber: phoneNumber,
-        coachType: coachType,
+        coachType: coachType!,
       );
 
       await res.fold(
@@ -102,10 +103,8 @@ final class AuthRepository {
       if (userCredential.user == null) {
         throw LogInWithEmailAndPasswordException.fromCode('user_not_found');
       }
-      // userType = await isUidExists(userCredential.user!.uid);
 
       final res = await _userRepository.getUserRemote(
-        // userType: await isCoacheOrTrainee(userCredential.user!.uid),
         uid: userCredential.user!.uid,
       );
 
@@ -154,7 +153,6 @@ final class AuthRepository {
       }
 
       final res = await _userRepository.getUserRemote(
-        // userType: userType,
         uid: userCredential.user!.uid,
       );
 

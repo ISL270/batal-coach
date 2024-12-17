@@ -1,4 +1,5 @@
 import 'package:btl/app/features/authentication/data/models/remote/user_info_rm.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -20,7 +21,7 @@ sealed class FireUserInfo implements UserInfoRM {
     required String email,
     required String name,
     required String phoneNumber,
-    required String coachType,
+    required CoachType coachType,
   }) =>
       switch (userType) {
         UserType.coach => FireCoachInfo(
@@ -64,7 +65,7 @@ sealed class FireUserInfo implements UserInfoRM {
 
 @JsonSerializable(explicitToJson: true)
 final class FireCoachInfo extends FireUserInfo {
-  final String? coachType;
+  final CoachType coachType;
   @override
   final UserType userType;
   @override

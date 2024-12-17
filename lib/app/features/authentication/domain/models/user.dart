@@ -1,3 +1,4 @@
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class User extends Equatable {
@@ -34,13 +35,13 @@ sealed class User extends Equatable {
 }
 
 final class Coach extends User {
-  final String? coachType;
+  final CoachType? coachType;
   const Coach(
       {required super.id,
       required super.email,
       required super.name,
       required super.phoneNumber,
-      required this.coachType
+      this.coachType
       // super.photo,
       });
   @override

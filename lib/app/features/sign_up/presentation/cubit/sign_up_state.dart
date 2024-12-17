@@ -3,7 +3,7 @@ part of 'sign_up_cubit.dart';
 final class SignUpState extends Equatable with FormzMixin {
   const SignUpState({
     this.userType = UserType.coach,
-    this.coachType = CoachType.fitness,
+    this.coachType = CoachType.fitnessCoach,
     this.name = const Name.pure(),
     this.email = const Email.pure(),
     this.coachEmail = const Email.pure(),

@@ -56,12 +56,12 @@ class SignUpCubit extends Cubit<SignUpState> {
         state.coachEmail.isValid;
         await _authRepository.signUp(
           state.userType,
-          coachEmail: '', // no coach field needed here
+          coachEmail: state.coachEmail.value, // no coach field needed here
           email: state.email.value,
           name: state.name.value,
           phoneNumber: state.phoneNumber.value,
           password: state.password.value,
-          coachType: state.coachType.toStringValue(),
+          coachType: state.coachType,
         );
       } else {
         await _authRepository.signUp(
@@ -71,7 +71,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           name: state.name.value,
           phoneNumber: state.phoneNumber.value,
           password: state.password.value,
-          coachType: '', // no coach type field needed here
+          coachType: state.coachType,
         );
       }
     } catch (e) {
@@ -89,20 +89,4 @@ class SignUpCubit extends Cubit<SignUpState> {
     }
     return false;
   }
-
-  // Future<void> signUpFormSubmitted() async {
-  //   emit(state.copyWith(status: const Loading()));
-  //   try {
-  //     await _authRepository.signUp(
-  //       state.userType,
-  //       coachEmail: state.coachEmail.value,
-  //       email: state.email.value,
-  //       name: state.name.value,
-  //       phoneNumber: state.phoneNumber.value,
-  //       password: state.password.value,
-  //     );
-  //   } catch (e) {
-  //     emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));
-  //   }
-  // }
 }

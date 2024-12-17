@@ -72,9 +72,9 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
                             color: context.colorsX.background,
                           ),
                           child: Text(
-                            coachType == CoachType.fitness
+                            coachType == CoachType.fitnessCoach
                                 ? context.l10n.fitness
-                                : coachType == CoachType.nutrition
+                                : coachType == CoachType.nutritionCoach
                                     ? context.l10n.nutrition
                                     : context.l10n.manager,
                           ),

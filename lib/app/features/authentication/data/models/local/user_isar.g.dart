@@ -22,33 +22,28 @@ const UserIsarSchema = CollectionSchema(
       name: r'coachEmail',
       type: IsarType.string,
     ),
-    r'coachType': PropertySchema(
-      id: 1,
-      name: r'coachType',
-      type: IsarType.string,
-    ),
     r'email': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'email',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'id',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'name',
       type: IsarType.string,
     ),
     r'phoneNumber': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'phoneNumber',
       type: IsarType.string,
     ),
     r'userType': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'userType',
       type: IsarType.byte,
       enumMap: _UserIsaruserTypeEnumValueMap,
@@ -80,12 +75,6 @@ int _userIsarEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  {
-    final value = object.coachType;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   bytesCount += 3 + object.email.length * 3;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.name.length * 3;
@@ -100,12 +89,11 @@ void _userIsarSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.coachEmail);
-  writer.writeString(offsets[1], object.coachType);
-  writer.writeString(offsets[2], object.email);
-  writer.writeString(offsets[3], object.id);
-  writer.writeString(offsets[4], object.name);
-  writer.writeString(offsets[5], object.phoneNumber);
-  writer.writeByte(offsets[6], object.userType.index);
+  writer.writeString(offsets[1], object.email);
+  writer.writeString(offsets[2], object.id);
+  writer.writeString(offsets[3], object.name);
+  writer.writeString(offsets[4], object.phoneNumber);
+  writer.writeByte(offsets[5], object.userType.index);
 }
 
 UserIsar _userIsarDeserialize(
@@ -116,13 +104,12 @@ UserIsar _userIsarDeserialize(
 ) {
   final object = UserIsar(
     coachEmail: reader.readStringOrNull(offsets[0]),
-    coachType: reader.readStringOrNull(offsets[1]),
-    email: reader.readString(offsets[2]),
-    id: reader.readString(offsets[3]),
-    name: reader.readString(offsets[4]),
-    phoneNumber: reader.readString(offsets[5]),
+    email: reader.readString(offsets[1]),
+    id: reader.readString(offsets[2]),
+    name: reader.readString(offsets[3]),
+    phoneNumber: reader.readString(offsets[4]),
     userType:
-        _UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offsets[6])] ??
+        _UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offsets[5])] ??
             UserType.coach,
   );
   return object;
@@ -138,7 +125,7 @@ P _userIsarDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
@@ -146,8 +133,6 @@ P _userIsarDeserializeProp<P>(
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
-      return (reader.readString(offset)) as P;
-    case 6:
       return (_UserIsaruserTypeValueEnumMap[reader.readByteOrNull(offset)] ??
           UserType.coach) as P;
     default:
@@ -451,153 +436,6 @@ extension UserIsarQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'coachEmail',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'coachType',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'coachType',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'coachType',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'coachType',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'coachType',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'coachType',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'coachType',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'coachType',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'coachType',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'coachType',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition> coachTypeIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'coachType',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterFilterCondition>
-      coachTypeIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'coachType',
         value: '',
       ));
     });
@@ -1198,18 +1036,6 @@ extension UserIsarQuerySortBy on QueryBuilder<UserIsar, UserIsar, QSortBy> {
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByCoachType() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'coachType', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByCoachTypeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'coachType', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterSortBy> sortByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
@@ -1297,18 +1123,6 @@ extension UserIsarQuerySortThenBy
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByCoachType() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'coachType', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByCoachTypeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'coachType', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QAfterSortBy> thenByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
@@ -1379,13 +1193,6 @@ extension UserIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<UserIsar, UserIsar, QDistinct> distinctByCoachType(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'coachType', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<UserIsar, UserIsar, QDistinct> distinctByEmail(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1432,12 +1239,6 @@ extension UserIsarQueryProperty
   QueryBuilder<UserIsar, String?, QQueryOperations> coachEmailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'coachEmail');
-    });
-  }
-
-  QueryBuilder<UserIsar, String?, QQueryOperations> coachTypeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'coachType');
     });
   }
 

@@ -8,7 +8,6 @@ part 'user_isar.g.dart';
 @collection
 final class UserIsar extends CacheModel<User> {
   String? coachEmail;
-  String? coachType;
 
   String email;
 
@@ -28,7 +27,6 @@ final class UserIsar extends CacheModel<User> {
     required this.name,
     required this.userType,
     required this.phoneNumber,
-    this.coachType,
     this.coachEmail,
   });
 
@@ -39,7 +37,6 @@ final class UserIsar extends CacheModel<User> {
             email: email,
             name: name,
             phoneNumber: phoneNumber,
-            coachType: coachType,
           ),
         UserType.trainee => Trainee(
             id: id,
@@ -57,7 +54,6 @@ final class UserIsar extends CacheModel<User> {
             email: user.email,
             phoneNumber: user.phoneNumber,
             userType: UserType.coach,
-            coachType: user.coachType,
           ),
         Trainee() => UserIsar(
             id: user.id,
