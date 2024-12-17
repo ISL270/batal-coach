@@ -23,7 +23,7 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
           children: [
             const _NameFormField(),
             const Gap(25),
-            const _TraineeEmailField(),
+            const _EmailField(),
             const Gap(25),
             const _PasswordField(),
             const Gap(25),
@@ -90,29 +90,11 @@ class _NameFormField extends StatelessWidget {
           key: const Key('signUpForm_nameInput_textField'),
           textInputAction: TextInputAction.next,
           onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
             label: Text(
               context.l10n.name.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
             ),
             errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
           ),
@@ -122,8 +104,8 @@ class _NameFormField extends StatelessWidget {
   }
 }
 
-class _TraineeEmailField extends StatelessWidget {
-  const _TraineeEmailField();
+class _EmailField extends StatelessWidget {
+  const _EmailField();
 
   @override
   Widget build(BuildContext context) {
@@ -136,30 +118,12 @@ class _TraineeEmailField extends StatelessWidget {
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
             label: Text(
               context.l10n.email.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
             ),
           ),
         );
@@ -182,30 +146,12 @@ class _CoachEmailField extends StatelessWidget {
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
           onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
             errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
             label: Text(
               context.l10n.coachemail.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
             ),
           ),
         );
@@ -226,41 +172,13 @@ class _PasswordField extends StatelessWidget {
           key: const Key('signUpForm_passwordInput_textField'),
           textInputAction: TextInputAction.next,
           onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
           obscureText: true,
           decoration: InputDecoration(
             errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
             label: Text(
               context.l10n.password.capitalized,
-              style: context.textThemeX.small.copyWith(
-                color: context.colorsX.background,
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
           ),
         );
@@ -282,41 +200,13 @@ class _ConfirmPasswordField extends StatelessWidget {
         return TextFormField(
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
           obscureText: true,
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
             errorText:
                 state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
             label: Text(
               context.l10n.confirmPassword.capitalized,
-              style: context.textThemeX.small.copyWith(
-                color: context.colorsX.background,
-              ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(
-                color: context.colorsX.background,
-              ),
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
           ),
           onChanged: (confirmPassword) =>
@@ -365,9 +255,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
       children: [
         Text(
           context.l10n.alreadyhaveaccount,
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
         ),
         const SizedBox(
           width: 5,
@@ -376,9 +264,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
           onTap: () => context.pop(),
           child: Text(
             context.l10n.signin,
-            style: TextStyle(
-              color: context.colorsX.primary,
-            ),
+            style: TextStyle(color: context.colorsX.primary),
           ),
         ),
       ],

@@ -94,7 +94,7 @@ class _SignUpContainerShapeWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: context.colorsX.onBackground,
+        color: context.colorsX.onBackgroundTint,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(74),
         ),
@@ -110,8 +110,8 @@ class _ArrowBackPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton.outlined(
       icon: const Icon(FontAwesomeIcons.arrowLeft),
-      color: context.colorsX.background,
-      style: IconButton.styleFrom(side: BorderSide(color: context.colorsX.background)),
+      color: context.colorsX.onBackground,
+      style: IconButton.styleFrom(side: BorderSide(color: context.colorsX.onBackground)),
       onPressed: () => context
           .read<SignUpCubit>()
           .pageController

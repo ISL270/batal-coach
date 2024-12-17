@@ -25,42 +25,16 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ArrowBackPageView(),
+            const _ArrowBackPageView(),
             const Gap(25),
             BlocSelector<SignUpCubit, SignUpState, CoachType>(
               selector: (state) => state.coachType,
               builder: (context, coachType) {
                 return Center(
                   child: DropdownButtonFormField<CoachType>(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(12)),
-                        borderSide: BorderSide(
-                          color: context.colorsX.background,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(12)),
-                        borderSide: BorderSide(
-                          color: context.colorsX.background,
-                        ),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(12)),
-                        borderSide: BorderSide(
-                          color: context.colorsX.background,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(12)),
-                        borderSide: BorderSide(
-                          color: context.colorsX.background,
-                        ),
-                      ),
-                    ),
                     borderRadius: BorderRadius.circular(12),
                     isExpanded: true,
-                    iconEnabledColor: context.colorsX.secondaryBackground,
+                    iconEnabledColor: context.colorsX.onBackground,
                     value: coachType,
                     dropdownColor: context.colorsX.secondary,
                     enableFeedback: true,
@@ -115,39 +89,11 @@ class _CompanyField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(
-        color: context.colorsX.background,
-      ),
+      style: TextStyle(color: context.colorsX.background),
       decoration: InputDecoration(
         label: Text(
           context.l10n.company.capitalized,
-          style: context.textThemeX.small.copyWith(
-            color: context.colorsX.background,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          borderSide: BorderSide(
-            color: context.colorsX.background,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          borderSide: BorderSide(
-            color: context.colorsX.background,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          borderSide: BorderSide(
-            color: context.colorsX.background,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          borderSide: BorderSide(
-            color: context.colorsX.background,
-          ),
+          style: context.textThemeX.small.copyWith(color: context.colorsX.background),
         ),
       ),
       onChanged: (p0) {},
@@ -171,29 +117,11 @@ class _PhoneNumberField extends StatelessWidget {
             LengthLimitingTextInputFormatter(15),
           ],
           keyboardType: TextInputType.phone,
-          style: TextStyle(
-            color: context.colorsX.background,
-          ),
+          style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
             label: Text(
               context.l10n.phoneNumber.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              borderSide: BorderSide(color: context.colorsX.background),
             ),
           ),
         );
