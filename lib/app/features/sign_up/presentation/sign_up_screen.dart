@@ -99,17 +99,17 @@ class _CoachEmailField extends StatelessWidget {
   const _CoachEmailField();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.coachEmail != current.coachEmail,
-      builder: (context, state) {
+    return BlocSelector<SignUpCubit, SignUpState, Email>(
+      selector: (state) => state.coachEmail,
+      builder: (context, coachEmail) {
         return TextFormField(
-          initialValue: state.coachEmail.value,
+          initialValue: coachEmail.value,
           key: const Key('signUpForm_coachEmailInput_textField'),
           onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: context.l10n.yourCoachEmail.capitalized,
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+            errorText: coachEmail.displayError != null ? context.l10n.invalidEmail : null,
           ),
         );
       },
@@ -121,16 +121,17 @@ class _EmailField extends StatelessWidget {
   const _EmailField();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.email != current.email,
-      builder: (context, state) {
-        return TextField(
+    return BlocSelector<SignUpCubit, SignUpState, Email>(
+      selector: (state) => state.email,
+      builder: (context, email) {
+        return TextFormField(
+          initialValue: email.value,
           key: const Key('signUpForm_emailInput_textField'),
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: context.l10n.email.capitalized,
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+            errorText: email.displayError != null ? context.l10n.invalidEmail : null,
           ),
         );
       },
@@ -144,9 +145,10 @@ class _NameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<SignUpCubit, SignUpState, Name>(
       selector: (state) => state.name,
-      builder: (context, name) => TextField(
+      builder: (context, name) => TextFormField(
+        initialValue: name.value,
         key: const Key('signUpForm_nameInput_textField'),
-        onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
+        onChanged: (name) => context.read<SignUpCubit>().nameChanged(name),
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
           labelText: context.l10n.name.capitalized,
@@ -164,9 +166,10 @@ class _PhoneNumberField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
       selector: (state) => state.phoneNumber,
-      builder: (context, phoneNumber) => TextField(
+      builder: (context, phoneNumber) => TextFormField(
+        initialValue: phoneNumber.value,
         key: const Key('signUpForm_phoneInput_textField'),
-        onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
+        onChanged: (phoneNumber) => context.read<SignUpCubit>().phoneChanged(phoneNumber),
         keyboardType: TextInputType.phone,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
@@ -186,16 +189,17 @@ class _PasswordField extends StatelessWidget {
   const _PasswordField();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.password != current.password,
-      builder: (context, state) {
-        return TextField(
+    return BlocSelector<SignUpCubit, SignUpState, Password>(
+      selector: (state) => state.password,
+      builder: (context, password) {
+        return TextFormField(
+          initialValue: password.value,
           key: const Key('signUpForm_passwordInput_textField'),
           onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
             labelText: context.l10n.password.capitalized,
-            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
+            errorText: password.displayError == null ? null : context.l10n.invalidPassword,
           ),
         );
       },
@@ -212,7 +216,8 @@ class _ConfirmPasswordField extends StatelessWidget {
           previous.password != current.password ||
           previous.confirmPassword != current.confirmPassword,
       builder: (context, state) {
-        return TextField(
+        return TextFormField(
+          initialValue: state.confirmPassword.value,
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
           onChanged: (confirmPassword) =>
               context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
