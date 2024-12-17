@@ -19,9 +19,9 @@ import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-part 'widgets/first_page_view.dart';
-part 'widgets/second_page_view.dart';
-part 'widgets/third_page_view.dart';
+part 'widgets/initial_signup_view.dart';
+part 'widgets/coach_signup_view.dart';
+part 'widgets/trainee_signup_view.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
