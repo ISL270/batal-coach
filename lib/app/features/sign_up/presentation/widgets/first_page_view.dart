@@ -24,16 +24,6 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
             const _NameFormField(),
             const Gap(25),
             const _TraineeEmailField(),
-            // BlocSelector<SignUpCubit, SignUpState, UserType>(
-            //   selector: (state) => state.userType,
-            //   builder: (context, userType) {
-            //     if (userType.isCoach) {
-            //       return const _CoachEmailField();
-            //     } else {
-
-            //     }
-            //   },
-            // ),
             const Gap(25),
             const _PasswordField(),
             const Gap(25),
@@ -347,7 +337,6 @@ class _NextPageViewButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
-      // selector: (state) => state.userType,
       builder: (context, state) {
         return SizedBox(
           width: double.infinity,

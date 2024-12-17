@@ -56,7 +56,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         state.coachEmail.isValid;
         await _authRepository.signUp(
           state.userType,
-          coachEmail: state.coachEmail.value, // no coach field needed here
+          coachEmail: state.coachEmail.value,
           email: state.email.value,
           name: state.name.value,
           phoneNumber: state.phoneNumber.value,

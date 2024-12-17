@@ -201,5 +201,3 @@ class _PhoneNumberField extends StatelessWidget {
     );
   }
 }
-
-// Widgets
