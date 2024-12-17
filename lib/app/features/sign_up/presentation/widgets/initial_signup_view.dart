@@ -15,7 +15,6 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
   Widget build(BuildContext context) {
     super.build(context);
     return SingleChildScrollView(
-      key: const PageStorageKey('First_page'),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
         padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
@@ -97,6 +96,10 @@ class _NameFormField extends StatelessWidget {
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
             errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
+            border: _signUpOutLinedInputBorder(context),
+            enabledBorder: _signUpOutLinedInputBorder(context),
+            focusedBorder: _signUpOutLinedInputBorder(context),
+            disabledBorder: _signUpOutLinedInputBorder(context),
           ),
         );
       },
@@ -125,34 +128,10 @@ class _EmailField extends StatelessWidget {
               context.l10n.email.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _CoachEmailField extends StatelessWidget {
-  const _CoachEmailField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.coachEmail != current.coachEmail,
-      builder: (context, state) {
-        return TextFormField(
-          key: const Key('signUpForm_coachEmailInput_textField'),
-          initialValue: state.coachEmail.value,
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.emailAddress,
-          onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
-          style: TextStyle(color: context.colorsX.background),
-          decoration: InputDecoration(
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
-            label: Text(
-              context.l10n.coachemail.capitalized,
-              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
-            ),
+            border: _signUpOutLinedInputBorder(context),
+            enabledBorder: _signUpOutLinedInputBorder(context),
+            focusedBorder: _signUpOutLinedInputBorder(context),
+            disabledBorder: _signUpOutLinedInputBorder(context),
           ),
         );
       },
@@ -180,6 +159,10 @@ class _PasswordField extends StatelessWidget {
               context.l10n.password.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
+            border: _signUpOutLinedInputBorder(context),
+            enabledBorder: _signUpOutLinedInputBorder(context),
+            focusedBorder: _signUpOutLinedInputBorder(context),
+            disabledBorder: _signUpOutLinedInputBorder(context),
           ),
         );
       },
@@ -208,6 +191,10 @@ class _ConfirmPasswordField extends StatelessWidget {
               context.l10n.confirmPassword.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
+            border: _signUpOutLinedInputBorder(context),
+            enabledBorder: _signUpOutLinedInputBorder(context),
+            focusedBorder: _signUpOutLinedInputBorder(context),
+            disabledBorder: _signUpOutLinedInputBorder(context),
           ),
           onChanged: (confirmPassword) =>
               context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
@@ -253,19 +240,11 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          context.l10n.alreadyhaveaccount,
-          style: TextStyle(color: context.colorsX.background),
-        ),
-        const SizedBox(
-          width: 5,
-        ),
+        Text(context.l10n.alreadyhaveaccount, style: TextStyle(color: context.colorsX.background)),
+        const SizedBox(width: 5),
         GestureDetector(
           onTap: () => context.pop(),
-          child: Text(
-            context.l10n.signin,
-            style: TextStyle(color: context.colorsX.primary),
-          ),
+          child: Text(context.l10n.signin, style: TextStyle(color: context.colorsX.primary)),
         ),
       ],
     );

@@ -11,30 +11,31 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
   @override
   bool get wantKeepAlive => true;
 
-  GlobalKey<FormState> formKey2 = GlobalKey();
-
-  Color? color;
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return SingleChildScrollView(
-      key: const PageStorageKey('Second_page'),
       child: Padding(
         padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _ArrowBackPageView(),
+            const _ArrowBackButton(),
             const Gap(25),
             BlocSelector<SignUpCubit, SignUpState, CoachType>(
               selector: (state) => state.coachType,
               builder: (context, coachType) {
                 return Center(
                   child: DropdownButtonFormField<CoachType>(
+                    decoration: InputDecoration(
+                      border: _signUpOutLinedInputBorder(context),
+                      enabledBorder: _signUpOutLinedInputBorder(context),
+                      focusedBorder: _signUpOutLinedInputBorder(context),
+                      disabledBorder: _signUpOutLinedInputBorder(context),
+                    ),
                     borderRadius: BorderRadius.circular(12),
                     isExpanded: true,
-                    iconEnabledColor: context.colorsX.onBackground,
+                    iconEnabledColor: context.colorsX.background,
                     value: coachType,
                     dropdownColor: context.colorsX.secondary,
                     enableFeedback: true,
@@ -55,17 +56,10 @@ class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliv
                         ),
                       );
                     }).toList(),
-                    onChanged: (CoachType? selectedType) {
-                      if (selectedType != null) {
-                        context.read<SignUpCubit>().coachTypeChanged(selectedType);
-                      }
-                    },
-                    validator: (value) {
-                      if (value == null) {
-                        return context.l10n.selectrole;
-                      }
-                      return null;
-                    },
+                    onChanged: (CoachType? selectedType) => selectedType != null
+                        ? context.read<SignUpCubit>().coachTypeChanged(selectedType)
+                        : null,
+                    validator: (value) => value != null ? context.l10n.selectrole : null,
                   ),
                 );
               },
@@ -95,37 +89,12 @@ class _CompanyField extends StatelessWidget {
           context.l10n.company.capitalized,
           style: context.textThemeX.small.copyWith(color: context.colorsX.background),
         ),
+        border: _signUpOutLinedInputBorder(context),
+        enabledBorder: _signUpOutLinedInputBorder(context),
+        focusedBorder: _signUpOutLinedInputBorder(context),
+        disabledBorder: _signUpOutLinedInputBorder(context),
       ),
-      onChanged: (p0) {},
-    );
-  }
-}
-
-class _PhoneNumberField extends StatelessWidget {
-  const _PhoneNumberField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
-      selector: (state) => state.phoneNumber,
-      builder: (context, phoneNumber) {
-        return TextFormField(
-          key: const Key('signUpForm_phoneInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(15),
-          ],
-          keyboardType: TextInputType.phone,
-          style: TextStyle(color: context.colorsX.background),
-          decoration: InputDecoration(
-            label: Text(
-              context.l10n.phoneNumber.capitalized,
-              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
-            ),
-          ),
-        );
-      },
+      onChanged: (value) {},
     );
   }
 }

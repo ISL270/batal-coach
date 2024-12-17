@@ -48,10 +48,7 @@ class SignUpScreen extends StatelessWidget {
                   onPressed: () => context.pop(),
                 ),
                 const Gap(15),
-                Text(
-                  context.l10n.createaccount,
-                  style: const TextStyle(fontSize: 42),
-                ),
+                Text(context.l10n.createaccount, style: const TextStyle(fontSize: 42)),
               ],
             ),
           ),
@@ -95,23 +92,21 @@ class _SignUpContainerShapeWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: context.colorsX.onBackgroundTint,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(74),
-        ),
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
       ),
     );
   }
 }
 
-class _ArrowBackPageView extends StatelessWidget {
-  const _ArrowBackPageView();
+class _ArrowBackButton extends StatelessWidget {
+  const _ArrowBackButton();
 
   @override
   Widget build(BuildContext context) {
     return IconButton.outlined(
       icon: const Icon(FontAwesomeIcons.arrowLeft),
-      color: context.colorsX.onBackground,
-      style: IconButton.styleFrom(side: BorderSide(color: context.colorsX.onBackground)),
+      color: context.colorsX.background,
+      style: IconButton.styleFrom(side: BorderSide(color: context.colorsX.background)),
       onPressed: () => context
           .read<SignUpCubit>()
           .pageController
@@ -148,4 +143,45 @@ class _SignUpButton extends StatelessWidget {
       },
     );
   }
+}
+
+class _PhoneNumberField extends StatelessWidget {
+  const _PhoneNumberField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
+      selector: (state) => state.phoneNumber,
+      builder: (context, phoneNumber) {
+        return TextFormField(
+          key: const Key('signUpForm_phoneInput_textField'),
+          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(15),
+          ],
+          keyboardType: TextInputType.phone,
+          style: TextStyle(color: context.colorsX.background),
+          decoration: InputDecoration(
+            label: Text(
+              context.l10n.phoneNumber.capitalized,
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
+            ),
+            border: _signUpOutLinedInputBorder(context),
+            enabledBorder: _signUpOutLinedInputBorder(context),
+            focusedBorder: _signUpOutLinedInputBorder(context),
+            disabledBorder: _signUpOutLinedInputBorder(context),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// just for the sign up screen
+OutlineInputBorder _signUpOutLinedInputBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(color: context.colorsX.background),
+  );
 }
