@@ -13,6 +13,16 @@ import 'package:btl/app/features/authentication/domain/repositories/auth_reposit
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/subjects.dart';
 
+/// An abstract reactive repository that synchronizes data between remote and local sources
+///
+/// This generic class provides a comprehensive data management strategy:
+/// - Handles authentication-based data synchronization
+/// - Manages remote (Firestore) and local (Isar) data sources
+/// - Provides a reactive stream of data with status updates
+///
+/// [D] represents the Domain model type
+/// [R] represents the Remote model type, which must extend [RemoteModel<D>]
+/// [C] represents the Cache model type, which must extend [CacheModel<D>]
 abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheModel<D>> {
   @protected
   final AuthRepository authRepository;
@@ -26,36 +36,56 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
     required this.remoteSource,
     required this.localSource,
   }) {
+    // Sets up initial data synchronization and stream management
     _createSubject();
     _init();
   }
 
+  /// Behavior subject to manage and broadcast data status
   late BehaviorSubject<Status<List<D>>> _subject;
 
+  /// Creates a new behavior subject with an initial state
   void _createSubject() => _subject = BehaviorSubject<Status<List<D>>>.seeded(Initial<List<D>>());
 
-  void _closeSubject() {
-    if (_subject.isClosed) return;
-    _subject.close();
-  }
-
+  /// Provides a broadcast stream of data status updates
+  ///
+  /// Allows multiple listeners to receive data synchronization updates
   Stream<Status<List<D>>> getUpdates() => _subject.asBroadcastStream();
 
+  /// Optional method for additional initialization logic
+  ///
+  /// Can be overridden by subclasses to add custom initialization steps
   @protected
   Future<void> toBeAwaited() => Future.value();
 
+  /// Initializes data synchronization based on user authentication
+  ///
+  /// Handles:
+  /// - User authentication state changes
+  /// - Remote data subscription
+  /// - Local data caching
+  /// - Status updates
   void _init() {
     authRepository.getUpdates().listen((user) async {
+      // Clear data for trainee users
       if (user?.isTrainee ?? true) {
         unawaited(remoteSource.cancelRemoteSub());
         unawaited(localSource.clear());
         _closeSubject();
         return;
       }
+
+      // Reinitialize subject if closed
       if (_subject.isClosed) _createSubject();
+
       _subject.add(const Loading());
+      
       await toBeAwaited();
+
+      // Subscribe to remote data source
       remoteSource.subToRemote(user!);
+
+      // Listen to remote data updates
       remoteSource.listToBeUpdated.listen(
         (remoteModels) async {
           final domainModels = remoteModels.map((e) => e.toDomain()).toList();
@@ -63,6 +93,7 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
           _subject.add(Success(domainModels));
         },
         onError: (e) {
+          // Ignore cache-related errors
           if ((e as GenericException).code == 'is_from_cache') {
             _subject.add(const Success([]));
             return;
@@ -73,6 +104,15 @@ abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends Ca
     });
   }
 
+  /// Closes the existing subject if it's open
+  void _closeSubject() {
+    if (_subject.isClosed) return;
+    _subject.close();
+  }
+
+  /// Disposes of repository resources
+  ///
+  /// Closes remote source and subject to prevent memory leaks
   @protected
   void dispose() {
     remoteSource.dispose();
