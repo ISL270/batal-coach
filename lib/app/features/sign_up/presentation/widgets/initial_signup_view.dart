@@ -87,6 +87,7 @@ class _NameFormField extends StatelessWidget {
       builder: (context, name) {
         return TextFormField(
           key: const Key('signUpForm_nameInput_textField'),
+          initialValue: name.value,
           textInputAction: TextInputAction.next,
           onChanged: (email) => context.read<SignUpCubit>().nameChanged(email),
           style: TextStyle(color: context.colorsX.background),
@@ -144,17 +145,18 @@ class _PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.password != current.password,
-      builder: (context, state) {
+    return BlocSelector<SignUpCubit, SignUpState, Password>(
+      selector: (state) => state.password,
+      builder: (context, password) {
         return TextFormField(
           key: const Key('signUpForm_passwordInput_textField'),
+          initialValue: password.value,
           textInputAction: TextInputAction.next,
           onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           style: TextStyle(color: context.colorsX.background),
           obscureText: true,
           decoration: InputDecoration(
-            errorText: state.password.displayError != null ? context.l10n.invalidPassword : null,
+            errorText: password.displayError != null ? context.l10n.invalidPassword : null,
             label: Text(
               context.l10n.password.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
@@ -182,6 +184,7 @@ class _ConfirmPasswordField extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
+          initialValue: state.confirmPassword.value,
           obscureText: true,
           style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
