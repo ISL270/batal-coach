@@ -71,7 +71,6 @@ class SignUpCubit extends Cubit<SignUpState> {
         state.name.isValid &&
         state.password.isValid &&
         state.confirmPassword.isValid) {
-      // take first page view info of user
       return true;
     }
     return false;
