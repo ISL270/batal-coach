@@ -12,6 +12,7 @@ import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
@@ -33,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, settings) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -148,21 +149,14 @@ class _AvatarLabelRow extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       textBaseline: TextBaseline.ideographic,
       children: [
-        const CircleAvatar(radius: 18),
-        const SizedBox(
-          width: 15,
-        ),
+        CircleAvatar(radius: 18.w),
+        SizedBox(width: 15.w),
         Text(
           context.l10n.profile.capitalized,
-          style: context.textThemeX.medium.copyWith(
-            textBaseline: TextBaseline.ideographic,
-          ),
+          style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
         ),
         const Spacer(),
-        const Icon(
-          Icons.arrow_forward_ios_rounded,
-          size: 18,
-        )
+        Icon(Icons.arrow_forward_ios_rounded, size: 18.w)
       ],
     );
   }
@@ -191,15 +185,10 @@ class _SettingsSectionWidget extends StatelessWidget {
           const Gap(20),
           Text(
             label,
-            style: context.textThemeX.medium.copyWith(
-              textBaseline: TextBaseline.ideographic,
-            ),
+            style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
           ),
           const Spacer(),
-          const Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: 18,
-          )
+          Icon(Icons.arrow_forward_ios_rounded, size: 18.w)
         ],
       ),
     );
