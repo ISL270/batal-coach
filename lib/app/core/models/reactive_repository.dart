@@ -23,7 +23,9 @@ import 'package:rxdart/subjects.dart';
 /// [D] represents the Domain model type
 /// [R] represents the Remote model type, which must extend [RemoteModel<D>]
 /// [C] represents the Cache model type, which must extend [CacheModel<D>]
-abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheModel<D>> {
+///
+/// For a visual representation check -> https://shrktna.atlassian.net/wiki/spaces/CA/whiteboard/36896771?atl_f=PAGETREE
+abstract class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheModel<D>> {
   @protected
   final AuthRepository authRepository;
   @protected
