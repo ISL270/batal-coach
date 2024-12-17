@@ -111,7 +111,8 @@ class _PhoneNumberField extends StatelessWidget {
       builder: (context, phoneNumber) {
         return TextFormField(
           key: const Key('signUpForm_phoneInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
+          initialValue: phoneNumber.value,
+          onChanged: (phoneNumber) => context.read<SignUpCubit>().phoneChanged(phoneNumber),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(15),
