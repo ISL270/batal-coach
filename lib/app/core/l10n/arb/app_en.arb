@@ -78,5 +78,6 @@
   "company":"Company Name (optional)",
   "createaccount":"Create \nAccount.",
   "profile":"profile",
-  "coachemail":"coach email"
+  "coachemail":"coach email",
+  "coachselect":"select a role"
 }
