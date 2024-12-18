@@ -1,13 +1,13 @@
 part of '../sign_up_screen.dart';
 
-class _ThirdPageView extends StatefulWidget {
-  const _ThirdPageView();
+class _TraineePageView extends StatefulWidget {
+  const _TraineePageView();
 
   @override
-  State<_ThirdPageView> createState() => ThirdPageView();
+  State<_TraineePageView> createState() => ThirdPageView();
 }
 
-class ThirdPageView extends State<_ThirdPageView> with AutomaticKeepAliveClientMixin {
+class ThirdPageView extends State<_TraineePageView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
