@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
@@ -29,11 +27,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void companyNameChanged(String value) => emit(state.copyWith(companyName: value));
 
-  void phoneChanged(String value) {
-    final pppp = PhoneNumber.dirty(value);
-
-    emit(state.copyWith(phoneNumber: pppp));
-  }
+  void phoneChanged(String value) => emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value)));
 
   void coachEmailChanged(String value) => emit(state.copyWith(coachEmail: Email.dirty(value)));
 
