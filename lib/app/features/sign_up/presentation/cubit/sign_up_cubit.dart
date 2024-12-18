@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
@@ -29,6 +31,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void phoneChanged(String value) {
     final pppp = PhoneNumber.dirty(value);
+
     emit(state.copyWith(phoneNumber: pppp));
   }
 

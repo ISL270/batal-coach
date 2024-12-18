@@ -172,6 +172,9 @@ class _PhoneNumberField extends StatelessWidget {
             enabledBorder: _signUpOutLinedInputBorder(context),
             focusedBorder: _signUpOutLinedInputBorder(context),
             disabledBorder: _signUpOutLinedInputBorder(context),
+            errorText: phoneNumber.displayError == null
+                ? null
+                : context.tr(phoneNumber.displayError!.name),
           ),
         );
       },

@@ -50,7 +50,7 @@ class _CoachEmailField extends StatelessWidget {
           onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
           style: TextStyle(color: context.colorsX.background),
           decoration: InputDecoration(
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+            errorText: state.coachEmail.displayError != null ? context.l10n.invalidEmail : null,
             label: Text(
               context.l10n.coachemail.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
