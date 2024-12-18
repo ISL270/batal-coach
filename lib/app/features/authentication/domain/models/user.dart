@@ -36,14 +36,14 @@ sealed class User extends Equatable {
 
 final class Coach extends User {
   final CoachType? coachType;
-  const Coach(
-      {required super.id,
-      required super.email,
-      required super.name,
-      required super.phoneNumber,
-      this.coachType
-      // super.photo,
-      });
+  const Coach({
+    required super.id,
+    required super.email,
+    required super.name,
+    required super.phoneNumber,
+    this.coachType,
+    // super.photo,
+  });
   @override
   List<Object?> get props => [super.props];
 }
