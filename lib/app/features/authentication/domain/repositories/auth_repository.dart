@@ -44,11 +44,12 @@ final class AuthRepository {
   Future<void> signUp(
     UserType userType, {
     required String coachEmail,
+    required String companyName,
     required String email,
     required String name,
     required String phoneNumber,
     required String password,
-    CoachType? coachType,
+    required CoachType coachType,
   }) async {
     try {
       final userCredential = await _fireAuth.createUserWithEmailAndPassword(
@@ -66,8 +67,9 @@ final class AuthRepository {
         coachEmail: coachEmail,
         email: email,
         name: name,
+        companyName: companyName,
         phoneNumber: phoneNumber,
-        coachType: coachType!,
+        coachType: coachType,
       );
 
       await res.fold(

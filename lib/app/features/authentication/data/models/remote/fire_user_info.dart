@@ -20,6 +20,7 @@ sealed class FireUserInfo implements UserInfoRM {
     required String coachEmail,
     required String email,
     required String name,
+    required String companyName,
     required String phoneNumber,
     required CoachType coachType,
   }) =>
@@ -29,6 +30,7 @@ sealed class FireUserInfo implements UserInfoRM {
             uid: uid,
             email: email,
             name: name,
+            companyName: companyName,
             phoneNumber: phoneNumber,
             coachType: coachType,
           ),
@@ -49,8 +51,9 @@ sealed class FireUserInfo implements UserInfoRM {
             uid: user.id,
             email: user.email,
             name: user.name,
+            companyName: user.companyName,
             phoneNumber: user.phoneNumber,
-            coachType: user.coachType!,
+            coachType: user.coachType,
           ),
         Trainee() => FireTraineeInfo(
             userType: userType,
@@ -66,6 +69,7 @@ sealed class FireUserInfo implements UserInfoRM {
 @JsonSerializable(explicitToJson: true)
 final class FireCoachInfo extends FireUserInfo {
   final CoachType coachType;
+  String? companyName;
   @override
   final UserType userType;
   @override
@@ -77,13 +81,14 @@ final class FireCoachInfo extends FireUserInfo {
   @override
   final String phoneNumber;
 
-  const FireCoachInfo({
+  FireCoachInfo({
     required this.userType,
     required this.uid,
     required this.email,
     required this.name,
     required this.phoneNumber,
     required this.coachType,
+    this.companyName,
   });
 
   factory FireCoachInfo.fromJson(Map<String, dynamic> json) => _$FireCoachInfoFromJson(json);
@@ -92,8 +97,14 @@ final class FireCoachInfo extends FireUserInfo {
   Map<String, dynamic> toJson() => _$FireCoachInfoToJson(this);
 
   @override
-  Coach toDomain() =>
-      Coach(id: uid, name: name, email: email, phoneNumber: phoneNumber, coachType: coachType);
+  Coach toDomain() => Coach(
+        id: uid,
+        name: name,
+        companyName: companyName,
+        email: email,
+        phoneNumber: phoneNumber,
+        coachType: coachType,
+      );
 }
 
 @JsonSerializable(explicitToJson: true)

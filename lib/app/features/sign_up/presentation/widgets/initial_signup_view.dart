@@ -1,13 +1,13 @@
 part of '../sign_up_screen.dart';
 
-class _FirstPageView extends StatefulWidget {
-  const _FirstPageView();
+class _InitialPageView extends StatefulWidget {
+  const _InitialPageView();
 
   @override
-  State<_FirstPageView> createState() => _FirstPageViewState();
+  State<_InitialPageView> createState() => _InitialPageViewState();
 }
 
-class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveClientMixin {
+class _InitialPageViewState extends State<_InitialPageView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 

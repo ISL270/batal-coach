@@ -40,6 +40,7 @@ final class UserRepository {
     required String coachEmail,
     required String email,
     required String name,
+    required String companyName,
     required String phoneNumber,
     required CoachType coachType,
   }) async {
@@ -48,6 +49,7 @@ final class UserRepository {
         userType,
         uid: uid,
         coachEmail: coachEmail,
+        companyName: companyName,
         email: email,
         name: name,
         phoneNumber: phoneNumber,

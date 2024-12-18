@@ -94,7 +94,7 @@ class _CompanyField extends StatelessWidget {
         focusedBorder: _signUpOutLinedInputBorder(context),
         disabledBorder: _signUpOutLinedInputBorder(context),
       ),
-      onChanged: (value) {},
+      onChanged: (companyName) => context.read<SignUpCubit>().companyNameChanged(companyName),
     );
   }
 }

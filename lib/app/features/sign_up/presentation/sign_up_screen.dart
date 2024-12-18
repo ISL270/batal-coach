@@ -66,7 +66,7 @@ class SignUpScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: context.read<SignUpCubit>().pageController,
                         children: [
-                          const _FirstPageView(),
+                          const _InitialPageView(),
                           if (userType.isCoach) const _CoachPageView(),
                           if (userType.isTrainee) const _TraineePageView(),
                         ],
@@ -155,7 +155,7 @@ class _PhoneNumberField extends StatelessWidget {
       builder: (context, phoneNumber) {
         return TextFormField(
           key: const Key('signUpForm_phoneInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().phoneChanged(email),
+          onChanged: (phoneNumber) => context.read<SignUpCubit>().phoneChanged(phoneNumber),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(15),

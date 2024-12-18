@@ -37,6 +37,7 @@ final class UserFirestoreSource with FirestoreHelper {
     UserType userType, {
     required String uid,
     required String coachEmail,
+    required String companyName,
     required String email,
     required String name,
     required String phoneNumber,
@@ -48,6 +49,7 @@ final class UserFirestoreSource with FirestoreHelper {
       coachEmail: coachEmail,
       email: email,
       name: name,
+      companyName: companyName,
       phoneNumber: phoneNumber,
       coachType: coachType,
     );

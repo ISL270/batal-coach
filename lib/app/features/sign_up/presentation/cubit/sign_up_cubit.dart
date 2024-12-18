@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
@@ -24,6 +26,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
   void nameChanged(String value) => emit(state.copyWith(name: Name.dirty(value)));
+
+  void companyNameChanged(String value) => emit(state.copyWith(companyName: value));
 
   void phoneChanged(String value) {
     final pppp = PhoneNumber.dirty(value);
@@ -60,6 +64,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         phoneNumber: state.phoneNumber.value,
         password: state.password.value,
         coachType: state.coachType,
+        companyName: state.companyName,
       );
     } catch (e) {
       emit(state.copyWith(status: Failure(e as SignUpWithEmailAndPasswordException)));

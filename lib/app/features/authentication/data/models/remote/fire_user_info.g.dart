@@ -14,11 +14,13 @@ FireCoachInfo _$FireCoachInfoFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       phoneNumber: json['phoneNumber'] as String,
       coachType: $enumDecode(_$CoachTypeEnumMap, json['coachType']),
+      companyName: json['companyName'] as String?,
     );
 
 Map<String, dynamic> _$FireCoachInfoToJson(FireCoachInfo instance) =>
     <String, dynamic>{
       'coachType': _$CoachTypeEnumMap[instance.coachType]!,
+      'companyName': instance.companyName,
       'userType': _$UserTypeEnumMap[instance.userType]!,
       'uid': instance.uid,
       'email': instance.email,

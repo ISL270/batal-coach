@@ -1,4 +1,5 @@
 import 'package:btl/app/core/isar/cache_model.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:isar/isar.dart';
@@ -8,6 +9,7 @@ part 'user_isar.g.dart';
 @collection
 final class UserIsar extends CacheModel<User> {
   String? coachEmail;
+  String? companyName;
 
   String email;
 
@@ -20,6 +22,8 @@ final class UserIsar extends CacheModel<User> {
 
   @enumerated
   UserType userType;
+  @enumerated
+  CoachType coachType;
 
   UserIsar({
     required this.id,
@@ -27,7 +31,9 @@ final class UserIsar extends CacheModel<User> {
     required this.name,
     required this.userType,
     required this.phoneNumber,
+    this.coachType = CoachType.fitnessCoach,
     this.coachEmail,
+    this.companyName,
   });
 
   @override
@@ -35,13 +41,14 @@ final class UserIsar extends CacheModel<User> {
         UserType.coach => Coach(
             id: id,
             email: email,
+            coachType: coachType,
             name: name,
             phoneNumber: phoneNumber,
           ),
         UserType.trainee => Trainee(
             id: id,
             email: email,
-            coachEmail: coachEmail!,
+            coachEmail: coachEmail ?? '',
             name: name,
             phoneNumber: phoneNumber,
           ),
@@ -54,7 +61,7 @@ final class UserIsar extends CacheModel<User> {
             email: user.email,
             phoneNumber: user.phoneNumber,
             userType: UserType.coach,
-          ),
+            coachType: user.coachType),
         Trainee() => UserIsar(
             id: user.id,
             name: user.name,
