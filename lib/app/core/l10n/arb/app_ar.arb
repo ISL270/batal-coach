@@ -68,16 +68,18 @@
   "applyFilter": "تطبيق التصفية",
   "done": "تم",
   "type": "النوع",
-  "regcontinue":"أكمل",
+  "continu":"أكمل",
   "alreadyhaveaccount":"لديك حساب بالفعل؟",
   "signin": "تسجيل الدخول",
   "selectrole":"نوع المدرب",
   "fitness":"مدرب اللياقة البدنية",
   "nutrition":"مدرب التغذية",
   "manager":"إداري",
-  "company":"اسم الشركة (اختياري)",
+  "company":"الشركة",
+  "companyname":"اسم الشركة",
   "createaccount":"إنشاء حساب.",
   "profile":"الحساب الشخصي",
   "coachemail":"البريد الإلكتروني للمدرب",
-  "coachselect":"اختر نوع المدرب"
+  "coachselect":"اختر نوع المدرب",
+  "optional":"اختياري"
 }

@@ -68,16 +68,18 @@
   "applyFilter": "apply filter",
   "done": "Done",
   "type": "Type",
-  "regcontinue":"Continue",
+  "continu":"Continue",
   "alreadyhaveaccount":"Already have an account?",
   "signin":"Sign in",
   "selectrole":"Select a coach role",
   "fitness":"Fitness Coach",
   "nutrition":"Nutrition Coach",
   "manager":"Manager",
-  "company":"Company Name (optional)",
-  "createaccount":"Create \nAccount.",
+  "company":"company",
+  "companyname":"company name",
+  "createaccount":"Create Account.",
   "profile":"profile",
   "coachemail":"coach email",
-  "coachselect":"select a role"
+  "coachselect":"select a role",
+  "optional":"optional"
 }

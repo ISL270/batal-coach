@@ -1,13 +1,13 @@
 part of '../sign_up_screen.dart';
 
-class _SecondPageView extends StatefulWidget {
-  const _SecondPageView();
+class _CoachPageView extends StatefulWidget {
+  const _CoachPageView();
 
   @override
-  State<_SecondPageView> createState() => _SecondPageViewState();
+  State<_CoachPageView> createState() => _CoachPageViewState();
 }
 
-class _SecondPageViewState extends State<_SecondPageView> with AutomaticKeepAliveClientMixin {
+class _CoachPageViewState extends State<_CoachPageView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -86,7 +86,7 @@ class _CompanyField extends StatelessWidget {
       style: TextStyle(color: context.colorsX.background),
       decoration: InputDecoration(
         label: Text(
-          context.l10n.company.capitalized,
+          '${context.l10n.companyname.capitalized} (${context.l10n.optional.capitalized})',
           style: context.textThemeX.small.copyWith(color: context.colorsX.background),
         ),
         border: _signUpOutLinedInputBorder(context),

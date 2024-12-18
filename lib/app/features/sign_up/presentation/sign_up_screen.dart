@@ -67,8 +67,8 @@ class SignUpScreen extends StatelessWidget {
                         controller: context.read<SignUpCubit>().pageController,
                         children: [
                           const _FirstPageView(),
-                          if (userType.isCoach) const _SecondPageView(),
-                          if (userType.isTrainee) const _ThirdPageView(),
+                          if (userType.isCoach) const _CoachPageView(),
+                          if (userType.isTrainee) const _TraineePageView(),
                         ],
                       ),
                     ),

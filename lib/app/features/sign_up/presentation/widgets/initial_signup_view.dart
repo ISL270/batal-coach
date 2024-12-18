@@ -66,7 +66,7 @@ class _FirstPageViewState extends State<_FirstPageView> with AutomaticKeepAliveC
               },
             ),
             const Gap(25),
-            _NextPageViewButton(pageController: context.read<SignUpCubit>().pageController),
+            const _NextPageViewButton(),
             const Gap(20),
             const _AlreadyHaveAnAccount(),
             const Gap(20),
@@ -208,11 +208,7 @@ class _ConfirmPasswordField extends StatelessWidget {
 }
 
 class _NextPageViewButton extends StatelessWidget {
-  const _NextPageViewButton({
-    required this.pageController,
-  });
-
-  final PageController pageController;
+  const _NextPageViewButton();
 
   @override
   Widget build(BuildContext context) {
@@ -223,10 +219,12 @@ class _NextPageViewButton extends StatelessWidget {
           height: 48,
           child: Button.filled(
             height: 0,
-            label: context.l10n.regcontinue,
+            label: context.l10n.continu,
             onPressed: context.read<SignUpCubit>().mainInfoValid()
-                ? () => pageController.nextPage(
-                    duration: const Duration(milliseconds: 600), curve: Curves.decelerate)
+                ? () => context
+                    .read<SignUpCubit>()
+                    .pageController
+                    .nextPage(duration: const Duration(milliseconds: 600), curve: Curves.decelerate)
                 : null,
           ),
         );
