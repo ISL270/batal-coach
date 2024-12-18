@@ -14,6 +14,7 @@ import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
@@ -36,9 +37,9 @@ class SignUpScreen extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: 50,
-              left: context.settingsBloc.state.language.isEnglish ? 20 : 0,
-              right: context.settingsBloc.state.language.isArabic ? 20 : 0,
+              top: 50.h,
+              left: context.settingsBloc.state.language.isEnglish ? 20.w : 0,
+              right: context.settingsBloc.state.language.isArabic ? 20.w : 0,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
                   onPressed: () => context.pop(),
                 ),
                 const Gap(15),
-                Text(context.l10n.createaccount, style: const TextStyle(fontSize: 42)),
+                Text(context.l10n.createaccount, style: TextStyle(fontSize: 42.w)),
               ],
             ),
           ),
@@ -56,7 +57,7 @@ class SignUpScreen extends StatelessWidget {
             selector: (state) => state.userType,
             builder: (context, userType) {
               return Padding(
-                padding: const EdgeInsets.only(top: 280),
+                padding: EdgeInsets.only(top: 280.h),
                 child: Stack(
                   children: [
                     const _SignUpContainerShapeWidget(),
@@ -138,7 +139,7 @@ class _SignUpButton extends StatelessWidget {
           density: ButtonDensity.comfortable,
           onPressed: state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
           label: context.l10n.signUp.capitalized,
-          height: 40,
+          height: 40.h,
         );
       },
     );

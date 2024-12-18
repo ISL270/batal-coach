@@ -16,7 +16,7 @@ class _CoachPageViewState extends State<_CoachPageView> with AutomaticKeepAliveC
     super.build(context);
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
+        padding: EdgeInsets.only(top: 50.h, right: 20.w, left: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

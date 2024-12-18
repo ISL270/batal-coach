@@ -14,10 +14,10 @@ class ThirdPageView extends State<_TraineePageView> with AutomaticKeepAliveClien
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(top: 50, right: 20, left: 20),
-        child: Column(
+        padding: EdgeInsets.only(top: 50.h, right: 20.w, left: 20.w),
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _ArrowBackButton(),

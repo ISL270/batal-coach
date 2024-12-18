@@ -17,7 +17,7 @@ class _InitialPageViewState extends State<_InitialPageView> with AutomaticKeepAl
     return SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
-        padding: const EdgeInsets.only(top: 80, right: 20, left: 20),
+        padding: EdgeInsets.only(top: 80.h, right: 20.w, left: 20.w),
         child: Column(
           children: [
             const _NameFormField(),
@@ -216,7 +216,7 @@ class _NextPageViewButton extends StatelessWidget {
       builder: (context, state) {
         return SizedBox(
           width: double.infinity,
-          height: 48,
+          height: 48.h,
           child: Button.filled(
             height: 0,
             label: context.l10n.continu,
@@ -242,7 +242,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(context.l10n.alreadyhaveaccount, style: TextStyle(color: context.colorsX.background)),
-        const SizedBox(width: 5),
+        SizedBox(width: 5.w),
         GestureDetector(
           onTap: () => context.pop(),
           child: Text(context.l10n.signin, style: TextStyle(color: context.colorsX.primary)),
