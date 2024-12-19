@@ -4,8 +4,8 @@ final class SignUpState extends Equatable with FormzMixin {
   const SignUpState({
     this.userType = UserType.coach,
     this.coachType = CoachType.fitnessCoach,
-    this.name = const Name.pure(),
     this.companyName = '',
+    this.name = const Name.pure(),
     this.email = const Email.pure(),
     this.coachEmail = const Email.pure(),
     this.password = const Password.pure(),
