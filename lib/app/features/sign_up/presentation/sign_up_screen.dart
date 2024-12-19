@@ -3,17 +3,26 @@ import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/core/l10n/language.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
-import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+
+part 'widgets/coach_signup_view.dart';
+part 'widgets/initial_signup_view.dart';
+part 'widgets/trainee_signup_view.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -23,218 +32,93 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: Text(context.l10n.signUp.capitalized),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.settingsBloc.add(SettingsThemeChanged(
-                context.settingsBloc.state.isThemeDark ? ThemeMode.light : ThemeMode.dark,
-              ));
-            },
-            icon: const Icon(Icons.dark_mode),
-          ),
-          IconButton(
-            onPressed: context.settingsBloc.switchLanguage,
-            icon: const Icon(Icons.g_translate),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 40),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BlocSelector<SignUpCubit, SignUpState, UserType>(
-              selector: (state) => state.userType,
-              builder: (context, userType) => Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: SegmentedButton(
-                      style: SegmentedButton.styleFrom(textStyle: context.textThemeX.small.bold),
-                      expandedInsets: const EdgeInsets.all(1),
-                      showSelectedIcon: false,
-                      onSelectionChanged: (selection) =>
-                          context.read<SignUpCubit>().changeUserType(selection.first),
-                      segments: [
-                        ButtonSegment(
-                          value: UserType.coach,
-                          label: Text(context.l10n.coach.capitalized),
-                        ),
-                        ButtonSegment(
-                          value: UserType.trainee,
-                          label: Text(context.l10n.trainee.capitalized),
-                        ),
-                      ],
-                      selected: {userType},
-                    ),
-                  ),
-                  const Gap(20),
-                  if (userType.isTrainee) const _CoachEmailField(),
-                  if (userType.isTrainee) const Gap(25),
-                ],
-              ),
+      padding: EdgeInsets.zero,
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              top: 50.h,
+              left: context.settingsBloc.state.language.isEnglish ? 20.w : 0,
+              right: context.settingsBloc.state.language.isArabic ? 20.w : 0,
             ),
-            const _EmailField(),
-            const Gap(25),
-            const _NameField(),
-            const Gap(25),
-            const _PhoneNumberField(),
-            const Gap(25),
-            const _PasswordField(),
-            const Gap(25),
-            const _ConfirmPasswordField(),
-            const Gap(25),
-            const _SignUpButton(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _CoachEmailField extends StatelessWidget {
-  const _CoachEmailField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, Email>(
-      selector: (state) => state.coachEmail,
-      builder: (context, coachEmail) {
-        return TextFormField(
-          initialValue: coachEmail.value,
-          key: const Key('signUpForm_coachEmailInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().coachEmailChanged(email),
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            labelText: context.l10n.yourCoachEmail.capitalized,
-            errorText: coachEmail.displayError != null ? context.l10n.invalidEmail : null,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: const Icon(FontAwesomeIcons.arrowLeftLong),
+                  onPressed: () => context.pop(),
+                ),
+                const Gap(15),
+                Text(context.l10n.createaccount, style: TextStyle(fontSize: 42.w)),
+              ],
+            ),
           ),
-        );
-      },
-    );
-  }
-}
-
-class _EmailField extends StatelessWidget {
-  const _EmailField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, Email>(
-      selector: (state) => state.email,
-      builder: (context, email) {
-        return TextFormField(
-          initialValue: email.value,
-          key: const Key('signUpForm_emailInput_textField'),
-          onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            labelText: context.l10n.email.capitalized,
-            errorText: email.displayError != null ? context.l10n.invalidEmail : null,
+          BlocSelector<SignUpCubit, SignUpState, UserType>(
+            selector: (state) => state.userType,
+            builder: (context, userType) {
+              return Padding(
+                padding: EdgeInsets.only(top: 280.h),
+                child: Stack(
+                  children: [
+                    const _SignUpContainerShapeWidget(),
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
+                      child: PageView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: context.read<SignUpCubit>().pageController,
+                        children: [
+                          const _InitialPageView(),
+                          if (userType.isCoach) const _CoachPageView(),
+                          if (userType.isTrainee) const _TraineePageView(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
-        );
-      },
-    );
-  }
-}
-
-class _NameField extends StatelessWidget {
-  const _NameField();
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, Name>(
-      selector: (state) => state.name,
-      builder: (context, name) => TextFormField(
-        initialValue: name.value,
-        key: const Key('signUpForm_nameInput_textField'),
-        onChanged: (name) => context.read<SignUpCubit>().nameChanged(name),
-        keyboardType: TextInputType.name,
-        decoration: InputDecoration(
-          labelText: context.l10n.name.capitalized,
-          errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
-        ),
-      ),
-    );
-  }
-}
-
-class _PhoneNumberField extends StatelessWidget {
-  const _PhoneNumberField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
-      selector: (state) => state.phoneNumber,
-      builder: (context, phoneNumber) => TextFormField(
-        initialValue: phoneNumber.value,
-        key: const Key('signUpForm_phoneInput_textField'),
-        onChanged: (phoneNumber) => context.read<SignUpCubit>().phoneChanged(phoneNumber),
-        keyboardType: TextInputType.phone,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(15),
         ],
-        decoration: InputDecoration(
-          labelText: context.l10n.phoneNumber.capitalized,
-          errorText:
-              phoneNumber.displayError == null ? null : context.tr(phoneNumber.displayError!.name),
-        ),
       ),
     );
   }
 }
 
-class _PasswordField extends StatelessWidget {
-  const _PasswordField();
+class _SignUpContainerShapeWidget extends StatelessWidget {
+  const _SignUpContainerShapeWidget();
+
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<SignUpCubit, SignUpState, Password>(
-      selector: (state) => state.password,
-      builder: (context, password) {
-        return TextFormField(
-          initialValue: password.value,
-          key: const Key('signUpForm_passwordInput_textField'),
-          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: context.l10n.password.capitalized,
-            errorText: password.displayError == null ? null : context.l10n.invalidPassword,
-          ),
-        );
-      },
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: context.colorsX.onBackgroundTint,
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(74)),
+      ),
     );
   }
 }
 
-class _ConfirmPasswordField extends StatelessWidget {
-  const _ConfirmPasswordField();
+class _ArrowBackButton extends StatelessWidget {
+  const _ArrowBackButton();
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) =>
-          previous.password != current.password ||
-          previous.confirmPassword != current.confirmPassword,
-      builder: (context, state) {
-        return TextFormField(
-          initialValue: state.confirmPassword.value,
-          key: const Key('signUpForm_confirmedPasswordInput_textField'),
-          onChanged: (confirmPassword) =>
-              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: context.l10n.confirmPassword.capitalized,
-            errorText:
-                state.confirmPassword.displayError != null ? context.l10n.passwordsDontMatch : null,
-          ),
-        );
-      },
+    return IconButton.outlined(
+      icon: const Icon(FontAwesomeIcons.arrowLeft),
+      color: context.colorsX.background,
+      style: IconButton.styleFrom(side: BorderSide(color: context.colorsX.background)),
+      onPressed: () => context
+          .read<SignUpCubit>()
+          .pageController
+          .previousPage(duration: const Duration(milliseconds: 600), curve: Curves.decelerate),
     );
   }
 }
 
 class _SignUpButton extends StatelessWidget {
   const _SignUpButton();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpCubit, SignUpState>(
@@ -255,8 +139,53 @@ class _SignUpButton extends StatelessWidget {
           density: ButtonDensity.comfortable,
           onPressed: state.isValid ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
           label: context.l10n.signUp.capitalized,
+          height: 40.h,
         );
       },
     );
   }
+}
+
+class _PhoneNumberField extends StatelessWidget {
+  const _PhoneNumberField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SignUpCubit, SignUpState, PhoneNumber>(
+      selector: (state) => state.phoneNumber,
+      builder: (context, phoneNumber) {
+        return TextFormField(
+          key: const Key('signUpForm_phoneInput_textField'),
+          onChanged: (phoneNumber) => context.read<SignUpCubit>().phoneChanged(phoneNumber),
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(15),
+          ],
+          keyboardType: TextInputType.phone,
+          style: TextStyle(color: context.colorsX.background),
+          decoration: InputDecoration(
+            label: Text(
+              context.l10n.phoneNumber.capitalized,
+              style: context.textThemeX.small.copyWith(color: context.colorsX.background),
+            ),
+            border: _signUpOutLinedInputBorder(context),
+            enabledBorder: _signUpOutLinedInputBorder(context),
+            focusedBorder: _signUpOutLinedInputBorder(context),
+            disabledBorder: _signUpOutLinedInputBorder(context),
+            errorText: phoneNumber.displayError == null
+                ? null
+                : context.tr(phoneNumber.displayError!.name),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// just for the sign up screen
+OutlineInputBorder _signUpOutLinedInputBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(color: context.colorsX.background),
+  );
 }
