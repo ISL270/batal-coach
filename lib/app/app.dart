@@ -23,7 +23,7 @@ class App extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_) => SettingsBloc()),
+            BlocProvider(create: (_) => SettingsBloc(getIt.get<SettingsRepository>())),
             BlocProvider(create: (_) => getIt.authBloc),
           ],
           child: BlocBuilder<AuthBloc, UserState>(
@@ -34,8 +34,8 @@ class App extends StatelessWidget {
                   return MaterialApp.router(
                     theme: AppTheme.light,
                     darkTheme: AppTheme.dark,
-                    themeMode: settingsState.themeMode,
-                    locale: settingsState.language.locale,
+                    themeMode: settingsState.settings.themeMode,
+                    locale: settingsState.settings.language.locale,
                     supportedLocales: AppLocalizations.supportedLocales,
                     localizationsDelegates: AppLocalizations.localizationsDelegates,
                     debugShowCheckedModeBanner: appFlavor != Flavors.production.name,
