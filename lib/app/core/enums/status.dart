@@ -76,6 +76,9 @@ sealed class Status<T> extends Equatable {
 
   @override
   List<Object?> get props => [];
+
+  // TODO: fix sealed classes json serialization.
+  static VoidStatus fromJson(String? json) => const Initial();
 }
 
 /// Represents the initial state of a data model.
