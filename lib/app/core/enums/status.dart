@@ -152,3 +152,6 @@ final class Failure<T> extends Status<T> {
   @override
   List<Object?> get props => [exception, oldData];
 }
+
+/// A type alias for a [Status] with a type argument of [void].
+typedef VoidStatus = Status<void>;
