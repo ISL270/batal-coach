@@ -8,6 +8,7 @@ import 'package:btl/app/features/edit_profile/presentation/widgets/save_button.d
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -25,19 +26,6 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final ImagePicker picker = ImagePicker();
   File? _image;
-
-  // Future<void> pickImageButton() async {
-  //   try {
-  //     final image = await picker.pickImage(source: ImageSource.gallery);
-  //     if (image == null) return;
-  //     final imageTemp = File(image.path);
-  //     setState(() {
-  //       this.image = imageTemp;
-  //     });
-  //   } catch (e) {
-  //     log('Failed to pick image : $e');
-  //   }
-  // }
 
   //Image Picker function to get image from gallery
   Future<void> getImageFromGallery() async {
@@ -99,17 +87,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             context.l10n.localeName == 'ar'
                 ? Icons.keyboard_arrow_right_sharp
                 : Icons.keyboard_arrow_left_sharp,
-            size: 28,
+            size: 28.w,
           ),
-          onPressed: () {
-            context.pop();
-          },
+          onPressed: () => context.pop(),
         ),
         centerTitle: true,
         title: Text(
           context.l10n.profile.capitalized,
           style: context.textThemeX.medium.bold.copyWith(
-            fontSize: 20,
+            fontSize: 20.sp,
           ),
         ),
       ),
@@ -125,7 +111,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   GestureDetector(
                     onTap: showOptions,
                     child: CircleAvatar(
-                      radius: 32,
+                      radius: 32.sp,
                       backgroundImage: _image != null ? FileImage(_image!) : null,
                       child: _image == null
                           ? const Center(

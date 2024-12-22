@@ -1,6 +1,7 @@
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class EditProfileItemsWidget extends StatelessWidget {
@@ -20,7 +21,7 @@ class EditProfileItemsWidget extends StatelessWidget {
       textBaseline: TextBaseline.ideographic,
       children: [
         SizedBox(
-          width: 120,
+          width: 120.w,
           child: Text(
             label,
             overflow: TextOverflow.ellipsis,

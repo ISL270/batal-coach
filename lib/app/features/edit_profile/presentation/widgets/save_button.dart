@@ -2,6 +2,7 @@ import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class SaveButton extends StatelessWidget {
@@ -12,13 +13,11 @@ class SaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 175,
-      height: 55,
+      width: 175.w,
+      height: 55.h,
       child: Button.filled(
         label: context.l10n.save.capitalized,
-        onPressed: () {
-          context.pop();
-        },
+        onPressed: () => context.pop(),
       ),
     );
   }

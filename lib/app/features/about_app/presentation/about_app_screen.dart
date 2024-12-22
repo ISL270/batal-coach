@@ -7,6 +7,7 @@ import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,14 +25,14 @@ class AboutAppScreen extends StatelessWidget {
             context.settingsBloc.state.language.isArabic
                 ? Icons.keyboard_arrow_right_sharp
                 : Icons.keyboard_arrow_left_sharp,
-            size: 28,
+            size: 28.w,
           ),
           onPressed: () => context.pop(),
         ),
         centerTitle: true,
         title: Text(
           context.l10n.aboutapp.capitalized,
-          style: context.textThemeX.medium.bold.copyWith(fontSize: 20),
+          style: context.textThemeX.medium.bold.copyWith(fontSize: 20.sp),
         ),
       ),
       body: Column(
@@ -71,10 +72,7 @@ class _AboutAppItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          label,
-          style: context.textThemeX.medium,
-        ),
+        Text(label, style: context.textThemeX.medium),
         const Spacer(),
         GestureDetector(
           onTap: onPressed,
