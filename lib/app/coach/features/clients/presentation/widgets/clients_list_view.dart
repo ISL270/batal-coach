@@ -25,10 +25,11 @@ class _ClientsListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return _ClientWidget(
                   client: Client(
-                    email: 'clientEmail@mail.com',
+                    clientEmail: 'clientEmail@mail.com',
                     name: 'slam Ashraf',
-                    phoneNumber: '+201146012354',
+                    phone: '+201146012354',
                     id: '20215',
+                    userType: 'Online',
                   ),
                 );
               },
@@ -75,7 +76,7 @@ class _ClientWidget extends StatelessWidget {
           ),
         ),
         title: Text(client.name, style: context.textThemeX.large.bold),
-        subtitle: Text(client.phoneNumber,
+        subtitle: Text(client.userType,
             style: context.textThemeX.small.copyWith(color: Colors.grey)),
       ),
     );

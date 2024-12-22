@@ -1,4 +1,5 @@
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/add_client/domain/models/client.dart';
+import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/filter_bloc.dart';
 import 'package:btl/app/core/extension_methods/date_x.dart';
@@ -30,7 +31,7 @@ class ClientsScreen extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.w)),
         child: Icon(Icons.add, color: context.colorsX.secondaryBackground),
-        onPressed: () {},
+        onPressed: () => context.pushNamed(AddClientScreen.name),
       ),
       padding: EdgeInsets.zero,
       appBar: AppBar(
