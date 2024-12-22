@@ -1,12 +1,4 @@
-import 'package:btl/app/coach/features/client_details/presentation/widgets/metrics_widget.dart';
-import 'package:btl/app/coach/features/client_details/presentation/widgets/overview_card.dart';
-import 'package:btl/app/core/assets_gen/assets.gen.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
-import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+part of '../client_details_screen.dart';
 
 class OverViewTab extends StatelessWidget {
   const OverViewTab({super.key});
@@ -29,7 +21,7 @@ class OverViewTab extends StatelessWidget {
                   style: context.textThemeX.large.bold,
                 ),
               ),
-              OverviewCard(
+              _OverviewCard(
                 title: context.l10n.workoutTitle,
                 subTitle: context.l10n.noWorkout,
                 image: Assets.icons.dumbbell,
@@ -40,7 +32,7 @@ class OverViewTab extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              OverviewCard(
+              _OverviewCard(
                 title: context.l10n.tasks,
                 subTitle: context.l10n.noTasks,
                 image: Assets.icons.checklist,
@@ -66,7 +58,7 @@ class OverViewTab extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   children: [
-                    MetricsWidget(
+                    _MetricsWidget(
                       title: context.l10n.weight,
                       subTitle: context.l10n.noData,
                       image: Assets.icons.weight,
@@ -74,7 +66,7 @@ class OverViewTab extends StatelessWidget {
                     SizedBox(
                       width: 20.w,
                     ),
-                    MetricsWidget(
+                    _MetricsWidget(
                       title: context.l10n.fat,
                       subTitle: context.l10n.noData,
                       image: Assets.icons.fat,
@@ -87,6 +79,112 @@ class OverViewTab extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OverviewCard extends StatelessWidget {
+  const _OverviewCard({
+    required this.title,
+    required this.subTitle,
+    required this.image,
+    this.onTap,
+  });
+
+  final String title;
+  final String subTitle;
+  final String image;
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            color: context.colorsX.isDark
+                ? context.colorsX.background
+                : context.colorsX.secondaryBackground,
+            borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: ListTile(
+            leading: Padding(
+              padding: const EdgeInsets.all(8),
+              child: SvgPicture.asset(
+                image,
+                width: 40.w,
+                colorFilter: ColorFilter.mode(
+                  context.colorsX.primary,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            title: Text(
+              title,
+              style: context.textThemeX.large.bold.copyWith(fontSize: 20),
+            ),
+            subtitle: Text(
+              subTitle,
+              style: context.textThemeX.small,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MetricsWidget extends StatelessWidget {
+  const _MetricsWidget({
+    required this.title,
+    required this.subTitle,
+    required this.image,
+  });
+
+  final String title;
+  final String subTitle;
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 180.h,
+        width: 200.w,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: context.colorsX.isDark
+              ? context.colorsX.background
+              : context.colorsX.secondaryBackground,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: context.textThemeX.medium.bold.copyWith(
+                color: context.colorsX.primary,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                subTitle,
+                style: context.textThemeX.small.copyWith(color: Colors.grey),
+              ),
+            ),
+            SvgPicture.asset(
+              image,
+              width: 40.w,
+              colorFilter: ColorFilter.mode(
+                context.colorsX.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+          ],
         ),
       ),
     );

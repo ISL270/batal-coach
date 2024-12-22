@@ -1,9 +1,4 @@
-import 'package:btl/app/coach/features/client_details/presentation/widgets/others_tab_item_widget.dart';
-import 'package:btl/app/coach/features/clients/domain/models/others_page_items.dart';
-import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:flutter/material.dart';
-
-
+part of '../client_details_screen.dart';
 
 class OthersTabView extends StatelessWidget {
   const OthersTabView({super.key});
@@ -18,7 +13,7 @@ class OthersTabView extends StatelessWidget {
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             final item = OthersTabItem.values[index];
-            return OthersTabItemWidget(item: item);
+            return _OthersTabItemWidget(item: item);
           },
           separatorBuilder: (BuildContext context, int index) {
             return const Divider(
@@ -29,6 +24,34 @@ class OthersTabView extends StatelessWidget {
           },
           itemCount: OthersTabItem.values.length,
         ),
+      ),
+    );
+  }
+}
+
+class _OthersTabItemWidget extends StatelessWidget {
+  const _OthersTabItemWidget({required this.item});
+
+  final OthersTabItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    final title = item.getTranslatedTitle(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: <Widget>[
+          Text(
+            title,
+            style: context.textThemeX.medium,
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: () => context.pushNamed(item.path),
+            icon: const Icon(Icons.arrow_forward_ios),
+          ),
+        ],
       ),
     );
   }
