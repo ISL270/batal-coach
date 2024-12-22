@@ -6,9 +6,11 @@ final class ClientsState extends Equatable {
 
   const ClientsState._({required this.clients, required this.exception});
 
-  factory ClientsState.initial() => const ClientsState._(clients: [], exception: null);
+  factory ClientsState.initial() =>
+      const ClientsState._(clients: [], exception: null);
 
-  ClientsState success(List<Client> clients) => ClientsState._(clients: clients, exception: null);
+  ClientsState success(List<Client> clients) =>
+      ClientsState._(clients: clients, exception: null);
 
   ClientsState failure(GenericException exception) =>
       ClientsState._(clients: clients, exception: exception);
