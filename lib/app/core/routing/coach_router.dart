@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
@@ -57,7 +58,8 @@ final coachRouter = GoRouter(
           ),
         ]),
     StatefulShellRoute.indexedStack(
-      builder: (_, ___, navigationShell) => HomeScreen(navigationShell: navigationShell),
+      builder: (_, ___, navigationShell) =>
+          HomeScreen(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           navigatorKey: _exerecisesNavigatorKey,
@@ -67,7 +69,8 @@ final coachRouter = GoRouter(
               path: '/${ExercisesScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
                 child: BlocProvider(
-                  create: (context) => ExercisesBloc(getIt.get<ExercisesRepository>()),
+                  create: (context) =>
+                      ExercisesBloc(getIt.get<ExercisesRepository>()),
                   child: const ExercisesScreen(),
                 ),
               ),
@@ -90,7 +93,8 @@ final coachRouter = GoRouter(
                 path: '/${WorkoutsScreen.name}',
                 pageBuilder: (context, state) => NoTransitionPage(
                       child: BlocProvider(
-                        create: (context) => WorkoutsBloc(getIt.get<WorkoutRepository>()),
+                        create: (context) =>
+                            WorkoutsBloc(getIt.get<WorkoutRepository>()),
                         child: const WorkoutsScreen(),
                       ),
                     ),
@@ -102,7 +106,8 @@ final coachRouter = GoRouter(
                     pageBuilder: (context, state) => CupertinoPage(
                       fullscreenDialog: true,
                       child: BlocProvider(
-                        create: (context) => WorkoutBuilderCubit(getIt.get<WorkoutRepository>()),
+                        create: (context) =>
+                            WorkoutBuilderCubit(getIt.get<WorkoutRepository>()),
                         child: const WorkoutBuilderScreen(),
                       ),
                     ),
@@ -118,10 +123,16 @@ final coachRouter = GoRouter(
               path: '/${ClientsScreen.name}',
               pageBuilder: (context, state) => NoTransitionPage(
                 child: BlocProvider(
-                  create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
+                  create: (context) =>
+                      ClientsBloc(getIt.get<ClientsRepository>()),
                   child: const ClientsScreen(),
                 ),
               ),
+            ),
+            GoRoute(
+              path: '/${ClientDetailsScreen.name}',
+              name: ClientDetailsScreen.name,
+              builder: (context, state) => const ClientDetailsScreen(),
             ),
           ],
         ),
@@ -131,7 +142,8 @@ final coachRouter = GoRouter(
             GoRoute(
               name: SettingsScreen.name,
               path: '/${SettingsScreen.name}',
-              pageBuilder: (context, state) => const NoTransitionPage(child: SettingsScreen()),
+              pageBuilder: (context, state) =>
+                  const NoTransitionPage(child: SettingsScreen()),
             ),
           ],
         ),
@@ -144,7 +156,9 @@ final coachRouter = GoRouter(
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
-    final fromloc = (state.isGoingToHome || state.isLoggingOut) ? '' : state.matchedLocation;
+    final fromloc = (state.isGoingToHome || state.isLoggingOut)
+        ? ''
+        : state.matchedLocation;
     if (!getIt.authBloc.state.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
@@ -170,7 +184,11 @@ final coachRouter = GoRouter(
 
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _exerecisesNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ExercisesScreen.name);
-final _workoutsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: WorkoutsScreen.name);
-final _clientsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: ClientsScreen.name);
-final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: SettingsScreen.name);
+final _exerecisesNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: ExercisesScreen.name);
+final _workoutsNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: WorkoutsScreen.name);
+final _clientsNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: ClientsScreen.name);
+final _settingsNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: SettingsScreen.name);

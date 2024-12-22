@@ -60,7 +60,7 @@ class _ClientWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => context.pushNamed(ClientDetailsScreen.name),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: CircleAvatar(

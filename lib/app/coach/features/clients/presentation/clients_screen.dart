@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/filter_bloc.dart';
