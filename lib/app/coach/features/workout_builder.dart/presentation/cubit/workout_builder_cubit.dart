@@ -14,35 +14,43 @@ part 'workout_builder_state.dart';
 
 class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
   final WorkoutRepository _workoutRepository;
-  WorkoutBuilderCubit(this._workoutRepository) : super(const WorkoutBuilderState());
+
+  WorkoutBuilderCubit(this._workoutRepository)
+      : super(const WorkoutBuilderState());
 
   final pageController = PageController();
 
   void updateName(String name) => emit(state.copyWith(name: name));
 
   void updateDescription(String description) => emit(state.copyWith(
-        description: description.isBlank ? const Optional.value(null) : Optional.value(description),
+        description: description.isBlank
+            ? const Optional.value(null)
+            : Optional.value(description),
       ));
 
   void addExercises(List<Exercise> exercises) {
-    emit(state.copyWith(exercisesSets: exercises.map(ExerciseSets.new).toList()));
+    emit(state.copyWith(
+        exercisesSets: exercises.map(ExerciseSets.new).toList()));
   }
 
   void removeSet(int excIndex, SET set) {
     final updatedExc = state.exercisesSets[excIndex].removeSet(set);
-    final updatedExercises = List<ExerciseSets>.from(state.exercisesSets)..[excIndex] = updatedExc;
+    final updatedExercises = List<ExerciseSets>.from(state.exercisesSets)
+      ..[excIndex] = updatedExc;
     emit(state.copyWith(exercisesSets: updatedExercises));
   }
 
   void addSet(int excIndex) {
     final updatedExc = state.exercisesSets[excIndex].addSet();
-    final updatedExercises = List<ExerciseSets>.from(state.exercisesSets)..[excIndex] = updatedExc;
+    final updatedExercises = List<ExerciseSets>.from(state.exercisesSets)
+      ..[excIndex] = updatedExc;
     emit(state.copyWith(exercisesSets: updatedExercises));
   }
 
   void updateField<F extends Field>(int excIndex, SET set, F field) {
     final updatedExc = state.exercisesSets[excIndex].updateField(set, field);
-    final updatedExercises = List<ExerciseSets>.from(state.exercisesSets)..[excIndex] = updatedExc;
+    final updatedExercises = List<ExerciseSets>.from(state.exercisesSets)
+      ..[excIndex] = updatedExc;
     emit(state.copyWith(exercisesSets: updatedExercises));
   }
 
@@ -66,6 +74,22 @@ class WorkoutBuilderCubit extends Cubit<WorkoutBuilderState> {
       (e) => emit(state.copyWith(status: Failure(e))),
       (r) => emit(state.copyWith(status: Success(r))),
     );
+  }
+
+  void startReordering() {
+    emit(state.copyWith(reordering: true));
+  }
+
+  // Finish reordering
+  void finishReordering() {
+    emit(state.copyWith(reordering: false));
+  }
+
+  void reorderExercise(int oldIndex, int newIndex) {
+    final updatedList = List.of(state.exercisesSets);
+    final item = updatedList.removeAt(oldIndex);
+    updatedList.insert(newIndex, item);
+    emit(state.copyWith(exercisesSets: updatedList));
   }
 
   @override
