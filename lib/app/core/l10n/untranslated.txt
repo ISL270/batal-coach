@@ -1,1 +1,8 @@
-{}
+{
+  "en": [
+    "ok",
+    "gender",
+    "male",
+    "female"
+  ]
+}

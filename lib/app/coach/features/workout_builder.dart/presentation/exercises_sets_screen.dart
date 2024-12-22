@@ -93,10 +93,10 @@ class _Exercise extends StatelessWidget {
         return Transform.scale(
           scale: scale,
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
+            margin: EdgeInsets.symmetric(vertical: 10.h),
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(25.sp),
               color: context.colorsX.secondaryBackground,
               border: isReordering
                   ? Border.all(
@@ -144,7 +144,7 @@ class _Exercise extends StatelessWidget {
                 background: Container(
                   color: context.colorsX.error,
                   alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 child: Row(
@@ -227,7 +227,7 @@ class _Exercise extends StatelessWidget {
               ),
             const Gap(5),
             Button.outlined(
-              height: 2,
+              height: 2.h,
               label: context.l10n.addSet,
               density: ButtonDensity.compact,
               onPressed: () => context.wkBuilderCubit.addSet(excIndex),
@@ -254,7 +254,7 @@ class _ExerciseWidgetHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.sp),
         color: context.colorsX.onBackground.withOpacity(0.1),
       ),
       child: Row(
@@ -262,7 +262,7 @@ class _ExerciseWidgetHeader extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(5),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.sp),
               child: CachedNetworkImage(
                 height: 40.h,
                 width: 40.w,
@@ -306,7 +306,7 @@ class _Cell extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: SizedBox(
-          height: 40,
+          height: 40.h,
           child: Center(child: Text(value, style: context.textThemeX.small)),
         ),
       ),
