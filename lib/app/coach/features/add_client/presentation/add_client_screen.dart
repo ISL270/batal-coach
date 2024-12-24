@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
+
 part 'widgets/client_category_widget.dart';
 
 class AddClientScreen extends StatelessWidget {
@@ -42,7 +43,9 @@ class AddClientScreen extends StatelessWidget {
           builder: (context, state) {
             return Screen(
               appBar: AppBar(
-                  centerTitle: true, title: Text(context.l10n.addClient)),
+                centerTitle: true,
+                title: Text(context.l10n.addClient),
+              ),
               body: const SingleChildScrollView(
                 child: Column(
                   children: [

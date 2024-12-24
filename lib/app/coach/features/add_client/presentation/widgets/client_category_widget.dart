@@ -29,10 +29,10 @@ class _ClientCategoryWidgetState extends State<_ClientCategoryWidget> {
               }
             });
           },
-          color: Colors.grey,
+          color: context.colorsX.onBackgroundTint,
           selectedColor: Colors.white,
           fillColor: context.colorsX.primary,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.w),
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),
@@ -59,7 +59,9 @@ class _ClientCategoryWidgetState extends State<_ClientCategoryWidget> {
                     style: context.textThemeX.large.bold),
                 Text(
                   context.l10n.mailInvitationDes,
-                  style: context.textThemeX.medium.copyWith(color: Colors.grey),
+                  style: context.textThemeX.medium.copyWith(
+                    color: context.colorsX.onBackgroundTint,
+                  ),
                 ),
               ],
             ),
