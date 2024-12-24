@@ -33,7 +33,7 @@ class _ClientsStatusCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: context.colorsX.secondaryBackground,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.sp),
         ),
         width: 130.w,
         child: Row(
@@ -55,7 +55,7 @@ class _ClientsStatusCard extends StatelessWidget {
                 Text(
                   title,
                   style: context.textThemeX.medium.bold
-                      .copyWith(color: const Color(0xff858585)),
+                      .copyWith(color: context.colorsX.onBackgroundTint35),
                 ),
               ],
             )

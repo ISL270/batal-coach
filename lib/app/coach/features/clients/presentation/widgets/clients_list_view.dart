@@ -17,7 +17,8 @@ class _ClientsListView extends StatelessWidget {
             const Gap(10),
             Text(
               '${context.l10n.allClients} (3)',
-              style: context.textThemeX.small.bold.copyWith(color: Colors.grey),
+              style: context.textThemeX.small.bold
+                  .copyWith(color: context.colorsX.onBackgroundTint),
             ),
             ListView.separated(
               shrinkWrap: true,
@@ -36,10 +37,10 @@ class _ClientsListView extends StatelessWidget {
                 return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-                  child: const Divider(
+                  child: Divider(
                     height: 1,
                     thickness: 0.5,
-                    color: Colors.grey,
+                    color: context.colorsX.onBackgroundTint,
                   ),
                 );
               },
@@ -76,7 +77,8 @@ class _ClientWidget extends StatelessWidget {
         ),
         title: Text(client.name, style: context.textThemeX.large.bold),
         subtitle: Text(client.phoneNumber,
-            style: context.textThemeX.small.copyWith(color: Colors.grey)),
+            style: context.textThemeX.small
+                .copyWith(color: context.colorsX.onBackgroundTint)),
       ),
     );
   }
@@ -97,7 +99,8 @@ class _SearchAndFilterWidget extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                 labelText: '${context.l10n.searchClients}...',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                prefixIcon:
+                    Icon(Icons.search, color: context.colorsX.onBackgroundTint),
               ),
             ),
           ),
@@ -109,8 +112,9 @@ class _SearchAndFilterWidget extends StatelessWidget {
                 onTap: () => _showFilterBottomSheet(context),
                 child: Icon(
                   Icons.filter_list,
-                  color:
-                      isFilterSelected ? context.colorsX.primary : Colors.grey,
+                  color: isFilterSelected
+                      ? context.colorsX.primary
+                      : context.colorsX.onBackgroundTint,
                 ),
               );
             },
@@ -124,8 +128,8 @@ class _SearchAndFilterWidget extends StatelessWidget {
       showModalBottomSheet<void>(
         backgroundColor: context.colorsX.secondaryBackground,
         context: context,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
         ),
         builder: (_) {
           return BlocProvider.value(
@@ -147,7 +151,7 @@ class _FilterBottomSheet extends StatelessWidget {
       context.l10n.archived
     ];
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -161,9 +165,8 @@ class _FilterBottomSheet extends StatelessWidget {
                   },
                   child: Text(
                     context.l10n.clear,
-                    style: context.textThemeX.medium.copyWith(
-                      color: context.colorsX.secondary,
-                    ),
+                    style: context.textThemeX.medium
+                        .copyWith(color: context.colorsX.secondary),
                   )),
               TextButton(
                   onPressed: () {
@@ -178,9 +181,9 @@ class _FilterBottomSheet extends StatelessWidget {
           ),
           Text(context.l10n.selectFilter,
               style: context.textThemeX.small.copyWith(
-                color: Colors.grey,
+                color: context.colorsX.onBackgroundTint,
               )),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           SizedBox(
             height: 170.h,
             child: ListView.builder(
@@ -194,7 +197,7 @@ class _FilterBottomSheet extends StatelessWidget {
                         : state.selectedFilters.first;
 
                     return RadioListTile<String>(
-                      activeColor: Theme.of(context).primaryColor,
+                      activeColor: context.colorsX.primary,
                       title: Text(filter),
                       value: filter,
                       groupValue: selectedFilter,
