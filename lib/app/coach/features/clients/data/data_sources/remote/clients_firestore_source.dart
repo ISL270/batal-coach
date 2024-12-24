@@ -1,5 +1,3 @@
-// ignore_for_file: inference_failure_on_untyped_parameter
-
 import 'package:btl/app/coach/features/clients/data/models/client_fm.dart';
 import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
@@ -11,7 +9,8 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
   ClientsFirestoreSource(super.firestoreSvc);
 
   @override
-  ClientFM fromJson(String docID, Map<String, dynamic> json) => ClientFM.fromJson(json);
+  ClientFM fromJson(String docID, Map<String, dynamic> json) =>
+      ClientFM.fromJson(json);
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>

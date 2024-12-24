@@ -19,7 +19,8 @@ final class ClientFM implements RemoteModel<Client> {
     required this.phoneNumber,
   });
 
-  factory ClientFM.fromJson(Map<String, dynamic> json) => _$ClientFMFromJson(json);
+  factory ClientFM.fromJson(Map<String, dynamic> json) =>
+      _$ClientFMFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClientFMToJson(this);
 
