@@ -59,32 +59,32 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final authModule = _$AuthModule();
+    gh.singleton<_i997.FirestoreService>(() => _i997.FirestoreService());
+    gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
+    gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     await gh.singletonAsync<_i26.IsarService>(
       () => _i26.IsarService.create(),
       preResolve: true,
     );
     gh.singleton<_i222.L10nService>(() => _i222.L10nService());
-    gh.singleton<_i997.FirestoreService>(() => _i997.FirestoreService());
-    gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
-    gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     gh.singleton<_i538.UserFirestoreSource>(
         () => _i538.UserFirestoreSource(gh<_i997.FirestoreService>()));
-    gh.singleton<_i193.UserIsarSource>(
-        () => _i193.UserIsarSource(gh<_i26.IsarService>()));
-    gh.singleton<_i25.WorkoutIsarSource>(
-        () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i25.WorkoutIsarSource>(
+        () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i193.UserIsarSource>(
+        () => _i193.UserIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i403.ClientsFirestoreSource>(
       () => _i403.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
     );
-    gh.singleton<_i389.WorkoutFirestoreSource>(
-        () => _i389.WorkoutFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i577.ExercisesFirestoreSource>(
       () => _i577.ExercisesFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
     );
+    gh.singleton<_i389.WorkoutFirestoreSource>(
+        () => _i389.WorkoutFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
           gh<_i193.UserIsarSource>(),
           gh<_i538.UserFirestoreSource>(),
