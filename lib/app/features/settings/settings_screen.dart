@@ -39,34 +39,34 @@ class SettingsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const _AvatarLabelRow(),
-                const Gap(30),
+                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.lock,
                   label: context.l10n.changepassword.capitalized,
                 ),
-                const Gap(30),
+                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.bell,
                   label: context.l10n.notifications.capitalized,
                 ),
-                const Gap(30),
+                Gap(30.h),
                 _SettingsSectionWidget(
                   // ignore: deprecated_member_use
                   iconData: FontAwesomeIcons.listNumeric,
                   label: context.l10n.units.capitalized,
                 ),
-                const Gap(30),
+                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.headset,
                   label: context.l10n.technicalsupport.capitalized,
                 ),
-                const Gap(30),
+                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.mobileScreenButton,
                   label: context.l10n.aboutapp.capitalized,
                 ),
                 const Spacer(),
-                const Gap(25),
+                Gap(25.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -97,7 +97,7 @@ class SettingsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                const Gap(25),
+                Gap(25.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -124,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                const Gap(25),
+                Gap(25.h),
                 Button.outlined(
                   maxWidth: true,
                   density: ButtonDensity.comfortable,
@@ -180,9 +180,9 @@ class _SettingsSectionWidget extends StatelessWidget {
       onTap: onPressed,
       child: Row(
         children: [
-          const Gap(5),
+          Gap(5.w),
           Icon(iconData),
-          const Gap(20),
+          Gap(20.w),
           Text(
             label,
             style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
