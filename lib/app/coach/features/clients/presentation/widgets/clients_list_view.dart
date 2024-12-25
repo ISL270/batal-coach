@@ -89,38 +89,25 @@ class _SearchAndFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => FilterBloc(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 0.36.sh,
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: '${context.l10n.searchClients}...',
-                prefixIcon:
-                    Icon(Icons.search, color: context.colorsX.onBackgroundTint),
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 0.36.sh,
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelText: '${context.l10n.searchClients}...',
+              prefixIcon:
+                  Icon(Icons.search, color: context.colorsX.onBackgroundTint),
             ),
           ),
-          Gap(20.w),
-          BlocBuilder<FilterBloc, FilterState>(
-            builder: (context, state) {
-              final isFilterSelected = state.selectedFilters.isNotEmpty;
-              return InkWell(
-                onTap: () => _showFilterBottomSheet(context),
-                child: Icon(
-                  Icons.filter_list,
-                  color: isFilterSelected
-                      ? context.colorsX.primary
-                      : context.colorsX.onBackgroundTint,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+        ),
+        Gap(20.w),
+        InkWell(
+          onTap: () => _showFilterBottomSheet(context),
+          child: Icon(Icons.filter_list, color: context.colorsX.primary),
+        )
+      ],
     );
   }
 
@@ -132,10 +119,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
         ),
         builder: (_) {
-          return BlocProvider.value(
-            value: BlocProvider.of<FilterBloc>(context),
-            child: const _FilterBottomSheet(),
-          );
+          return const _FilterBottomSheet();
         },
       );
 }
@@ -160,7 +144,6 @@ class _FilterBottomSheet extends StatelessWidget {
             children: [
               TextButton(
                   onPressed: () {
-                    BlocProvider.of<FilterBloc>(context).add(ClearFilters());
                     context.pop();
                   },
                   child: Text(
@@ -170,7 +153,6 @@ class _FilterBottomSheet extends StatelessWidget {
                   )),
               TextButton(
                   onPressed: () {
-                    BlocProvider.of<FilterBloc>(context).add(SearchFilters());
                     context.pop();
                   },
                   child: Text(
@@ -190,24 +172,14 @@ class _FilterBottomSheet extends StatelessWidget {
               itemCount: filters.length,
               itemBuilder: (context, index) {
                 final filter = filters[index];
-                return BlocBuilder<FilterBloc, FilterState>(
-                  builder: (context, state) {
-                    final selectedFilter = state.selectedFilters.isEmpty
-                        ? null
-                        : state.selectedFilters.first;
 
-                    return RadioListTile<String>(
-                      activeColor: context.colorsX.primary,
-                      title: Text(filter),
-                      value: filter,
-                      groupValue: selectedFilter,
-                      onChanged: (value) {
-                        if (value != null) {
-                          BlocProvider.of<FilterBloc>(context)
-                              .add(ToggleFilter(filter));
-                        }
-                      },
-                    );
+                return RadioListTile<String>(
+                  activeColor: context.colorsX.primary,
+                  title: Text(filter),
+                  value: filter,
+                  groupValue: '',
+                  onChanged: (value) {
+                    if (value != null) {}
                   },
                 );
               },
