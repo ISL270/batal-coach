@@ -45,36 +45,6 @@ final coachRouter = GoRouter(
       builder: (context, state) => const ClientsScreen(),
     ),
     GoRoute(
-      path: '/${AddClientScreen.name}',
-      name: AddClientScreen.name,
-      builder: (context, state) => const AddClientScreen(),
-    ),
-    GoRoute(
-      path: '/${ClientDetailsScreen.name}',
-      name: ClientDetailsScreen.name,
-      builder: (context, state) => const ClientDetailsScreen(),
-    ),
-    GoRoute(
-      path: '/${EditClientInfo.name}',
-      name: EditClientInfo.name,
-      builder: (context, state) => const EditClientInfo(),
-    ),
-    GoRoute(
-      path: '/${ClientLimitationsScreen.name}',
-      name: ClientLimitationsScreen.name,
-      builder: (context, state) => const ClientLimitationsScreen(),
-    ),
-    GoRoute(
-      path: '/${ClientGoalScreen.name}',
-      name: ClientGoalScreen.name,
-      builder: (context, state) => const ClientGoalScreen(),
-    ),
-    GoRoute(
-      path: '/${ClientTasksScreen.name}',
-      name: ClientTasksScreen.name,
-      builder: (context, state) => const ClientTasksScreen(),
-    ),
-    GoRoute(
         name: LoginScreen.name,
         path: '/${LoginScreen.name}',
         builder: (context, state) => BlocProvider(

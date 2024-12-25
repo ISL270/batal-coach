@@ -7,10 +7,6 @@ sealed class SettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class SettingsFetched extends SettingsEvent {
-  const SettingsFetched();
-}
-
 final class SettingsLanguageChanged extends SettingsEvent {
   final Language language;
   const SettingsLanguageChanged(this.language);
