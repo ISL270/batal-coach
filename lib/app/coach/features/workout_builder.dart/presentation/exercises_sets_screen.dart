@@ -54,6 +54,7 @@ class _ExercisesSetsScreen extends StatelessWidget {
 class _Exercise extends StatelessWidget {
   final int excIndex;
   final bool reordering;
+  // ignore: unused_element
   const _Exercise({required this.excIndex, this.reordering = false});
 
   @override

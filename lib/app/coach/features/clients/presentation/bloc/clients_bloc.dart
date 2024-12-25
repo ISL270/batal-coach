@@ -25,7 +25,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     await emit.forEach(
       _repository.getUpdates(),
       onData: (status) => switch (status) {
-        Success<List<Client>>(:final result) => state.success(result),
+        Success<List<Client>>(newData: final result) => state.success(result),
         Failure<List<Client>>(:final exception) => state.failure(exception),
         _ => state,
       },

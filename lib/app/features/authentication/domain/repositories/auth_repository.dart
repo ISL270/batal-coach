@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart';
@@ -43,10 +44,12 @@ final class AuthRepository {
   Future<void> signUp(
     UserType userType, {
     required String coachEmail,
+    required String companyName,
     required String email,
     required String name,
     required String phoneNumber,
     required String password,
+    required CoachType coachType,
   }) async {
     try {
       final userCredential = await _fireAuth.createUserWithEmailAndPassword(
@@ -64,7 +67,9 @@ final class AuthRepository {
         coachEmail: coachEmail,
         email: email,
         name: name,
+        companyName: companyName,
         phoneNumber: phoneNumber,
+        coachType: coachType,
       );
 
       await res.fold(
@@ -102,7 +107,6 @@ final class AuthRepository {
       }
 
       final res = await _userRepository.getUserRemote(
-        userType: userType,
         uid: userCredential.user!.uid,
       );
 
@@ -151,7 +155,6 @@ final class AuthRepository {
       }
 
       final res = await _userRepository.getUserRemote(
-        userType: userType,
         uid: userCredential.user!.uid,
       );
 
