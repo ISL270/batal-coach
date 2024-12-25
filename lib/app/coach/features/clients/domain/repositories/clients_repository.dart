@@ -1,7 +1,7 @@
-import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar.dart';
+import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
 import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart';
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart';
-import 'package:btl/app/coach/features/clients/data/models/client_fm.dart';
+import 'package:btl/app/coach/features/clients/data/data_sources/remote/client_fm.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
 @singleton
-final class ClientsRepository extends ReactiveRepository<Client, ClientFM, ClientsIsar> {
+final class ClientsRepository extends ReactiveRepository<Client, ClientFM, ClientIsar> {
   final ClientsFirestoreSource _remoteSource;
   final ClientsIsarSource _localSource;
 

@@ -81,12 +81,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i557.SettingsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i193.UserIsarSource>(
         () => _i193.UserIsarSource(gh<_i26.IsarService>()));
-    gh.singleton<_i374.ClientsIsarSource>(
-        () => _i374.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i25.WorkoutIsarSource>(
         () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i374.ClientsIsarSource>(
+        () => _i374.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i662.SettingsRepository>(
         () => _i662.SettingsRepository(gh<_i557.SettingsIsarSource>()));
     gh.singleton<_i403.ClientsFirestoreSource>(

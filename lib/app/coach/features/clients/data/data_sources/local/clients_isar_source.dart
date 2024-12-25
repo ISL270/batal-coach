@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar.dart';
+import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/isar/isar_source.dart';
 import 'package:dartx/dartx.dart';
@@ -6,27 +6,24 @@ import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 
 @singleton
-final class ClientsIsarSource extends IsarSource<Client, ClientsIsar> {
+final class ClientsIsarSource extends IsarSource<Client, ClientIsar> {
   ClientsIsarSource(super.isarService);
 
   @override
-  ClientsIsar fromDomain(Client dm) => ClientsIsar.fromDomain(dm);
+  ClientIsar fromDomain(Client dm) => ClientIsar.fromDomain(dm);
 
-  Future<int> putClient(ClientsIsar client) =>
-      isarService.put<ClientsIsar>(client);
+  Future<int> putClient(ClientIsar client) => isarService.put<ClientIsar>(client);
 
-  Future<List<ClientsIsar>> getAllClients() =>
-      isarService.getAll<ClientsIsar>();
+  Future<List<ClientIsar>> getAllClients() => isarService.getAll<ClientIsar>();
 
-  Future<List<ClientsIsar>> getClients(
+  Future<List<ClientIsar>> getClients(
     String searchTerm, {
     required int page,
     required int pageSize,
   }) async {
     final query = switch (searchTerm.isNotBlank) {
-      true =>
-        isarService.instance.clientsIsars.where().nameStartsWith(searchTerm),
-      false => isarService.instance.clientsIsars.where().anyName(),
+      true => isarService.instance.clientIsars.where().nameStartsWith(searchTerm),
+      false => isarService.instance.clientIsars.where().anyName(),
     };
     return query.offset(page * pageSize).limit(pageSize).findAll();
   }
