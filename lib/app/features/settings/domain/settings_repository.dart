@@ -1,4 +1,3 @@
-import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/features/settings/data/sources/local/settings_isar_source.dart';
 import 'package:btl/app/features/settings/domain/settings.dart';
 import 'package:injectable/injectable.dart';

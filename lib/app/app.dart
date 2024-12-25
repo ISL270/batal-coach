@@ -6,6 +6,7 @@ import 'package:btl/app/core/routing/trainee_router.dart';
 import 'package:btl/app/core/theming/app_theme.dart';
 import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:btl/app/features/settings/domain/settings_repository.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/flavors/flavors.dart';
 import 'package:flutter/material.dart';

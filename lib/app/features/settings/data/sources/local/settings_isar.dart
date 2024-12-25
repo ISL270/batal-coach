@@ -12,9 +12,9 @@ final class SettingsIsar extends CacheModel<Settings> {
   String id = '';
   @override
   Id cacheID = Isar.autoIncrement;
-  @Enumerated(EnumType.name)
+  @enumerated
   final Language language;
-  @Enumerated(EnumType.name)
+  @enumerated
   final ThemeMode themeMode;
 
   SettingsIsar({
@@ -22,9 +22,9 @@ final class SettingsIsar extends CacheModel<Settings> {
     required this.themeMode,
   });
 
-  factory SettingsIsar.fromDomain(Settings domain) => SettingsIsar(
-        language: domain.language,
-        themeMode: domain.themeMode,
+  factory SettingsIsar.fromDomain(Settings dm) => SettingsIsar(
+        language: dm.language,
+        themeMode: dm.themeMode,
       );
 
   @override
