@@ -1,4 +1,5 @@
 import 'package:btl/app/features/authentication/data/models/remote/user_info_rm.dart';
+import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -19,7 +20,9 @@ sealed class FireUserInfo implements UserInfoRM {
     required String coachEmail,
     required String email,
     required String name,
+    required String companyName,
     required String phoneNumber,
+    required CoachType coachType,
   }) =>
       switch (userType) {
         UserType.coach => FireCoachInfo(
@@ -27,7 +30,9 @@ sealed class FireUserInfo implements UserInfoRM {
             uid: uid,
             email: email,
             name: name,
+            companyName: companyName,
             phoneNumber: phoneNumber,
+            coachType: coachType,
           ),
         UserType.trainee => FireTraineeInfo(
             userType: userType,
@@ -46,7 +51,9 @@ sealed class FireUserInfo implements UserInfoRM {
             uid: user.id,
             email: user.email,
             name: user.name,
+            companyName: user.companyName,
             phoneNumber: user.phoneNumber,
+            coachType: user.coachType,
           ),
         Trainee() => FireTraineeInfo(
             userType: userType,
@@ -61,6 +68,8 @@ sealed class FireUserInfo implements UserInfoRM {
 
 @JsonSerializable(explicitToJson: true)
 final class FireCoachInfo extends FireUserInfo {
+  final CoachType coachType;
+  String? companyName;
   @override
   final UserType userType;
   @override
@@ -72,12 +81,14 @@ final class FireCoachInfo extends FireUserInfo {
   @override
   final String phoneNumber;
 
-  const FireCoachInfo({
+  FireCoachInfo({
     required this.userType,
     required this.uid,
     required this.email,
     required this.name,
     required this.phoneNumber,
+    required this.coachType,
+    this.companyName,
   });
 
   factory FireCoachInfo.fromJson(Map<String, dynamic> json) => _$FireCoachInfoFromJson(json);
@@ -89,8 +100,10 @@ final class FireCoachInfo extends FireUserInfo {
   Coach toDomain() => Coach(
         id: uid,
         name: name,
+        companyName: companyName,
         email: email,
         phoneNumber: phoneNumber,
+        coachType: coachType,
       );
 }
 

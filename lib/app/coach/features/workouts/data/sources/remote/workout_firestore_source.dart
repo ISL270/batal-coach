@@ -39,8 +39,8 @@ final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> wi
   WorkoutFM fromJson(String docID, Map<String, dynamic> json) => WorkoutFM.fromJson(docID, json);
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User coach) =>
+  Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>
       firestoreSvc.workouts.collection
-          .where(firestoreSvc.workouts.coachIdField, isEqualTo: coach.id)
+          .where(firestoreSvc.workouts.coachIdField, isEqualTo: user.id)
           .snapshots();
 }

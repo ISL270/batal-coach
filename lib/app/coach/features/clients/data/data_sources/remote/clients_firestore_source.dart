@@ -14,9 +14,9 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
   ClientFM fromJson(String docID, Map<String, dynamic> json) => ClientFM.fromJson(json);
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User coach) =>
+  Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>
       firestoreSvc.trainees.collection
-          .where(firestoreSvc.trainees.coachEmailField, isEqualTo: coach.email)
+          .where(firestoreSvc.trainees.coachEmailField, isEqualTo: user.email)
           .snapshots();
 
   @disposeMethod

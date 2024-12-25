@@ -34,11 +34,11 @@ class AuthBloc extends Bloc<AuthEvent, UserState> {
     AuthLogoutRequested event,
     Emitter<UserState> emit,
   ) async {
-    emit(const Loading());
+    emit(state.toLoading());
     try {
       await _authRepo.logOut();
     } catch (e) {
-      emit(Failure(e as GenericException));
+      emit(state.toFailure(e as GenericException));
     }
   }
 
@@ -64,7 +64,7 @@ typedef UserState = Status<User?>;
 extension X on UserState {
   User? get user {
     if (isSuccess) {
-      return (this as Success<User?>).result;
+      return (this as Success<User?>).newData;
     }
     return null;
   }
