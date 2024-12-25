@@ -1,0 +1,25 @@
+import 'dart:async';
+
+import 'package:btl/app/core/isar/isar_source.dart';
+import 'package:btl/app/features/settings/data/sources/local/settings_isar.dart';
+import 'package:btl/app/features/settings/domain/settings.dart';
+import 'package:injectable/injectable.dart';
+
+@singleton
+final class SettingsIsarSource extends IsarSource<Settings, SettingsIsar> {
+  SettingsIsarSource(super.isarService);
+
+  Future<void> updateSettings(Settings settings) async {
+    await clear();
+    final settingsIsar = SettingsIsar.fromDomain(settings);
+    await isarService.put(settingsIsar);
+  }
+
+  Future<Settings> getSettings() async {
+    final settingsIsar = await isarService.getFirst<SettingsIsar>();
+    return settingsIsar?.toDomain() ?? const Settings();
+  }
+
+  @override
+  SettingsIsar fromDomain(Settings dm) => SettingsIsar.fromDomain(dm);
+}

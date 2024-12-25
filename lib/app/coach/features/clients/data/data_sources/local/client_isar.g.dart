@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'clients_isar.dart';
+part of 'client_isar.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,13 +9,13 @@ part of 'clients_isar.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetClientsIsarCollection on Isar {
-  IsarCollection<ClientsIsar> get clientsIsar => this.collection();
+extension GetClientIsarCollection on Isar {
+  IsarCollection<ClientIsar> get clientIsars => this.collection();
 }
 
-const ClientsIsarSchema = CollectionSchema(
-  name: r'ClientsIsar',
-  id: -4667986420485227724,
+const ClientIsarSchema = CollectionSchema(
+  name: r'ClientIsar',
+  id: 4565609658594221865,
   properties: {
     r'email': PropertySchema(
       id: 0,
@@ -38,10 +38,10 @@ const ClientsIsarSchema = CollectionSchema(
       type: IsarType.string,
     )
   },
-  estimateSize: _clientsIsarEstimateSize,
-  serialize: _clientsIsarSerialize,
-  deserialize: _clientsIsarDeserialize,
-  deserializeProp: _clientsIsarDeserializeProp,
+  estimateSize: _clientIsarEstimateSize,
+  serialize: _clientIsarSerialize,
+  deserialize: _clientIsarDeserialize,
+  deserializeProp: _clientIsarDeserializeProp,
   idName: r'cacheID',
   indexes: {
     r'name': IndexSchema(
@@ -60,14 +60,14 @@ const ClientsIsarSchema = CollectionSchema(
   },
   links: {},
   embeddedSchemas: {},
-  getId: _clientsIsarGetId,
-  getLinks: _clientsIsarGetLinks,
-  attach: _clientsIsarAttach,
+  getId: _clientIsarGetId,
+  getLinks: _clientIsarGetLinks,
+  attach: _clientIsarAttach,
   version: '3.1.0+1',
 );
 
-int _clientsIsarEstimateSize(
-  ClientsIsar object,
+int _clientIsarEstimateSize(
+  ClientIsar object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -79,8 +79,8 @@ int _clientsIsarEstimateSize(
   return bytesCount;
 }
 
-void _clientsIsarSerialize(
-  ClientsIsar object,
+void _clientIsarSerialize(
+  ClientIsar object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -91,13 +91,13 @@ void _clientsIsarSerialize(
   writer.writeString(offsets[3], object.phone);
 }
 
-ClientsIsar _clientsIsarDeserialize(
+ClientIsar _clientIsarDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = ClientsIsar(
+  final object = ClientIsar(
     email: reader.readString(offsets[0]),
     id: reader.readString(offsets[1]),
     name: reader.readString(offsets[2]),
@@ -106,7 +106,7 @@ ClientsIsar _clientsIsarDeserialize(
   return object;
 }
 
-P _clientsIsarDeserializeProp<P>(
+P _clientIsarDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -126,26 +126,25 @@ P _clientsIsarDeserializeProp<P>(
   }
 }
 
-Id _clientsIsarGetId(ClientsIsar object) {
+Id _clientIsarGetId(ClientIsar object) {
   return object.cacheID;
 }
 
-List<IsarLinkBase<dynamic>> _clientsIsarGetLinks(ClientsIsar object) {
+List<IsarLinkBase<dynamic>> _clientIsarGetLinks(ClientIsar object) {
   return [];
 }
 
-void _clientsIsarAttach(
-    IsarCollection<dynamic> col, Id id, ClientsIsar object) {}
+void _clientIsarAttach(IsarCollection<dynamic> col, Id id, ClientIsar object) {}
 
-extension ClientsIsarQueryWhereSort
-    on QueryBuilder<ClientsIsar, ClientsIsar, QWhere> {
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhere> anyCacheID() {
+extension ClientIsarQueryWhereSort
+    on QueryBuilder<ClientIsar, ClientIsar, QWhere> {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhere> anyCacheID() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhere> anyName() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhere> anyName() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'name'),
@@ -154,9 +153,9 @@ extension ClientsIsarQueryWhereSort
   }
 }
 
-extension ClientsIsarQueryWhere
-    on QueryBuilder<ClientsIsar, ClientsIsar, QWhereClause> {
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> cacheIDEqualTo(
+extension ClientIsarQueryWhere
+    on QueryBuilder<ClientIsar, ClientIsar, QWhereClause> {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> cacheIDEqualTo(
       Id cacheID) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
@@ -166,7 +165,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> cacheIDNotEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> cacheIDNotEqualTo(
       Id cacheID) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -189,7 +188,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> cacheIDGreaterThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> cacheIDGreaterThan(
       Id cacheID,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
@@ -199,7 +198,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> cacheIDLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> cacheIDLessThan(
       Id cacheID,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
@@ -209,7 +208,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> cacheIDBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> cacheIDBetween(
     Id lowerCacheID,
     Id upperCacheID, {
     bool includeLower = true,
@@ -225,7 +224,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameEqualTo(
       String name) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -235,7 +234,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameNotEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameNotEqualTo(
       String name) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -270,7 +269,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameGreaterThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameGreaterThan(
     String name, {
     bool include = false,
   }) {
@@ -284,7 +283,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameLessThan(
     String name, {
     bool include = false,
   }) {
@@ -298,7 +297,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameBetween(
     String lowerName,
     String upperName, {
     bool includeLower = true,
@@ -315,7 +314,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameStartsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameStartsWith(
       String NamePrefix) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
@@ -326,7 +325,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameIsEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
         indexName: r'name',
@@ -335,7 +334,7 @@ extension ClientsIsarQueryWhere
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterWhereClause> nameIsNotEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterWhereClause> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -362,9 +361,9 @@ extension ClientsIsarQueryWhere
   }
 }
 
-extension ClientsIsarQueryFilter
-    on QueryBuilder<ClientsIsar, ClientsIsar, QFilterCondition> {
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> cacheIDEqualTo(
+extension ClientIsarQueryFilter
+    on QueryBuilder<ClientIsar, ClientIsar, QFilterCondition> {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> cacheIDEqualTo(
       Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -374,7 +373,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition>
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
       cacheIDGreaterThan(
     Id value, {
     bool include = false,
@@ -388,7 +387,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> cacheIDLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> cacheIDLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -401,7 +400,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> cacheIDBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> cacheIDBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -418,7 +417,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -431,8 +430,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition>
-      emailGreaterThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -447,7 +445,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -462,7 +460,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -481,7 +479,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailStartsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -494,7 +492,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailEndsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -507,7 +505,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailContains(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -519,7 +517,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailMatches(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -531,7 +529,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> emailIsEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> emailIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'email',
@@ -540,7 +538,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition>
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
       emailIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -550,7 +548,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -563,7 +561,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -578,7 +576,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -593,7 +591,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -612,7 +610,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idStartsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -625,7 +623,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idEndsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -638,7 +636,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idContains(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -650,7 +648,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idMatches(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -662,7 +660,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idIsEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -671,7 +669,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> idIsNotEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> idIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'id',
@@ -680,7 +678,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -693,7 +691,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameGreaterThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -708,7 +706,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -723,7 +721,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -742,7 +740,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameStartsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -755,7 +753,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameEndsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -768,7 +766,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameContains(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -780,7 +778,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameMatches(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -792,7 +790,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> nameIsEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'name',
@@ -801,8 +799,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition>
-      nameIsNotEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'name',
@@ -811,7 +808,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneEqualTo(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -824,8 +821,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition>
-      phoneGreaterThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -840,7 +836,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneLessThan(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -855,7 +851,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneBetween(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -874,7 +870,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneStartsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -887,7 +883,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneEndsWith(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -900,7 +896,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneContains(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -912,7 +908,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneMatches(
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -924,7 +920,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition> phoneIsEmpty() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> phoneIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'phone',
@@ -933,7 +929,7 @@ extension ClientsIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterFilterCondition>
+  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
       phoneIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -944,150 +940,150 @@ extension ClientsIsarQueryFilter
   }
 }
 
-extension ClientsIsarQueryObject
-    on QueryBuilder<ClientsIsar, ClientsIsar, QFilterCondition> {}
+extension ClientIsarQueryObject
+    on QueryBuilder<ClientIsar, ClientIsar, QFilterCondition> {}
 
-extension ClientsIsarQueryLinks
-    on QueryBuilder<ClientsIsar, ClientsIsar, QFilterCondition> {}
+extension ClientIsarQueryLinks
+    on QueryBuilder<ClientIsar, ClientIsar, QFilterCondition> {}
 
-extension ClientsIsarQuerySortBy
-    on QueryBuilder<ClientsIsar, ClientsIsar, QSortBy> {
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByEmail() {
+extension ClientIsarQuerySortBy
+    on QueryBuilder<ClientIsar, ClientIsar, QSortBy> {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByEmailDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortById() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByIdDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByName() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByNameDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByPhone() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByPhone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> sortByPhoneDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByPhoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.desc);
     });
   }
 }
 
-extension ClientsIsarQuerySortThenBy
-    on QueryBuilder<ClientsIsar, ClientsIsar, QSortThenBy> {
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByCacheID() {
+extension ClientIsarQuerySortThenBy
+    on QueryBuilder<ClientIsar, ClientIsar, QSortThenBy> {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByCacheID() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'cacheID', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByCacheIDDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByCacheIDDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'cacheID', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByEmail() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByEmailDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenById() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByName() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByNameDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByPhone() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByPhone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QAfterSortBy> thenByPhoneDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByPhoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.desc);
     });
   }
 }
 
-extension ClientsIsarQueryWhereDistinct
-    on QueryBuilder<ClientsIsar, ClientsIsar, QDistinct> {
-  QueryBuilder<ClientsIsar, ClientsIsar, QDistinct> distinctByEmail(
+extension ClientIsarQueryWhereDistinct
+    on QueryBuilder<ClientIsar, ClientIsar, QDistinct> {
+  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByEmail(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'email', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QDistinct> distinctById(
+  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctById(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'id', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QDistinct> distinctByName(
+  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ClientsIsar, ClientsIsar, QDistinct> distinctByPhone(
+  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByPhone(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phone', caseSensitive: caseSensitive);
@@ -1095,33 +1091,33 @@ extension ClientsIsarQueryWhereDistinct
   }
 }
 
-extension ClientsIsarQueryProperty
-    on QueryBuilder<ClientsIsar, ClientsIsar, QQueryProperty> {
-  QueryBuilder<ClientsIsar, int, QQueryOperations> cacheIDProperty() {
+extension ClientIsarQueryProperty
+    on QueryBuilder<ClientIsar, ClientIsar, QQueryProperty> {
+  QueryBuilder<ClientIsar, int, QQueryOperations> cacheIDProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'cacheID');
     });
   }
 
-  QueryBuilder<ClientsIsar, String, QQueryOperations> emailProperty() {
+  QueryBuilder<ClientIsar, String, QQueryOperations> emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'email');
     });
   }
 
-  QueryBuilder<ClientsIsar, String, QQueryOperations> idProperty() {
+  QueryBuilder<ClientIsar, String, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<ClientsIsar, String, QQueryOperations> nameProperty() {
+  QueryBuilder<ClientIsar, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<ClientsIsar, String, QQueryOperations> phoneProperty() {
+  QueryBuilder<ClientIsar, String, QQueryOperations> phoneProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phone');
     });

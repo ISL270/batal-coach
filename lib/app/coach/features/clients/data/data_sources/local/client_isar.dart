@@ -2,10 +2,10 @@ import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:isar/isar.dart';
 
-part 'clients_isar.g.dart';
+part 'client_isar.g.dart';
 
 @collection
-final class ClientsIsar extends CacheModel<Client> {
+final class ClientIsar extends CacheModel<Client> {
   @override
   String id;
 
@@ -14,16 +14,16 @@ final class ClientsIsar extends CacheModel<Client> {
 
   String email;
 
-  String phone;
+  String phone; 
 
-  ClientsIsar({
+  ClientIsar({
     required this.id,
     required this.email,
     required this.name,
     required this.phone,
   });
 
-  factory ClientsIsar.fromDomain(Client domain) => ClientsIsar(
+  factory ClientIsar.fromDomain(Client domain) => ClientIsar(
         id: domain.id,
         name: domain.name,
         email: domain.email,
