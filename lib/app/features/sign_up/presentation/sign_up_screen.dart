@@ -8,6 +8,7 @@ import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';
+import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
@@ -38,8 +39,8 @@ class SignUpScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               top: 50.h,
-              left: context.settingsBloc.state.language.isEnglish ? 20.w : 0,
-              right: context.settingsBloc.state.language.isArabic ? 20.w : 0,
+              left: context.settingsBloc.state.settings.language.isEnglish ? 20.w : 0,
+              right: context.settingsBloc.state.settings.language.isArabic ? 20.w : 0,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
