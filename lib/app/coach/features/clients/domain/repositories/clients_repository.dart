@@ -11,8 +11,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
 @singleton
-final class ClientsRepository
-    extends ReactiveRepository<Client, ClientFM, ClientsIsar> {
+final class ClientsRepository extends ReactiveRepository<Client, ClientFM, ClientsIsar> {
   final ClientsFirestoreSource _remoteSource;
   final ClientsIsarSource _localSource;
 
@@ -25,8 +24,7 @@ final class ClientsRepository
   late BehaviorSubject<Status<List<Client>>> _subject;
 
   void _createSubject() =>
-      _subject = BehaviorSubject<Status<List<Client>>>.seeded(
-          const Initial<List<Client>>());
+      _subject = BehaviorSubject<Status<List<Client>>>.seeded(const Initial<List<Client>>());
 
   void _closeSubject() {
     if (_subject.isClosed) return;
@@ -46,8 +44,7 @@ final class ClientsRepository
       if (_subject.isClosed) _createSubject();
       _remoteSource.subToRemote(user!);
       _remoteSource.listToBeUpdated.listen(
-        (rmClients) =>
-            _subject.add(Success(rmClients.map((c) => c.toDomain()).toList())),
+        (rmClients) => _subject.add(Success(rmClients.map((c) => c.toDomain()).toList())),
         onError: (Object e) => _subject.add(Failure(e as GenericException)),
       );
     });
@@ -58,8 +55,7 @@ final class ClientsRepository
     required int page,
     required int pageSize,
   }) async {
-    final cms = await _localSource.getClients(searchTerm,
-        page: page, pageSize: pageSize);
+    final cms = await _localSource.getClients(searchTerm, page: page, pageSize: pageSize);
     return cms.map((e) => e.toDomain()).toList();
   }
 

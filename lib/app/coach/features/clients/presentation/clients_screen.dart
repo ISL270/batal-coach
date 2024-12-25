@@ -27,8 +27,7 @@ class ClientsScreen extends StatelessWidget {
     return Screen(
       floatingActionButton: FloatingActionButton(
         backgroundColor: context.colorsX.primary,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.w)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.w)),
         child: Icon(Icons.add, color: context.colorsX.secondaryBackground),
         onPressed: () {},
       ),
@@ -61,8 +60,7 @@ class ClientsScreen extends StatelessWidget {
                   ),
                   Text(
                     context.l10n.allClients,
-                    style: context.textThemeX.heading.bold
-                        .copyWith(fontSize: 32.sp),
+                    style: context.textThemeX.heading.bold.copyWith(fontSize: 32.sp),
                   ),
                   SizedBox(
                     height: 10.h,
