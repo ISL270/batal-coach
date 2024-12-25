@@ -37,7 +37,7 @@ class AboutAppScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Gap(25),
+          Gap(25.h),
           Row(
             children: [
               Text(
@@ -48,9 +48,9 @@ class AboutAppScreen extends StatelessWidget {
               Text('0.0.1', style: context.textThemeX.medium.bold),
             ],
           ),
-          const Gap(30),
+          Gap(30.h),
           _AboutAppItemWidget(label: context.l10n.privacypolicy.capitalized),
-          const Gap(30),
+          Gap(30.h),
           _AboutAppItemWidget(label: context.l10n.termsofservice.capitalized),
         ],
       ),
