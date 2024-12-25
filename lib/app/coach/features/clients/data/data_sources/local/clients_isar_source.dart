@@ -25,8 +25,8 @@ final class ClientsIsarSource extends IsarSource<Client, ClientsIsar> {
   }) async {
     final query = switch (searchTerm.isNotBlank) {
       true =>
-        isarService.instance.clientsIsar.where().nameStartsWith(searchTerm),
-      false => isarService.instance.clientsIsar.where().anyName(),
+        isarService.instance.clientsIsars.where().nameStartsWith(searchTerm),
+      false => isarService.instance.clientsIsars.where().anyName(),
     };
     return query.offset(page * pageSize).limit(pageSize).findAll();
   }
