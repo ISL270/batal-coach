@@ -42,6 +42,12 @@ import 'package:btl/app/features/authentication/domain/repositories/user_reposit
     as _i55;
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart'
     as _i260;
+import 'package:btl/app/features/settings/data/sources/local/settings_isar_source.dart'
+    as _i557;
+import 'package:btl/app/features/settings/domain/settings_repository.dart'
+    as _i662;
+import 'package:btl/app/features/settings/settings/settings_bloc.dart'
+    as _i1055;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
@@ -69,12 +75,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
     gh.singleton<_i538.UserFirestoreSource>(
         () => _i538.UserFirestoreSource(gh<_i997.FirestoreService>()));
+    gh.singleton<_i557.SettingsIsarSource>(
+        () => _i557.SettingsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i193.UserIsarSource>(
         () => _i193.UserIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i25.WorkoutIsarSource>(
         () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i662.SettingsRepository>(
+        () => _i662.SettingsRepository(gh<_i557.SettingsIsarSource>()));
     gh.singleton<_i403.ClientsFirestoreSource>(
       () => _i403.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
@@ -89,6 +99,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i193.UserIsarSource>(),
           gh<_i538.UserFirestoreSource>(),
         ));
+    gh.factory<_i1055.SettingsBloc>(
+        () => _i1055.SettingsBloc(gh<_i662.SettingsRepository>()));
     await gh.singletonAsync<_i902.AuthRepository>(
       () {
         final i = _i902.AuthRepository(

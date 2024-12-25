@@ -76,9 +76,9 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     SegmentedButton(
                       showSelectedIcon: false,
-                      selected: {settings.themeMode},
+                      selected: {settings.settings.themeMode},
                       onSelectionChanged: (selection) {
-                        context.settingsBloc.add(SettingsThemeChanged(selection.first));
+                        context.read<SettingsBloc>().add(SettingsThemeChanged(selection.first));
                       },
                       segments: [
                         ButtonSegment(
@@ -94,7 +94,7 @@ class SettingsScreen extends StatelessWidget {
                           label: Text(context.l10n.system.capitalized),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 Gap(25.h),
@@ -107,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     SegmentedButton(
                       showSelectedIcon: false,
-                      selected: {settings.language},
+                      selected: {settings.settings.language},
                       onSelectionChanged: (selection) {
                         context.settingsBloc.add(SettingsLanguageChanged(selection.first));
                       },
@@ -121,7 +121,7 @@ class SettingsScreen extends StatelessWidget {
                           label: Text(Language.english.name),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 Gap(25.h),
@@ -130,7 +130,7 @@ class SettingsScreen extends StatelessWidget {
                   density: ButtonDensity.comfortable,
                   onPressed: () => getIt.authBloc.add(AuthLogoutRequested()),
                   label: context.l10n.logout.capitalized,
-                )
+                ),
               ],
             ),
           );
