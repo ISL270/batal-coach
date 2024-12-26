@@ -16,10 +16,7 @@ class ClientGoalScreen extends StatelessWidget {
     return Screen(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          context.l10n.editGoal,
-          style: context.textThemeX.large,
-        ),
+        title: Text(context.l10n.editGoal, style: context.textThemeX.large),
         actions: [
           TextButton(
             onPressed: () {},
@@ -32,9 +29,7 @@ class ClientGoalScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 30.h,
-          ),
+          SizedBox(height: 30.h),
           Text(
             context.l10n.goalDes,
             style: context.textThemeX.medium
