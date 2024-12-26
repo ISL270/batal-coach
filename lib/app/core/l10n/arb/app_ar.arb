@@ -170,5 +170,7 @@
       "clear": "مسح",
       "selectFilter": "اختر فلتر للاستخدام",
       "archived": "مؤرشف",
-      "wentWrong": "لقد حدث خطأ ما"
+      "wentWrong": "لقد حدث خطأ ما",
+      "thisWeek":"هذا الإسبوع"
+
 }

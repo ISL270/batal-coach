@@ -28,7 +28,6 @@ class _WeekSelectorState extends State<_WeekSelector> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Left arrow
         IconButton(
           icon: Icon(
             Icons.chevron_left,
@@ -39,14 +38,13 @@ class _WeekSelectorState extends State<_WeekSelector> {
         // Content
         Column(
           children: [
-            // 'This Week' dropdown
             Text(
-              'THIS WEEK',
+              context.l10n.thisWeek,
               style: context.textThemeX.medium.bold.copyWith(
                 color: context.colorsX.primary,
               ),
             ),
-            const Gap(4),
+            Gap(4.h),
             Text(
               DateTime.now().getWeekRange(_currentDate),
               style: context.textThemeX.medium.bold,
