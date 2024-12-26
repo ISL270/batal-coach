@@ -47,12 +47,12 @@ class SelectableField extends StatelessWidget {
     showModalBottomSheet<dynamic>(
       backgroundColor: context.colorsX.secondaryBackground,
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
       ),
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

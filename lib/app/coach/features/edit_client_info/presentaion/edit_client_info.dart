@@ -1,5 +1,3 @@
-import 'package:btl/app/coach/features/edit_client_info/presentaion/profile_form_field.dart';
-import 'package:btl/app/coach/features/edit_client_info/presentaion/profile_image_widget.dart';
 import 'package:btl/app/coach/features/edit_client_info/presentaion/selectable_field.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
@@ -30,7 +28,7 @@ class EditClientInfo extends StatelessWidget {
             onPressed: () {},
             child: Text(
               context.l10n.save,
-              style: const TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 14.sp),
             ),
           ),
         ],
@@ -38,49 +36,45 @@ class EditClientInfo extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const ProfileImageWidget(),
-            const SizedBox(
-              height: 15,
-            ),
-            ProfileFormField(
+            const _ProfileImageWidget(),
+            SizedBox(height: 15.h),
+            _ProfileFormField(
               label: context.l10n.fName,
               value: 'Amr',
             ),
-            ProfileFormField(
+            _ProfileFormField(
               label: context.l10n.lName,
               value: 'Hossam',
             ),
-            ProfileFormField(
+            _ProfileFormField(
               label: context.l10n.email,
               value: 'amr@gmail.com',
             ),
-            ProfileFormField(
+            _ProfileFormField(
               label: context.l10n.phoneNumber,
               value: '+201146012354',
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            SizedBox(height: 10.h),
             SelectableField(
               context: context,
               label: context.l10n.gender,
               value: context.l10n.male,
               options: [context.l10n.male, context.l10n.female],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             SelectableField(
               context: context,
               label: context.l10n.clientCategory,
               value: context.l10n.online,
-              options: [context.l10n.inPerson, context.l10n.online, context.l10n.hybrid],
+              options: [
+                context.l10n.inPerson,
+                context.l10n.online,
+                context.l10n.hybrid
+              ],
             ),
-            const SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 40.h),
             Button.filled(
-              onPressed: () {
-                _showAlertDialog(context);
-              },
+              onPressed: () => _showAlertDialog(context),
               label: context.l10n.archiveClient,
             ),
           ],
@@ -96,19 +90,13 @@ class EditClientInfo extends StatelessWidget {
         return AlertDialog(
           surfaceTintColor: context.colorsX.secondaryBackground,
           backgroundColor: context.colorsX.secondaryBackground,
-          // title: const Text('Alert Dialog'),
           content: SizedBox(
             height: 0.32.sh,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  '🗃️',
-                  style: TextStyle(fontSize: 30),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
+                Text('🗃️', style: TextStyle(fontSize: 30.sp)),
+                SizedBox(height: 10.h),
                 Text(
                   context.l10n.archiveClient,
                   style: context.textThemeX.large.bold,
@@ -118,14 +106,10 @@ class EditClientInfo extends StatelessWidget {
                   style: context.textThemeX.small,
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20.h),
                 Button.filled(
                   label: context.l10n.ok,
-                  onPressed: () {
-                    context.pop();
-                  },
+                  onPressed: () => context.pop(),
                 ),
                 TextButton(onPressed: () {}, child: Text(context.l10n.cancel))
               ],
@@ -133,6 +117,83 @@ class EditClientInfo extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _ProfileImageWidget extends StatelessWidget {
+  const _ProfileImageWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        children: [
+          CircleAvatar(
+            backgroundColor: context.colorsX.secondary,
+            radius: 45.sp,
+            child: Text(
+              'AH',
+              style: context.textThemeX.large.copyWith(
+                color: context.colorsX.secondaryBackground,
+                fontSize: 24.sp,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xff7469DA),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(4.w),
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                  size: 19.w,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _ProfileFormField extends StatelessWidget {
+  const _ProfileFormField({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: SizedBox(
+            width: 0.38.sh,
+            child: TextFormField(
+              initialValue: value,
+              decoration: InputDecoration(
+                labelText: label,
+                labelStyle: TextStyle(
+                    color: context.colorsX.onBackground, fontSize: 14.sp),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
