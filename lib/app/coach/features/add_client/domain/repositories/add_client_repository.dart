@@ -2,7 +2,6 @@ import 'package:btl/app/coach/features/add_client/data/data_source/remote/add_cl
 import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
 import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart';
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/client_fm.dart';
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
@@ -14,14 +13,13 @@ final class AddClientRepository
     extends ReactiveRepository<Client, ClientFM, ClientIsar> {
   final AddClientFirestoreSource _remoteSource;
   final ClientsIsarSource _localSource;
-  final ClientsFirestoreSource _excsRepository;
 
   AddClientRepository(
     super.authRepository,
     this._remoteSource,
     this._localSource,
-    this._excsRepository,
   ) : super(localSource: _localSource, remoteSource: _remoteSource);
+
   Future<EitherException<void>> saveClient({
     required String coachEmail,
     required String phoneNumber,
