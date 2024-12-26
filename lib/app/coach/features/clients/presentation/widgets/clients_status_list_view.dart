@@ -29,37 +29,41 @@ class _ClientsStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.h),
-      child: Container(
-        decoration: BoxDecoration(
-          color: context.colorsX.secondaryBackground,
-          borderRadius: BorderRadius.circular(8.sp),
-        ),
-        width: 150.w,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              statusInfo.emoji,
-              style: context.textThemeX.heading.copyWith(fontSize: 26.sp),
-            ),
-            SizedBox(width: 10.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  statusInfo.count,
-                  style: context.textThemeX.heading.copyWith(fontSize: 32.sp),
-                ),
-                Text(
-                  title,
-                  style: context.textThemeX.medium.bold
-                      .copyWith(color: context.colorsX.onBackgroundTint35),
-                ),
-              ],
-            )
-          ],
+      padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 5.h),
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(8.sp),
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.colorsX.secondaryBackground,
+            borderRadius: BorderRadius.circular(8.sp),
+          ),
+          width: 150.w,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                statusInfo.emoji,
+                style: context.textThemeX.heading.copyWith(fontSize: 26.sp),
+              ),
+              SizedBox(width: 10.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    statusInfo.count,
+                    style: context.textThemeX.heading.copyWith(fontSize: 32.sp),
+                  ),
+                  Text(
+                    title,
+                    style: context.textThemeX.medium.bold
+                        .copyWith(color: context.colorsX.onBackgroundTint35),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

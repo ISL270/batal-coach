@@ -127,14 +127,11 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispMethod(),
     );
-    gh.singleton<_i1006.ClientsRepository>(
-      () => _i1006.ClientsRepository(
-        gh<_i902.AuthRepository>(),
-        gh<_i403.ClientsFirestoreSource>(),
-        gh<_i374.ClientsIsarSource>(),
-      ),
-      dispose: (i) => i.dispose(),
-    );
+    gh.singleton<_i1006.ClientsRepository>(() => _i1006.ClientsRepository(
+          gh<_i902.AuthRepository>(),
+          gh<_i403.ClientsFirestoreSource>(),
+          gh<_i374.ClientsIsarSource>(),
+        ));
     gh.factory<_i441.ClientsBloc>(
         () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
     gh.factory<_i450.ExercisesBloc>(

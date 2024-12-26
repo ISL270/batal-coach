@@ -6,7 +6,7 @@ class _ClientsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 5.w),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 5.w),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
         decoration: BoxDecoration(color: context.colorsX.secondaryBackground),
@@ -118,7 +118,10 @@ class _SearchAndFilterWidget extends StatelessWidget {
         Gap(20.w),
         InkWell(
           onTap: () => _showFilterBottomSheet(context),
-          child: Icon(Icons.filter_list, color: context.colorsX.primary),
+          child: Icon(
+            Icons.tune,
+            color: context.colorsX.primary,
+          ),
         )
       ],
     );
