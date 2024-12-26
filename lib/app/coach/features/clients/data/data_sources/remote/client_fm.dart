@@ -39,6 +39,6 @@ final class ClientFM implements RemoteModel<Client> {
         name: name,
         email: email,
         phoneNumber: phoneNumber,
-        lastActive: lastActive,
+        lastActiveDate: lastActive,
       );
 }

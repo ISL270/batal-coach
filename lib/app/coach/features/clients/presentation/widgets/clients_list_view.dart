@@ -33,8 +33,9 @@ class _ClientsListView extends StatelessWidget {
                     email: 'clientEmail@mail.com',
                     name: 'Eslam Ashraf',
                     phoneNumber: '+201146012354',
-                    lastActive: DateTime.now(),
                     id: '20215',
+                    lastActiveDate: DateTime.now(),
+                    lastActiveString: DateTime.now().toLastSeen(context),
                   ),
                 );
               },
@@ -81,7 +82,7 @@ class _ClientWidget extends StatelessWidget {
           ),
         ),
         title: Text(client.name, style: context.textThemeX.large.bold),
-        subtitle: Text(client.lastActive.toString(),
+        subtitle: Text(client.lastActiveString ?? 'last active long time ago',
             style: context.textThemeX.small
                 .copyWith(color: context.colorsX.onBackgroundTint)),
       ),

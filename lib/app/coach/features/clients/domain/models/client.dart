@@ -7,13 +7,15 @@ final class Client {
 
   final String phoneNumber;
 
-  final DateTime lastActive;
+  final DateTime lastActiveDate;
+  final String? lastActiveString;
 
   Client({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.lastActive,
+    required this.lastActiveDate,
+    this.lastActiveString,
   });
 }

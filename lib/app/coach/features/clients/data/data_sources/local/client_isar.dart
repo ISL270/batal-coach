@@ -15,22 +15,26 @@ final class ClientIsar extends CacheModel<Client> {
   String email;
 
   String phone;
-  DateTime lastActive;
+  DateTime lastActiveDate;
+  String? lastActiveString;
 
   ClientIsar({
     required this.id,
     required this.email,
     required this.name,
     required this.phone,
-    required this.lastActive,
+    required this.lastActiveDate,
+    this.lastActiveString,
   });
 
   factory ClientIsar.fromDomain(Client domain) => ClientIsar(
-      id: domain.id,
-      name: domain.name,
-      email: domain.email,
-      phone: domain.phoneNumber,
-      lastActive: domain.lastActive);
+        id: domain.id,
+        name: domain.name,
+        email: domain.email,
+        phone: domain.phoneNumber,
+        lastActiveDate: domain.lastActiveDate,
+        lastActiveString: '',
+      );
 
   @override
   Client toDomain() {
@@ -39,7 +43,8 @@ final class ClientIsar extends CacheModel<Client> {
       name: name,
       email: email,
       phoneNumber: phone,
-      lastActive: lastActive,
+      lastActiveDate: lastActiveDate,
+      lastActiveString: lastActiveString,
     );
   }
 }
