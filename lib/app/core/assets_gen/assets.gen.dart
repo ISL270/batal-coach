@@ -16,11 +16,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/dumbbell_outlined.svg
   String get dumbbellOutlined => 'assets/icons/dumbbell_outlined.svg';
 
+  /// File path: assets/icons/settings_outline.svg
+  String get settingsOutline => 'assets/icons/settings_outline.svg';
+
   /// File path: assets/icons/sprint.svg
   String get sprint => 'assets/icons/sprint.svg';
 
   /// List of all assets
-  List<String> get values => [dumbbell, dumbbellOutlined, sprint];
+  List<String> get values => [dumbbell, dumbbellOutlined, settingsOutline, sprint];
 }
 
 class Assets {

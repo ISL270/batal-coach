@@ -7,10 +7,13 @@ final class Client {
 
   final String phoneNumber;
 
+  final String lastActive;
+
   Client({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
+    required this.lastActive,
   });
 }

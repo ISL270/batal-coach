@@ -17,7 +17,13 @@ abstract base class IsarSource<D, C extends CacheModel<D>> {
 
   const IsarSource(this.isarService);
 
-  Future<void> clear() => isarService.clear<C>();
+  /// Converts a domain model to its corresponding cache model
+  ///
+  /// Must be implemented by subclasses to define specific conversion logic
+  ///
+  /// [dm] The domain model to be converted
+  /// Returns the converted cache model
+  C fromDomain(D dm);
 
   /// Persists multiple domain models to the local database
   ///
@@ -27,11 +33,5 @@ abstract base class IsarSource<D, C extends CacheModel<D>> {
   /// Returns a [Future] with a list of stored record IDs
   Future<List<int>> putAll(List<D> list) => isarService.putAll<C>(list.map(fromDomain).toList());
 
-  /// Converts a domain model to its corresponding cache model
-  ///
-  /// Must be implemented by subclasses to define specific conversion logic
-  ///
-  /// [dm] The domain model to be converted
-  /// Returns the converted cache model
-  C fromDomain(D dm);
+  Future<void> clear() => isarService.clear<C>();
 }

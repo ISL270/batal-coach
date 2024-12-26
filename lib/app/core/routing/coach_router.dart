@@ -41,6 +41,11 @@ final coachRouter = GoRouter(
       ),
     ),
     GoRoute(
+      path: ClientsScreen.name,
+      name: '/${ClientsScreen.name}',
+      builder: (context, state) => const ClientsScreen(),
+    ),
+    GoRoute(
         name: LoginScreen.name,
         path: '/${LoginScreen.name}',
         builder: (context, state) => BlocProvider(
@@ -150,9 +155,7 @@ final coachRouter = GoRouter(
       ],
     ),
   ],
-  refreshListenable: GoRouterRefreshStream(
-    getIt.authBloc.stream.where((state) => state.isSuccess),
-  ),
+  refreshListenable: GoRouterRefreshStream(getIt.authBloc.stream.where((state) => state.isSuccess)),
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
@@ -168,8 +171,8 @@ final coachRouter = GoRouter(
             );
     }
 
-    // if the user is logged in, send them where they were going before (or
-    // home if they weren't going anywhere)
+    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
+    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     if (state.isLoggingIn) {
       return state.uri.queryParameters['from'] ??
           state.namedLocation(getIt.authBloc.homeNamedRoute);

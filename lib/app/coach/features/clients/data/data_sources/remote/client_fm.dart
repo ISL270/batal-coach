@@ -11,15 +11,18 @@ final class ClientFM implements RemoteModel<Client> {
   final String name;
   final String email;
   final String phoneNumber;
+  final String lastActive;
 
   ClientFM({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
+    required this.lastActive,
   });
 
-  factory ClientFM.fromJson(Map<String, dynamic> json) => _$ClientFMFromJson(json);
+  factory ClientFM.fromJson(Map<String, dynamic> json) =>
+      _$ClientFMFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClientFMToJson(this);
 
@@ -29,5 +32,6 @@ final class ClientFM implements RemoteModel<Client> {
         name: name,
         email: email,
         phoneNumber: phoneNumber,
+        lastActive: lastActive,
       );
 }
