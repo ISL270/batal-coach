@@ -44,9 +44,7 @@ class ClientLimitationsScreen extends StatelessWidget {
             context.l10n.noNotes,
             style: context.textThemeX.heading.bold,
           ),
-          Gap(
-            20.h,
-          ),
+          Gap(20.h),
           Center(
             child: SizedBox(
               width: 0.32.sh,
@@ -57,9 +55,7 @@ class ClientLimitationsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Gap(
-            20.h,
-          ),
+          Gap(20.h),
           Button.filled(onPressed: () {}, label: context.l10n.addNotes)
         ],
       ),
