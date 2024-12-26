@@ -4,11 +4,11 @@ import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/settings/domain/settings.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class AboutAppScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class AboutAppScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            context.settingsBloc.state.language.isArabic
+            context.settingsBloc.state.settings.language.isArabic
                 ? Icons.keyboard_arrow_right_sharp
                 : Icons.keyboard_arrow_left_sharp,
             size: 28.w,
@@ -36,8 +36,8 @@ class AboutAppScreen extends StatelessWidget {
         ),
       ),
       body: Column(
+        spacing: 30.h,
         children: [
-          Gap(25.h),
           Row(
             children: [
               Text(
@@ -48,9 +48,7 @@ class AboutAppScreen extends StatelessWidget {
               Text('0.0.1', style: context.textThemeX.medium.bold),
             ],
           ),
-          Gap(30.h),
           _AboutAppItemWidget(label: context.l10n.privacypolicy.capitalized),
-          Gap(30.h),
           _AboutAppItemWidget(label: context.l10n.termsofservice.capitalized),
         ],
       ),
@@ -77,7 +75,7 @@ class _AboutAppItemWidget extends StatelessWidget {
         GestureDetector(
           onTap: onPressed,
           child: Icon(
-            context.settingsBloc.state.isArabic
+            context.settingsBloc.state.settings.isArabic
                 ? Icons.keyboard_arrow_left_sharp
                 : Icons.keyboard_arrow_right_sharp,
           ),
