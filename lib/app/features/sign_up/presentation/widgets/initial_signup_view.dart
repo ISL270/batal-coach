@@ -241,7 +241,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(context.l10n.alreadyhaveaccount, style: TextStyle(color: context.colorsX.background)),
+        Text(context.l10n.alreadyHaveAccount, style: TextStyle(color: context.colorsX.background)),
         SizedBox(width: 5.w),
         GestureDetector(
           onTap: () => context.pop(),

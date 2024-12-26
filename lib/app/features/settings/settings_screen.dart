@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/getit_x.dart';
@@ -36,95 +38,80 @@ class SettingsScreen extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 20.w),
             child: Column(
+              spacing: 30.h,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const _AvatarLabelRow(),
-                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.lock,
-                  label: context.l10n.changepassword.capitalized,
+                  label: context.l10n.changePassword.capitalized,
+                  widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
                 ),
-                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.bell,
                   label: context.l10n.notifications.capitalized,
+                  widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
                 ),
-                Gap(30.h),
                 _SettingsSectionWidget(
-                  // ignore: deprecated_member_use
                   iconData: FontAwesomeIcons.listNumeric,
                   label: context.l10n.units.capitalized,
+                  widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
                 ),
-                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.headset,
-                  label: context.l10n.technicalsupport.capitalized,
+                  label: context.l10n.technicalSupport.capitalized,
+                  widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
                 ),
-                Gap(30.h),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.mobileScreenButton,
                   label: context.l10n.aboutapp.capitalized,
+                  widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
                 ),
-                const Spacer(),
-                Gap(25.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.l10n.theme.capitalized,
-                      style: context.textThemeX.large.bold,
-                    ),
-                    SegmentedButton(
-                      showSelectedIcon: false,
-                      selected: {settings.settings.themeMode},
-                      onSelectionChanged: (selection) {
-                        context.read<SettingsBloc>().add(SettingsThemeChanged(selection.first));
-                      },
-                      segments: [
-                        ButtonSegment(
-                          value: ThemeMode.light,
-                          label: Text(context.l10n.light.capitalized),
-                        ),
-                        ButtonSegment(
-                          value: ThemeMode.dark,
-                          label: Text(context.l10n.dark.capitalized),
-                        ),
-                        ButtonSegment(
-                          value: ThemeMode.system,
-                          label: Text(context.l10n.system.capitalized),
-                        ),
-                      ],
-                    ),
-                  ],
+                _SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.palette,
+                  label: context.l10n.theme.capitalized,
+                  widget: SegmentedButton(
+                    showSelectedIcon: false,
+                    selected: {settings.settings.themeMode},
+                    onSelectionChanged: (selection) =>
+                        context.read<SettingsBloc>().add(SettingsThemeChanged(selection.first)),
+                    segments: [
+                      ButtonSegment(
+                        value: ThemeMode.light,
+                        label: Text(context.l10n.light.capitalized),
+                      ),
+                      ButtonSegment(
+                        value: ThemeMode.dark,
+                        label: Text(context.l10n.dark.capitalized),
+                      ),
+                      ButtonSegment(
+                        value: ThemeMode.system,
+                        label: Text(context.l10n.system.capitalized),
+                      ),
+                    ],
+                  ),
                 ),
-                Gap(25.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.l10n.language.capitalized,
-                      style: context.textThemeX.large.bold,
-                    ),
-                    SegmentedButton(
-                      showSelectedIcon: false,
-                      selected: {settings.settings.language},
-                      onSelectionChanged: (selection) {
-                        context.settingsBloc.add(SettingsLanguageChanged(selection.first));
-                      },
-                      segments: [
-                        ButtonSegment(
-                          value: Language.arabic,
-                          label: Text(Language.arabic.name),
-                        ),
-                        ButtonSegment(
-                          value: Language.english,
-                          label: Text(Language.english.name),
-                        ),
-                      ],
-                    ),
-                  ],
+                _SettingsSectionWidget(
+                  iconData: FontAwesomeIcons.earth,
+                  label: context.l10n.language.capitalized,
+                  widget: SegmentedButton(
+                    showSelectedIcon: false,
+                    selected: {settings.settings.language},
+                    onSelectionChanged: (selection) {
+                      context.settingsBloc.add(SettingsLanguageChanged(selection.first));
+                    },
+                    segments: [
+                      ButtonSegment(
+                        value: Language.arabic,
+                        label: Text(Language.arabic.name),
+                      ),
+                      ButtonSegment(
+                        value: Language.english,
+                        label: Text(Language.english.name),
+                      ),
+                    ],
+                  ),
                 ),
-                Gap(25.h),
                 Button.outlined(
                   maxWidth: true,
                   density: ButtonDensity.comfortable,
@@ -166,6 +153,7 @@ class _SettingsSectionWidget extends StatelessWidget {
   const _SettingsSectionWidget({
     required this.label,
     required this.iconData,
+    required this.widget,
     // ignore: unused_element
     this.onPressed,
   });
@@ -173,6 +161,7 @@ class _SettingsSectionWidget extends StatelessWidget {
   final String label;
   final void Function()? onPressed;
   final IconData iconData;
+  final Widget widget;
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +177,7 @@ class _SettingsSectionWidget extends StatelessWidget {
             style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
           ),
           const Spacer(),
-          Icon(Icons.arrow_forward_ios_rounded, size: 18.w)
+          widget,
         ],
       ),
     );
