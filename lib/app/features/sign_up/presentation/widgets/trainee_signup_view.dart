@@ -52,7 +52,7 @@ class _CoachEmailField extends StatelessWidget {
           decoration: InputDecoration(
             errorText: state.coachEmail.displayError != null ? context.l10n.invalidEmail : null,
             label: Text(
-              context.l10n.coachemail.capitalized,
+              context.l10n.coachEmail.capitalized,
               style: context.textThemeX.small.copyWith(color: context.colorsX.background),
             ),
             border: _signUpOutLinedInputBorder(context),
