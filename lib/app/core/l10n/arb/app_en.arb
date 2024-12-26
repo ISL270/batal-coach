@@ -87,5 +87,8 @@
   "units":"units",
   "technicalSupport":"technical support",
   "aboutapp":"about app",
-  "profile":"profile"
+  "profile":"profile",
+  "version":"Version",
+  "termsOfService":"Terms of Service",
+  "privacyPolicy":"Privacy Policy"
 }

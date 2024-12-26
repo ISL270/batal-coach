@@ -87,5 +87,8 @@
   "units":"الوحدات",
   "technicalSupport":"الدعم الفني",
   "aboutapp":"حول التطبيق",
-  "profile":"الحساب الشخصي"
+  "profile":"الحساب الشخصي",
+  "version":"الإصدار",
+  "termsOfService":"بنود الخدمة",
+  "privacyPolicy":"سياسة الخصوصية"
 }

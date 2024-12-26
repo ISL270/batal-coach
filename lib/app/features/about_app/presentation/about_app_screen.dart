@@ -48,8 +48,8 @@ class AboutAppScreen extends StatelessWidget {
               Text('0.0.1', style: context.textThemeX.medium.bold),
             ],
           ),
-          _AboutAppItemWidget(label: context.l10n.privacypolicy.capitalized),
-          _AboutAppItemWidget(label: context.l10n.termsofservice.capitalized),
+          _AboutAppItemWidget(label: context.l10n.privacyPolicy.capitalized),
+          _AboutAppItemWidget(label: context.l10n.termsOfService.capitalized),
         ],
       ),
     );
