@@ -6,7 +6,7 @@ class _ClientsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 5.w),
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 5.w),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
         decoration: BoxDecoration(color: context.colorsX.secondaryBackground),
@@ -15,10 +15,14 @@ class _ClientsListView extends StatelessWidget {
           children: [
             const _SearchAndFilterWidget(),
             const Gap(10),
-            Text(
-              '${context.l10n.allClients} (3)',
-              style: context.textThemeX.small.bold
-                  .copyWith(color: context.colorsX.onBackgroundTint),
+            Padding(
+              padding: EdgeInsets.all(8.w),
+              child: Text(
+                '${context.l10n.allClients.toUpperCase()} (3)',
+                style: context.textThemeX.small.bold.copyWith(
+                  color: context.colorsX.onBackgroundTint.withOpacity(0.5),
+                ),
+              ),
             ),
             ListView.separated(
               shrinkWrap: true,
@@ -27,8 +31,9 @@ class _ClientsListView extends StatelessWidget {
                 return _ClientWidget(
                   client: Client(
                     email: 'clientEmail@mail.com',
-                    name: 'slam Ashraf',
+                    name: 'Eslam Ashraf',
                     phoneNumber: '+201146012354',
+                    lastActive: '2 ${context.l10n.minutes} ${context.l10n.ago}',
                     id: '20215',
                   ),
                 );
@@ -40,7 +45,7 @@ class _ClientsListView extends StatelessWidget {
                   child: Divider(
                     height: 1,
                     thickness: 0.5,
-                    color: context.colorsX.onBackgroundTint,
+                    color: context.colorsX.onBackgroundTint35.withOpacity(0.1),
                   ),
                 );
               },
@@ -76,7 +81,7 @@ class _ClientWidget extends StatelessWidget {
           ),
         ),
         title: Text(client.name, style: context.textThemeX.large.bold),
-        subtitle: Text(client.phoneNumber,
+        subtitle: Text(client.lastActive,
             style: context.textThemeX.small
                 .copyWith(color: context.colorsX.onBackgroundTint)),
       ),
@@ -96,9 +101,17 @@ class _SearchAndFilterWidget extends StatelessWidget {
           width: 0.36.sh,
           child: TextFormField(
             decoration: InputDecoration(
+              filled: true,
+              fillColor: context.colorsX.onBackgroundTint35.withOpacity(0.02),
               labelText: '${context.l10n.searchClients}...',
-              prefixIcon:
-                  Icon(Icons.search, color: context.colorsX.onBackgroundTint),
+              prefixIcon: Icon(
+                Icons.search,
+                color: context.colorsX.onBackgroundTint35,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none, // Removes the visible border
+                borderRadius: BorderRadius.circular(8.sp), // Add border radius
+              ),
             ),
           ),
         ),

@@ -6,7 +6,7 @@ class _ClientsStatusListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120.h,
+      height: 100.h,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: ClientStatus.values.map((status) {
@@ -35,7 +35,7 @@ class _ClientsStatusCard extends StatelessWidget {
           color: context.colorsX.secondaryBackground,
           borderRadius: BorderRadius.circular(8.sp),
         ),
-        width: 130.w,
+        width: 150.w,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

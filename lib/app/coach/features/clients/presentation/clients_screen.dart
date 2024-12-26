@@ -23,11 +23,21 @@ class ClientsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: context.colorsX.primary,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.w)),
-        child: Icon(Icons.add, color: context.colorsX.secondaryBackground),
-        onPressed: () {},
+      floatingActionButton: SizedBox(
+        width: 65.w, // Adjust width as needed
+        height: 65.w, // Adjust height as needed
+        child: FloatingActionButton(
+          backgroundColor: context.colorsX.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.w),
+          ),
+          child: Icon(
+            Icons.add,
+            color: context.colorsX.secondaryBackground,
+            size: 35.w,
+          ),
+          onPressed: () {},
+        ),
       ),
       padding: EdgeInsets.zero,
       appBar: AppBar(
@@ -35,7 +45,11 @@ class ClientsScreen extends StatelessWidget {
           child: Row(
             children: [
               const Spacer(),
-              Icon(Icons.settings, color: context.colorsX.primary),
+              Icon(
+                Icons.settings,
+                color: context.colorsX.primary,
+                size: 33.sp,
+              ),
             ],
           ),
         ),
@@ -58,11 +72,10 @@ class ClientsScreen extends StatelessWidget {
                   ),
                   Text(
                     context.l10n.allClients,
-                    style: context.textThemeX.heading.bold.copyWith(fontSize: 32.sp),
+                    style: context.textThemeX.heading.bold
+                        .copyWith(fontSize: 32.sp),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  SizedBox(height: 10.h),
                   const _ClientsStatusListView(),
                 ],
               ),
