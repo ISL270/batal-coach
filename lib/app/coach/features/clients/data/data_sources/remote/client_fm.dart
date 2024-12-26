@@ -22,8 +22,7 @@ final class ClientFM implements RemoteModel<Client> {
     required this.lastActive,
   });
 
-  factory ClientFM.fromJson(String docID, Map<String, dynamic> json) =>
-      ClientFM(
+  factory ClientFM.fromJson(String docID, Map<String, dynamic> json) => ClientFM(
         id: docID,
         name: json['name'] as String,
         email: json['email'] as String,

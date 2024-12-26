@@ -9,8 +9,7 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
   ClientsFirestoreSource(super.firestoreSvc);
 
   @override
-  ClientFM fromJson(String docID, Map<String, dynamic> json) =>
-      ClientFM.fromJson(docID, json);
+  ClientFM fromJson(String docID, Map<String, dynamic> json) => ClientFM.fromJson(docID, json);
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>
