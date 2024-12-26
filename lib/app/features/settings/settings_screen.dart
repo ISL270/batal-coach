@@ -73,6 +73,7 @@ class SettingsScreen extends StatelessWidget {
                   widget: SegmentedButton(
                     showSelectedIcon: false,
                     selected: {settings.settings.themeMode},
+                    style: const ButtonStyle(visualDensity: VisualDensity.compact),
                     onSelectionChanged: (selection) =>
                         context.read<SettingsBloc>().add(SettingsThemeChanged(selection.first)),
                     segments: [
@@ -97,6 +98,7 @@ class SettingsScreen extends StatelessWidget {
                   widget: SegmentedButton(
                     showSelectedIcon: false,
                     selected: {settings.settings.language},
+                    style: const ButtonStyle(visualDensity: VisualDensity.compact),
                     onSelectionChanged: (selection) {
                       context.settingsBloc.add(SettingsLanguageChanged(selection.first));
                     },
