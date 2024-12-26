@@ -5,6 +5,7 @@ import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.
 import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:btl/app/core/isar/isar_helper.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
+import 'package:btl/app/features/settings/data/sources/local/settings_isar.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,6 +23,7 @@ final class IsarService with IsarHelper {
         UserIsarSchema,
         ExerciseIsarSchema,
         WorkoutIsarSchema,
+        SettingsIsarSchema,
       ],
       directory: dir.path,
     );

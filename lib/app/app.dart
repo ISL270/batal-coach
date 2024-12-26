@@ -6,6 +6,7 @@ import 'package:btl/app/core/routing/trainee_router.dart';
 import 'package:btl/app/core/theming/app_theme.dart';
 import 'package:btl/app/features/authentication/domain/models/user_x.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:btl/app/features/settings/domain/settings_repository.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/flavors/flavors.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (_) => SettingsBloc()),
+            BlocProvider(create: (_) => SettingsBloc(getIt.get<SettingsRepository>())),
             BlocProvider(create: (_) => getIt.authBloc),
           ],
           child: BlocBuilder<AuthBloc, UserState>(
@@ -34,8 +35,8 @@ class App extends StatelessWidget {
                   return MaterialApp.router(
                     theme: AppTheme.light,
                     darkTheme: AppTheme.dark,
-                    themeMode: settingsState.themeMode,
-                    locale: settingsState.language.locale,
+                    themeMode: settingsState.settings.themeMode,
+                    locale: settingsState.settings.language.locale,
                     supportedLocales: AppLocalizations.supportedLocales,
                     localizationsDelegates: AppLocalizations.localizationsDelegates,
                     debugShowCheckedModeBanner: appFlavor != Flavors.production.name,
