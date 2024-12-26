@@ -3,6 +3,7 @@ import 'package:btl/app/coach/features/add_client/domain/repositories/add_client
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
+import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_inputs/form_inputs.dart';
@@ -18,9 +19,11 @@ class AddClientCubit extends Cubit<AddClientState> {
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
-  void fNameChanged(String value) => emit(state.copyWith(fName: Name.dirty(value)));
+  void fNameChanged(String value) =>
+      emit(state.copyWith(fName: Name.dirty(value)));
 
-  void lNameChanged(String value) => emit(state.copyWith(lName: Name.dirty(value)));
+  void lNameChanged(String value) =>
+      emit(state.copyWith(lName: Name.dirty(value)));
 
   void phoneChanged(String value) {
     final pppp = PhoneNumber.dirty(value);
@@ -32,7 +35,7 @@ class AddClientCubit extends Cubit<AddClientState> {
       const uuid = Uuid();
 
       emit(state.copyWith(status: const Loading()));
-      final coachEmail = getIt.get<FirebaseAuth>().currentUser?.email ?? '';
+      final coachEmail = getIt.get<AuthRepository>().user?.email ?? '';
       await _repository.saveClient(
         coachEmail: coachEmail,
         phoneNumber: state.phoneNumber.value,
@@ -40,6 +43,7 @@ class AddClientCubit extends Cubit<AddClientState> {
         phone: state.phoneNumber.value,
         id: uuid.v1(),
         userType: 'trainee',
+        lastActive: DateTime.now(),
       );
       emit(state.copyWith(status: const Success('success')));
     } catch (e) {

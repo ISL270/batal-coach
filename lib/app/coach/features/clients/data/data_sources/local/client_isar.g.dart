@@ -30,7 +30,7 @@ const ClientIsarSchema = CollectionSchema(
     r'lastActive': PropertySchema(
       id: 2,
       name: r'lastActive',
-      type: IsarType.string,
+      type: IsarType.dateTime,
     ),
     r'name': PropertySchema(
       id: 3,
@@ -79,7 +79,6 @@ int _clientIsarEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.email.length * 3;
   bytesCount += 3 + object.id.length * 3;
-  bytesCount += 3 + object.lastActive.length * 3;
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.phone.length * 3;
   return bytesCount;
@@ -93,7 +92,7 @@ void _clientIsarSerialize(
 ) {
   writer.writeString(offsets[0], object.email);
   writer.writeString(offsets[1], object.id);
-  writer.writeString(offsets[2], object.lastActive);
+  writer.writeDateTime(offsets[2], object.lastActive);
   writer.writeString(offsets[3], object.name);
   writer.writeString(offsets[4], object.phone);
 }
@@ -107,7 +106,7 @@ ClientIsar _clientIsarDeserialize(
   final object = ClientIsar(
     email: reader.readString(offsets[0]),
     id: reader.readString(offsets[1]),
-    lastActive: reader.readString(offsets[2]),
+    lastActive: reader.readDateTime(offsets[2]),
     name: reader.readString(offsets[3]),
     phone: reader.readString(offsets[4]),
   );
@@ -126,7 +125,7 @@ P _clientIsarDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
@@ -689,56 +688,48 @@ extension ClientIsarQueryFilter
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> lastActiveEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'lastActive',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
       lastActiveGreaterThan(
-    String value, {
+    DateTime value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'lastActive',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
       lastActiveLessThan(
-    String value, {
+    DateTime value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'lastActive',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> lastActiveBetween(
-    String lower,
-    String upper, {
+    DateTime lower,
+    DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -747,78 +738,6 @@ extension ClientIsarQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'lastActive',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'lastActive',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'lastActive',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> lastActiveMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'lastActive',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastActive',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'lastActive',
-        value: '',
       ));
     });
   }
@@ -1245,10 +1164,9 @@ extension ClientIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByLastActive(
-      {bool caseSensitive = true}) {
+  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByLastActive() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lastActive', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'lastActive');
     });
   }
 
@@ -1287,7 +1205,7 @@ extension ClientIsarQueryProperty
     });
   }
 
-  QueryBuilder<ClientIsar, String, QQueryOperations> lastActiveProperty() {
+  QueryBuilder<ClientIsar, DateTime, QQueryOperations> lastActiveProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lastActive');
     });

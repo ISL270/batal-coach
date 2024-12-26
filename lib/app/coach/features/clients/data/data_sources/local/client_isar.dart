@@ -15,7 +15,7 @@ final class ClientIsar extends CacheModel<Client> {
   String email;
 
   String phone;
-  String lastActive;
+  DateTime lastActive;
 
   ClientIsar({
     required this.id,

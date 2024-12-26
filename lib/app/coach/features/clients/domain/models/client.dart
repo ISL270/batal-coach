@@ -7,7 +7,7 @@ final class Client {
 
   final String phoneNumber;
 
-  final String lastActive;
+  final DateTime lastActive;
 
   Client({
     required this.id,

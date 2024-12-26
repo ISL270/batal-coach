@@ -8,6 +8,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:btl/app/coach/features/add_client/data/data_source/remote/add_client_firestore_source.dart'
+    as _i1045;
+import 'package:btl/app/coach/features/add_client/domain/repositories/add_client_repository.dart'
+    as _i886;
+import 'package:btl/app/coach/features/add_client/presentation/bloc/add_client_cubit.dart'
+    as _i249;
 import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart'
     as _i374;
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart'
@@ -89,6 +95,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i557.SettingsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i662.SettingsRepository>(
         () => _i662.SettingsRepository(gh<_i557.SettingsIsarSource>()));
+    gh.singleton<_i1045.AddClientFirestoreSource>(
+        () => _i1045.AddClientFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i403.ClientsFirestoreSource>(
       () => _i403.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
@@ -117,6 +125,12 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
       dispose: (i) => i.dispose(),
     );
+    gh.singleton<_i886.AddClientRepository>(() => _i886.AddClientRepository(
+          gh<_i902.AuthRepository>(),
+          gh<_i1045.AddClientFirestoreSource>(),
+          gh<_i374.ClientsIsarSource>(),
+          gh<_i403.ClientsFirestoreSource>(),
+        ));
     gh.singleton<_i260.AuthBloc>(
         () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
     gh.singleton<_i611.ExercisesRepository>(
@@ -136,6 +150,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
     gh.factory<_i450.ExercisesBloc>(
         () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
+    gh.factory<_i249.AddClientCubit>(
+        () => _i249.AddClientCubit(gh<_i886.AddClientRepository>()));
     gh.singleton<_i820.WorkoutRepository>(
       () => _i820.WorkoutRepository(
         gh<_i902.AuthRepository>(),

@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
@@ -39,7 +40,7 @@ class ClientsScreen extends StatelessWidget {
             color: context.colorsX.secondaryBackground,
             size: 35.w,
           ),
-          onPressed: () {},
+          onPressed: () => context.pushNamed(AddClientScreen.name),
         ),
       ),
       padding: EdgeInsets.zero,

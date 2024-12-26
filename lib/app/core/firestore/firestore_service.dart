@@ -26,13 +26,18 @@ final class _Trainees {
   late final nameField = 'name';
   late final phoneNumberField = 'phoneNumber';
   late final coachEmailField = 'coachEmail';
+  late final lastActive = 'lastActive';
 }
 
 final class _Exercises {
-  late final btlExercises = FirebaseFirestore.instance.collection('btl_exercises');
+  late final btlExercises =
+      FirebaseFirestore.instance.collection('btl_exercises');
 
   CollectionReference<Map<String, dynamic>> coachExercises(String uid) =>
-      FirebaseFirestore.instance.collection('coaches').doc(uid).collection('exercises');
+      FirebaseFirestore.instance
+          .collection('coaches')
+          .doc(uid)
+          .collection('exercises');
 }
 
 final class _Workouts {
