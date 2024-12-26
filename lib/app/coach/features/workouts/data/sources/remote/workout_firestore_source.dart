@@ -16,7 +16,8 @@ import 'package:injectable/injectable.dart';
 part 'workout_fm.dart';
 
 @singleton
-final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> with FirestoreHelper {
+final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM>
+    with FirestoreHelper {
   WorkoutFirestoreSource(super.firestoreSvc);
 
   Future<void> saveWorkout({
@@ -30,13 +31,15 @@ final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> wi
           firestoreSvc.workouts.coachIdField: coachID,
           firestoreSvc.workouts.nameField: name,
           firestoreSvc.workouts.descriptionField: description,
-          firestoreSvc.workouts.exercisesSetsField: exercisesSets.map(jsonEncode).toList(),
+          firestoreSvc.workouts.exercisesSetsField:
+              exercisesSets.map(jsonEncode).toList(),
           firestoreSvc.workouts.createdAtField: FieldValue.serverTimestamp(),
         });
       });
 
   @override
-  WorkoutFM fromJson(String docID, Map<String, dynamic> json) => WorkoutFM.fromJson(docID, json);
+  WorkoutFM fromJson(String docID, Map<String, dynamic> json) =>
+      WorkoutFM.fromJson(docID, json);
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>

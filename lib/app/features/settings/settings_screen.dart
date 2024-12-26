@@ -38,7 +38,6 @@ class SettingsScreen extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 20.w),
             child: Column(
-              spacing: 30.h,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const _AvatarLabelRow(),
@@ -73,9 +72,11 @@ class SettingsScreen extends StatelessWidget {
                   widget: SegmentedButton(
                     showSelectedIcon: false,
                     selected: {settings.settings.themeMode},
-                    style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                    onSelectionChanged: (selection) =>
-                        context.read<SettingsBloc>().add(SettingsThemeChanged(selection.first)),
+                    style:
+                        const ButtonStyle(visualDensity: VisualDensity.compact),
+                    onSelectionChanged: (selection) => context
+                        .read<SettingsBloc>()
+                        .add(SettingsThemeChanged(selection.first)),
                     segments: [
                       ButtonSegment(
                         value: ThemeMode.light,
@@ -98,9 +99,11 @@ class SettingsScreen extends StatelessWidget {
                   widget: SegmentedButton(
                     showSelectedIcon: false,
                     selected: {settings.settings.language},
-                    style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                    style:
+                        const ButtonStyle(visualDensity: VisualDensity.compact),
                     onSelectionChanged: (selection) {
-                      context.settingsBloc.add(SettingsLanguageChanged(selection.first));
+                      context.settingsBloc
+                          .add(SettingsLanguageChanged(selection.first));
                     },
                     segments: [
                       ButtonSegment(
@@ -142,7 +145,8 @@ class _AvatarLabelRow extends StatelessWidget {
         SizedBox(width: 15.w),
         Text(
           context.l10n.profile.capitalized,
-          style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
+          style: context.textThemeX.medium
+              .copyWith(textBaseline: TextBaseline.ideographic),
         ),
         const Spacer(),
         Icon(Icons.arrow_forward_ios_rounded, size: 18.w)
@@ -176,7 +180,8 @@ class _SettingsSectionWidget extends StatelessWidget {
           Gap(20.w),
           Text(
             label,
-            style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
+            style: context.textThemeX.medium
+                .copyWith(textBaseline: TextBaseline.ideographic),
           ),
           const Spacer(),
           widget,
