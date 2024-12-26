@@ -50,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
                   onPressed: () => context.pop(),
                 ),
                 const Gap(15),
-                Text(context.l10n.createaccount, style: TextStyle(fontSize: 42.w)),
+                Text(context.l10n.createAccount, style: TextStyle(fontSize: 42.w)),
               ],
             ),
           ),
