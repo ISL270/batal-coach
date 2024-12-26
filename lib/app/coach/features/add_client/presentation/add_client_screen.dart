@@ -46,19 +46,19 @@ class AddClientScreen extends StatelessWidget {
                 centerTitle: true,
                 title: Text(context.l10n.addClient),
               ),
-              body: const SingleChildScrollView(
+              body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Gap(10),
-                    _FNameField(),
-                    Gap(20),
-                    _LNameField(),
-                    Gap(20),
-                    _PhoneNumberField(),
-                    Gap(20),
-                    _ClientCategoryWidget(),
-                    Gap(40),
-                    _SignUpButton()
+                    Gap(10.h),
+                    const _FNameField(),
+                    Gap(20.h),
+                    const _LNameField(),
+                    Gap(20.h),
+                    const _PhoneNumberField(),
+                    Gap(20.h),
+                    const _ClientCategoryWidget(),
+                    Gap(40.h),
+                    const _SignUpButton()
                   ],
                 ),
               ),

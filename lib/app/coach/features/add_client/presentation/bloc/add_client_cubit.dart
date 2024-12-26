@@ -5,7 +5,6 @@ import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
