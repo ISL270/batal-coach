@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+
 part 'widgets/week_selection_widget.dart';
 
 class ClientTasksScreen extends StatelessWidget {
@@ -53,18 +55,13 @@ class ClientTasksScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                  color: context.colorsX.secondaryBackground,
-                ),
+                decoration:
+                    BoxDecoration(color: context.colorsX.secondaryBackground),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                    SizedBox(height: 20.h),
                     const _WeekSelector(),
-                    const Spacer(
-                      flex: 2,
-                    ),
+                    const Spacer(flex: 2),
                     SvgPicture.asset(
                       Assets.icons.notes,
                       width: 250.w,
@@ -74,26 +71,20 @@ class ClientTasksScreen extends StatelessWidget {
                       style: context.textThemeX.medium
                           .copyWith(color: Colors.grey),
                     ),
-                    const Spacer(
-                      flex: 3,
-                    ),
+                    const Spacer(flex: 3),
                     Button.filled(
-                      onPressed: () {
-                        showTaskBottomSheet(
-                          context,
-                          context.l10n.selectType,
-                          [
-                            context.l10n.bodyMetrics,
-                            context.l10n.progressPhoto,
-                            context.l10n.general,
-                          ],
-                        );
-                      },
+                      onPressed: () => showTaskBottomSheet(
+                        context,
+                        context.l10n.selectType,
+                        [
+                          context.l10n.bodyMetrics,
+                          context.l10n.progressPhoto,
+                          context.l10n.general,
+                        ],
+                      ),
                       label: context.l10n.createTask,
                     ),
-                    const Spacer(
-                      flex: 2,
-                    ),
+                    const Spacer(flex: 2),
                   ],
                 ),
               ),
@@ -109,21 +100,20 @@ class ClientTasksScreen extends StatelessWidget {
     showModalBottomSheet<dynamic>(
       backgroundColor: context.colorsX.secondaryBackground,
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
       ),
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 label,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               for (final String option in options)
                 ListTile(
                   title: Text(option),
@@ -131,9 +121,7 @@ class ClientTasksScreen extends StatelessWidget {
                     Icons.arrow_forward_ios,
                     color: context.colorsX.primary,
                   ),
-                  onTap: () {
-                    Navigator.pop(context, option);
-                  },
+                  onTap: () => context.pop(option),
                 ),
             ],
           ),
@@ -167,7 +155,9 @@ class _TasksHeaderCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: context.textThemeX.medium.copyWith(color: Colors.grey),
+                style: context.textThemeX.medium.copyWith(
+                  color: context.colorsX.onBackgroundTint35,
+                ),
               ),
               Text(
                 fraction,
@@ -175,7 +165,9 @@ class _TasksHeaderCard extends StatelessWidget {
               ),
               Text(
                 context.l10n.tracked,
-                style: context.textThemeX.small.copyWith(color: Colors.grey),
+                style: context.textThemeX.small.copyWith(
+                  color: context.colorsX.onBackgroundTint35,
+                ),
               ),
             ],
           ),
