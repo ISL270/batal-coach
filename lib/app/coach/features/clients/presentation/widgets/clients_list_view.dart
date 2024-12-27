@@ -6,9 +6,11 @@ class _ClientsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 5.w),
+      padding: EdgeInsets.symmetric(
+        vertical: 8.h,
+      ),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         decoration: BoxDecoration(color: context.colorsX.secondaryBackground),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,14 +37,13 @@ class _ClientsListView extends StatelessWidget {
                     phoneNumber: '+201146012354',
                     id: '20215',
                     lastActiveDate: DateTime.now(),
-                    lastActiveString: DateTime.now().toLastSeen(context),
                   ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
                   child: Divider(
                     height: 1,
                     thickness: 0.5,
@@ -72,19 +73,26 @@ class _ClientWidget extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         leading: CircleAvatar(
           backgroundColor: context.colorsX.secondary,
-          radius: 28.sp,
+          radius: 25.r,
           child: Text(
             client.name.initials,
             style: context.textThemeX.large.copyWith(
               color: context.colorsX.secondaryBackground,
-              fontSize: 22.sp,
+              fontSize: 20.sp,
             ),
           ),
         ),
-        title: Text(client.name, style: context.textThemeX.large.bold),
-        subtitle: Text(client.lastActiveString ?? 'last active long time ago',
-            style: context.textThemeX.small
-                .copyWith(color: context.colorsX.onBackgroundTint)),
+        title: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          child: Text(client.name, style: context.textThemeX.large.bold),
+        ),
+        subtitle: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          child: Text(client.clientLastSeen(context),
+              style: context.textThemeX.small.copyWith(
+                color: context.colorsX.onBackgroundTint,
+              )),
+        ),
       ),
     );
   }
@@ -99,7 +107,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 0.36.sh,
+          width: 0.35.sh,
           child: TextFormField(
             decoration: InputDecoration(
               filled: true,
@@ -116,7 +124,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
             ),
           ),
         ),
-        Gap(20.w),
+        Gap(18.w),
         InkWell(
           onTap: () => _showFilterBottomSheet(context),
           child: Icon(
@@ -136,74 +144,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
         ),
         builder: (_) {
-          return const _FilterBottomSheet();
+          return const SizedBox();
         },
       );
-}
-
-class _FilterBottomSheet extends StatelessWidget {
-  const _FilterBottomSheet();
-
-  @override
-  Widget build(BuildContext context) {
-    final filters = [
-      context.l10n.connected,
-      context.l10n.pending,
-      context.l10n.archived
-    ];
-    return Padding(
-      padding: EdgeInsets.all(16.w),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: Text(
-                    context.l10n.clear,
-                    style: context.textThemeX.medium
-                        .copyWith(color: context.colorsX.secondary),
-                  )),
-              TextButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: Text(
-                    context.l10n.search,
-                    style: context.textThemeX.medium,
-                  )),
-            ],
-          ),
-          Text(context.l10n.selectFilter,
-              style: context.textThemeX.small.copyWith(
-                color: context.colorsX.onBackgroundTint,
-              )),
-          SizedBox(height: 16.h),
-          SizedBox(
-            height: 170.h,
-            child: ListView.builder(
-              itemCount: filters.length,
-              itemBuilder: (context, index) {
-                final filter = filters[index];
-
-                return RadioListTile<String>(
-                  activeColor: context.colorsX.primary,
-                  title: Text(filter),
-                  value: filter,
-                  groupValue: '',
-                  onChanged: (value) {
-                    if (value != null) {}
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

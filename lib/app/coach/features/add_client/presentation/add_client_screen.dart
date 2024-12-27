@@ -1,11 +1,8 @@
-import 'package:btl/app/coach/features/add_client/domain/repositories/add_client_repository.dart';
 import 'package:btl/app/coach/features/add_client/presentation/bloc/add_client_cubit.dart';
+import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/core/theming/app_colors_extension.dart';
-import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
 
-part 'widgets/client_category_widget.dart';
+// part 'widgets/client_category_widget.dart';
 
 class AddClientScreen extends StatelessWidget {
   const AddClientScreen({super.key});
@@ -25,7 +22,7 @@ class AddClientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddClientCubit(getIt.get<AddClientRepository>()),
+      create: (context) => AddClientCubit(getIt.get<ClientsRepository>()),
       child: BlocListener<AddClientCubit, AddClientState>(
         listener: (context, state) {
           if (state.status.isSuccess) {
@@ -56,9 +53,9 @@ class AddClientScreen extends StatelessWidget {
                     Gap(20.h),
                     const _PhoneNumberField(),
                     Gap(20.h),
-                    const _ClientCategoryWidget(),
+                    // const _ClientCategoryWidget(),
                     Gap(40.h),
-                    const _SignUpButton()
+                    const _AddClientButton()
                   ],
                 ),
               ),
@@ -140,8 +137,8 @@ class _PhoneNumberField extends StatelessWidget {
   }
 }
 
-class _SignUpButton extends StatelessWidget {
-  const _SignUpButton();
+class _AddClientButton extends StatelessWidget {
+  const _AddClientButton();
 
   @override
   Widget build(BuildContext context) {

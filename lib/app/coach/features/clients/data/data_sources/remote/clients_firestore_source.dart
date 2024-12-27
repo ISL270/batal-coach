@@ -1,12 +1,34 @@
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/client_fm.dart';
+import 'package:btl/app/core/firestore/firestore_helper.dart';
 import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
-final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
+final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM>
+    with FirestoreHelper {
   ClientsFirestoreSource(super.firestoreSvc);
+
+  Future<void> saveClient({
+    required String coachEmail,
+    required String phoneNumber,
+    required DateTime lastActive,
+    required String name,
+    required String phone,
+    required String id,
+    required String userType,
+  }) async =>
+      firestoreOperationHandler(() async {
+        await firestoreSvc.trainees.collection.add({
+          firestoreSvc.trainees.coachEmailField: coachEmail,
+          firestoreSvc.trainees.emailField: phoneNumber,
+          firestoreSvc.trainees.nameField: name,
+          firestoreSvc.trainees.phoneNumberField: phone,
+          firestoreSvc.trainees.idField: id,
+          firestoreSvc.trainees.lastActive: lastActive,
+        });
+      });
 
   @override
   ClientFM fromJson(String docID, Map<String, dynamic> json) =>

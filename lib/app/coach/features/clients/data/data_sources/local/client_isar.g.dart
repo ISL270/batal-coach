@@ -32,18 +32,13 @@ const ClientIsarSchema = CollectionSchema(
       name: r'lastActiveDate',
       type: IsarType.dateTime,
     ),
-    r'lastActiveString': PropertySchema(
-      id: 3,
-      name: r'lastActiveString',
-      type: IsarType.string,
-    ),
     r'name': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'name',
       type: IsarType.string,
     ),
     r'phone': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'phone',
       type: IsarType.string,
     )
@@ -84,12 +79,6 @@ int _clientIsarEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.email.length * 3;
   bytesCount += 3 + object.id.length * 3;
-  {
-    final value = object.lastActiveString;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.phone.length * 3;
   return bytesCount;
@@ -104,9 +93,8 @@ void _clientIsarSerialize(
   writer.writeString(offsets[0], object.email);
   writer.writeString(offsets[1], object.id);
   writer.writeDateTime(offsets[2], object.lastActiveDate);
-  writer.writeString(offsets[3], object.lastActiveString);
-  writer.writeString(offsets[4], object.name);
-  writer.writeString(offsets[5], object.phone);
+  writer.writeString(offsets[3], object.name);
+  writer.writeString(offsets[4], object.phone);
 }
 
 ClientIsar _clientIsarDeserialize(
@@ -119,9 +107,8 @@ ClientIsar _clientIsarDeserialize(
     email: reader.readString(offsets[0]),
     id: reader.readString(offsets[1]),
     lastActiveDate: reader.readDateTime(offsets[2]),
-    lastActiveString: reader.readStringOrNull(offsets[3]),
-    name: reader.readString(offsets[4]),
-    phone: reader.readString(offsets[5]),
+    name: reader.readString(offsets[3]),
+    phone: reader.readString(offsets[4]),
   );
   return object;
 }
@@ -140,10 +127,8 @@ P _clientIsarDeserializeProp<P>(
     case 2:
       return (reader.readDateTime(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
-    case 4:
       return (reader.readString(offset)) as P;
-    case 5:
+    case 4:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -758,160 +743,6 @@ extension ClientIsarQueryFilter
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'lastActiveString',
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'lastActiveString',
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastActiveString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'lastActiveString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'lastActiveString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'lastActiveString',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'lastActiveString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'lastActiveString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'lastActiveString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'lastActiveString',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastActiveString',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveStringIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'lastActiveString',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition> nameEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1219,19 +1050,6 @@ extension ClientIsarQuerySortBy
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByLastActiveString() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveString', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy>
-      sortByLastActiveStringDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveString', Sort.desc);
-    });
-  }
-
   QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1308,19 +1126,6 @@ extension ClientIsarQuerySortThenBy
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByLastActiveString() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveString', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy>
-      thenByLastActiveStringDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveString', Sort.desc);
-    });
-  }
-
   QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1368,14 +1173,6 @@ extension ClientIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByLastActiveString(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lastActiveString',
-          caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1415,13 +1212,6 @@ extension ClientIsarQueryProperty
       lastActiveDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lastActiveDate');
-    });
-  }
-
-  QueryBuilder<ClientIsar, String?, QQueryOperations>
-      lastActiveStringProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lastActiveString');
     });
   }
 

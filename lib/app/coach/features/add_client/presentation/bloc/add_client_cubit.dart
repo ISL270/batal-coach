@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/coach/features/add_client/domain/repositories/add_client_repository.dart';
+import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
@@ -14,7 +14,7 @@ part 'add_client_state.dart';
 
 @injectable
 class AddClientCubit extends Cubit<AddClientState> {
-  final AddClientRepository _repository;
+  final ClientsRepository _repository;
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
@@ -32,7 +32,6 @@ class AddClientCubit extends Cubit<AddClientState> {
   Future<void> saveClient() async {
     try {
       const uuid = Uuid();
-
       emit(state.copyWith(status: const Loading()));
       final coachEmail = getIt.get<AuthRepository>().user?.email ?? '';
       await _repository.saveClient(

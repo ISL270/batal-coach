@@ -1,8 +1,7 @@
 import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
-import 'package:btl/app/core/assets_gen/assets.gen.dart';
-import 'package:btl/app/core/extension_methods/color_x.dart';
+import 'package:btl/app/core/extension_methods/client_x.dart';
 import 'package:btl/app/core/extension_methods/date_x.dart';
 import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
@@ -12,7 +11,6 @@ import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,12 +26,12 @@ class ClientsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Screen(
       floatingActionButton: SizedBox(
-        width: 65.w, // Adjust width as needed
-        height: 65.w, // Adjust height as needed
+        width: 65.r,
+        height: 65.r,
         child: FloatingActionButton(
           backgroundColor: context.colorsX.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.w),
+            borderRadius: BorderRadius.circular(50.r),
           ),
           child: Icon(
             Icons.add,
@@ -43,17 +41,13 @@ class ClientsScreen extends StatelessWidget {
           onPressed: () => context.pushNamed(AddClientScreen.name),
         ),
       ),
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       appBar: AppBar(
         title: Align(
           child: Row(
             children: [
               const Spacer(),
-              SvgPicture.asset(
-                Assets.icons.settingsOutline,
-                width: 32.w,
-                colorFilter: context.colorsX.primary.srcInFilter,
-              )
+              Icon(Icons.settings, color: context.colorsX.primary)
             ],
           ),
         ),
@@ -62,27 +56,30 @@ class ClientsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    DateTime.now().toFormattedDate(context),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.h),
+                  child: Text(
+                    DateTime.now().toMMMMDate(context),
                     style: context.textThemeX.medium.bold.copyWith(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       color: context.colorsX.primary,
                     ),
                   ),
-                  Text(
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.h),
+                  child: Text(
                     context.l10n.allClients,
                     style: context.textThemeX.heading.bold
                         .copyWith(fontSize: 32.sp),
                   ),
-                  SizedBox(height: 10.h),
-                  const _ClientsStatusListView(),
-                ],
-              ),
+                ),
+                SizedBox(height: 10.h),
+                const _ClientsStatusListView(),
+              ],
             ),
             const _ClientsListView(),
           ],

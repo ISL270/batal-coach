@@ -16,7 +16,6 @@ final class ClientIsar extends CacheModel<Client> {
 
   String phone;
   DateTime lastActiveDate;
-  String? lastActiveString;
 
   ClientIsar({
     required this.id,
@@ -24,7 +23,6 @@ final class ClientIsar extends CacheModel<Client> {
     required this.name,
     required this.phone,
     required this.lastActiveDate,
-    this.lastActiveString,
   });
 
   factory ClientIsar.fromDomain(Client domain) => ClientIsar(
@@ -33,7 +31,6 @@ final class ClientIsar extends CacheModel<Client> {
         email: domain.email,
         phone: domain.phoneNumber,
         lastActiveDate: domain.lastActiveDate,
-        lastActiveString: '',
       );
 
   @override
@@ -44,7 +41,6 @@ final class ClientIsar extends CacheModel<Client> {
       email: email,
       phoneNumber: phone,
       lastActiveDate: lastActiveDate,
-      lastActiveString: lastActiveString,
     );
   }
 }
