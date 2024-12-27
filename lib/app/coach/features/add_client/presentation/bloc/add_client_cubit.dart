@@ -18,11 +18,9 @@ class AddClientCubit extends Cubit<AddClientState> {
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
-  void fNameChanged(String value) =>
-      emit(state.copyWith(fName: Name.dirty(value)));
+  void fNameChanged(String value) => emit(state.copyWith(fName: Name.dirty(value)));
 
-  void lNameChanged(String value) =>
-      emit(state.copyWith(lName: Name.dirty(value)));
+  void lNameChanged(String value) => emit(state.copyWith(lName: Name.dirty(value)));
 
   void phoneChanged(String value) {
     final pppp = PhoneNumber.dirty(value);

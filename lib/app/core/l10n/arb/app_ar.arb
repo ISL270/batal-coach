@@ -171,6 +171,14 @@
       "selectFilter": "اختر فلتر للاستخدام",
       "archived": "مؤرشف",
       "wentWrong": "لقد حدث خطأ ما",
-      "seconds":"ثواني"
+      "seconds":"ثواني",
+      "changePassword": "تغير كلمة المرور",
+      "notifications": "الإشعارات",
+      "technicalSupport": "الدعم الفني",
+      "aboutapp": "حول التطبيق",
+      "selectRole": "اختر الدور",
+      "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+      "coachEmail": "بريد إلكتروني للمدرب",
+      "companyName":"اسم الشركة"
 
 }

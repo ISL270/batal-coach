@@ -73,8 +73,7 @@ class ClientsScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 16.h),
                   child: Text(
                     context.l10n.allClients,
-                    style: context.textThemeX.heading.bold
-                        .copyWith(fontSize: 32.sp),
+                    style: context.textThemeX.heading.bold.copyWith(fontSize: 32.sp),
                   ),
                 ),
                 SizedBox(height: 10.h),
