@@ -25,12 +25,12 @@ class ClientTasksScreen extends StatelessWidget {
       padding: EdgeInsets.zero,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: context.colorsX.onBackground.withOpacity(0.01),
+        backgroundColor: context.colorsX.onBackground.withValues(alpha: 0.01),
         title: Text(context.l10n.tasks, style: context.textThemeX.large),
       ),
       body: Material(
         surfaceTintColor: context.colorsX.primary,
-        color: context.colorsX.onBackground.withOpacity(0.01),
+        color: context.colorsX.onBackground.withValues(alpha: 0.01),
         child: Column(
           children: [
             SizedBox(
@@ -69,7 +69,7 @@ class ClientTasksScreen extends StatelessWidget {
                     Text(
                       context.l10n.noAssignedTasks,
                       style: context.textThemeX.medium
-                          .copyWith(color: Colors.grey),
+                          .copyWith(color: context.colorsX.onBackgroundTint35),
                     ),
                     const Spacer(flex: 3),
                     Button.filled(
@@ -101,7 +101,7 @@ class ClientTasksScreen extends StatelessWidget {
       backgroundColor: context.colorsX.secondaryBackground,
       context: context,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
       ),
       builder: (BuildContext context) {
         return Padding(
@@ -111,7 +111,7 @@ class ClientTasksScreen extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                style: context.textThemeX.medium.bold,
               ),
               SizedBox(height: 16.h),
               for (final String option in options)
@@ -145,11 +145,11 @@ class _TasksHeaderCard extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.r),
           color: context.colorsX.secondaryBackground,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
