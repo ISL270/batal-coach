@@ -131,7 +131,7 @@ class _ProfileImageWidget extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: context.colorsX.secondary,
-            radius: 45.sp,
+            radius: 45.r,
             child: Text(
               'AH',
               style: context.textThemeX.large.copyWith(
@@ -181,13 +181,14 @@ class _ProfileFormField extends StatelessWidget {
               initialValue: value,
               decoration: InputDecoration(
                 labelText: label,
-                labelStyle: TextStyle(
-                    color: context.colorsX.onBackground, fontSize: 14.sp),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                labelStyle: context.textThemeX.medium,
+                focusedBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: context.colorsX.onBackgroundTint35),
                 ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: context.colorsX.onBackgroundTint35),
                 ),
               ),
             ),
