@@ -57,7 +57,7 @@ class SelectableField extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(label, style: context.textThemeX.medium),
-              const Gap(16),
+              Gap(16.h),
               for (final String option in options)
                 ListTile(
                   title: Text(option),
