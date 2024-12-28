@@ -10,8 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_inputs/form_inputs.dart';
-import 'package:gap/gap.dart';
-
 // part 'widgets/client_category_widget.dart';
 
 class AddClientScreen extends StatelessWidget {
@@ -45,17 +43,13 @@ class AddClientScreen extends StatelessWidget {
               ),
               body: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    Gap(10.h),
-                    const _FNameField(),
-                    Gap(20.h),
-                    const _LNameField(),
-                    Gap(20.h),
-                    const _PhoneNumberField(),
-                    Gap(20.h),
+                  spacing: 20.h,
+                  children: const [
+                    _FNameField(),
+                    _LNameField(),
+                    _PhoneNumberField(),
                     // const _ClientCategoryWidget(),
-                    Gap(40.h),
-                    const _AddClientButton()
+                    _AddClientButton()
                   ],
                 ),
               ),
@@ -127,7 +121,7 @@ class _PhoneNumberField extends StatelessWidget {
           LengthLimitingTextInputFormatter(15),
         ],
         decoration: InputDecoration(
-          labelText: context.l10n.phoneNumber,
+          labelText: context.l10n.pNumber,
           errorText: phoneNumber.displayError == null
               ? null
               : context.tr(context.l10n.phoneNumberRequired),

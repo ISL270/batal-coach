@@ -20,7 +20,8 @@ class _ClientsListView extends StatelessWidget {
               child: Text(
                 '${context.l10n.allClients.toUpperCase()} (3)',
                 style: context.textThemeX.small.bold.copyWith(
-                  color: context.colorsX.onBackgroundTint.withOpacity(0.5),
+                  color:
+                      context.colorsX.onBackgroundTint.withValues(alpha: 0.5),
                 ),
               ),
             ),
@@ -45,7 +46,8 @@ class _ClientsListView extends StatelessWidget {
                   child: Divider(
                     height: 1,
                     thickness: 0.5,
-                    color: context.colorsX.onBackgroundTint35.withOpacity(0.1),
+                    color: context.colorsX.onBackgroundTint35
+                        .withValues(alpha: 0.1),
                   ),
                 );
               },
@@ -98,11 +100,12 @@ class _SearchAndFilterWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 0.36.sh,
+          width: 0.34.sh,
           child: TextFormField(
             decoration: InputDecoration(
               filled: true,
-              fillColor: context.colorsX.onBackgroundTint35.withOpacity(0.02),
+              fillColor:
+                  context.colorsX.onBackgroundTint35.withValues(alpha: 0.03),
               labelText: '${context.l10n.searchClients}...',
               prefixIcon: Icon(
                 Icons.search,
