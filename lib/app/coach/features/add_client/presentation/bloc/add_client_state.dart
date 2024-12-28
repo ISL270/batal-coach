@@ -4,12 +4,14 @@ final class AddClientState extends Equatable with FormzMixin {
   const AddClientState({
     this.fName = const Name.pure(),
     this.lName = const Name.pure(),
+    this.email = const Email.pure(),
     this.phoneNumber = const PhoneNumber.pure(),
     this.status = const Initial(),
   });
 
   final Name fName;
   final Name lName;
+  final Email email;
   final PhoneNumber phoneNumber;
   final VoidStatus status;
 
@@ -18,18 +20,21 @@ final class AddClientState extends Equatable with FormzMixin {
         fName,
         lName,
         phoneNumber,
+        email,
         status,
       ];
 
   AddClientState copyWith({
     Name? fName,
     Name? lName,
+    Email? email,
     PhoneNumber? phoneNumber,
     VoidStatus? status,
   }) {
     return AddClientState(
       fName: fName ?? this.fName,
       lName: lName ?? this.lName,
+      email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       status: status ?? this.status,
     );
@@ -41,6 +46,7 @@ final class AddClientState extends Equatable with FormzMixin {
         fName,
         lName,
         phoneNumber,
+        email,
       ];
 
   String get errorMsg {

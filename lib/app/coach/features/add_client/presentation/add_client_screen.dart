@@ -1,6 +1,7 @@
 import 'package:btl/app/coach/features/add_client/presentation/bloc/add_client_cubit.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/widgets/button.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_inputs/form_inputs.dart';
+import 'package:go_router/go_router.dart';
 // part 'widgets/client_category_widget.dart';
 
 class AddClientScreen extends StatelessWidget {
@@ -27,7 +29,7 @@ class AddClientScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(context.l10n.clientAdded)),
             );
-            Navigator.of(context).pop();
+            context.pop();
           } else if (state.status.isFailure) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(context.l10n.wentWrong),
@@ -43,10 +45,11 @@ class AddClientScreen extends StatelessWidget {
               ),
               body: SingleChildScrollView(
                 child: Column(
-                  spacing: 20.h,
+                  spacing: 30.h,
                   children: const [
                     _FNameField(),
                     _LNameField(),
+                    _MailField(),
                     _PhoneNumberField(),
                     // const _ClientCategoryWidget(),
                     _AddClientButton()
@@ -68,17 +71,44 @@ class _FNameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<AddClientCubit, AddClientState, Name>(
       selector: (state) => state.fName,
-      builder: (context, name) => TextField(
-        onChanged: (fName) =>
-            context.read<AddClientCubit>().fNameChanged(fName),
-        keyboardType: TextInputType.name,
-        decoration: InputDecoration(
-          labelText: context.l10n.fName,
-          errorText: name.displayError == null
-              ? null
-              : context.tr(name.displayError!.name),
+      builder: (context, name) => Padding(
+        padding: EdgeInsets.only(top: 8.h),
+        child: TextField(
+          onChanged: (fName) =>
+              context.read<AddClientCubit>().fNameChanged(fName),
+          keyboardType: TextInputType.name,
+          decoration: InputDecoration(
+            labelText: context.l10n.fName,
+            errorText: name.displayError == null
+                ? null
+                : context.tr(name.displayError!.name),
+          ),
         ),
       ),
+    );
+  }
+}
+
+class _MailField extends StatelessWidget {
+  const _MailField();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AddClientCubit, AddClientState>(
+      buildWhen: (previous, current) => previous.email != current.email,
+      builder: (context, state) {
+        return TextField(
+          onChanged: (email) =>
+              context.read<AddClientCubit>().emailChanged(email),
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            labelText: context.l10n.email.capitalized,
+            errorText: state.email.displayError != null
+                ? context.l10n.invalidEmail
+                : null,
+          ),
+        );
+      },
     );
   }
 }

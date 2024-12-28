@@ -13,25 +13,25 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM>
   Future<void> saveClient({
     required String coachEmail,
     required String phoneNumber,
+    required String email,
     required DateTime lastActive,
     required String name,
     required String phone,
-    required String id,
     required String userType,
   }) async =>
       firestoreOperationHandler(() async {
         await firestoreSvc.trainees.collection.add({
           firestoreSvc.trainees.coachEmailField: coachEmail,
-          firestoreSvc.trainees.emailField: phoneNumber,
           firestoreSvc.trainees.nameField: name,
+          firestoreSvc.trainees.emailField: email,
           firestoreSvc.trainees.phoneNumberField: phone,
-          firestoreSvc.trainees.idField: id,
           firestoreSvc.trainees.lastActive: lastActive,
         });
       });
 
   @override
-  ClientFM fromJson(String docID, Map<String, dynamic> json) => ClientFM.fromJson(docID, json);
+  ClientFM fromJson(String docID, Map<String, dynamic> json) =>
+      ClientFM.fromJson(docID, json);
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>

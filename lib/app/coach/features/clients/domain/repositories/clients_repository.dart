@@ -28,8 +28,8 @@ final class ClientsRepository
     required String phoneNumber,
     required DateTime lastActive,
     required String name,
+    required String email,
     required String phone,
-    required String id,
     required String userType,
   }) async {
     try {
@@ -38,7 +38,7 @@ final class ClientsRepository
         phoneNumber: phoneNumber,
         name: name,
         phone: phone,
-        id: id,
+        email: email,
         lastActive: lastActive,
         userType: userType,
       );
