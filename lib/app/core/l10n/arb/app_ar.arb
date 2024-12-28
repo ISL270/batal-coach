@@ -179,6 +179,9 @@
       "selectRole": "اختر الدور",
       "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
       "coachEmail": "بريد إلكتروني للمدرب",
-      "companyName":"اسم الشركة"
-
+      "companyName":"اسم الشركة",
+      "ok" : "نعم",
+      "gender": "النوع",
+      "male": "ذكر",
+      "female": "مؤنث"
 }

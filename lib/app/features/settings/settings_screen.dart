@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, unused_element
 
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
@@ -26,6 +26,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Screen(
+      padding: EdgeInsets.zero,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -36,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, settings) {
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.w),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -72,11 +73,9 @@ class SettingsScreen extends StatelessWidget {
                   widget: SegmentedButton(
                     showSelectedIcon: false,
                     selected: {settings.settings.themeMode},
-                    style:
-                        const ButtonStyle(visualDensity: VisualDensity.compact),
-                    onSelectionChanged: (selection) => context
-                        .read<SettingsBloc>()
-                        .add(SettingsThemeChanged(selection.first)),
+                    style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                    onSelectionChanged: (selection) =>
+                        context.read<SettingsBloc>().add(SettingsThemeChanged(selection.first)),
                     segments: [
                       ButtonSegment(
                         value: ThemeMode.light,
@@ -99,12 +98,9 @@ class SettingsScreen extends StatelessWidget {
                   widget: SegmentedButton(
                     showSelectedIcon: false,
                     selected: {settings.settings.language},
-                    style:
-                        const ButtonStyle(visualDensity: VisualDensity.compact),
-                    onSelectionChanged: (selection) {
-                      context.settingsBloc
-                          .add(SettingsLanguageChanged(selection.first));
-                    },
+                    style: const ButtonStyle(visualDensity: VisualDensity.compact),
+                    onSelectionChanged: (selection) =>
+                        context.settingsBloc.add(SettingsLanguageChanged(selection.first)),
                     segments: [
                       ButtonSegment(
                         value: Language.arabic,
@@ -117,12 +113,7 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Button.outlined(
-                  maxWidth: true,
-                  density: ButtonDensity.comfortable,
-                  onPressed: () => getIt.authBloc.add(AuthLogoutRequested()),
-                  label: context.l10n.logout.capitalized,
-                ),
+                const _LogoutButton(),
               ],
             ),
           );
@@ -133,24 +124,35 @@ class SettingsScreen extends StatelessWidget {
 }
 
 class _AvatarLabelRow extends StatelessWidget {
-  const _AvatarLabelRow();
+  const _AvatarLabelRow({this.onPressed});
+
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      textBaseline: TextBaseline.ideographic,
-      children: [
-        CircleAvatar(radius: 18.w),
-        SizedBox(width: 15.w),
-        Text(
-          context.l10n.profile.capitalized,
-          style: context.textThemeX.medium
-              .copyWith(textBaseline: TextBaseline.ideographic),
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(16.w),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: SizedBox(
+          height: 60.h,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            textBaseline: TextBaseline.ideographic,
+            children: [
+              CircleAvatar(radius: 18.w),
+              SizedBox(width: 15.w),
+              Text(
+                context.l10n.profile.capitalized,
+                style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
+              ),
+              const Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded, size: 18.w)
+            ],
+          ),
         ),
-        const Spacer(),
-        Icon(Icons.arrow_forward_ios_rounded, size: 18.w)
-      ],
+      ),
     );
   }
 }
@@ -160,7 +162,6 @@ class _SettingsSectionWidget extends StatelessWidget {
     required this.label,
     required this.iconData,
     required this.widget,
-    // ignore: unused_element
     this.onPressed,
   });
 
@@ -173,19 +174,44 @@ class _SettingsSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      child: Row(
-        children: [
-          Gap(5.w),
-          Icon(iconData),
-          Gap(20.w),
-          Text(
-            label,
-            style: context.textThemeX.medium
-                .copyWith(textBaseline: TextBaseline.ideographic),
+      borderRadius: BorderRadius.circular(16.w),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: SizedBox(
+          height: 60.h,
+          child: Row(
+            children: [
+              Gap(5.w),
+              Icon(iconData),
+              Gap(20.w),
+              Text(
+                label,
+                style: context.textThemeX.medium.copyWith(textBaseline: TextBaseline.ideographic),
+              ),
+              const Spacer(),
+              widget,
+            ],
           ),
-          const Spacer(),
-          widget,
-        ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LogoutButton extends StatelessWidget {
+  const _LogoutButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 10.w),
+      child: Button.outlined(
+        maxWidth: true,
+        density: ButtonDensity.comfortable,
+        onPressed: () => getIt.authBloc.add(AuthLogoutRequested()),
+        label: context.l10n.logout.capitalized,
       ),
     );
   }

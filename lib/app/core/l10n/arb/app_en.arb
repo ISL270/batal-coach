@@ -174,5 +174,9 @@
           "selectRole": "Select Role",
           "alreadyHaveAccount": "Already have an account?",
           "coachEmail": "Coach Email",
-          "companyName":"Company Name"
+          "companyName":"Company Name",
+          "ok" : "Ok",
+          "gender": "Gender",
+          "male": "Male",
+          "female": "Female"
   }
