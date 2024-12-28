@@ -35,7 +35,7 @@ class SelectableField extends StatelessWidget {
               ],
             ),
             SizedBox(height: 18.h),
-            const Divider(height: 0, color: Colors.grey),
+            Divider(height: 0, color: context.colorsX.onBackgroundTint35),
           ],
         ),
       ),
