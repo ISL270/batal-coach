@@ -2,38 +2,33 @@ part of 'add_client_cubit.dart';
 
 final class AddClientState extends Equatable with FormzMixin {
   const AddClientState({
-    this.fName = const Name.pure(),
-    this.lName = const Name.pure(),
+    this.fullName = const Name.pure(),
     this.email = const Email.pure(),
     this.phoneNumber = const PhoneNumber.pure(),
     this.status = const Initial(),
   });
 
-  final Name fName;
-  final Name lName;
+  final Name fullName;
   final Email email;
   final PhoneNumber phoneNumber;
   final VoidStatus status;
 
   @override
   List<Object?> get props => [
-        fName,
-        lName,
+        fullName,
         phoneNumber,
         email,
         status,
       ];
 
   AddClientState copyWith({
-    Name? fName,
-    Name? lName,
+    Name? fullName,
     Email? email,
     PhoneNumber? phoneNumber,
     VoidStatus? status,
   }) {
     return AddClientState(
-      fName: fName ?? this.fName,
-      lName: lName ?? this.lName,
+      fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       status: status ?? this.status,
@@ -43,8 +38,7 @@ final class AddClientState extends Equatable with FormzMixin {
   @override
   // ignore: strict_raw_type
   List<FormzInput> get inputs => [
-        fName,
-        lName,
+        fullName,
         phoneNumber,
         email,
       ];

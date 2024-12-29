@@ -49,8 +49,7 @@ class AddClientScreen extends StatelessWidget {
                 child: Column(
                   spacing: 30.h,
                   children: const [
-                    _FNameField(),
-                    _LNameField(),
+                    _FullNameField(),
                     _MailField(),
                     _PhoneNumberField(),
                     // const _ClientCategoryWidget(),
@@ -66,20 +65,20 @@ class AddClientScreen extends StatelessWidget {
   }
 }
 
-class _FNameField extends StatelessWidget {
-  const _FNameField();
+class _FullNameField extends StatelessWidget {
+  const _FullNameField();
 
   @override
   Widget build(BuildContext context) {
     return BlocSelector<AddClientCubit, AddClientState, Name>(
-      selector: (state) => state.fName,
+      selector: (state) => state.fullName,
       builder: (context, name) => Padding(
         padding: EdgeInsets.only(top: 8.h),
         child: TextField(
-          onChanged: (fName) => context.read<AddClientCubit>().fNameChanged(fName),
+          onChanged: (name) => context.read<AddClientCubit>().fullNameChanged(name),
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
-            labelText: context.l10n.fName,
+            labelText: context.l10n.fullName,
             errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
           ),
         ),
@@ -105,25 +104,6 @@ class _MailField extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _LNameField extends StatelessWidget {
-  const _LNameField();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<AddClientCubit, AddClientState, Name>(
-      selector: (state) => state.lName,
-      builder: (context, name) => TextField(
-        onChanged: (lName) => context.read<AddClientCubit>().lNameChanged(lName),
-        keyboardType: TextInputType.name,
-        decoration: InputDecoration(
-          labelText: context.l10n.lName,
-          errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
-        ),
-      ),
     );
   }
 }

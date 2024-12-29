@@ -16,9 +16,7 @@ class AddClientCubit extends Cubit<AddClientState> {
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
-  void fNameChanged(String value) => emit(state.copyWith(fName: Name.dirty(value)));
-
-  void lNameChanged(String value) => emit(state.copyWith(lName: Name.dirty(value)));
+  void fullNameChanged(String value) => emit(state.copyWith(fullName: Name.dirty(value)));
 
   void phoneChanged(String value) {
     final pppp = PhoneNumber.dirty(value);
@@ -33,7 +31,7 @@ class AddClientCubit extends Cubit<AddClientState> {
       await _repository.saveClient(
         coachEmail: coachEmail,
         phoneNumber: state.phoneNumber.value,
-        name: state.fName.value,
+        name: state.fullName.value,
         phone: state.phoneNumber.value,
         userType: UserType.trainee.name,
         lastActive: DateTime.now(),
