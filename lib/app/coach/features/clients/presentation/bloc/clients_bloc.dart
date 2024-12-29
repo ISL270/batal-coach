@@ -32,10 +32,4 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
       },
     );
   }
-
-  @override
-  Future<void> close() {
-    _repository.dispose();
-    return super.close();
-  }
 }

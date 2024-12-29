@@ -36,7 +36,7 @@ class AddClientCubit extends Cubit<AddClientState> {
         name: state.fullName.value,
         phone: state.phoneNumber.value,
         userType: UserType.trainee.name,
-        lastActive: DateTime.now(),
+        lastActiveAt: DateTime.now(),
         email: state.email.value,
       );
       emit(state.copyWith(status: const Success('success')));

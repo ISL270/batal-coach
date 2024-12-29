@@ -9,8 +9,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
-final class ClientsRepository
-    extends ReactiveRepository<Client, ClientFM, ClientIsar> {
+final class ClientsRepository extends ReactiveRepository<Client, ClientFM, ClientIsar> {
   final ClientsFirestoreSource _remoteSource;
   final ClientsIsarSource _localSource;
 
@@ -26,7 +25,7 @@ final class ClientsRepository
   Future<EitherException<void>> saveClient({
     required String coachEmail,
     required String phoneNumber,
-    required DateTime lastActive,
+    required DateTime lastActiveAt,
     required String name,
     required String email,
     required String phone,
@@ -39,7 +38,7 @@ final class ClientsRepository
         name: name,
         phone: phone,
         email: email,
-        lastActive: lastActive,
+        lastActiveAt: lastActiveAt,
         userType: userType,
       );
       return right(null);

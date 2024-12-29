@@ -6,15 +6,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
-final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM>
-    with FirestoreHelper {
+final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> with FirestoreHelper {
   ClientsFirestoreSource(super.firestoreSvc);
 
   Future<void> saveClient({
     required String coachEmail,
     required String phoneNumber,
     required String email,
-    required DateTime lastActive,
+    required DateTime lastActiveAt,
     required String name,
     required String phone,
     required String userType,
@@ -25,13 +24,12 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM>
           firestoreSvc.trainees.nameField: name,
           firestoreSvc.trainees.emailField: email,
           firestoreSvc.trainees.phoneNumberField: phone,
-          firestoreSvc.trainees.lastActive: lastActive,
+          firestoreSvc.trainees.lastActiveAtField: lastActiveAt,
         });
       });
 
   @override
-  ClientFM fromJson(String docID, Map<String, dynamic> json) =>
-      ClientFM.fromJson(docID, json);
+  ClientFM fromJson(String docID, Map<String, dynamic> json) => ClientFM.fromJson(docID, json);
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>

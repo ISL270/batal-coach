@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 extension DateTimeX on Client {
   String clientLastSeen(BuildContext context) {
     final now = DateTime.now();
-    final difference = now.difference(lastActiveDate);
+    final difference = now.difference(lastActiveAt);
     final lastActivity = context.l10n.lastActivity;
     final ago = context.l10n.ago;
     if (difference.inSeconds < 60) {
@@ -19,7 +19,7 @@ extension DateTimeX on Client {
     } else if (difference.inDays < 7) {
       return '$lastActivity ${difference.inDays} ${context.l10n.days} $ago';
     } else {
-      return DateFormat('yyyy-MM-dd').format(lastActiveDate);
+      return DateFormat('yyyy-MM-dd').format(lastActiveAt);
     }
   }
 }
