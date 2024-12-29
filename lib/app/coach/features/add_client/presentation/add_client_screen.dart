@@ -2,8 +2,10 @@ import 'package:btl/app/coach/features/add_client/presentation/bloc/add_client_c
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
+import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
@@ -74,14 +76,11 @@ class _FNameField extends StatelessWidget {
       builder: (context, name) => Padding(
         padding: EdgeInsets.only(top: 8.h),
         child: TextField(
-          onChanged: (fName) =>
-              context.read<AddClientCubit>().fNameChanged(fName),
+          onChanged: (fName) => context.read<AddClientCubit>().fNameChanged(fName),
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
             labelText: context.l10n.fName,
-            errorText: name.displayError == null
-                ? null
-                : context.tr(name.displayError!.name),
+            errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
           ),
         ),
       ),
@@ -98,14 +97,11 @@ class _MailField extends StatelessWidget {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return TextField(
-          onChanged: (email) =>
-              context.read<AddClientCubit>().emailChanged(email),
+          onChanged: (email) => context.read<AddClientCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: context.l10n.email.capitalized,
-            errorText: state.email.displayError != null
-                ? context.l10n.invalidEmail
-                : null,
+            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
           ),
         );
       },
@@ -121,14 +117,11 @@ class _LNameField extends StatelessWidget {
     return BlocSelector<AddClientCubit, AddClientState, Name>(
       selector: (state) => state.lName,
       builder: (context, name) => TextField(
-        onChanged: (lName) =>
-            context.read<AddClientCubit>().lNameChanged(lName),
+        onChanged: (lName) => context.read<AddClientCubit>().lNameChanged(lName),
         keyboardType: TextInputType.name,
         decoration: InputDecoration(
           labelText: context.l10n.lName,
-          errorText: name.displayError == null
-              ? null
-              : context.tr(name.displayError!.name),
+          errorText: name.displayError == null ? null : context.tr(name.displayError!.name),
         ),
       ),
     );
@@ -143,8 +136,7 @@ class _PhoneNumberField extends StatelessWidget {
     return BlocSelector<AddClientCubit, AddClientState, PhoneNumber>(
       selector: (state) => state.phoneNumber,
       builder: (context, phoneNumber) => TextField(
-        onChanged: (phone) =>
-            context.read<AddClientCubit>().phoneChanged(phone),
+        onChanged: (phone) => context.read<AddClientCubit>().phoneChanged(phone),
         keyboardType: TextInputType.phone,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
@@ -176,14 +168,14 @@ class _AddClientButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        final coachEmail = getIt.authBloc.state.user!.email;
         return Button.filled(
           maxWidth: true,
           shape: ButtonShape.roundedCorners,
           isLoading: state.status.isLoading,
           density: ButtonDensity.comfortable,
-          onPressed: state.isValid
-              ? () => context.read<AddClientCubit>().saveClient()
-              : null,
+          onPressed:
+              state.isValid ? () => context.read<AddClientCubit>().saveClient(coachEmail) : null,
           label: context.l10n.add,
         );
       },
