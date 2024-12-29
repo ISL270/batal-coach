@@ -19,7 +19,7 @@ import 'package:go_router/go_router.dart';
 class AddClientScreen extends StatelessWidget {
   const AddClientScreen({super.key});
 
-  static const name = 'AddClient';
+  static const name = 'add-client';
 
   @override
   Widget build(BuildContext context) {
