@@ -15,41 +15,48 @@ class _ClientsListView extends StatelessWidget {
           children: [
             const _SearchAndFilterWidget(),
             const Gap(10),
-            Padding(
-              padding: EdgeInsets.all(8.w),
-              child: Text(
-                '${context.l10n.allClients.toUpperCase()} (3)',
-                style: context.textThemeX.small.bold.copyWith(
-                  color:
-                      context.colorsX.onBackgroundTint.withValues(alpha: 0.5),
-                ),
-              ),
-            ),
             BlocBuilder<ClientsBloc, ClientsState>(
               builder: (context, state) => switch (state.status) {
                 Loading() => const Center(child: CircularProgressIndicator()),
                 _ => state.clients.result.isEmpty
                     ? const Center(child: Text('No clients found'))
-                    : ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return _ClientWidget(
-                              client: state.clients.result[index]);
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20.w, vertical: 5.h),
-                            child: Divider(
-                              height: 1,
-                              thickness: 0.5,
-                              color: context.colorsX.onBackgroundTint35
-                                  .withValues(alpha: 0.1),
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.w),
+                            child: Text(
+                              '${context.l10n.allClients.toUpperCase()} '
+                              '(${state.clients.result.length})',
+                              style: context.textThemeX.small.bold.copyWith(
+                                color: context.colorsX.onBackgroundTint
+                                    .withValues(alpha: 0.5),
+                              ),
                             ),
-                          );
-                        },
-                        itemCount: state.clients.result.length,
+                          ),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return _ClientWidget(
+                                  client: state.clients.result[index]);
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.w, vertical: 5.h),
+                                child: Divider(
+                                  height: 1,
+                                  thickness: 0.5,
+                                  color: context.colorsX.onBackgroundTint35
+                                      .withValues(alpha: 0.1),
+                                ),
+                              );
+                            },
+                            itemCount: state.clients.result.length,
+                          ),
+                        ],
                       ),
               },
             ),
@@ -116,6 +123,8 @@ class _SearchAndFilterWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.sp), // Add border radius
               ),
             ),
+            onChanged: (searchTerm) =>
+                context.read<ClientsBloc>().add(ClientsSearched(searchTerm)),
           ),
         ),
         Gap(20.w),
