@@ -38,7 +38,7 @@ class AddClientCubit extends Cubit<AddClientState> {
       await _repository.saveClient(
         coachEmail: coachEmail,
         phoneNumber: state.phoneNumber.value,
-        name: state.fName.value,
+        name: state.fName.value + state.lName.value,
         phone: state.phoneNumber.value,
         userType: 'trainee',
         lastActive: DateTime.now(),
