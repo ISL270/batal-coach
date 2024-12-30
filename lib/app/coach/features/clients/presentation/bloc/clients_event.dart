@@ -17,3 +17,5 @@ final class ClientsSearched extends ClientsEvent {
 }
 
 final class _ClientsSubscriptionRequested extends ClientsEvent {}
+
+final class ClientsNextPageFetched extends ClientsEvent {}

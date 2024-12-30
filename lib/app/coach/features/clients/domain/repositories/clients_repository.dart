@@ -60,4 +60,7 @@ final class ClientsRepository
     );
     return cms.map((e) => e.toDomain()).toList();
   }
+
+  @disposeMethod
+  void dispMethod() => dispose();
 }

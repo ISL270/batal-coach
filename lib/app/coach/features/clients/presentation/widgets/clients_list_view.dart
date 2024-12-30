@@ -25,33 +25,33 @@ class _ClientsListView extends StatelessWidget {
                 ),
               ),
             ),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return _ClientWidget(
-                  client: Client(
-                    email: 'clientEmail@mail.com',
-                    name: 'Eslam Ashraf',
-                    phoneNumber: '+201146012354',
-                    id: '20215',
-                    lastActiveDate: DateTime.now(),
-                  ),
-                );
+            BlocBuilder<ClientsBloc, ClientsState>(
+              builder: (context, state) => switch (state.status) {
+                Loading() => const Center(child: CircularProgressIndicator()),
+                _ => state.clients.result.isEmpty
+                    ? const Center(child: Text('No clients found'))
+                    : ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return _ClientWidget(
+                              client: state.clients.result[index]);
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20.w, vertical: 5.h),
+                            child: Divider(
+                              height: 1,
+                              thickness: 0.5,
+                              color: context.colorsX.onBackgroundTint35
+                                  .withValues(alpha: 0.1),
+                            ),
+                          );
+                        },
+                        itemCount: state.clients.result.length,
+                      ),
               },
-              separatorBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-                  child: Divider(
-                    height: 1,
-                    thickness: 0.5,
-                    color: context.colorsX.onBackgroundTint35
-                        .withValues(alpha: 0.1),
-                  ),
-                );
-              },
-              itemCount: 3,
             ),
           ],
         ),
