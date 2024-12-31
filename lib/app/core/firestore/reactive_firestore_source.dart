@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:btl/app/core/firestore/firestore_helper.dart';
 import 'package:btl/app/core/firestore/firestore_service.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
@@ -17,7 +18,7 @@ import 'package:flutter/foundation.dart';
 /// - Handling errors and edge cases
 ///
 /// [FM] represents the Firebase Model type to be converted from Firestore documents
-abstract base class ReactiveFirestoreSource<FM> {
+abstract base class ReactiveFirestoreSource<FM> with FirestoreHelper {
   @protected
   final FirestoreService firestoreSvc;
 
