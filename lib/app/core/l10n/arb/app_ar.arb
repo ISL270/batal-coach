@@ -183,5 +183,22 @@
       "ok" : "نعم",
       "gender": "النوع",
       "male": "ذكر",
-      "female": "مؤنث"
+      "female": "مؤنث",
+      "appBarTitle": "منشئ التمارين",
+      "addSet": "إضافة مجموعة",
+      "set": "مجموعة",
+      "reps": "التكرارات",
+      "time": "الوقت",
+      "weight": "الوزن",
+      "distance": "المسافة",
+      "deleteConfirmation": "هل أنت متأكد أنك تريد حذف هذه المجموعة؟",
+      "yes": "نعم",
+      "no": "لا",
+      "workoutName": "اسم التمرين",
+      "workoutDes": "وصف التمرين",
+      "newWorkout": "تمرين جديد",
+      "addExercises": "إضافة تمارين",
+      "selectExercise":"اختر تمرين",
+      "noExercises":"لم يتم العثور على تمارين"
+
 }
