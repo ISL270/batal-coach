@@ -17,19 +17,16 @@ class AddClientCubit extends Cubit<AddClientState> {
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
-  void fNameChanged(String value) =>
-      emit(state.copyWith(fName: Name.dirty(value)));
+  void fNameChanged(String value) => emit(state.copyWith(fName: Name.dirty(value)));
 
-  void lNameChanged(String value) =>
-      emit(state.copyWith(lName: Name.dirty(value)));
+  void lNameChanged(String value) => emit(state.copyWith(lName: Name.dirty(value)));
 
   void phoneChanged(String value) {
     final pppp = PhoneNumber.dirty(value);
     emit(state.copyWith(phoneNumber: pppp));
   }
 
-  void emailChanged(String value) =>
-      emit(state.copyWith(email: Email.dirty(value)));
+  void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
   Future<void> saveClient() async {
     try {
