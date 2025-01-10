@@ -24,6 +24,10 @@ sealed class User extends Equatable {
   /// Url for the current user's photo.
   // final String? photo;
 
+  // Getters
+  bool get isCoach => runtimeType == Coach;
+  bool get isTrainee => runtimeType == Trainee;
+
   @override
   List<Object?> get props => [
         email,
