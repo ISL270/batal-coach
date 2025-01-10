@@ -27,7 +27,9 @@ final class ClientFM implements RemoteModel<Client> {
         name: json['name'] as String,
         email: json['email'] as String,
         phoneNumber: json['phoneNumber'] as String,
-        lastActive: (json['lastActive'] as Timestamp).toDate(),
+        lastActive: json['lastActive'] != null
+            ? (json['lastActive'] as Timestamp).toDate()
+            : DateTime.fromMillisecondsSinceEpoch(0),
       );
 
   Map<String, dynamic> toJson() => _$ClientFMToJson(this);
