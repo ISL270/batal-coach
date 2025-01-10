@@ -15,7 +15,6 @@ class _InitialPageViewState extends State<_InitialPageView> with AutomaticKeepAl
   Widget build(BuildContext context) {
     super.build(context);
     return SingleChildScrollView(
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Padding(
         padding: EdgeInsets.only(top: 80.h, right: 20.w, left: 20.w),
         child: Column(
@@ -241,7 +240,7 @@ class _AlreadyHaveAnAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(context.l10n.alreadyhaveaccount, style: TextStyle(color: context.colorsX.background)),
+        Text(context.l10n.alreadyHaveAccount, style: TextStyle(color: context.colorsX.background)),
         SizedBox(width: 5.w),
         GestureDetector(
           onTap: () => context.pop(),
