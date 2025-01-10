@@ -5,6 +5,7 @@ import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
+import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
 import 'package:btl/app/widgets/svg_asset.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView.builder(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        reverse: context.settingsBloc.state.language.isArabic,
+        reverse: context.settingsBloc.state.settings.language.isArabic,
         itemBuilder: (context, index) => switch (index) {
           0 => const Scaffold(
               body: Center(

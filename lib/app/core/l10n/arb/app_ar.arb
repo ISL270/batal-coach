@@ -171,23 +171,17 @@
       "selectFilter": "اختر فلتر للاستخدام",
       "archived": "مؤرشف",
       "wentWrong": "لقد حدث خطأ ما",
-      "appBarTitle": "منشئ التمارين",
-      "addSet": "إضافة مجموعة",
-      "set": "مجموعة",
-      "reps": "التكرارات",
-      "time": "الوقت",
-      "weight": "الوزن",
-      "distance": "المسافة",
-      "deleteConfirmation": "هل أنت متأكد أنك تريد حذف هذه المجموعة؟",
-      "yes": "نعم",
-      "no": "لا",
-      "workoutName": "اسم التمرين",
-      "workoutDes": "وصف التمرين",
-      "newWorkout": "تمرين جديد",
-      "addExercises": "إضافة تمارين",
-      "selectExercise":"اختر تمرين",
-      "noExercises":"لم يتم العثور على تمارين"
-
-
-
+      "seconds":"ثواني",
+      "changePassword": "تغير كلمة المرور",
+      "notifications": "الإشعارات",
+      "technicalSupport": "الدعم الفني",
+      "aboutapp": "حول التطبيق",
+      "selectRole": "اختر الدور",
+      "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+      "coachEmail": "بريد إلكتروني للمدرب",
+      "companyName":"اسم الشركة",
+      "ok" : "نعم",
+      "gender": "النوع",
+      "male": "ذكر",
+      "female": "مؤنث"
 }
