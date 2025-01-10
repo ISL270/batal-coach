@@ -178,5 +178,6 @@
           "ok" : "Ok",
           "gender": "Gender",
           "male": "Male",
-          "female": "Female"
+          "female": "Female",
+          "thisWeek":"THIS WEEK"
   }
