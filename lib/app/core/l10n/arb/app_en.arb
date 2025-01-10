@@ -178,5 +178,14 @@
           "ok" : "Ok",
           "gender": "Gender",
           "male": "Male",
-          "female": "Female"
+          "female": "Female",
+            "changePassword":"change password",
+            "notifications":"notifications",
+            "units":"units",
+            "technicalSupport":"technical support",
+            "aboutapp":"about app",
+            "profile":"profile",
+            "version":"Version",
+            "termsOfService":"Terms of Service",
+            "privacyPolicy":"Privacy Policy"
   }
