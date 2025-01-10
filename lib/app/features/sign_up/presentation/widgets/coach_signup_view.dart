@@ -59,7 +59,7 @@ class _CoachPageViewState extends State<_CoachPageView> with AutomaticKeepAliveC
                     onChanged: (CoachType? selectedType) => selectedType != null
                         ? context.read<SignUpCubit>().coachTypeChanged(selectedType)
                         : null,
-                    validator: (value) => value != null ? context.l10n.selectrole : null,
+                    validator: (value) => value != null ? context.l10n.selectRole : null,
                   ),
                 );
               },
@@ -86,7 +86,7 @@ class _CompanyField extends StatelessWidget {
       style: TextStyle(color: context.colorsX.background),
       decoration: InputDecoration(
         label: Text(
-          '${context.l10n.companyname.capitalized} (${context.l10n.optional.capitalized})',
+          '${context.l10n.companyName.capitalized} (${context.l10n.optional.capitalized})',
           style: context.textThemeX.small.copyWith(color: context.colorsX.background),
         ),
         border: _signUpOutLinedInputBorder(context),

@@ -36,12 +36,14 @@ class HomeScreen extends StatelessWidget {
             selectedIndex: navigationShell.currentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: SvgAsset(Assets.icons.dumbbell, color: context.colorsX.primary),
+                selectedIcon: SvgAsset(Assets.icons.dumbbell,
+                    color: context.colorsX.primary),
                 icon: SvgAsset(Assets.icons.dumbbellOutlined),
                 label: context.l10n.exercise(0).capitalizedDefinite,
               ),
               NavigationDestination(
-                selectedIcon: SvgAsset(Assets.icons.sprint, color: context.colorsX.primary),
+                selectedIcon: SvgAsset(Assets.icons.sprint,
+                    color: context.colorsX.primary),
                 icon: SvgAsset(Assets.icons.sprint),
                 label: context.l10n.workout(0).capitalizedDefinite,
               ),
@@ -52,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               ),
               NavigationDestination(
                 selectedIcon: const Icon(Icons.settings),
-                icon: const Icon(Icons.settings_outlined),
+                icon: const Icon(Icons.settings),
                 label: context.l10n.settings.capitalizedDefinite,
               ),
             ],
