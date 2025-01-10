@@ -1,4 +1,5 @@
 import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
+import 'package:btl/app/coach/features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
 import 'package:btl/app/core/extension_methods/client_x.dart';
@@ -45,10 +46,7 @@ class ClientsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Align(
           child: Row(
-            children: [
-              const Spacer(),
-              Icon(Icons.settings, color: context.colorsX.primary)
-            ],
+            children: [const Spacer(), Icon(Icons.settings, color: context.colorsX.primary)],
           ),
         ),
       ),

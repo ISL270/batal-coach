@@ -137,14 +137,12 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
               Text(
                 '🏡 (GMT-08:00) America/Los_Angeles',
                 textAlign: TextAlign.center,
-                style: context.textThemeX.small
-                    .copyWith(color: Colors.grey, fontSize: 12),
+                style: context.textThemeX.small.copyWith(color: Colors.grey, fontSize: 12),
               ),
               Text(
                 '⏱︎ 6:19 AM',
                 textAlign: TextAlign.center,
-                style: context.textThemeX.small
-                    .copyWith(color: Colors.grey, fontSize: 12),
+                style: context.textThemeX.small.copyWith(color: Colors.grey, fontSize: 12),
               ),
             ],
           ),
