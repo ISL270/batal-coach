@@ -13,12 +13,12 @@ final class ExercisesFirestoreSource extends ReactiveFirestoreSource<ExerciseFM>
   ExercisesFirestoreSource(super.firestoreSvc);
 
   @override
-  ExerciseFM fromJson(String docID,Map<String, dynamic> json) => ExerciseFM.fromJson(json);
+  ExerciseFM fromJson(String docID, Map<String, dynamic> json) => ExerciseFM.fromJson(json);
 
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>
       firestoreSvc.exercises.btlExercises.snapshots();
 
   @disposeMethod
-  void dispMethod() => dispose();
+  void dispMethod() => cancelRemoteSub();
 }

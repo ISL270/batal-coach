@@ -1,14 +1,16 @@
+import 'package:btl/app/core/constants/default.dart';
+
 final class PaginatedResult<T> {
-  final List<T> result;
   final int page;
   final int pageSize;
+  final List<T> result;
   final bool hasReachedMax;
 
   const PaginatedResult({
-    this.result = const [],
     this.page = 0,
-    this.pageSize = 15,
+    this.result = const [],
     this.hasReachedMax = false,
+    this.pageSize = Default.pageSize,
   });
 
   PaginatedResult<T> copyWith({
@@ -17,9 +19,9 @@ final class PaginatedResult<T> {
   }) {
     return PaginatedResult<T>(
       result: result,
+      pageSize: pageSize,
       page: page ?? this.page,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-      pageSize: pageSize,
     );
   }
 

@@ -165,5 +165,18 @@
       "clear": "Clear",
       "selectFilter": "Select filter to use",
       "archived": "Archived",
-      "wentWrong": "something went wrong"
+      "seconds":"seconds",
+      "wentWrong": "something went wrong",
+       "changePassword": "Change Password",
+          "notifications": "Notifications",
+          "technicalSupport": "Technical Support",
+          "aboutapp": "About App",
+          "selectRole": "Select Role",
+          "alreadyHaveAccount": "Already have an account?",
+          "coachEmail": "Coach Email",
+          "companyName":"Company Name",
+          "ok" : "Ok",
+          "gender": "Gender",
+          "male": "Male",
+          "female": "Female"
   }
