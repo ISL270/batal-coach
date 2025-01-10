@@ -18,7 +18,7 @@ part 'widgets/over_view_tab_widget.dart';
 class ClientDetailsScreen extends StatelessWidget {
   const ClientDetailsScreen({super.key});
 
-  static const name = 'ClientDetails';
+  static const name = 'client-details';
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +55,7 @@ class ClientDetailsScreen extends StatelessWidget {
               TabBar(
                 indicatorColor: context.colorsX.primary, // Tab indicator color
                 labelColor: context.colorsX.primary, // Active tab label color
-                unselectedLabelColor: context
-                    .colorsX.onBackgroundTint, // Inactive tab label color
+                unselectedLabelColor: context.colorsX.onBackgroundTint, // Inactive tab label color
                 tabs: [
                   Tab(text: context.l10n.overview),
                   Tab(text: context.l10n.others),
@@ -137,14 +136,14 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
               Text(
                 '🏡 (GMT-08:00) America/Los_Angeles',
                 textAlign: TextAlign.center,
-                style: context.textThemeX.small.copyWith(
-                    color: context.colorsX.onBackgroundTint, fontSize: 12.sp),
+                style: context.textThemeX.small
+                    .copyWith(color: context.colorsX.onBackgroundTint, fontSize: 12.sp),
               ),
               Text(
                 '⏱︎ 6:19 AM',
                 textAlign: TextAlign.center,
-                style: context.textThemeX.small.copyWith(
-                    color: context.colorsX.onBackgroundTint, fontSize: 12),
+                style: context.textThemeX.small
+                    .copyWith(color: context.colorsX.onBackgroundTint, fontSize: 12),
               ),
             ],
           ),
