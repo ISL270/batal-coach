@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
@@ -126,6 +127,11 @@ final coachRouter = GoRouter(
                   child: const ClientsScreen(),
                 ),
               ),
+            ),
+            GoRoute(
+              name: AddClientScreen.name,
+              path: '/${AddClientScreen.name}',
+              builder: (context, state) => const AddClientScreen(),
             ),
           ],
         ),
