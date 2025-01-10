@@ -1,5 +1,6 @@
 // ignore_for_file: strict_raw_type
 
+import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
@@ -24,6 +25,7 @@ final class IsarService with IsarHelper {
         ExerciseIsarSchema,
         WorkoutIsarSchema,
         SettingsIsarSchema,
+        ClientIsarSchema,
       ],
       directory: dir.path,
     );

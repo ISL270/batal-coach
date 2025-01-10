@@ -1,10 +1,11 @@
+import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/routing/coach_router.dart';
 import 'package:btl/app/core/routing/trainee_router.dart';
 import 'package:btl/app/core/theming/app_theme.dart';
-import 'package:btl/app/features/authentication/domain/models/user_x.dart';
+import 'package:btl/app/features/authentication/domain/models/auth_state.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/settings/domain/settings_repository.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
@@ -27,7 +28,7 @@ class App extends StatelessWidget {
             BlocProvider(create: (_) => SettingsBloc(getIt.get<SettingsRepository>())),
             BlocProvider(create: (_) => getIt.authBloc),
           ],
-          child: BlocBuilder<AuthBloc, UserState>(
+          child: BlocBuilder<AuthBloc, Status<AuthState>>(
             buildWhen: hasUserTypeChanged,
             builder: (context, authState) {
               return BlocBuilder<SettingsBloc, SettingsState>(
