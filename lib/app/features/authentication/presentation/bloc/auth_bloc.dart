@@ -7,6 +7,7 @@ import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/models/auth_state.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:btl/app/features/login/login_screen.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
@@ -76,10 +77,13 @@ class AuthBloc extends Bloc<AuthEvent, Status<AuthState>> {
   /// Returns:
   /// - Exercises screen route for coaches
   /// - Throws [UnimplementedError] for other user types
-  String get homeNamedRoute => switch (state.user) {
-        Coach() => ExercisesScreen.name,
-        _ => throw UnimplementedError(),
-      };
+  String get homeNamedRoute {
+    return switch (state.user) {
+      null => LoginScreen.name,
+      Coach() => ExercisesScreen.name,
+      _ => throw UnimplementedError(),
+    };
+  }
 
   /// Closes the bloc and disposes of authentication resources
   @override
