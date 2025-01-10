@@ -32,7 +32,7 @@ class _NavBar extends StatelessWidget {
             ),
             NavigationDestination(
               selectedIcon: const Icon(Icons.settings),
-              icon: const Icon(Icons.settings_outlined),
+              icon: const Icon(Icons.settings),
               label: context.l10n.settings.capitalizedDefinite,
             ),
           ],

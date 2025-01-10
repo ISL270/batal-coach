@@ -15,9 +15,15 @@ class _ClientsListView extends StatelessWidget {
           children: [
             const _SearchAndFilterWidget(),
             const Gap(10),
-            Text(
-              '${context.l10n.allClients} (3)',
-              style: context.textThemeX.small.bold.copyWith(color: Colors.grey),
+            Padding(
+              padding: EdgeInsets.all(8.w),
+              child: Text(
+                '${context.l10n.allClients.toUpperCase()} (3)',
+                style: context.textThemeX.small.bold.copyWith(
+                  color:
+                      context.colorsX.onBackgroundTint.withValues(alpha: 0.5),
+                ),
+              ),
             ),
             ListView.separated(
               shrinkWrap: true,
@@ -26,9 +32,10 @@ class _ClientsListView extends StatelessWidget {
                 return _ClientWidget(
                   client: Client(
                     email: 'clientEmail@mail.com',
-                    name: 'slam Ashraf',
+                    name: 'Eslam Ashraf',
                     phoneNumber: '+201146012354',
                     id: '20215',
+                    lastActiveDate: DateTime.now(),
                   ),
                 );
               },
@@ -36,10 +43,11 @@ class _ClientsListView extends StatelessWidget {
                 return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-                  child: const Divider(
+                  child: Divider(
                     height: 1,
                     thickness: 0.5,
-                    color: Colors.grey,
+                    color: context.colorsX.onBackgroundTint35
+                        .withValues(alpha: 0.1),
                   ),
                 );
               },
@@ -75,8 +83,9 @@ class _ClientWidget extends StatelessWidget {
           ),
         ),
         title: Text(client.name, style: context.textThemeX.large.bold),
-        subtitle: Text(client.phoneNumber,
-            style: context.textThemeX.small.copyWith(color: Colors.grey)),
+        subtitle: Text(client.clientLastSeen(context),
+            style: context.textThemeX.small
+                .copyWith(color: context.colorsX.onBackgroundTint)),
       ),
     );
   }
@@ -87,36 +96,37 @@ class _SearchAndFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => FilterBloc(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 0.36.sh,
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: '${context.l10n.searchClients}...',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 0.34.sh,
+          child: TextFormField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor:
+                  context.colorsX.onBackgroundTint35.withValues(alpha: 0.03),
+              labelText: '${context.l10n.searchClients}...',
+              prefixIcon: Icon(
+                Icons.search,
+                color: context.colorsX.onBackgroundTint35,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none, // Removes the visible border
+                borderRadius: BorderRadius.circular(8.sp), // Add border radius
               ),
             ),
           ),
-          Gap(20.w),
-          BlocBuilder<FilterBloc, FilterState>(
-            builder: (context, state) {
-              final isFilterSelected = state.selectedFilters.isNotEmpty;
-              return InkWell(
-                onTap: () => _showFilterBottomSheet(context),
-                child: Icon(
-                  Icons.filter_list,
-                  color:
-                      isFilterSelected ? context.colorsX.primary : Colors.grey,
-                ),
-              );
-            },
+        ),
+        Gap(20.w),
+        InkWell(
+          onTap: () => _showFilterBottomSheet(context),
+          child: Icon(
+            Icons.tune,
+            color: context.colorsX.primary,
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -124,14 +134,11 @@ class _SearchAndFilterWidget extends StatelessWidget {
       showModalBottomSheet<void>(
         backgroundColor: context.colorsX.secondaryBackground,
         context: context,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16.sp)),
         ),
         builder: (_) {
-          return BlocProvider.value(
-            value: BlocProvider.of<FilterBloc>(context),
-            child: const _FilterBottomSheet(),
-          );
+          return const _FilterBottomSheet();
         },
       );
 }
@@ -147,7 +154,7 @@ class _FilterBottomSheet extends StatelessWidget {
       context.l10n.archived
     ];
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -156,18 +163,15 @@ class _FilterBottomSheet extends StatelessWidget {
             children: [
               TextButton(
                   onPressed: () {
-                    BlocProvider.of<FilterBloc>(context).add(ClearFilters());
                     context.pop();
                   },
                   child: Text(
                     context.l10n.clear,
-                    style: context.textThemeX.medium.copyWith(
-                      color: context.colorsX.secondary,
-                    ),
+                    style: context.textThemeX.medium
+                        .copyWith(color: context.colorsX.secondary),
                   )),
               TextButton(
                   onPressed: () {
-                    BlocProvider.of<FilterBloc>(context).add(SearchFilters());
                     context.pop();
                   },
                   child: Text(
@@ -178,33 +182,23 @@ class _FilterBottomSheet extends StatelessWidget {
           ),
           Text(context.l10n.selectFilter,
               style: context.textThemeX.small.copyWith(
-                color: Colors.grey,
+                color: context.colorsX.onBackgroundTint,
               )),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           SizedBox(
             height: 170.h,
             child: ListView.builder(
               itemCount: filters.length,
               itemBuilder: (context, index) {
                 final filter = filters[index];
-                return BlocBuilder<FilterBloc, FilterState>(
-                  builder: (context, state) {
-                    final selectedFilter = state.selectedFilters.isEmpty
-                        ? null
-                        : state.selectedFilters.first;
 
-                    return RadioListTile<String>(
-                      activeColor: Theme.of(context).primaryColor,
-                      title: Text(filter),
-                      value: filter,
-                      groupValue: selectedFilter,
-                      onChanged: (value) {
-                        if (value != null) {
-                          BlocProvider.of<FilterBloc>(context)
-                              .add(ToggleFilter(filter));
-                        }
-                      },
-                    );
+                return RadioListTile<String>(
+                  activeColor: context.colorsX.primary,
+                  title: Text(filter),
+                  value: filter,
+                  groupValue: '',
+                  onChanged: (value) {
+                    if (value != null) {}
                   },
                 );
               },

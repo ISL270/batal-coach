@@ -1,6 +1,7 @@
+import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
-import 'package:btl/app/coach/features/clients/presentation/bloc/filter_bloc.dart';
+import 'package:btl/app/core/extension_methods/client_x.dart';
 import 'package:btl/app/core/extension_methods/date_x.dart';
 import 'package:btl/app/core/extension_methods/string_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
@@ -9,7 +10,6 @@ import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -25,20 +25,29 @@ class ClientsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Screen(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: context.colorsX.primary,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.w)),
-        child: Icon(Icons.add, color: context.colorsX.secondaryBackground),
-        onPressed: () {},
+      floatingActionButton: SizedBox(
+        width: 65.r,
+        height: 65.r,
+        child: FloatingActionButton(
+          backgroundColor: context.colorsX.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.r),
+          ),
+          child: Icon(
+            Icons.add,
+            color: context.colorsX.secondaryBackground,
+            size: 35.w,
+          ),
+          onPressed: () => context.pushNamed(AddClientScreen.name),
+        ),
       ),
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       appBar: AppBar(
         title: Align(
           child: Row(
             children: [
               const Spacer(),
-              Icon(Icons.settings, color: context.colorsX.primary),
+              Icon(Icons.settings, color: context.colorsX.primary)
             ],
           ),
         ),
@@ -47,29 +56,29 @@ class ClientsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    DateTime.now().toFormattedDate(context),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.h),
+                  child: Text(
+                    DateTime.now().toMMMMDate(context),
                     style: context.textThemeX.medium.bold.copyWith(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       color: context.colorsX.primary,
                     ),
                   ),
-                  Text(
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.h),
+                  child: Text(
                     context.l10n.allClients,
-                    style: context.textThemeX.heading.bold
-                        .copyWith(fontSize: 32.sp),
+                    style: context.textThemeX.heading.bold.copyWith(fontSize: 32.sp),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  const _ClientsStatusListView(),
-                ],
-              ),
+                ),
+                SizedBox(height: 10.h),
+                const _ClientsStatusListView(),
+              ],
             ),
             const _ClientsListView(),
           ],

@@ -28,7 +28,7 @@ class WorkoutsBloc extends Bloc<WorkoutsEvent, WorkoutsState> {
     Emitter<WorkoutsState> emit,
   ) async {
     await emit.forEach(
-      _repository.getUpdates(),
+      _repository.stream(),
       onData: (status) {
         if (status.isSuccess) {
           add(WkSearched(state.searchTerm));
