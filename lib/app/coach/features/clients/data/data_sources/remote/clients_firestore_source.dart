@@ -37,5 +37,5 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
           .snapshots();
 
   @disposeMethod
-  void dispMethod() => dispose();
+  void dispMethod() => cancelRemoteSub();
 }

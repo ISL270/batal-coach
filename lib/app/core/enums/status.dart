@@ -33,9 +33,9 @@ sealed class Status<T> extends Equatable {
   /// Returns a [Loading] state with optional current data.
   Loading<T> toLoading() => switch (this) {
         Initial<T>(initialData: final currentData) => Loading(currentData),
+        Loading<T>(currentData: final currentData) => Loading(currentData),
         Success<T>(newData: final currentData) => Loading(currentData),
         Failure<T>(oldData: final currentData) => Loading(currentData),
-        Loading<T>() => throw Exception('State is already loading'),
       };
 
   /// Converts the current state to a Failure state.
@@ -46,8 +46,10 @@ sealed class Status<T> extends Equatable {
   /// [exception] The error that caused the failure.
   /// Returns a [Failure] state with the exception and optional old data.
   Failure<T> toFailure(GenericException exception) => switch (this) {
-        Loading<T>(currentData: final currentData) => Failure(exception, oldData: currentData),
-        _ => throw Exception('Can only go to failure from loading state'),
+        Initial<T>(initialData: final oldData) => Failure(exception, oldData: oldData),
+        Loading<T>(currentData: final oldData) => Failure(exception, oldData: oldData),
+        Success<T>(newData: final oldData) => Failure(exception, oldData: oldData),
+        Failure<T>(oldData: final oldData) => Failure(exception, oldData: oldData),
       };
 
   /// Converts the current state to a Success state.
@@ -58,14 +60,22 @@ sealed class Status<T> extends Equatable {
   /// [newData] The successful result data.
   /// Returns a [Success] state with the new data.
   Success<T> toSuccess(T newData) => switch (this) {
+        Initial<T>() => Success(newData),
         Loading<T>() => Success(newData),
         Success<T>() => Success(newData),
-        _ => throw Exception('Can only go to success from loading state'),
+        Failure<T>() => Success(newData),
+      };
+
+  T? get data => switch (this) {
+        Initial<T>(initialData: final data) => data,
+        Loading<T>(currentData: final data) => data,
+        Success<T>(newData: final data) => data,
+        Failure<T>(oldData: final data) => data,
       };
 
   bool get isInitial => this is Initial;
-  bool get isSuccess => this is Success;
   bool get isLoading => this is Loading;
+  bool get isSuccess => this is Success;
   bool get isFailure => this is Failure;
 
   @override

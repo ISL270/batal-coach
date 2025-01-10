@@ -9,8 +9,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
-final class ClientsRepository
-    extends ReactiveRepository<Client, ClientFM, ClientIsar> {
+final class ClientsRepository extends ReactiveRepository<Client, ClientFM, ClientIsar> {
   final ClientsFirestoreSource _remoteSource;
   final ClientsIsarSource _localSource;
 
