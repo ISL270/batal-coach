@@ -16,8 +16,6 @@ import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
@@ -154,7 +152,7 @@ final coachRouter = GoRouter(
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
     final fromloc = (state.isGoingToHome || state.isLoggingOut) ? '' : state.matchedLocation;
-    if (!getIt.authBloc.state.isAuthenticated) {
+    if (!getIt.authBloc.state.data!.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
           : state.namedLocation(
@@ -163,7 +161,6 @@ final coachRouter = GoRouter(
             );
     }
 
-    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     if (state.isLoggingIn) {
       return state.uri.queryParameters['from'] ??

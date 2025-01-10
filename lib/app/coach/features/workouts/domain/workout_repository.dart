@@ -26,7 +26,7 @@ final class WorkoutRepository extends ReactiveRepository<Workout, WorkoutFM, Wor
 
   @override
   Future<void> toBeAwaited() =>
-      _excsRepository.getUpdates().takeWhileInclusive((status) => !status.isSuccess).last;
+      _excsRepository.stream().takeWhileInclusive((status) => !status.isSuccess).last;
 
   Future<EitherException<void>> saveWorkout({
     required String name,
