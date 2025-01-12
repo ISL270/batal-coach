@@ -32,6 +32,8 @@ import 'package:rxdart/subjects.dart';
 /// - Status tracking (Initial, Loading, Success, Failure)
 /// - Selective data updates for authorized users
 /// - Error handling and cache management
+///
+/// For a visual representation check -> https://shrktna.atlassian.net/wiki/spaces/CA/whiteboard/36896771?atl_f=PAGETREE
 abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheModel<D>> {
   @protected
   final AuthRepository authRepository;
