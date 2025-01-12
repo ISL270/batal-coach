@@ -23,7 +23,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
     Emitter<ClientsState> emit,
   ) async {
     await emit.forEach(
-      _repository.getUpdates(),
+      _repository.stream(),
       onData: (status) {
         if (status.isSuccess) {
           add(ClientsSearched(state.searchTerm));
@@ -31,11 +31,5 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
         return state;
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    _repository.dispose();
-    return super.close();
   }
 }
