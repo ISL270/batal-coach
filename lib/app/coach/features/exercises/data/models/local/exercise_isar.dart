@@ -7,40 +7,40 @@ part 'exercise_isar.g.dart';
 @collection
 final class ExerciseIsar extends CacheModel<Exercise> {
   @override
-  String id;
+  final String id;
 
   @Index(type: IndexType.value, caseSensitive: false)
-  String name;
+  final String name;
 
   @Enumerated(EnumType.name)
-  Force? force;
+  final Force? force;
 
   @Enumerated(EnumType.name)
-  ExLevel? level;
+  final ExLevel? level;
 
   @Enumerated(EnumType.name)
-  Mechanic? mechanic;
+  final Mechanic? mechanic;
 
   @Enumerated(EnumType.name)
-  ExType? type;
+  final ExType? type;
 
   @Enumerated(EnumType.name)
-  Equipment? equipment;
+  final Equipment? equipment;
 
   @Enumerated(EnumType.name)
-  Muscle mainMuscle;
+  final Muscle mainMuscle;
 
-  List<String> instructions;
+  final List<String> instructions;
 
-  List<String> images;
-
-  @Enumerated(EnumType.name)
-  List<Muscle> secondaryMuscles;
+  final List<String> images;
 
   @Enumerated(EnumType.name)
-  List<FieldType> fields;
+  final List<Muscle> secondaryMuscles;
 
-  ExerciseIsar({
+  @Enumerated(EnumType.name)
+  final List<FieldType> fields;
+
+  const ExerciseIsar({
     required this.id,
     required this.name,
     required this.force,
@@ -54,6 +54,21 @@ final class ExerciseIsar extends CacheModel<Exercise> {
     required this.secondaryMuscles,
     required this.fields,
   });
+
+  factory ExerciseIsar.fromDomain(Exercise exc) => ExerciseIsar(
+        id: exc.id,
+        type: exc.type,
+        equipment: exc.equipment,
+        force: exc.force,
+        images: exc.images,
+        instructions: exc.instructions,
+        level: exc.level,
+        mainMuscle: exc.mainMuscle,
+        mechanic: exc.mechanic,
+        name: exc.name,
+        secondaryMuscles: exc.secondaryMuscles,
+        fields: exc.fieldTypes,
+      );
 
   @override
   Exercise toDomain() => Exercise(
@@ -69,20 +84,5 @@ final class ExerciseIsar extends CacheModel<Exercise> {
         mainMuscle: mainMuscle,
         secondaryMuscles: secondaryMuscles,
         fieldTypes: fields,
-      );
-
-  factory ExerciseIsar.fromDomain(Exercise exc) => ExerciseIsar(
-        id: exc.id,
-        type: exc.type,
-        equipment: exc.equipment,
-        force: exc.force,
-        images: exc.images,
-        instructions: exc.instructions,
-        level: exc.level,
-        mainMuscle: exc.mainMuscle,
-        mechanic: exc.mechanic,
-        name: exc.name,
-        secondaryMuscles: exc.secondaryMuscles,
-        fields: exc.fieldTypes,
       );
 }

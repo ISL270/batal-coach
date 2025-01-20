@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:btl/app/core/isar/isar_service.dart';
 import 'package:flutter/foundation.dart';
@@ -25,13 +27,25 @@ abstract base class IsarSource<D, C extends CacheModel<D>> {
   /// Returns the converted cache model
   C fromDomain(D dm);
 
-  /// Persists multiple domain models to the local database
-  ///
-  /// Converts domain models to cache models before storing
-  ///
-  /// [list] The list of domain models to be stored
-  /// Returns a [Future] with a list of stored record IDs
+  Future<int> put(D dm) => isarService.put<C>(fromDomain(dm));
+
   Future<List<int>> putAll(List<D> list) => isarService.putAll<C>(list.map(fromDomain).toList());
 
+  Future<C?> get(String id) => isarService.get<C>(id);
+
+  Future<C?> getFirst() => isarService.getFirst<C>();
+
+  Future<List<C?>> getAll() => isarService.getAll<C>();
+
+  Future<List<C>> getAllByIDs(List<String> ids) => isarService.getAllByIDs<C>(ids);
+
+  Future<bool> delete(D dm) => isarService.delete<C>(fromDomain(dm));
+
+  Future<bool> deleteByID(String id) => isarService.deleteByID<C>(id);
+
+  Future<int> deleteAll(List<String> ids) => isarService.deleteAll<C>(ids);
+
   Future<void> clear() => isarService.clear<C>();
+
+  Stream<C?> watchObject(String id) => isarService.watchObject<C>(id);
 }

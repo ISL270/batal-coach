@@ -7,17 +7,17 @@ part 'client_isar.g.dart';
 @collection
 final class ClientIsar extends CacheModel<Client> {
   @override
-  String id;
+  final String id;
 
   @Index(type: IndexType.value, caseSensitive: false)
-  String name;
+  final String name;
 
-  String email;
+  final String email;
 
-  String phone;
-  DateTime lastActiveDate;
+  final String phone;
+  final DateTime lastActiveDate;
 
-  ClientIsar({
+  const ClientIsar({
     required this.id,
     required this.email,
     required this.name,

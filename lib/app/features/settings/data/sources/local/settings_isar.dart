@@ -9,7 +9,7 @@ part 'settings_isar.g.dart';
 @collection
 final class SettingsIsar extends CacheModel<Settings> {
   @override
-  String id = '';
+  final String id = 'settings';
   @override
   Id cacheID = Isar.autoIncrement;
   @enumerated
