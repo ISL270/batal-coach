@@ -7,11 +7,11 @@ import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:btl/app/core/isar/isar_source.dart';
-import 'package:btl/app/core/models/doc_change.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/features/authentication/domain/models/auth_state.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:rxdart/subjects.dart';
 
 /// An abstract reactive repository that manages synchronization between
@@ -110,16 +110,16 @@ abstract class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheMo
       // Listen to remote updates and synchronize local data
       remoteSource.changes.listen(
         (remoteChanges) async {
-          for (final change in remoteChanges) {
-            switch (change) {
-              case DocAdded<R>():
-                unawaited(localSource.put(change.newDoc.toDomain()));
-              case DocModified<R>():
-                unawaited(localSource.put(change.modifiedDoc.toDomain()));
-              case DocRemoved<R>():
-                unawaited(localSource.deleteByID(change.id));
-            }
-          }
+          final (toBeSaved, toBeDeleted) = remoteChanges.partition((change) => change.isDeleted);
+
+          //TODO: Make it faster
+          //Tips for better performance:
+          // 1. convert from RM to CM directly.
+          // 2. .map() is slow, a for loop might be better.
+          await Future.wait([
+            localSource.deleteAllByIDs(toBeDeleted.map((e) => e.doc.id)),
+            localSource.putAll(toBeSaved.map((e) => e.doc.toDomain()))
+          ]);
 
           // Mark synchronization as successful
           _subject.add(_subject.value.toSuccess(null));
@@ -142,10 +142,13 @@ abstract class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheMo
   ///
   /// Parameters:
   /// - [docID] Unique identifier of the document to be deleted
-  Future<void> deleteDoc(String docID) => remoteSource.deleteDoc(
-        uid: authRepository.user!.id,
-        docID: docID,
-      );
+  Future<void> deleteDoc(String docID) async {
+    try {
+      await remoteSource.deleteDoc(uid: authRepository.user!.id, docID: docID);
+    } catch (e) {
+      throw e as GenericException;
+    }
+  }
 
   /// Watches a specific object in the local source
   ///
