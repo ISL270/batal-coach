@@ -108,7 +108,7 @@ enum EquipmentFM implements RemoteModel<Equipment> {
       EquipmentFM.values.firstWhere((e) => e.name == domain.name);
 
   @override
-  String get id => throw UnimplementedError();
+  String get id => 'unused id';
 }
 
 enum CategoryFM {
@@ -153,7 +153,7 @@ enum LevelFM implements RemoteModel<ExLevel> {
       LevelFM.values.firstWhere((e) => e.name == domain.name);
 
   @override
-  String get id => throw UnimplementedError();
+  String get id => 'unused id';
 }
 
 enum MuscleFM implements RemoteModel<Muscle> {
@@ -183,7 +183,7 @@ enum MuscleFM implements RemoteModel<Muscle> {
       MuscleFM.values.firstWhere((e) => e.name == domain.name);
 
   @override
-  String get id => throw UnimplementedError();
+  String get id => 'unused id';
 }
 
 enum ForceFM implements RemoteModel<Force> {
@@ -197,7 +197,7 @@ enum ForceFM implements RemoteModel<Force> {
       ForceFM.values.firstWhere((e) => e.name == domain.name);
 
   @override
-  String get id => throw UnimplementedError();
+  String get id => 'unused id';
 }
 
 enum MechanicFM implements RemoteModel<Mechanic> {
@@ -210,7 +210,7 @@ enum MechanicFM implements RemoteModel<Mechanic> {
       MechanicFM.values.firstWhere((e) => e.name == domain.name);
 
   @override
-  String get id => throw UnimplementedError();
+  String get id => 'unused id';
 }
 
 enum FieldFM implements RemoteModel<FieldType> {
@@ -225,7 +225,7 @@ enum FieldFM implements RemoteModel<FieldType> {
       FieldFM.values.firstWhere((e) => e.name == domain.name);
 
   @override
-  String get id => throw UnimplementedError();
+  String get id => 'unused id';
 }
 
 List<FieldFM> _getFieldsByCategory(CategoryFM category) {
