@@ -60,7 +60,7 @@ extension ExerciseX on Exercise {
   }
 
   String get mockImage =>
-      'https://firebasestorage.googleapis.com/v0/b/btl-dev-69d91.appspot.com/o/default_exercises%2Fweighted_crunches.gif?alt=media&token=b17224d9-6542-4292-b600-fd9949a7f913';
+      'https://firebasestorage.googleapis.com/v0/b/btl-dev-69d91.appspot.com/o/default_exercises%2FOblique-Floor-Crunches.gif?alt=media&token=e137c34c-6aa4-4f72-a17f-eba678134b0b';
 }
 
 enum ExType {
