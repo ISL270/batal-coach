@@ -71,7 +71,7 @@ sealed class Status<T> extends Equatable {
         Failure<T>() => Success(newData),
       };
 
-/// Returns the data associated with the current state, which may be null.
+  /// Returns the data associated with the current state, which may be null.
   T? get data => switch (this) {
         Initial<T>(initialData: final data) => data,
         Loading<T>(currentData: final data) => data,
