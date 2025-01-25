@@ -199,6 +199,15 @@
       "newWorkout": "تمرين جديد",
       "addExercises": "إضافة تمارين",
       "selectExercise":"اختر تمرين",
-      "noExercises":"لم يتم العثور على تمارين"
+      "noExercises":"لم يتم العثور على تمارين",
+        "changePassword":"تغيير كلمة المرور",
+        "notifications":"الإشعارات",
+        "units":"الوحدات",
+        "technicalSupport":"الدعم الفني",
+        "aboutapp":"حول التطبيق",
+        "profile":"الحساب الشخصي",
+        "version":"الإصدار",
+        "termsOfService":"بنود الخدمة",
+        "privacyPolicy":"سياسة الخصوصية"
 
 }

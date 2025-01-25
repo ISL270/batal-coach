@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, unused_element
 
+import 'package:btl/app/core/extension_methods/arabic_x.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/getit_x.dart';
@@ -8,6 +9,7 @@ import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
+import 'package:btl/app/features/about_app/presentation/about_app_screen.dart';
 import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/widgets/button.dart';
@@ -17,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -30,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          context.l10n.settings.capitalized,
+          context.l10n.settings.capitalized.definite,
           style: context.textThemeX.large.bold,
         ),
       ),
@@ -63,6 +66,7 @@ class SettingsScreen extends StatelessWidget {
                   widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
                 ),
                 _SettingsSectionWidget(
+                  onPressed: () => context.pushNamed(AboutAppScreen.name),
                   iconData: FontAwesomeIcons.mobileScreenButton,
                   label: context.l10n.aboutapp.capitalized,
                   widget: Icon(Icons.arrow_forward_ios_rounded, size: 18.w),
