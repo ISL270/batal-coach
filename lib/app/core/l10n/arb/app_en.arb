@@ -179,7 +179,7 @@
           "gender": "Gender",
           "male": "Male",
           "female": "Female",
-      "appBarTitle": "Workout Builder",
+      "workoutBuilder": "Workout Builder",
       "addSet": "Add set",
       "set": "Set",
       "reps": "Reps",
