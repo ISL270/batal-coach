@@ -7,7 +7,7 @@ class _WkDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Screen(
       appBar: AppBar(
-        title: const Text('New Workout'),
+        title: Text(context.l10n.newWorkout),
       ),
       body: Column(
         children: [
@@ -18,7 +18,8 @@ class _WkDetails extends StatelessWidget {
               return TextFormField(
                 initialValue: name,
                 onChanged: context.wkBuilderCubit.updateName,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration:
+                    InputDecoration(labelText: context.l10n.workoutName),
               );
             },
           ),
@@ -30,18 +31,19 @@ class _WkDetails extends StatelessWidget {
                 maxLines: 5,
                 initialValue: description,
                 onChanged: context.wkBuilderCubit.updateDescription,
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(labelText: context.l10n.workoutDes),
               );
             },
           ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: BlocBuilder<WorkoutBuilderCubit, WorkoutBuilderState>(
+      floatingActionButton:
+          BlocBuilder<WorkoutBuilderCubit, WorkoutBuilderState>(
         builder: (context, state) {
           if (state.exercisesSets.isNotEmpty) {
             return Button.filled(
-              label: 'Continue',
+              label: context.l10n.continu,
               density: ButtonDensity.comfortable,
               onPressed: state.name.isBlank
                   ? null
@@ -52,7 +54,7 @@ class _WkDetails extends StatelessWidget {
             );
           }
           return Button.filled(
-            label: 'Add Exercises',
+            label: context.l10n.addExercises,
             density: ButtonDensity.comfortable,
             onPressed: state.name.isBlank
                 ? null
