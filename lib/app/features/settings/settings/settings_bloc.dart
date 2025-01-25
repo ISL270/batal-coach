@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/l10n/language.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:btl/app/features/settings/domain/settings.dart';
 import 'package:btl/app/features/settings/domain/settings_repository.dart';
 import 'package:equatable/equatable.dart';

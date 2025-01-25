@@ -14,20 +14,20 @@ part 'workout_isar.g.dart';
 @collection
 final class WorkoutIsar extends CacheModel<Workout> {
   @override
-  String id;
+  final String id;
 
-  String coachID;
+  final String coachID;
 
   @Index(type: IndexType.value, caseSensitive: false)
-  String name;
+  final String name;
 
-  String? description;
+  final String? description;
 
-  List<String> exercisesSets;
+  final List<String> exercisesSets;
 
-  DateTime createdAt;
+  final DateTime createdAt;
 
-  WorkoutIsar({
+  const WorkoutIsar({
     required this.id,
     required this.coachID,
     required this.name,
@@ -65,7 +65,7 @@ final class ExerciseSetsIsar with ExerciseSetsSerializer {
   final String excID;
   final Map<SET, List<Field>> fields;
 
-  ExerciseSetsIsar(this.excID, this.fields);
+  const ExerciseSetsIsar(this.excID, this.fields);
 
   String get encoded => jsonEncode(toMap(excID, fields));
 
