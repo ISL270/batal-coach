@@ -2,33 +2,22 @@ import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/settings/domain/settings.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class AboutAppScreen extends StatelessWidget {
   const AboutAppScreen({super.key});
 
-  static const name = 'aboutapp';
+  static const name = 'about-app';
 
   @override
   Widget build(BuildContext context) {
     return Screen(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            context.settingsBloc.state.settings.language.isArabic
-                ? Icons.keyboard_arrow_right_sharp
-                : Icons.keyboard_arrow_left_sharp,
-            size: 28.w,
-          ),
-          onPressed: () => context.pop(),
-        ),
         centerTitle: true,
         title: Text(
           context.l10n.aboutapp.capitalized,
