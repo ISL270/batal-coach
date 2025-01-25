@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart';
-import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/set.dart';
 import 'package:btl/app/core/models/domain/workout.dart';
 import 'package:btl/app/core/models/optional.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:dartx/dartx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';

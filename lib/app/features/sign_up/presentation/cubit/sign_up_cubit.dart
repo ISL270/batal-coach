@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/core/enums/status.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:btl/app/features/authentication/data/models/remote/auth_exceptions.dart';
 import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';

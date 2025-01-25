@@ -2,12 +2,12 @@
 
 import 'dart:async';
 
-import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:btl/app/core/isar/isar_source.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:btl/app/features/authentication/domain/models/auth_state.dart';
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:flutter/foundation.dart';
@@ -44,7 +44,7 @@ import 'package:rxdart/subjects.dart';
 ///     : super(auth, remoteSource: remote, localSource: local);
 /// }
 /// ```
-abstract class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheModel<D>> {
+abstract base class ReactiveRepository<D, R extends RemoteModel<D>, C extends CacheModel<D>> {
   @protected
   final AuthRepository authRepository;
   @protected
