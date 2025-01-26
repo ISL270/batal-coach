@@ -195,13 +195,15 @@
       "addExercises": "Add Exercises",
       "selectExercise":"Select Exercise",
       "noExercises":"No exercises found",
-            "changePassword":"change password",
-            "notifications":"notifications",
-            "units":"units",
-            "technicalSupport":"technical support",
-            "aboutapp":"about app",
-            "profile":"profile",
-            "version":"Version",
-            "termsOfService":"Terms of Service",
-            "privacyPolicy":"Privacy Policy"
+      "changePassword":"change password",
+      "notifications":"notifications",
+      "units":"units",
+      "technicalSupport":"technical support",
+       "aboutapp":"about app",
+      "profile":"profile",
+       "version":"Version",
+      "termsOfService":"Terms of Service",
+      "privacyPolicy":"Privacy Policy",
+      "thisWeek":"This Week"
+
   }
