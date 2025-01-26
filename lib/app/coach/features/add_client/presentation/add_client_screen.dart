@@ -2,10 +2,8 @@ import 'package:btl/app/coach/features/add_client/presentation/cubit/add_client_
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
-import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:go_router/go_router.dart';
-// part 'widgets/client_category_widget.dart';
 
 class AddClientScreen extends StatelessWidget {
   const AddClientScreen({super.key});
@@ -148,14 +145,12 @@ class _AddClientButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final coachEmail = getIt.authBloc.state.user!.email;
         return Button.filled(
           maxWidth: true,
           shape: ButtonShape.roundedCorners,
           isLoading: state.status.isLoading,
           density: ButtonDensity.comfortable,
-          onPressed:
-              state.isValid ? () => context.read<AddClientCubit>().saveClient(coachEmail) : null,
+          onPressed: state.isValid ? () => context.read<AddClientCubit>().saveClient() : null,
           label: context.l10n.add,
         );
       },
