@@ -35,27 +35,23 @@ class AddClientScreen extends StatelessWidget {
             ));
           }
         },
-        child: BlocBuilder<AddClientCubit, AddClientState>(
-          builder: (context, state) {
-            return Screen(
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text(context.l10n.addClient),
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  spacing: 30.h,
-                  children: const [
-                    _FullNameField(),
-                    _MailField(),
-                    _PhoneNumberField(),
-                    // const _ClientCategoryWidget(),
-                    _AddClientButton()
-                  ],
-                ),
-              ),
-            );
-          },
+        child: Screen(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(context.l10n.addClient),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              spacing: 30.h,
+              children: const [
+                _FullNameField(),
+                _EmailField(),
+                _PhoneNumberField(),
+                // const _ClientCategoryWidget(),
+                _AddClientButton()
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -84,20 +80,20 @@ class _FullNameField extends StatelessWidget {
   }
 }
 
-class _MailField extends StatelessWidget {
-  const _MailField();
+class _EmailField extends StatelessWidget {
+  const _EmailField();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddClientCubit, AddClientState>(
-      buildWhen: (previous, current) => previous.email != current.email,
-      builder: (context, state) {
+    return BlocSelector<AddClientCubit, AddClientState, Email>(
+      selector: (state) => state.email,
+      builder: (context, email) {
         return TextField(
           onChanged: (email) => context.read<AddClientCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: context.l10n.email.capitalized,
-            errorText: state.email.displayError != null ? context.l10n.invalidEmail : null,
+            errorText: email.displayError == null ? null : context.tr(context.l10n.invalidEmail),
           ),
         );
       },
