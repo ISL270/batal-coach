@@ -1,5 +1,6 @@
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
+import 'package:form_inputs/form_inputs.dart' as formz;
 import 'package:isar/isar.dart';
 
 part 'client_isar.g.dart';
@@ -7,17 +8,18 @@ part 'client_isar.g.dart';
 @collection
 final class ClientIsar extends CacheModel<Client> {
   @override
-  String id;
+  final String id;
 
   @Index(type: IndexType.value, caseSensitive: false)
-  String name;
+  final String name;
 
-  String email;
+  final String email;
 
-  String phone;
-  DateTime lastActiveAt;
+  final String phone;
 
-  ClientIsar({
+  final DateTime lastActiveAt;
+
+  const ClientIsar({
     required this.id,
     required this.email,
     required this.name,
@@ -27,7 +29,7 @@ final class ClientIsar extends CacheModel<Client> {
 
   factory ClientIsar.fromDomain(Client domain) => ClientIsar(
         id: domain.id,
-        name: domain.name,
+        name: domain.name.value,
         email: domain.email,
         phone: domain.phoneNumber,
         lastActiveAt: domain.lastActiveAt,
@@ -37,7 +39,7 @@ final class ClientIsar extends CacheModel<Client> {
   Client toDomain() {
     return Client(
       id: id,
-      name: name,
+      name: formz.Name.fromString(name),
       email: email,
       phoneNumber: phone,
       lastActiveAt: lastActiveAt,

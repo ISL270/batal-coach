@@ -31,7 +31,7 @@ class _ClientsListView extends StatelessWidget {
                 return _ClientWidget(
                   client: Client(
                     email: 'clientEmail@mail.com',
-                    name: 'Eslam Ashraf',
+                    name: Name.fromString('Eslam Ashraf'),
                     phoneNumber: '+201146012354',
                     id: '20215',
                     lastActiveAt: DateTime.now(),
@@ -79,7 +79,7 @@ class _ClientWidget extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(client.name, style: context.textThemeX.large.bold),
+        title: Text(client.name.value, style: context.textThemeX.large.bold),
         subtitle: Text(client.clientLastSeen(context),
             style: context.textThemeX.small.copyWith(color: context.colorsX.onBackgroundTint)),
       ),
