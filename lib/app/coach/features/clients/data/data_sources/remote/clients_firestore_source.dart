@@ -38,4 +38,10 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
 
   @disposeMethod
   void dispMethod() => cancelRemoteSub();
+
+  @override
+  Future<void> deleteDoc({required String uid, required String docID}) {
+    // TODO: implement deleteDoc
+    throw UnimplementedError();
+  }
 }
