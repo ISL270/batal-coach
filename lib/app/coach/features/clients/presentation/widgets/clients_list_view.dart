@@ -29,8 +29,7 @@ class _ClientsListView extends StatelessWidget {
                               '${context.l10n.allClients.toUpperCase()} '
                               '(${state.clients.result.length})',
                               style: context.textThemeX.small.bold.copyWith(
-                                color: context.colorsX.onBackgroundTint
-                                    .withValues(alpha: 0.5),
+                                color: context.colorsX.onBackgroundTint.withValues(alpha: 0.5),
                               ),
                             ),
                           ),
@@ -38,19 +37,15 @@ class _ClientsListView extends StatelessWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return _ClientWidget(
-                                  client: state.clients.result[index]);
+                              return _ClientWidget(client: state.clients.result[index]);
                             },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
+                            separatorBuilder: (BuildContext context, int index) {
                               return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20.w, vertical: 5.h),
+                                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
                                 child: Divider(
                                   height: 1,
                                   thickness: 0.5,
-                                  color: context.colorsX.onBackgroundTint35
-                                      .withValues(alpha: 0.1),
+                                  color: context.colorsX.onBackgroundTint35.withValues(alpha: 0.1),
                                 ),
                               );
                             },
@@ -89,10 +84,9 @@ class _ClientWidget extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(client.name, style: context.textThemeX.large.bold),
+        title: Text(client.name.value, style: context.textThemeX.large.bold),
         subtitle: Text(client.clientLastSeen(context),
-            style: context.textThemeX.small
-                .copyWith(color: context.colorsX.onBackgroundTint)),
+            style: context.textThemeX.small.copyWith(color: context.colorsX.onBackgroundTint)),
       ),
     );
   }
@@ -111,8 +105,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
           child: TextFormField(
             decoration: InputDecoration(
               filled: true,
-              fillColor:
-                  context.colorsX.onBackgroundTint35.withValues(alpha: 0.03),
+              fillColor: context.colorsX.onBackgroundTint35.withValues(alpha: 0.03),
               labelText: '${context.l10n.searchClients}...',
               prefixIcon: Icon(
                 Icons.search,
@@ -123,8 +116,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.sp), // Add border radius
               ),
             ),
-            onChanged: (searchTerm) =>
-                context.read<ClientsBloc>().add(ClientsSearched(searchTerm)),
+            onChanged: (searchTerm) => context.read<ClientsBloc>().add(ClientsSearched(searchTerm)),
           ),
         ),
         Gap(20.w),
@@ -139,8 +131,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
     );
   }
 
-  void _showFilterBottomSheet(BuildContext context) =>
-      showModalBottomSheet<void>(
+  void _showFilterBottomSheet(BuildContext context) => showModalBottomSheet<void>(
         backgroundColor: context.colorsX.secondaryBackground,
         context: context,
         shape: RoundedRectangleBorder(
@@ -157,11 +148,7 @@ class _FilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filters = [
-      context.l10n.connected,
-      context.l10n.pending,
-      context.l10n.archived
-    ];
+    final filters = [context.l10n.connected, context.l10n.pending, context.l10n.archived];
     return Padding(
       padding: EdgeInsets.all(16.w),
       child: Column(
@@ -176,8 +163,7 @@ class _FilterBottomSheet extends StatelessWidget {
                   },
                   child: Text(
                     context.l10n.clear,
-                    style: context.textThemeX.medium
-                        .copyWith(color: context.colorsX.secondary),
+                    style: context.textThemeX.medium.copyWith(color: context.colorsX.secondary),
                   )),
               TextButton(
                   onPressed: () {
