@@ -16,6 +16,7 @@ import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
+import 'package:btl/app/features/about_app/presentation/about_app_screen.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
@@ -128,8 +129,8 @@ final coachRouter = GoRouter(
               ),
             ),
             GoRoute(
-              path: '/${AddClientScreen.name}',
               name: AddClientScreen.name,
+              path: '/${AddClientScreen.name}',
               builder: (context, state) => const AddClientScreen(),
             ),
           ],
@@ -141,6 +142,14 @@ final coachRouter = GoRouter(
               name: SettingsScreen.name,
               path: '/${SettingsScreen.name}',
               pageBuilder: (context, state) => const NoTransitionPage(child: SettingsScreen()),
+              routes: [
+                GoRoute(
+                  name: AboutAppScreen.name,
+                  path: AboutAppScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => const NoTransitionPage(child: AboutAppScreen()),
+                ),
+              ],
             ),
           ],
         ),
@@ -161,6 +170,7 @@ final coachRouter = GoRouter(
             );
     }
 
+    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     if (state.isLoggingIn) {
       return state.uri.queryParameters['from'] ??
