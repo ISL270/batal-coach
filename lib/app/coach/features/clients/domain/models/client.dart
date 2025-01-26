@@ -1,7 +1,9 @@
+import 'package:form_inputs/form_inputs.dart';
+
 final class Client {
   final String id;
 
-  final String name;
+  final Name name;
 
   final String email;
 

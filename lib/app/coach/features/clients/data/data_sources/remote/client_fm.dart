@@ -1,12 +1,14 @@
 import 'package:btl/app/coach/features/clients/domain/models/client.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:form_inputs/form_inputs.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'client_fm.g.dart';
 
 @JsonSerializable()
 final class ClientFM implements RemoteModel<Client> {
+  @override
   @JsonKey(name: 'uid')
   final String id;
   final String name;
@@ -35,7 +37,7 @@ final class ClientFM implements RemoteModel<Client> {
   @override
   Client toDomain() => Client(
         id: id,
-        name: name,
+        name: Name.fromString(name),
         email: email,
         phoneNumber: phoneNumber,
         lastActiveDate: lastActive,
