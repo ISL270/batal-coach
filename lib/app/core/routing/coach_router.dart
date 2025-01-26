@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
@@ -17,8 +18,7 @@ import 'package:btl/app/core/extension_methods/getit_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/routing/go_router_refresh_stream.dart';
 import 'package:btl/app/core/routing/go_router_state_extension.dart';
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc.dart';
-import 'package:btl/app/features/authentication/presentation/bloc/auth_bloc_extension.dart';
+import 'package:btl/app/features/about_app/presentation/about_app_screen.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
 import 'package:btl/app/features/login/login_screen.dart';
 import 'package:btl/app/features/settings/settings_screen.dart';
@@ -40,6 +40,11 @@ final coachRouter = GoRouter(
         create: (context) => SplashBloc(),
         child: const SplashScreen(),
       ),
+    ),
+    GoRoute(
+      path: ClientsScreen.name,
+      name: '/${ClientsScreen.name}',
+      builder: (context, state) => const ClientsScreen(),
     ),
     GoRoute(
         name: LoginScreen.name,
@@ -134,6 +139,11 @@ final coachRouter = GoRouter(
                 ),
               ),
             ),
+            GoRoute(
+              name: AddClientScreen.name,
+              path: '/${AddClientScreen.name}',
+              builder: (context, state) => const AddClientScreen(),
+            ),
           ],
         ),
         StatefulShellBranch(
@@ -143,20 +153,26 @@ final coachRouter = GoRouter(
               name: SettingsScreen.name,
               path: '/${SettingsScreen.name}',
               pageBuilder: (context, state) => const NoTransitionPage(child: SettingsScreen()),
+              routes: [
+                GoRoute(
+                  name: AboutAppScreen.name,
+                  path: AboutAppScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => const NoTransitionPage(child: AboutAppScreen()),
+                ),
+              ],
             ),
           ],
         ),
       ],
     ),
   ],
-  refreshListenable: GoRouterRefreshStream(
-    getIt.authBloc.stream.where((state) => state.isSuccess),
-  ),
+  refreshListenable: GoRouterRefreshStream(getIt.authBloc.stream.where((state) => state.isSuccess)),
   redirect: (context, state) {
     // If the user is not logged in, they need to login.
     // Bundle the location the user is coming from into a query parameter
     final fromloc = (state.isGoingToHome || state.isLoggingOut) ? '' : state.matchedLocation;
-    if (!getIt.authBloc.state.isAuthenticated) {
+    if (!getIt.authBloc.state.data!.isAuthenticated) {
       return state.isGoingToSplash || state.isLoggingIn || state.isSigningUp
           ? null
           : state.namedLocation(
@@ -165,8 +181,8 @@ final coachRouter = GoRouter(
             );
     }
 
-    // if the user is logged in, send them where they were going before (or
-    // home if they weren't going anywhere)
+    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
+    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     if (state.isLoggingIn) {
       return state.uri.queryParameters['from'] ??
           state.namedLocation(getIt.authBloc.homeNamedRoute);

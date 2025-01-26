@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart';
 import 'package:btl/app/coach/features/workouts/data/exercise_details_serializer.dart';
-import 'package:btl/app/core/firestore/firestore_helper.dart';
 import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:btl/app/core/injection/injection.dart';
@@ -16,7 +15,7 @@ import 'package:injectable/injectable.dart';
 part 'workout_fm.dart';
 
 @singleton
-final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> with FirestoreHelper {
+final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> {
   WorkoutFirestoreSource(super.firestoreSvc);
 
   Future<void> saveWorkout({
@@ -39,8 +38,14 @@ final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> wi
   WorkoutFM fromJson(String docID, Map<String, dynamic> json) => WorkoutFM.fromJson(docID, json);
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User coach) =>
+  Stream<QuerySnapshot<Map<String, dynamic>>> snapshotQuery(User user) =>
       firestoreSvc.workouts.collection
-          .where(firestoreSvc.workouts.coachIdField, isEqualTo: coach.id)
+          .where(firestoreSvc.workouts.coachIdField, isEqualTo: user.id)
           .snapshots();
+
+  @override
+  Future<void> deleteDoc({required String uid, required String docID}) {
+    // TODO: implement deleteDoc
+    throw UnimplementedError();
+  }
 }

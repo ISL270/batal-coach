@@ -1,16 +1,21 @@
+import 'package:form_inputs/form_inputs.dart';
+
 final class Client {
   final String id;
 
-  final String name;
+  final Name name;
 
   final String email;
 
   final String phoneNumber;
+
+  final DateTime lastActiveDate;
 
   Client({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
+    required this.lastActiveDate,
   });
 }

@@ -1,4 +1,5 @@
 abstract interface class RemoteModel<D> {
-  // Map<String, dynamic> toJson();
+  String get id;
+
   D toDomain();
 }

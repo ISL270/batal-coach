@@ -2,10 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/models/exercise_filters.dart';
-import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/bloc_event_transformers.dart';
-import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/domain/paginated_result.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
@@ -19,11 +18,11 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
   ExercisesBloc(this._repository) : super(ExercisesState._initial()) {
     on<_ExcsSubscriptionRequested>(_onSubscriptionRequested);
     on<ExcsSearched>(_onSearched);
+    on<ExcsFiltered>(_onFilterUpdate);
     on<ExcsNextPageFetched>(
       _onNextPageFetched,
       transformer: EventTransformers.throttleDroppable(),
     );
-    on<ExcsFiltered>(_onFilterUpdate);
 
     add(_ExcsSubscriptionRequested());
   }
@@ -32,19 +31,30 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
     _ExcsSubscriptionRequested event,
     Emitter<ExercisesState> emit,
   ) async {
-    await emit.forEach(
-      _repository.getUpdates(),
-      onData: (status) {
-        if (status.isSuccess) {
-          add(ExcsSearched(state.searchTerm));
-        }
-        return state;
+    // Listen to status updates from the repository using onEach
+    // This creates a stream subscription that will react to different status changes
+    await emit.onEach(
+      _repository.stream(),
+      onData: (status) => switch (status) {
+        Loading<void>() => state.exercises.result.isEmpty
+            // If no exercises are loaded yet emit loading state
+            ? emit(state._copyWith(status: state.status.toLoading()))
+            // If exercises already exist, do nothing
+            : {},
+        // If changes successfully happened in the repository, update the displayed result
+        Success<void>() => add(ExcsSearched(state.searchTerm)),
+        Failure<void>(exception: final e) =>
+          emit(state._copyWith(status: state.status.toFailure(e))),
+        _ => {},
       },
     );
   }
 
   Future<void> _onSearched(ExcsSearched event, Emitter<ExercisesState> emit) async {
-    emit(state._searchInProgress(event.searchTerm));
+    emit(state._copyWith(
+      searchTerm: event.searchTerm,
+      status: state.status.toLoading(),
+    ));
 
     final searchResult = await _repository.searchExercises(
       event.searchTerm,
@@ -53,7 +63,10 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
       pageSize: state.exercises.pageSize,
     );
 
-    emit(state._success(exercises: PaginatedResult(result: searchResult)));
+    emit(state._copyWith(
+      status: state.status.toSuccess(null),
+      exercises: PaginatedResult(result: searchResult),
+    ));
   }
 
   Future<void> _onNextPageFetched(
@@ -69,7 +82,8 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
       pageSize: state.exercises.pageSize,
     );
 
-    emit(state._success(
+    emit(state._copyWith(
+      status: state.status.toSuccess(null),
       exercises: state.exercises.appendResult(
         searchResult,
         hasReachedMax: searchResult.length < state.exercises.pageSize,
@@ -82,7 +96,7 @@ class ExercisesBloc extends Bloc<ExercisesEvent, ExercisesState> {
     Emitter<ExercisesState> emit,
   ) {
     if (state.filters == event.filters) return;
-    emit(state._filter(event.filters));
+    emit(state._copyWith(filters: event.filters));
     add(ExcsSearched(state.searchTerm));
   }
 }

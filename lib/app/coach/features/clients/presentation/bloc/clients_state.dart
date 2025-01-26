@@ -1,18 +1,28 @@
 part of 'clients_bloc.dart';
 
 final class ClientsState extends Equatable {
-  final List<Client> clients;
-  final GenericException? exception;
+  final VoidStatus status;
+  final String searchTerm;
+  final PaginatedResult<Client> client;
 
-  const ClientsState._({required this.clients, required this.exception});
+  const ClientsState({
+    this.searchTerm = '',
+    this.status = const Initial(),
+    this.client = const PaginatedResult(),
+  });
 
-  factory ClientsState.initial() => const ClientsState._(clients: [], exception: null);
-
-  ClientsState success(List<Client> clients) => ClientsState._(clients: clients, exception: null);
-
-  ClientsState failure(GenericException exception) =>
-      ClientsState._(clients: clients, exception: exception);
+  ClientsState copyWith({
+    VoidStatus? status,
+    String? searchTerm,
+    PaginatedResult<Client>? client,
+  }) {
+    return ClientsState(
+      status: status ?? this.status,
+      client: client ?? this.client,
+      searchTerm: searchTerm ?? this.searchTerm,
+    );
+  }
 
   @override
-  List<Object?> get props => [clients, exception];
+  List<Object> get props => [status, searchTerm, client];
 }

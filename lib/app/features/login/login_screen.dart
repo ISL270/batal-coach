@@ -2,9 +2,10 @@ import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
-import 'package:btl/app/features/authentication/domain/models/user_type.dart';
 import 'package:btl/app/features/login/cubit/login_cubit.dart';
+import 'package:btl/app/features/settings/domain/settings.dart';
 import 'package:btl/app/features/settings/settings/settings_bloc.dart';
 import 'package:btl/app/features/sign_up/presentation/sign_up_screen.dart';
 import 'package:btl/app/widgets/button.dart';
@@ -33,15 +34,19 @@ class LoginScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               context.settingsBloc.add(SettingsThemeChanged(
-                context.settingsBloc.state.isThemeDark ? ThemeMode.light : ThemeMode.dark,
+                context.settingsBloc.state.settings.isThemeDark ? ThemeMode.light : ThemeMode.dark,
               ));
             },
             icon: Icon(
-              context.settingsBloc.state.isThemeDark ? Icons.dark_mode : Icons.dark_mode_outlined,
+              context.settingsBloc.state.settings.isThemeDark
+                  ? Icons.dark_mode
+                  : Icons.dark_mode_outlined,
             ),
           ),
           IconButton(
-            onPressed: context.settingsBloc.switchLanguage,
+            onPressed: () {
+              // context.settingsBloc.switchLanguage
+            },
             icon: const Icon(Icons.g_translate),
           ),
         ],
@@ -61,31 +66,17 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              BlocSelector<LoginCubit, LoginState, UserType>(
-                selector: (state) => state.userType,
-                builder: (context, userType) => SizedBox(
-                  width: double.infinity,
-                  child: SegmentedButton(
-                    style: SegmentedButton.styleFrom(textStyle: context.textThemeX.small.bold),
-                    expandedInsets: const EdgeInsets.all(1),
-                    showSelectedIcon: false,
-                    onSelectionChanged: (selection) =>
-                        context.read<LoginCubit>().changeUserType(selection.first),
-                    segments: [
-                      ButtonSegment(
-                        value: UserType.coach,
-                        label: Text(context.l10n.coach.capitalized),
-                      ),
-                      ButtonSegment(
-                        value: UserType.trainee,
-                        label: Text(context.l10n.trainee.capitalized),
-                      ),
-                    ],
-                    selected: {userType},
+              Center(
+                child: Text(
+                  context.l10n.btl,
+                  style: context.textThemeX.heading.copyWith(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w900,
+                    color: context.colorsX.primary,
                   ),
                 ),
               ),
-              const Gap(25),
+              const Gap(50),
               _EmailInput(),
               const Gap(25),
               _PasswordInput(),
