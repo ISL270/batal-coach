@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, recursive_getters
 
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
@@ -8,6 +8,7 @@ part 'exercise_fm.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ExerciseFM implements RemoteModel<Exercise> {
+  @override
   final String id;
   final String name;
   final ForceFM? force;
@@ -105,6 +106,9 @@ enum EquipmentFM implements RemoteModel<Equipment> {
   Equipment toDomain() => Equipment.values.firstWhere((e) => e.name == name);
   static EquipmentFM fromDomain(Equipment domain) =>
       EquipmentFM.values.firstWhere((e) => e.name == domain.name);
+
+  @override
+  String get id => 'unused id';
 }
 
 enum CategoryFM {
@@ -147,6 +151,9 @@ enum LevelFM implements RemoteModel<ExLevel> {
   ExLevel toDomain() => ExLevel.values.firstWhere((e) => e.name == name);
   static LevelFM fromDomain(ExLevel domain) =>
       LevelFM.values.firstWhere((e) => e.name == domain.name);
+
+  @override
+  String get id => 'unused id';
 }
 
 enum MuscleFM implements RemoteModel<Muscle> {
@@ -174,6 +181,9 @@ enum MuscleFM implements RemoteModel<Muscle> {
   Muscle toDomain() => Muscle.values.firstWhere((e) => e.name == name);
   static MuscleFM fromDomain(Muscle domain) =>
       MuscleFM.values.firstWhere((e) => e.name == domain.name);
+
+  @override
+  String get id => 'unused id';
 }
 
 enum ForceFM implements RemoteModel<Force> {
@@ -185,6 +195,9 @@ enum ForceFM implements RemoteModel<Force> {
   Force toDomain() => Force.values.firstWhere((e) => e.name == name);
   static ForceFM fromDomain(Force domain) =>
       ForceFM.values.firstWhere((e) => e.name == domain.name);
+
+  @override
+  String get id => 'unused id';
 }
 
 enum MechanicFM implements RemoteModel<Mechanic> {
@@ -195,6 +208,9 @@ enum MechanicFM implements RemoteModel<Mechanic> {
   Mechanic toDomain() => Mechanic.values.firstWhere((e) => e.name == name);
   static MechanicFM fromDomain(Mechanic domain) =>
       MechanicFM.values.firstWhere((e) => e.name == domain.name);
+
+  @override
+  String get id => 'unused id';
 }
 
 enum FieldFM implements RemoteModel<FieldType> {
@@ -207,6 +223,9 @@ enum FieldFM implements RemoteModel<FieldType> {
   FieldType toDomain() => FieldType.values.firstWhere((e) => e.name == name);
   static FieldFM fromDomain(FieldType domain) =>
       FieldFM.values.firstWhere((e) => e.name == domain.name);
+
+  @override
+  String get id => 'unused id';
 }
 
 List<FieldFM> _getFieldsByCategory(CategoryFM category) {
