@@ -12,7 +12,7 @@ import 'package:isar/isar.dart';
 final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
   const ExercisesIsarSource(super.isarService);
 
-  Future<int> deleteExercises(List<String> ids) => isarService.deleteAll<ExerciseIsar>(ids);
+  Future<int> deleteExercises(List<String> ids) => isarService.deleteAllByIDs<ExerciseIsar>(ids);
 
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
