@@ -42,4 +42,10 @@ final class WorkoutFirestoreSource extends ReactiveFirestoreSource<WorkoutFM> {
       firestoreSvc.workouts.collection
           .where(firestoreSvc.workouts.coachIdField, isEqualTo: user.id)
           .snapshots();
+
+  @override
+  Future<void> deleteDoc({required String uid, required String docID}) {
+    // TODO: implement deleteDoc
+    throw UnimplementedError();
+  }
 }

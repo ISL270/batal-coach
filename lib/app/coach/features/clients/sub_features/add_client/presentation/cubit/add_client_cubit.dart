@@ -1,9 +1,9 @@
+// ignore_for_file: void_checks
+
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
-import 'package:btl/app/core/enums/status.dart';
-import 'package:btl/app/core/injection/injection.dart';
+import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
-import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:equatable/equatable.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
@@ -17,29 +17,19 @@ class AddClientCubit extends Cubit<AddClientState> {
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
-  void fNameChanged(String value) => emit(state.copyWith(fName: Name.dirty(value)));
+  void nameChanged(String value) => emit(state.copyWith(fullName: Name.dirty(value)));
 
-  void lNameChanged(String value) => emit(state.copyWith(lName: Name.dirty(value)));
-
-  void phoneChanged(String value) {
-    final pppp = PhoneNumber.dirty(value);
-    emit(state.copyWith(phoneNumber: pppp));
-  }
+  void phoneChanged(String value) => emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value)));
 
   void emailChanged(String value) => emit(state.copyWith(email: Email.dirty(value)));
 
   Future<void> saveClient() async {
     try {
       emit(state.copyWith(status: const Loading()));
-      final coachEmail = getIt.get<AuthRepository>().user?.email ?? '';
       await _repository.saveClient(
-        coachEmail: coachEmail,
-        phoneNumber: state.phoneNumber.value,
-        name: state.fName.value + state.lName.value,
-        phone: state.phoneNumber.value,
-        userType: 'trainee',
-        lastActive: DateTime.now(),
         email: state.email.value,
+        name: state.name.value,
+        phone: state.phoneNumber.value,
       );
       emit(state.copyWith(status: const Success('success')));
     } catch (e) {

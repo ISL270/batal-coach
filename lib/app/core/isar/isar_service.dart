@@ -1,10 +1,10 @@
 // ignore_for_file: strict_raw_type
 
-import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
+import 'package:btl/app/coach/features/clients/data/sources/local/client_isar.dart';
 import 'package:btl/app/coach/features/exercises/data/models/local/exercise_isar.dart';
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
+import 'package:btl/app/core/extension_types/string_id.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
-import 'package:btl/app/core/isar/isar_helper.dart';
 import 'package:btl/app/features/authentication/data/models/local/user_isar.dart';
 import 'package:btl/app/features/settings/data/sources/local/settings_isar.dart';
 import 'package:injectable/injectable.dart';
@@ -12,9 +12,9 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
 @singleton
-final class IsarService with IsarHelper {
-  final Isar _isar;
+final class IsarService {
   const IsarService._(this._isar);
+  final Isar _isar;
 
   @FactoryMethod(preResolve: true)
   static Future<IsarService> create() async {
@@ -43,16 +43,16 @@ final class IsarService with IsarHelper {
     return _isar.writeTxnSync(() => _isar.collection<T>().putSync(object));
   }
 
-  Future<List<int>> putAll<T extends CacheModel>(List<T> objects) async {
-    return _isar.writeTxn(() => _isar.collection<T>().putAll(objects));
+  Future<List<int>> putAll<T extends CacheModel>(Iterable<T> objects) async {
+    return _isar.writeTxn(() => _isar.collection<T>().putAll(objects.toList()));
   }
 
   Future<T?> get<T extends CacheModel>(String id) async {
-    return _isar.txn(() => _isar.collection<T>().get(toIntID(id)));
+    return _isar.txn(() => _isar.collection<T>().get(StringID.toIntID(id)));
   }
 
   T? getSync<T extends CacheModel>(String id) {
-    return _isar.txnSync(() => _isar.collection<T>().getSync(toIntID(id)));
+    return _isar.txnSync(() => _isar.collection<T>().getSync(StringID.toIntID(id)));
   }
 
   Future<T?> getFirst<T extends CacheModel>() async {
@@ -75,16 +75,23 @@ final class IsarService with IsarHelper {
     return _isar.writeTxn(() => _isar.collection<T>().delete(object.cacheID));
   }
 
+  Future<bool> deleteByID<T extends CacheModel>(String id) async {
+    return _isar.writeTxn(() => _isar.collection<T>().delete(StringID.toIntID(id)));
+  }
+
   bool deleteSync<T extends CacheModel>(T object) {
     return _isar.writeTxnSync(() => _isar.collection<T>().deleteSync(object.cacheID));
   }
 
-  Future<int> deleteAll<T extends CacheModel>(List<String> ids) async {
-    return _isar.writeTxn(() => _isar.collection<T>().deleteAll(ids.map(toIntID).toList()));
+  Future<int> deleteAllByIDs<T extends CacheModel>(Iterable<String> ids) async {
+    return _isar.writeTxn(
+      () => _isar.collection<T>().deleteAll(ids.map(StringID.toIntID).toList()),
+    );
   }
 
-  Future<int> deleteAllSync<T extends CacheModel>(List<int> ids) async {
-    return _isar.writeTxnSync(() => _isar.collection<T>().deleteAllSync(ids));
+  Future<int> deleteAllByIDsSync<T extends CacheModel>(Iterable<String> ids) async {
+    return _isar.writeTxnSync(
+        () => _isar.collection<T>().deleteAllSync(ids.map(StringID.toIntID).toList()));
   }
 
   Future<void> clear<T extends CacheModel>() async {
@@ -97,7 +104,7 @@ final class IsarService with IsarHelper {
 
   Future<List<T>> getAllByIDs<T extends CacheModel>(List<String> ids) async {
     return _isar.txn(() async {
-      final docs = await _isar.collection<T>().getAll(ids.map(toIntID).toList());
+      final docs = await _isar.collection<T>().getAll(ids.map(StringID.toIntID).toList());
       // Remove nulls.
       return docs.whereType<T>().toList();
     });
@@ -105,9 +112,12 @@ final class IsarService with IsarHelper {
 
   List<T> getAllByIDsSync<T extends CacheModel>(List<String> ids) {
     return _isar.txnSync(() {
-      final docs = _isar.collection<T>().getAllSync(ids.map(toIntID).toList());
+      final docs = _isar.collection<T>().getAllSync(ids.map(StringID.toIntID).toList());
       // Remove nulls.
       return docs.whereType<T>().toList();
     });
   }
+
+  Stream<T?> watchObject<T extends CacheModel>(String id) =>
+      _isar.collection<T>().watchObject(StringID.toIntID(id));
 }

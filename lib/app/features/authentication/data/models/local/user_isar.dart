@@ -9,26 +9,26 @@ part 'user_isar.g.dart';
 @collection
 final class UserIsar extends CacheModel<User> {
   @override
-  String id;
+  final String id;
 
-  String email;
+  final String email;
   // Trainee related
-  String? coachEmail;
+  final String? coachEmail;
 
-  String name;
+  final String name;
 
-  String phoneNumber;
+  final String phoneNumber;
 
   @Enumerated(EnumType.name)
-  UserType userType;
+  final UserType userType;
 
   // Coach related
   @Enumerated(EnumType.name)
-  CoachType? coachType;
+  final CoachType? coachType;
   // Coach related
-  String? companyName;
+  final String? companyName;
 
-  UserIsar({
+  const UserIsar({
     required this.id,
     required this.email,
     required this.name,
@@ -38,25 +38,6 @@ final class UserIsar extends CacheModel<User> {
     this.coachEmail,
     this.companyName,
   });
-
-  @override
-  User toDomain() => switch (userType) {
-        UserType.coach => Coach(
-            id: id,
-            name: name,
-            email: email,
-            coachType: coachType!,
-            companyName: companyName,
-            phoneNumber: phoneNumber,
-          ),
-        UserType.trainee => Trainee(
-            id: id,
-            email: email,
-            coachEmail: coachEmail!,
-            name: name,
-            phoneNumber: phoneNumber,
-          ),
-      };
 
   factory UserIsar.fromDomain(User user) => switch (user) {
         Coach() => UserIsar(
@@ -75,6 +56,25 @@ final class UserIsar extends CacheModel<User> {
             userType: UserType.trainee,
             coachEmail: user.coachEmail,
             phoneNumber: user.phoneNumber,
+          ),
+      };
+
+  @override
+  User toDomain() => switch (userType) {
+        UserType.coach => Coach(
+            id: id,
+            name: name,
+            email: email,
+            coachType: coachType!,
+            companyName: companyName,
+            phoneNumber: phoneNumber,
+          ),
+        UserType.trainee => Trainee(
+            id: id,
+            email: email,
+            coachEmail: coachEmail!,
+            name: name,
+            phoneNumber: phoneNumber,
           ),
       };
 }

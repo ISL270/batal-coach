@@ -38,7 +38,7 @@ class _ClientsStatusCard extends StatelessWidget {
             color: context.colorsX.secondaryBackground,
             borderRadius: BorderRadius.circular(8.sp),
           ),
-          width: 140.w,
+          width: title.length >= 9 ? 160.w + (0.1 * title.length) : 140.w,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

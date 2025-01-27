@@ -6,6 +6,7 @@ import 'package:btl/app/core/extension_methods/bloc_x.dart';
 import 'package:btl/app/core/extension_methods/double_x.dart';
 import 'package:btl/app/core/extension_methods/duration_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
+import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/length_unit.dart';
 import 'package:btl/app/core/models/domain/mass_unit.dart';
