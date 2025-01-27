@@ -27,9 +27,9 @@ const ClientIsarSchema = CollectionSchema(
       name: r'id',
       type: IsarType.string,
     ),
-    r'lastActiveDate': PropertySchema(
+    r'lastActiveAt': PropertySchema(
       id: 2,
-      name: r'lastActiveDate',
+      name: r'lastActiveAt',
       type: IsarType.dateTime,
     ),
     r'name': PropertySchema(
@@ -92,7 +92,7 @@ void _clientIsarSerialize(
 ) {
   writer.writeString(offsets[0], object.email);
   writer.writeString(offsets[1], object.id);
-  writer.writeDateTime(offsets[2], object.lastActiveDate);
+  writer.writeDateTime(offsets[2], object.lastActiveAt);
   writer.writeString(offsets[3], object.name);
   writer.writeString(offsets[4], object.phone);
 }
@@ -106,7 +106,7 @@ ClientIsar _clientIsarDeserialize(
   final object = ClientIsar(
     email: reader.readString(offsets[0]),
     id: reader.readString(offsets[1]),
-    lastActiveDate: reader.readDateTime(offsets[2]),
+    lastActiveAt: reader.readDateTime(offsets[2]),
     name: reader.readString(offsets[3]),
     phone: reader.readString(offsets[4]),
   );
@@ -688,45 +688,45 @@ extension ClientIsarQueryFilter
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveDateEqualTo(DateTime value) {
+      lastActiveAtEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastActiveDate',
+        property: r'lastActiveAt',
         value: value,
       ));
     });
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveDateGreaterThan(
+      lastActiveAtGreaterThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'lastActiveDate',
+        property: r'lastActiveAt',
         value: value,
       ));
     });
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveDateLessThan(
+      lastActiveAtLessThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'lastActiveDate',
+        property: r'lastActiveAt',
         value: value,
       ));
     });
   }
 
   QueryBuilder<ClientIsar, ClientIsar, QAfterFilterCondition>
-      lastActiveDateBetween(
+      lastActiveAtBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
@@ -734,7 +734,7 @@ extension ClientIsarQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'lastActiveDate',
+        property: r'lastActiveAt',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1037,16 +1037,15 @@ extension ClientIsarQuerySortBy
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByLastActiveDate() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByLastActiveAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveDate', Sort.asc);
+      return query.addSortBy(r'lastActiveAt', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy>
-      sortByLastActiveDateDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> sortByLastActiveAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveDate', Sort.desc);
+      return query.addSortBy(r'lastActiveAt', Sort.desc);
     });
   }
 
@@ -1113,16 +1112,15 @@ extension ClientIsarQuerySortThenBy
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByLastActiveDate() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByLastActiveAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveDate', Sort.asc);
+      return query.addSortBy(r'lastActiveAt', Sort.asc);
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy>
-      thenByLastActiveDateDesc() {
+  QueryBuilder<ClientIsar, ClientIsar, QAfterSortBy> thenByLastActiveAtDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastActiveDate', Sort.desc);
+      return query.addSortBy(r'lastActiveAt', Sort.desc);
     });
   }
 
@@ -1167,9 +1165,9 @@ extension ClientIsarQueryWhereDistinct
     });
   }
 
-  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByLastActiveDate() {
+  QueryBuilder<ClientIsar, ClientIsar, QDistinct> distinctByLastActiveAt() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lastActiveDate');
+      return query.addDistinctBy(r'lastActiveAt');
     });
   }
 
@@ -1208,10 +1206,9 @@ extension ClientIsarQueryProperty
     });
   }
 
-  QueryBuilder<ClientIsar, DateTime, QQueryOperations>
-      lastActiveDateProperty() {
+  QueryBuilder<ClientIsar, DateTime, QQueryOperations> lastActiveAtProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lastActiveDate');
+      return query.addPropertyName(r'lastActiveAt');
     });
   }
 

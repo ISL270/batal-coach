@@ -1,5 +1,5 @@
-import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/clients/data/sources/local/client_isar.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/core/isar/isar_source.dart';
 import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
