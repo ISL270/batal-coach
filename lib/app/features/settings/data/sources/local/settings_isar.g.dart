@@ -85,7 +85,6 @@ SettingsIsar _settingsIsarDeserialize(
             ThemeMode.system,
   );
   object.cacheID = id;
-  object.id = reader.readString(offsets[0]);
   return object;
 }
 

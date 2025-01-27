@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:btl/app/coach/features/workouts/domain/workout_repository.dart';
-import 'package:btl/app/core/enums/status.dart';
 import 'package:btl/app/core/models/bloc_event_transformers.dart';
 import 'package:btl/app/core/models/domain/paginated_result.dart';
 import 'package:btl/app/core/models/domain/workout.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:equatable/equatable.dart';
 
 part 'workouts_event.dart';

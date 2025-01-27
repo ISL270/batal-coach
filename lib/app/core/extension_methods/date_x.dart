@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 extension DateTimeX on DateTime {
-  String toMMMMDate(BuildContext context) {
+  String toMMMM(BuildContext context) {
     final locale = Localizations.localeOf(context).toString();
     return '${context.l10n.today.toUpperCase()}, $day ${DateFormat.MMMM(locale).format(this)}';
   }
