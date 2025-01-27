@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

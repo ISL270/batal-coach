@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/domain/models/others_page_items.dart';
+import 'package:btl/app/coach/features/clients/domain/others_page_items.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';

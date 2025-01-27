@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:form_inputs/form_inputs.dart';

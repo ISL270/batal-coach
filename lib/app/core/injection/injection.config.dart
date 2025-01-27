@@ -10,11 +10,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:btl/app/coach/features/add_client/presentation/cubit/add_client_cubit.dart'
     as _i264;
-import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart'
+import 'package:btl/app/coach/features/clients/data/sources/local/clients_isar_source.dart'
     as _i374;
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart'
+import 'package:btl/app/coach/features/clients/data/sources/remote/clients_firestore_source.dart'
     as _i403;
-import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart'
+import 'package:btl/app/coach/features/clients/domain/clients_repository.dart'
     as _i1006;
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
     as _i441;

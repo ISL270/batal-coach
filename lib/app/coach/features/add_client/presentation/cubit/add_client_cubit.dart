@@ -1,7 +1,7 @@
 // ignore_for_file: void_checks
 
 import 'package:bloc/bloc.dart';
-import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
+import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/status.dart';
 import 'package:equatable/equatable.dart';
