@@ -8,8 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:btl/app/coach/features/add_client/presentation/bloc/add_client_cubit.dart'
-    as _i249;
+import 'package:btl/app/coach/features/add_client/presentation/cubit/add_client_cubit.dart'
+    as _i264;
 import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart'
     as _i374;
 import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart'
@@ -136,8 +136,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i441.ClientsBloc>(
         () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
-    gh.factory<_i249.AddClientCubit>(
-        () => _i249.AddClientCubit(gh<_i1006.ClientsRepository>()));
+    gh.factory<_i264.AddClientCubit>(
+        () => _i264.AddClientCubit(gh<_i1006.ClientsRepository>()));
     gh.factory<_i450.ExercisesBloc>(
         () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     gh.singleton<_i820.WorkoutRepository>(

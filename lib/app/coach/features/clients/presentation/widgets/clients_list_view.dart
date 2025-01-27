@@ -34,7 +34,7 @@ class _ClientsListView extends StatelessWidget {
                     name: Name.fromString('Eslam Ashraf'),
                     phoneNumber: '+201146012354',
                     id: '20215',
-                    lastActiveDate: DateTime.now(),
+                    lastActiveAt: DateTime.now(),
                   ),
                 );
               },

@@ -10,36 +10,26 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 final class ClientsRepository extends ReactiveRepository<Client, ClientFM, ClientIsar> {
-  final ClientsFirestoreSource _remoteSource;
   final ClientsIsarSource _localSource;
+  final ClientsFirestoreSource _remoteSource;
 
   ClientsRepository(
     super.authRepository,
     this._remoteSource,
     this._localSource,
-  ) : super(
-          localSource: _localSource,
-          remoteSource: _remoteSource,
-        );
+  ) : super(localSource: _localSource, remoteSource: _remoteSource);
 
   Future<EitherException<void>> saveClient({
-    required String coachEmail,
-    required String phoneNumber,
-    required DateTime lastActive,
     required String name,
     required String email,
     required String phone,
-    required String userType,
   }) async {
     try {
       await _remoteSource.saveClient(
-        coachEmail: coachEmail,
-        phoneNumber: phoneNumber,
         name: name,
         phone: phone,
         email: email,
-        lastActive: lastActive,
-        userType: userType,
+        coachEmail: authRepository.user!.email,
       );
       return right(null);
     } catch (e) {

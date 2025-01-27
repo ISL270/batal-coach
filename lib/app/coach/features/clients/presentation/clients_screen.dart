@@ -46,7 +46,10 @@ class ClientsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Align(
           child: Row(
-            children: [const Spacer(), Icon(Icons.settings, color: context.colorsX.primary)],
+            children: [
+              const Spacer(),
+              Icon(Icons.settings, color: context.colorsX.primary),
+            ],
           ),
         ),
       ),
@@ -60,7 +63,7 @@ class ClientsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.h),
                   child: Text(
-                    DateTime.now().toMMMMDate(context),
+                    DateTime.now().toMMMM(context),
                     style: context.textThemeX.medium.bold.copyWith(
                       fontSize: 14.sp,
                       color: context.colorsX.primary,

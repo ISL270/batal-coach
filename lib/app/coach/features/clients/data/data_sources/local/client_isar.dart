@@ -16,14 +16,15 @@ final class ClientIsar extends CacheModel<Client> {
   final String email;
 
   final String phone;
-  final DateTime lastActiveDate;
+
+  final DateTime lastActiveAt;
 
   const ClientIsar({
     required this.id,
     required this.email,
     required this.name,
     required this.phone,
-    required this.lastActiveDate,
+    required this.lastActiveAt,
   });
 
   factory ClientIsar.fromDomain(Client domain) => ClientIsar(
@@ -31,7 +32,7 @@ final class ClientIsar extends CacheModel<Client> {
         name: domain.name.value,
         email: domain.email,
         phone: domain.phoneNumber,
-        lastActiveDate: domain.lastActiveDate,
+        lastActiveAt: domain.lastActiveAt,
       );
 
   @override
@@ -41,7 +42,7 @@ final class ClientIsar extends CacheModel<Client> {
       name: formz.Name.fromString(name),
       email: email,
       phoneNumber: phone,
-      lastActiveDate: lastActiveDate,
+      lastActiveAt: lastActiveAt,
     );
   }
 }
