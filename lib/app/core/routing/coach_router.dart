@@ -6,6 +6,7 @@ import 'package:btl/app/coach/features/clients/sub_features/client_details/prese
 import 'package:btl/app/coach/features/clients/sub_features/client_goals/presentation/client_goals_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_limitaions/presentation/client_limitations_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_tasks/presentation/client_tasks_screen.dart';
+import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/cubit/edit_client_info_cubit.dart';
 import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/edit_client_info.dart';
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
@@ -168,10 +169,11 @@ final coachRouter = GoRouter(
                   builder: (context, state) => const ClientTasksScreen(),
                 ),
                 GoRoute(
-                  name: EditClientScreen.name,
-                  path: EditClientScreen.name,
+                  name: EditClientInfo.name,
+                  path: EditClientInfo.name,
                   parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => const EditClientScreen(),
+                  builder: (context, state) => BlocProvider(
+                      create: (_) => EditClientInfoCubit(), child: const EditClientInfo()),
                 )
               ],
             ),

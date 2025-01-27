@@ -1,77 +1,99 @@
-import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/selectable_field.dart';
+import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/cubit/edit_client_info_cubit.dart';
+import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/button.dart';
 import 'package:btl/app/widgets/screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class EditClientScreen extends StatelessWidget {
-  const EditClientScreen({super.key});
+class EditClientInfo extends StatelessWidget {
+  const EditClientInfo({super.key});
 
-  static const name = 'edit-client';
+  static const name = 'edit-client-info';
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditClientInfoCubit>();
+
     return Screen(
+      padding: EdgeInsets.zero,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          context.l10n.editProfile,
+          context.l10n.editClient,
           style: context.textThemeX.large,
         ),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              context.l10n.save,
-              style: TextStyle(fontSize: 14.sp),
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const _ProfileImageWidget(),
-            SizedBox(height: 15.h),
-            _ProfileFormField(
-              label: context.l10n.fullName,
-              value: 'Amr',
+            BlocBuilder<EditClientInfoCubit, EditClientInfoState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () async {
+                    await showCupertinoModalPopup<void>(
+                      context: context,
+                      builder: (context) => CupertinoActionSheet(
+                        actions: [
+                          CupertinoActionSheetAction(
+                            child: Text(context.l10n.gallery.capitalized),
+                            onPressed: () {
+                              context.pop();
+                              cubit.getImageFromGallery();
+                            },
+                          ),
+                          CupertinoActionSheetAction(
+                            child: Text(context.l10n.camera.capitalized),
+                            onPressed: () {
+                              context.pop();
+                              cubit.getImageFromCamera();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: CircleAvatar(
+                    radius: 40.w,
+                    backgroundImage: state.file != null ? FileImage(state.file!) : null,
+                    child: state.file == null
+                        ? const Center(child: Icon(FontAwesomeIcons.cameraRetro))
+                        : null,
+                  ),
+                );
+              },
             ),
-            _ProfileFormField(
-              label: context.l10n.lName,
-              value: 'Hossam',
-            ),
-            _ProfileFormField(
-              label: context.l10n.email,
-              value: 'amr@gmail.com',
-            ),
-            _ProfileFormField(
-              label: context.l10n.phoneNumber,
-              value: '+201146012354',
-            ),
-            SizedBox(height: 10.h),
-            SelectableField(
-              context: context,
-              label: context.l10n.gender,
-              value: context.l10n.male,
-              options: [context.l10n.male, context.l10n.female],
-            ),
-            SizedBox(height: 16.h),
-            SelectableField(
-              context: context,
-              label: context.l10n.clientCategory,
-              value: context.l10n.online,
-              options: [context.l10n.inPerson, context.l10n.online, context.l10n.hybrid],
-            ),
+            Gap(15.h),
+            _ProfileField(label: context.l10n.name, value: 'Andrew - Demo'),
+            _ProfileField(label: context.l10n.email, value: 'ben@demo'),
+            _ProfileField(label: context.l10n.phoneNumber, value: '201146012354+'),
+            _ProfileField(label: context.l10n.birthdate, value: '20/01/2003'),
+            _ProfileField(label: context.l10n.gender, value: 'Male'),
+            _ProfileField(label: context.l10n.clientCategory, value: 'Online'),
             SizedBox(height: 40.h),
-            Button.filled(
-              onPressed: () => _showAlertDialog(context),
-              label: context.l10n.archiveClient,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 20.w,
+              children: [
+                Button.filled(
+                  height: 50.h,
+                  onPressed: () {},
+                  label: context.l10n.save,
+                ),
+                Button.filled(
+                  height: 50.h,
+                  onPressed: () => _showAlertDialog(context),
+                  label: context.l10n.archive,
+                ),
+              ],
             ),
           ],
         ),
@@ -94,7 +116,7 @@ class EditClientScreen extends StatelessWidget {
                 Text('🗃️', style: TextStyle(fontSize: 30.sp)),
                 SizedBox(height: 10.h),
                 Text(
-                  context.l10n.archiveClient,
+                  context.l10n.archive,
                   style: context.textThemeX.large.bold,
                 ),
                 Text(
@@ -102,12 +124,12 @@ class EditClientScreen extends StatelessWidget {
                   style: context.textThemeX.small,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 20.h),
+                Gap(20.h),
                 Button.filled(
                   label: context.l10n.ok,
                   onPressed: () => context.pop(),
                 ),
-                TextButton(onPressed: () {}, child: Text(context.l10n.cancel))
+                TextButton(onPressed: () => context.pop(), child: Text(context.l10n.cancel))
               ],
             ),
           ),
@@ -117,78 +139,35 @@ class EditClientScreen extends StatelessWidget {
   }
 }
 
-class _ProfileImageWidget extends StatelessWidget {
-  const _ProfileImageWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          CircleAvatar(
-            backgroundColor: context.colorsX.secondary,
-            radius: 45.r,
-            child: Text(
-              'AH',
-              style: context.textThemeX.large.copyWith(
-                color: context.colorsX.secondaryBackground,
-                fontSize: 24.sp,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xff7469DA),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(4.w),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.white,
-                  size: 19.w,
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _ProfileFormField extends StatelessWidget {
-  const _ProfileFormField({required this.label, required this.value});
+class _ProfileField extends StatelessWidget {
+  const _ProfileField({required this.label, required this.value});
 
   final String label;
   final String value;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.h),
-          child: SizedBox(
-            width: 0.38.sh,
-            child: TextFormField(
-              initialValue: value,
-              decoration: InputDecoration(
-                labelText: label,
-                labelStyle: context.textThemeX.medium,
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: context.colorsX.onBackgroundTint35),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: context.colorsX.onBackgroundTint35),
-                ),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(label, style: context.textThemeX.medium.bold.copyWith(color: Colors.grey)),
+              Text(
+                value,
+                style: context.textThemeX.medium.bold,
               ),
-            ),
+            ],
           ),
-        ),
-      ],
+          Gap(16.h),
+          Divider(
+            height: 10.h,
+            color: context.colorsX.onBackgroundTint35.withValues(alpha: 0.09),
+          )
+        ],
+      ),
     );
   }
 }

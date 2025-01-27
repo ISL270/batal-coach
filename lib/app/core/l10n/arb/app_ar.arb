@@ -139,7 +139,7 @@
     "features": "الميزات",
     "editProfile": "تعديل الملف الشخصي",
     "save": "حفظ",
-    "archiveClient": "أرشفة العميل",
+    "archive": "أرشفة العميل",
     "archiveClientConfirmation": "يرجى التأكد من إبلاغ عميلك بأن وصوله إلى التطبيق المحمول سيكون محدودًا",
     "ok": "موافق",
     "cancel": "إلغاء",
@@ -210,6 +210,10 @@
         "version":"الإصدار",
         "termsOfService":"بنود الخدمة",
         "privacyPolicy":"سياسة الخصوصية",
-        "thisWeek":"هذا الاسبوع"
+        "thisWeek":"هذا الاسبوع",
+      "birthdate":"تاريخ الميلاد",
+      "editClient":"تعديل بيانات العميل",
+      "gallery":"المعرض",
+      "camera":"الكاميرا"
 
 }

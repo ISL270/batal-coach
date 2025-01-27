@@ -41,7 +41,7 @@ class ClientDetailsScreen extends StatelessWidget {
                   children: [
                     _ClientDetailsHeaderIcon(
                       icon: Icons.edit,
-                      onTap: () => context.pushNamed(EditClientScreen.name),
+                      onTap: () => context.pushNamed(EditClientInfo.name),
                     ),
                     _ClientDetailsHeaderIcon(
                       icon: Icons.chat,
