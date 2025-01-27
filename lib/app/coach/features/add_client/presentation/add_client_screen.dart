@@ -1,5 +1,5 @@
 import 'package:btl/app/coach/features/add_client/presentation/cubit/add_client_cubit.dart';
-import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
+import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/core/extension_methods/context_x.dart';
 import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/injection/injection.dart';

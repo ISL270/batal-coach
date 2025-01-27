@@ -1,5 +1,6 @@
 import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
-import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart';
+import 'package:btl/app/coach/features/clients/sub_features/client_details/presentation/client_details_screen.dart';
+import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
@@ -132,6 +133,11 @@ final coachRouter = GoRouter(
               name: AddClientScreen.name,
               path: '/${AddClientScreen.name}',
               builder: (context, state) => const AddClientScreen(),
+            ),
+            GoRoute(
+              path: '/${ClientDetailsScreen.name}',
+              name: ClientDetailsScreen.name,
+              builder: (context, state) => const ClientDetailsScreen(),
             ),
           ],
         ),

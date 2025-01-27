@@ -1,8 +1,8 @@
-import 'package:btl/app/coach/features/clients/data/data_sources/local/client_isar.dart';
-import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart';
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/client_fm.dart';
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart';
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/clients/data/sources/local/client_isar.dart';
+import 'package:btl/app/coach/features/clients/data/sources/local/clients_isar_source.dart';
+import 'package:btl/app/coach/features/clients/data/sources/remote/client_fm.dart';
+import 'package:btl/app/coach/features/clients/data/sources/remote/clients_firestore_source.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/core/models/domain/generic_exception.dart';
 import 'package:btl/app/core/models/reactive_repository.dart';
 import 'package:fpdart/fpdart.dart';

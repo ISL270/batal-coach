@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/core/isar/cache_model.dart';
 import 'package:form_inputs/form_inputs.dart' as formz;
 import 'package:isar/isar.dart';

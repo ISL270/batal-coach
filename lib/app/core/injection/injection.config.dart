@@ -10,12 +10,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:btl/app/coach/features/add_client/presentation/cubit/add_client_cubit.dart'
     as _i264;
-import 'package:btl/app/coach/features/clients/data/data_sources/local/clients_isar_source.dart'
-    as _i374;
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/clients_firestore_source.dart'
-    as _i403;
-import 'package:btl/app/coach/features/clients/domain/repositories/clients_repository.dart'
-    as _i1006;
+import 'package:btl/app/coach/features/clients/data/sources/local/clients_isar_source.dart'
+    as _i347;
+import 'package:btl/app/coach/features/clients/data/sources/remote/clients_firestore_source.dart'
+    as _i886;
+import 'package:btl/app/coach/features/clients/domain/clients_repository.dart'
+    as _i999;
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart'
     as _i441;
 import 'package:btl/app/coach/features/exercises/data/data_sources/local/exercises_isar_source.dart'
@@ -83,22 +83,22 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i557.SettingsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i193.UserIsarSource>(
         () => _i193.UserIsarSource(gh<_i26.IsarService>()));
-    gh.singleton<_i374.ClientsIsarSource>(
-        () => _i374.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i25.WorkoutIsarSource>(
         () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i347.ClientsIsarSource>(
+        () => _i347.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i662.SettingsRepository>(
         () => _i662.SettingsRepository(gh<_i557.SettingsIsarSource>()));
-    gh.singleton<_i403.ClientsFirestoreSource>(
-      () => _i403.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
-      dispose: (i) => i.dispMethod(),
-    );
     gh.singleton<_i389.WorkoutFirestoreSource>(
         () => _i389.WorkoutFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i577.ExercisesFirestoreSource>(
       () => _i577.ExercisesFirestoreSource(gh<_i997.FirestoreService>()),
+      dispose: (i) => i.dispMethod(),
+    );
+    gh.singleton<_i886.ClientsFirestoreSource>(
+      () => _i886.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
     );
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
@@ -129,15 +129,15 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       dispose: (i) => i.dispMethod(),
     );
-    gh.singleton<_i1006.ClientsRepository>(() => _i1006.ClientsRepository(
+    gh.singleton<_i999.ClientsRepository>(() => _i999.ClientsRepository(
           gh<_i902.AuthRepository>(),
-          gh<_i403.ClientsFirestoreSource>(),
-          gh<_i374.ClientsIsarSource>(),
+          gh<_i886.ClientsFirestoreSource>(),
+          gh<_i347.ClientsIsarSource>(),
         ));
     gh.factory<_i441.ClientsBloc>(
-        () => _i441.ClientsBloc(gh<_i1006.ClientsRepository>()));
+        () => _i441.ClientsBloc(gh<_i999.ClientsRepository>()));
     gh.factory<_i264.AddClientCubit>(
-        () => _i264.AddClientCubit(gh<_i1006.ClientsRepository>()));
+        () => _i264.AddClientCubit(gh<_i999.ClientsRepository>()));
     gh.factory<_i450.ExercisesBloc>(
         () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     gh.singleton<_i820.WorkoutRepository>(
