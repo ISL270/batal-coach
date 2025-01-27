@@ -29,7 +29,6 @@ class EditClientInfoCubit extends Cubit<EditClientInfoState> {
   DateTime firstDate = DateTime(1920);
   DateTime lastDate = DateTime.now();
 
-  //change gender type state
   void genderTypeChanged(Gender gender) => emit(state.copyWith(gender: gender));
 
   //change name state
@@ -70,7 +69,10 @@ class EditClientInfoCubit extends Cubit<EditClientInfoState> {
     }
   }
 
-  //get user data from local source ( Isar Database )
+  void updateCategory(String category) {
+    emit(state.copyWith(clientCategory: category));
+  }
+
   Future<void> getUserData() async {
     final user = getIt.authBloc.state.user;
 

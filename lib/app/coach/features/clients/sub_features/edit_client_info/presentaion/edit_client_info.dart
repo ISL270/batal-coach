@@ -77,7 +77,15 @@ class EditClientInfo extends StatelessWidget {
             _ProfileField(label: context.l10n.phoneNumber, value: '201146012354+'),
             _ProfileField(label: context.l10n.birthdate, value: '20/01/2003'),
             _ProfileField(label: context.l10n.gender, value: 'Male'),
-            _ProfileField(label: context.l10n.clientCategory, value: 'Online'),
+            BlocBuilder<EditClientInfoCubit, EditClientInfoState>(
+              builder: (context, state) {
+                return _ProfileField(
+                  label: context.l10n.clientCategory,
+                  value: state.clientCategory,
+                  isCategory: true,
+                );
+              },
+            ),
             SizedBox(height: 40.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -140,26 +148,101 @@ class EditClientInfo extends StatelessWidget {
 }
 
 class _ProfileField extends StatelessWidget {
-  const _ProfileField({required this.label, required this.value});
+  const _ProfileField({required this.label, required this.value, this.isCategory = false});
 
   final String label;
   final String value;
+  final bool isCategory;
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditClientInfoCubit>();
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(label, style: context.textThemeX.medium.bold.copyWith(color: Colors.grey)),
-              Text(
-                value,
-                style: context.textThemeX.medium.bold,
-              ),
-            ],
+          GestureDetector(
+            onTap: isCategory
+                ? () async {
+                    await showCupertinoModalPopup<void>(
+                      context: context,
+                      builder: (context) => CupertinoActionSheet(
+                        message: Text(
+                          context.l10n.changeClientCategory,
+                          style: context.textThemeX.small
+                              .copyWith(color: context.colorsX.onBackground),
+                        ),
+                        actions: [
+                          CupertinoActionSheetAction(
+                            onPressed: () {
+                              cubit.updateCategory('In-Person');
+                              context.pop();
+                            },
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque, // Suppresses touch feedback
+                              child: Text(
+                                context.l10n.inPerson,
+                                style: context.textThemeX.large
+                                    .copyWith(color: context.colorsX.onBackground),
+                              ),
+                            ),
+                          ),
+                          CupertinoActionSheetAction(
+                            onPressed: () {
+                              cubit.updateCategory('Online');
+                              context.pop();
+                            },
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              child: Text(
+                                context.l10n.online,
+                                style: context.textThemeX.medium
+                                    .copyWith(color: context.colorsX.onBackground),
+                              ),
+                            ),
+                          ),
+                          CupertinoActionSheetAction(
+                            onPressed: () {
+                              cubit.updateCategory('Hybrid');
+                              context.pop();
+                            },
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              child: Text(
+                                context.l10n.hybrid,
+                                style: context.textThemeX.medium
+                                    .copyWith(color: context.colorsX.onBackground),
+                              ),
+                            ),
+                          ),
+                        ],
+                        cancelButton: CupertinoActionSheetAction(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: Text(
+                            context.l10n.cancel,
+                            style: context.textThemeX.medium.copyWith(color: context.colorsX.error),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                : null,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  label,
+                  style: context.textThemeX.medium.bold.copyWith(color: Colors.grey),
+                ),
+                Text(
+                  value,
+                  style: context.textThemeX.medium.bold,
+                ),
+              ],
+            ),
           ),
           Gap(16.h),
           Divider(

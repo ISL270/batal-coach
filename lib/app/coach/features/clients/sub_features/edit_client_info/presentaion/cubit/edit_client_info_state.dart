@@ -6,6 +6,7 @@ final class EditClientInfoState extends Equatable with FormzMixin {
   const EditClientInfoState({
     this.name = const Name.pure(),
     this.email = const Email.pure(),
+    this.clientCategory = '',
     this.phoneNumber = const PhoneNumber.pure(),
     this.status = const Initial(),
     this.gender = Gender.male,
@@ -15,6 +16,7 @@ final class EditClientInfoState extends Equatable with FormzMixin {
 
   final Name name;
   final Email email;
+  final String clientCategory;
   final PhoneNumber phoneNumber;
   final Status status;
   final File? file;
@@ -24,6 +26,7 @@ final class EditClientInfoState extends Equatable with FormzMixin {
   EditClientInfoState copyWith({
     Name? name,
     Email? email,
+    String? clientCategory,
     PhoneNumber? phoneNumber,
     Status? status,
     File? file,
@@ -34,6 +37,7 @@ final class EditClientInfoState extends Equatable with FormzMixin {
       name: name ?? this.name,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      clientCategory: clientCategory ?? this.clientCategory,
       status: status ?? this.status,
       file: file ?? this.file,
       date: date ?? this.date,
@@ -50,6 +54,7 @@ final class EditClientInfoState extends Equatable with FormzMixin {
         file,
         date,
         gender,
+        clientCategory,
       ];
 
   @override

@@ -215,6 +215,8 @@
       "editClient":"تعديل بيانات العميل",
       "gallery":"المعرض",
       "camera":"الكاميرا",
-      "noClients":"لايوجد عملاء حتي الان"
+      "noClients":"لايوجد عملاء حتي الان",
+      "changeClientCategory":"تغير نوع العميل"
+
 
 }

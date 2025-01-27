@@ -209,5 +209,6 @@
       "editClient":"Edit Client",
       "gallery":"Gallery",
       "camera":"Camera",
-      "noClients":"No Clients Found"
+      "noClients":"No Clients Found",
+      "changeClientCategory":"Change Client Category"
   }
