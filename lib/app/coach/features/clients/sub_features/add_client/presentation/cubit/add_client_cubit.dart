@@ -17,7 +17,7 @@ class AddClientCubit extends Cubit<AddClientState> {
 
   AddClientCubit(this._repository) : super(const AddClientState());
 
-  void fullNameChanged(String value) => emit(state.copyWith(fullName: Name.dirty(value)));
+  void nameChanged(String value) => emit(state.copyWith(fullName: Name.dirty(value)));
 
   void phoneChanged(String value) => emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value)));
 
@@ -28,7 +28,7 @@ class AddClientCubit extends Cubit<AddClientState> {
       emit(state.copyWith(status: const Loading()));
       await _repository.saveClient(
         email: state.email.value,
-        name: state.fullName.value,
+        name: state.name.value,
         phone: state.phoneNumber.value,
       );
       emit(state.copyWith(status: const Success('success')));

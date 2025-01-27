@@ -1,17 +1,19 @@
 import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/coach/features/clients/domain/client_status.dart';
+import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/sub_features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/core/extension_methods/client_x.dart';
 import 'package:btl/app/core/extension_methods/date_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
+import 'package:btl/app/core/models/status.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:form_inputs/form_inputs.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 

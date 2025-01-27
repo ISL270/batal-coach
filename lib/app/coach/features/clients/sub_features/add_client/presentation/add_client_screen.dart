@@ -64,11 +64,11 @@ class _FullNameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<AddClientCubit, AddClientState, Name>(
-      selector: (state) => state.fullName,
+      selector: (state) => state.name,
       builder: (context, name) => Padding(
         padding: EdgeInsets.only(top: 8.h),
         child: TextField(
-          onChanged: (name) => context.read<AddClientCubit>().fullNameChanged(name),
+          onChanged: (name) => context.read<AddClientCubit>().nameChanged(name),
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
             labelText: context.l10n.fullName,

@@ -49,4 +49,7 @@ final class ClientsRepository extends ReactiveRepository<Client, ClientFM, Clien
     );
     return cms.map((e) => e.toDomain()).toList();
   }
+
+  @disposeMethod
+  void dispMethod() => dispose();
 }

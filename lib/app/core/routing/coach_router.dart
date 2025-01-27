@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
@@ -6,8 +7,6 @@ import 'package:btl/app/coach/features/clients/sub_features/client_details/prese
 import 'package:btl/app/coach/features/clients/sub_features/client_goals/presentation/client_goals_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_limitaions/presentation/client_limitations_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_tasks/presentation/client_tasks_screen.dart';
-import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/cubit/edit_client_info_cubit.dart';
-import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/edit_client_info.dart';
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
@@ -145,38 +144,6 @@ final coachRouter = GoRouter(
                     ),
                   ),
                 ]),
-            GoRoute(
-              name: ClientDetailsScreen.name,
-              path: '/${ClientDetailsScreen.name}',
-              builder: (context, state) => const ClientDetailsScreen(),
-              routes: [
-                GoRoute(
-                  name: ClientGoalsScreen.name,
-                  path: ClientGoalsScreen.name,
-                  parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => const ClientGoalsScreen(),
-                ),
-                GoRoute(
-                  name: ClientLimitationsScreen.name,
-                  path: ClientLimitationsScreen.name,
-                  parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => const ClientLimitationsScreen(),
-                ),
-                GoRoute(
-                  name: ClientTasksScreen.name,
-                  path: ClientTasksScreen.name,
-                  parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => const ClientTasksScreen(),
-                ),
-                GoRoute(
-                  name: EditClientInfo.name,
-                  path: EditClientInfo.name,
-                  parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => BlocProvider(
-                      create: (_) => EditClientInfoCubit(), child: const EditClientInfo()),
-                )
-              ],
-            ),
           ],
         ),
         StatefulShellBranch(
@@ -199,6 +166,35 @@ final coachRouter = GoRouter(
         ),
       ],
     ),
+    // Define ClientDetailsScreen as a top-level route
+    GoRoute(
+      name: ClientDetailsScreen.name,
+      path: '/${ClientDetailsScreen.name}',
+      builder: (context, state) {
+        final client = state.extra! as Client; // Retrieve the client object
+        return ClientDetailsScreen(client: client);
+      }, // Pass the client to the screen
+      routes: [
+        GoRoute(
+          name: ClientGoalsScreen.name,
+          path: ClientGoalsScreen.name,
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => const ClientGoalsScreen(),
+        ),
+        GoRoute(
+          name: ClientLimitationsScreen.name,
+          path: ClientLimitationsScreen.name,
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => const ClientLimitationsScreen(),
+        ),
+        GoRoute(
+          name: ClientTasksScreen.name,
+          path: ClientTasksScreen.name,
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => const ClientTasksScreen(),
+        ),
+      ],
+    ),
   ],
   refreshListenable: GoRouterRefreshStream(getIt.authBloc.stream.where((state) => state.isSuccess)),
   redirect: (context, state) {
@@ -214,7 +210,6 @@ final coachRouter = GoRouter(
             );
     }
 
-    // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     // if the user is logged in, send them where they were going before (or home if they weren't going anywhere)
     if (state.isLoggingIn) {
       return state.uri.queryParameters['from'] ??
