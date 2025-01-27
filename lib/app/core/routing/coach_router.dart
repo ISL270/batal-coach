@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/client_limitaions/presentation/client_limitations_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
@@ -134,6 +135,11 @@ final coachRouter = GoRouter(
                     name: ClientGoalsScreen.name,
                     path: ClientGoalsScreen.name,
                     builder: (context, state) => const ClientGoalsScreen(),
+                  ),
+                  GoRoute(
+                    name: ClientLimitationsScreen.name,
+                    path: ClientLimitationsScreen.name,
+                    builder: (context, state) => const ClientLimitationsScreen(),
                   )
                 ]),
             GoRoute(

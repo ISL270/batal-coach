@@ -63,7 +63,7 @@ enum _OthersTabItem {
   progressPhotos('progressPhotos', ''),
   goal('goal', ClientGoalsScreen.name),
   notes('notes', ''),
-  limitationsInjuries('limitationsInjuries', ''),
+  limitationsInjuries('limitationsInjuries', ClientLimitationsScreen.name),
   clientProfile('clientProfile', ''),
   units('units', '/units'),
   features('features', '');
