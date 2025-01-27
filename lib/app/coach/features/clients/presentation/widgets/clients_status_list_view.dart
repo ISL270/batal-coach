@@ -7,17 +7,14 @@ class _ClientsStatusListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 100.h,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: ClientStatus.values.map((status) {
-            return _ClientsStatusCard(
-              statusInfo: status,
-              title: status.title(context),
-            );
-          }).toList(),
-        ),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: ClientStatus.values.map((status) {
+          return _ClientsStatusCard(
+            statusInfo: status,
+            title: status.title(context),
+          );
+        }).toList(),
       ),
     );
   }

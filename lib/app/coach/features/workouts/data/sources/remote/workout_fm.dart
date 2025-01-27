@@ -1,6 +1,7 @@
 part of 'workout_firestore_source.dart';
 
 final class WorkoutFM implements RemoteModel<Workout> {
+  @override
   final String id;
   final String coachID;
   final String name;

@@ -106,7 +106,7 @@
     "ago":"ماضية",
   "addClient":"إضافة عميل",
   "add":"إضافة",
-  "fName":"الاسم الأول",
+  "fullName":"الإسم",
   "lName":"الاسم الثاني",
   "pNumber":"رقم الهاتف",
   "clientCategory":"فئة العميل",
@@ -139,7 +139,7 @@
     "features": "الميزات",
     "editProfile": "تعديل الملف الشخصي",
     "save": "حفظ",
-    "archiveClient": "أرشفة العميل",
+    "archive": "أرشفة العميل",
     "archiveClientConfirmation": "يرجى التأكد من إبلاغ عميلك بأن وصوله إلى التطبيق المحمول سيكون محدودًا",
     "ok": "موافق",
     "cancel": "إلغاء",
@@ -184,6 +184,7 @@
       "gender": "النوع",
       "male": "ذكر",
       "female": "مؤنث",
+      "thisWeek":"هذا الاسبوع",
       "workoutBuilder": "منشئ التمارين",
       "addSet": "إضافة مجموعة",
       "set": "مجموعة",
@@ -208,6 +209,14 @@
         "profile":"الحساب الشخصي",
         "version":"الإصدار",
         "termsOfService":"بنود الخدمة",
-        "privacyPolicy":"سياسة الخصوصية"
+        "privacyPolicy":"سياسة الخصوصية",
+        "thisWeek":"هذا الاسبوع",
+      "birthdate":"تاريخ الميلاد",
+      "editClient":"تعديل بيانات العميل",
+      "gallery":"المعرض",
+      "camera":"الكاميرا",
+      "noClients":"لايوجد عملاء حتي الان",
+      "changeClientCategory":"تغير نوع العميل"
+
 
 }

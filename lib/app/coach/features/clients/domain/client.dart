@@ -9,13 +9,13 @@ final class Client {
 
   final String phoneNumber;
 
-  final DateTime lastActiveDate;
+  final DateTime lastActiveAt;
 
   Client({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.lastActiveDate,
+    required this.lastActiveAt,
   });
 }

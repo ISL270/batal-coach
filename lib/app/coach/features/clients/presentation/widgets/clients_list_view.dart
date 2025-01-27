@@ -15,40 +15,45 @@ class _ClientsListView extends StatelessWidget {
           children: [
             const _SearchAndFilterWidget(),
             const Gap(10),
-            Padding(
-              padding: EdgeInsets.all(8.w),
-              child: Text(
-                '${context.l10n.allClients.toUpperCase()} (3)',
-                style: context.textThemeX.small.bold.copyWith(
-                  color: context.colorsX.onBackgroundTint.withValues(alpha: 0.5),
-                ),
-              ),
-            ),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return _ClientWidget(
-                  client: Client(
-                    email: 'clientEmail@mail.com',
-                    name: Name.fromString('Eslam Ashraf'),
-                    phoneNumber: '+201146012354',
-                    id: '20215',
-                    lastActiveDate: DateTime.now(),
-                  ),
-                );
+            BlocBuilder<ClientsBloc, ClientsState>(
+              builder: (context, state) => switch (state.status) {
+                Loading() => const Center(child: CircularProgressIndicator()),
+                _ => state.clients.result.isEmpty
+                    ? Center(child: Text(context.l10n.noClients))
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.w),
+                            child: Text(
+                              '${context.l10n.allClients.toUpperCase()} '
+                              '(${state.clients.result.length})',
+                              style: context.textThemeX.small.bold.copyWith(
+                                color: context.colorsX.onBackgroundTint.withValues(alpha: 0.5),
+                              ),
+                            ),
+                          ),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return _ClientWidget(client: state.clients.result[index]);
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                                child: Divider(
+                                  height: 1,
+                                  thickness: 0.5,
+                                  color: context.colorsX.onBackgroundTint35.withValues(alpha: 0.1),
+                                ),
+                              );
+                            },
+                            itemCount: state.clients.result.length,
+                          ),
+                        ],
+                      ),
               },
-              separatorBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-                  child: Divider(
-                    height: 1,
-                    thickness: 0.5,
-                    color: context.colorsX.onBackgroundTint35.withValues(alpha: 0.1),
-                  ),
-                );
-              },
-              itemCount: 3,
             ),
           ],
         ),
@@ -65,7 +70,7 @@ class _ClientWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => context.pushNamed(ClientDetailsScreen.name, extra: client),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: CircleAvatar(
@@ -111,6 +116,7 @@ class _SearchAndFilterWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.sp), // Add border radius
               ),
             ),
+            onChanged: (searchTerm) => context.read<ClientsBloc>().add(ClientsSearched(searchTerm)),
           ),
         ),
         Gap(20.w),
