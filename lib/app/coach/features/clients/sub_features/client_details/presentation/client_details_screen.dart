@@ -1,3 +1,4 @@
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_limitaions/presentation/client_limitations_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_goals/presentation/client_goals_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_tasks/presentation/client_tasks_screen.dart';
@@ -17,8 +18,11 @@ part 'widgets/others_tab_view.dart';
 part 'widgets/over_view_tab_widget.dart';
 
 class ClientDetailsScreen extends StatelessWidget {
-  const ClientDetailsScreen({super.key});
-
+  const ClientDetailsScreen({
+    required this.client,
+    super.key,
+  });
+  final Client client;
   static const name = 'client-details';
 
   @override
@@ -51,7 +55,7 @@ class ClientDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const _ClientDetailsUserHeaderInfo(),
+              _ClientDetailsUserHeaderInfo(client.name, client.lastActiveAt),
               SizedBox(height: 16.h),
               TabBar(
                 indicatorColor: context.colorsX.primary, // Tab indicator color
@@ -107,8 +111,9 @@ class _ClientDetailsHeaderIcon extends StatelessWidget {
 }
 
 class _ClientDetailsUserHeaderInfo extends StatelessWidget {
-  const _ClientDetailsUserHeaderInfo();
-
+  const _ClientDetailsUserHeaderInfo(this._name, this._lastActiveAt);
+  final Name _name;
+  final DateTime _lastActiveAt;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -119,7 +124,7 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
             backgroundColor: context.colorsX.secondary,
             radius: 33.sp,
             child: Text(
-              const Name.dirty('Amr Hossam').initials,
+              _name.initials,
               style: TextStyle(
                 color: context.colorsX.onBackground,
                 fontSize: 24.sp,
@@ -132,7 +137,7 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Amr Hossam - Demo', style: context.textThemeX.heading.bold),
+              Text(_name.value, style: context.textThemeX.heading.bold),
               SizedBox(height: 4.h),
               Text(
                 '🏡 (GMT-08:00) America/Los_Angeles',
@@ -141,7 +146,7 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
                     .copyWith(color: context.colorsX.onBackgroundTint, fontSize: 12.sp),
               ),
               Text(
-                '⏱︎ 6:19 AM',
+                '⏱︎ $_lastActiveAt',
                 textAlign: TextAlign.center,
                 style: context.textThemeX.small
                     .copyWith(color: context.colorsX.onBackgroundTint, fontSize: 12),
