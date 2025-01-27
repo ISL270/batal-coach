@@ -2,7 +2,6 @@ import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/coach/features/clients/domain/client_status.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/sub_features/add_client/presentation/add_client_screen.dart';
-import 'package:btl/app/coach/features/clients/sub_features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/core/extension_methods/client_x.dart';
 import 'package:btl/app/core/extension_methods/date_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
