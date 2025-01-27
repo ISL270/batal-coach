@@ -37,7 +37,7 @@ class ClientLimitationsScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            Assets.icons.notes,
+            Assets.illustrations.notes,
             width: 300.w,
           ),
           Text(

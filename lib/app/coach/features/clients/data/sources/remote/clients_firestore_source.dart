@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/data/data_sources/remote/client_fm.dart';
+import 'package:btl/app/coach/features/clients/data/sources/remote/client_fm.dart';
 import 'package:btl/app/core/firestore/reactive_firestore_source.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,21 +9,18 @@ final class ClientsFirestoreSource extends ReactiveFirestoreSource<ClientFM> {
   ClientsFirestoreSource(super.firestoreSvc);
 
   Future<void> saveClient({
-    required String coachEmail,
-    required String phoneNumber,
-    required String email,
-    required DateTime lastActive,
     required String name,
+    required String email,
     required String phone,
-    required String userType,
+    required String coachEmail,
   }) async =>
       firestoreOperationHandler(() async {
         await firestoreSvc.trainees.collection.add({
-          firestoreSvc.trainees.coachEmailField: coachEmail,
           firestoreSvc.trainees.nameField: name,
           firestoreSvc.trainees.emailField: email,
           firestoreSvc.trainees.phoneNumberField: phone,
-          firestoreSvc.trainees.lastActive: lastActive,
+          firestoreSvc.trainees.coachEmailField: coachEmail,
+          firestoreSvc.trainees.lastActiveAtField: FieldValue.serverTimestamp(),
         });
       });
 

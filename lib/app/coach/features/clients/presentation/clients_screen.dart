@@ -1,6 +1,7 @@
-import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
-import 'package:btl/app/coach/features/clients/domain/models/client_status.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
+import 'package:btl/app/coach/features/clients/domain/client_status.dart';
+import 'package:btl/app/coach/features/clients/sub_features/add_client/presentation/add_client_screen.dart';
+import 'package:btl/app/coach/features/clients/sub_features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/core/extension_methods/client_x.dart';
 import 'package:btl/app/core/extension_methods/date_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
@@ -45,7 +46,10 @@ class ClientsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Align(
           child: Row(
-            children: [const Spacer(), Icon(Icons.settings, color: context.colorsX.primary)],
+            children: [
+              const Spacer(),
+              Icon(Icons.settings, color: context.colorsX.primary),
+            ],
           ),
         ),
       ),
@@ -59,7 +63,7 @@ class ClientsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.h),
                   child: Text(
-                    DateTime.now().toMMMMDate(context),
+                    DateTime.now().toMMMM(context),
                     style: context.textThemeX.medium.bold.copyWith(
                       fontSize: 14.sp,
                       color: context.colorsX.primary,
