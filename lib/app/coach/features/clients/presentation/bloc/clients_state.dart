@@ -18,7 +18,7 @@ final class ClientsState extends Equatable {
   }) {
     return ClientsState(
       status: status ?? this.status,
-      clients: client ?? this.clients,
+      clients: client ?? clients,
       searchTerm: searchTerm ?? this.searchTerm,
     );
   }
