@@ -3,6 +3,7 @@ import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.da
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/add_client/presentation/add_client_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_details/presentation/client_details_screen.dart';
+import 'package:btl/app/coach/features/clients/sub_features/client_goals/presentation/client_goals_screen.dart';
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
@@ -120,15 +121,21 @@ final coachRouter = GoRouter(
           navigatorKey: _clientsNavigatorKey,
           routes: [
             GoRoute(
-              name: ClientsScreen.name,
-              path: '/${ClientsScreen.name}',
-              pageBuilder: (context, state) => NoTransitionPage(
-                child: BlocProvider(
-                  create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
-                  child: const ClientsScreen(),
-                ),
-              ),
-            ),
+                name: ClientsScreen.name,
+                path: '/${ClientsScreen.name}',
+                pageBuilder: (context, state) => NoTransitionPage(
+                      child: BlocProvider(
+                        create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
+                        child: const ClientsScreen(),
+                      ),
+                    ),
+                routes: [
+                  GoRoute(
+                    name: ClientGoalsScreen.name,
+                    path: ClientGoalsScreen.name,
+                    builder: (context, state) => const ClientGoalsScreen(),
+                  )
+                ]),
             GoRoute(
               name: AddClientScreen.name,
               path: '/${AddClientScreen.name}',

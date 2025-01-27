@@ -83,22 +83,22 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i557.SettingsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i193.UserIsarSource>(
         () => _i193.UserIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i347.ClientsIsarSource>(
+        () => _i347.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i25.WorkoutIsarSource>(
         () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
-    gh.singleton<_i347.ClientsIsarSource>(
-        () => _i347.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i662.SettingsRepository>(
         () => _i662.SettingsRepository(gh<_i557.SettingsIsarSource>()));
+    gh.singleton<_i886.ClientsFirestoreSource>(
+      () => _i886.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
+      dispose: (i) => i.dispMethod(),
+    );
     gh.singleton<_i389.WorkoutFirestoreSource>(
         () => _i389.WorkoutFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i577.ExercisesFirestoreSource>(
       () => _i577.ExercisesFirestoreSource(gh<_i997.FirestoreService>()),
-      dispose: (i) => i.dispMethod(),
-    );
-    gh.singleton<_i886.ClientsFirestoreSource>(
-      () => _i886.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
     );
     gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
@@ -134,10 +134,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i886.ClientsFirestoreSource>(),
           gh<_i347.ClientsIsarSource>(),
         ));
-    gh.factory<_i441.ClientsBloc>(
-        () => _i441.ClientsBloc(gh<_i999.ClientsRepository>()));
     gh.factory<_i1031.AddClientCubit>(
         () => _i1031.AddClientCubit(gh<_i999.ClientsRepository>()));
+    gh.factory<_i441.ClientsBloc>(
+        () => _i441.ClientsBloc(gh<_i999.ClientsRepository>()));
     gh.factory<_i450.ExercisesBloc>(
         () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     gh.singleton<_i820.WorkoutRepository>(
