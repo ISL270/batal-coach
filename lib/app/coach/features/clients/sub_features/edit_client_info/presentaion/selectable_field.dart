@@ -42,8 +42,8 @@ class SelectableField extends StatelessWidget {
     );
   }
 
-  void _showBottomSheet(BuildContext context, String label,
-      String selectedValue, List<String> options) {
+  void _showBottomSheet(
+      BuildContext context, String label, String selectedValue, List<String> options) {
     showModalBottomSheet<dynamic>(
       backgroundColor: context.colorsX.secondaryBackground,
       context: context,

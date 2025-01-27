@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/edit_client_info/presentaion/selectable_field.dart';
+import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/selectable_field.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class EditClientInfo extends StatelessWidget {
-  const EditClientInfo({super.key});
+class EditClientScreen extends StatelessWidget {
+  const EditClientScreen({super.key});
 
-  static const name = 'editClientInfo';
+  static const name = 'edit-client';
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class EditClientInfo extends StatelessWidget {
             const _ProfileImageWidget(),
             SizedBox(height: 15.h),
             _ProfileFormField(
-              label: context.l10n.fName,
+              label: context.l10n.fullName,
               value: 'Amr',
             ),
             _ProfileFormField(
@@ -66,11 +66,7 @@ class EditClientInfo extends StatelessWidget {
               context: context,
               label: context.l10n.clientCategory,
               value: context.l10n.online,
-              options: [
-                context.l10n.inPerson,
-                context.l10n.online,
-                context.l10n.hybrid
-              ],
+              options: [context.l10n.inPerson, context.l10n.online, context.l10n.hybrid],
             ),
             SizedBox(height: 40.h),
             Button.filled(
@@ -183,12 +179,10 @@ class _ProfileFormField extends StatelessWidget {
                 labelText: label,
                 labelStyle: context.textThemeX.medium,
                 focusedBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: context.colorsX.onBackgroundTint35),
+                  borderSide: BorderSide(color: context.colorsX.onBackgroundTint35),
                 ),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: context.colorsX.onBackgroundTint35),
+                  borderSide: BorderSide(color: context.colorsX.onBackgroundTint35),
                 ),
               ),
             ),
