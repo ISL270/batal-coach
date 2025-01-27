@@ -208,5 +208,6 @@
       "birthdate":"Birthdate",
       "editClient":"Edit Client",
       "gallery":"Gallery",
-      "camera":"Camera"
+      "camera":"Camera",
+      "noClients":"No Clients Found"
   }

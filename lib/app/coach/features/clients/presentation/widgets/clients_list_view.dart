@@ -19,7 +19,7 @@ class _ClientsListView extends StatelessWidget {
               builder: (context, state) => switch (state.status) {
                 Loading() => const Center(child: CircularProgressIndicator()),
                 _ => state.clients.result.isEmpty
-                    ? const Center(child: Text('No clients found'))
+                    ? Center(child: Text(context.l10n.noClients))
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
