@@ -25,9 +25,7 @@ class _OverViewTab extends StatelessWidget {
                 title: context.l10n.workoutTitle,
                 subTitle: context.l10n.noWorkout,
                 image: Assets.icons.dumbbell,
-                onTap: () {
-                  context.pushNamed(ClientTasksScreen.name);
-                },
+                onTap: () => context.pushNamed(ClientTasksScreen.name),
               ),
               SizedBox(height: 10.h),
               _OverviewCard(
