@@ -1,4 +1,4 @@
-part of '../client_details_screen.dart';
+part of 'client_details_screen.dart';
 
 class _OverViewTab extends StatelessWidget {
   const _OverViewTab();
@@ -47,8 +47,7 @@ class _OverViewTab extends StatelessWidget {
                       style: context.textThemeX.large.bold,
                     ),
                     const Spacer(),
-                    TextButton(
-                        onPressed: () {}, child: Text(context.l10n.viewMore)),
+                    TextButton(onPressed: () {}, child: Text(context.l10n.viewMore)),
                   ],
                 ),
               ),
@@ -169,8 +168,7 @@ class _MetricsWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
                 subTitle,
-                style: context.textThemeX.small
-                    .copyWith(color: context.colorsX.onBackgroundTint),
+                style: context.textThemeX.small.copyWith(color: context.colorsX.onBackgroundTint),
               ),
             ),
             SvgPicture.asset(

@@ -1,5 +1,5 @@
 import 'package:btl/app/coach/features/add_client/presentation/add_client_screen.dart';
-import 'package:btl/app/coach/features/client_details/presentation/client_details_screen.dart';
+import 'package:btl/app/coach/features/clients/sub_features/client_details/presentation/client_details_screen.dart';
 import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/presentation/bloc/clients_bloc.dart';
 import 'package:btl/app/coach/features/clients/presentation/clients_screen.dart';
