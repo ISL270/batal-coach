@@ -1,5 +1,6 @@
-import 'package:btl/app/coach/features/client_limitaions/presentation/client_limitations_screen.dart';
+import 'package:btl/app/coach/features/clients/sub_features/client_limitaions/presentation/client_limitations_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_goals/presentation/client_goals_screen.dart';
+import 'package:btl/app/coach/features/clients/sub_features/client_tasks/presentation/client_tasks_screen.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';

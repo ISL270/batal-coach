@@ -34,9 +34,7 @@ class _OverViewTab extends StatelessWidget {
                 title: context.l10n.tasks,
                 subTitle: context.l10n.noTasks,
                 image: Assets.icons.checklist,
-                onTap: () {
-                  // context.pushNamed(ClientTasksScreen.name);
-                },
+                onTap: () => context.pushNamed(ClientTasksScreen.name),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),

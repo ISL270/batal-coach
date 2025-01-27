@@ -184,6 +184,7 @@
       "gender": "النوع",
       "male": "ذكر",
       "female": "مؤنث",
+      "thisWeek":"هذا الاسبوع",
       "workoutBuilder": "منشئ التمارين",
       "addSet": "إضافة مجموعة",
       "set": "مجموعة",
@@ -208,6 +209,7 @@
         "profile":"الحساب الشخصي",
         "version":"الإصدار",
         "termsOfService":"بنود الخدمة",
-        "privacyPolicy":"سياسة الخصوصية"
+        "privacyPolicy":"سياسة الخصوصية",
+        "thisWeek":"هذا الاسبوع"
 
 }

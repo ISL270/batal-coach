@@ -179,6 +179,7 @@
           "gender": "Gender",
           "male": "Male",
           "female": "Female",
+          "thisWeek":"this week",
       "workoutBuilder": "Workout Builder",
       "addSet": "Add set",
       "set": "Set",
