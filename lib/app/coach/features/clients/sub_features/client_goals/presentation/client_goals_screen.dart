@@ -6,10 +6,10 @@ import 'package:btl/app/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ClientGoalScreen extends StatelessWidget {
-  const ClientGoalScreen({super.key});
+class ClientGoalsScreen extends StatelessWidget {
+  const ClientGoalsScreen({super.key});
 
-  static const name = 'clientGoalScreen';
+  static const name = 'client-goals';
 
   @override
   Widget build(BuildContext context) {

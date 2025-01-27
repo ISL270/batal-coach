@@ -12,7 +12,7 @@ class _OthersTabView extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
-            final item = OthersTabItem.values[index];
+            final item = _OthersTabItem.values[index];
             return _OthersTabItemWidget(item: item);
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -22,7 +22,7 @@ class _OthersTabView extends StatelessWidget {
               color: context.colorsX.onBackgroundTint,
             );
           },
-          itemCount: OthersTabItem.values.length,
+          itemCount: _OthersTabItem.values.length,
         ),
       ),
     );
@@ -32,7 +32,7 @@ class _OthersTabView extends StatelessWidget {
 class _OthersTabItemWidget extends StatelessWidget {
   const _OthersTabItemWidget({required this.item});
 
-  final OthersTabItem item;
+  final _OthersTabItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -54,5 +54,48 @@ class _OthersTabItemWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+enum _OthersTabItem {
+  activityHistory('activityHistory', ''),
+  exerciseHistory('exerciseHistory', ''),
+  progressPhotos('progressPhotos', ''),
+  goal('goal', ClientGoalsScreen.name),
+  notes('notes', ''),
+  limitationsInjuries('limitationsInjuries', ''),
+  clientProfile('clientProfile', ''),
+  units('units', '/units'),
+  features('features', '');
+
+  final String key;
+  final String path;
+
+  const _OthersTabItem(this.key, this.path);
+
+  String getTranslatedTitle(BuildContext context) {
+    final l10n = context.l10n;
+    switch (key) {
+      case 'activityHistory':
+        return l10n.activityHistory;
+      case 'exerciseHistory':
+        return l10n.exerciseHistory;
+      case 'progressPhotos':
+        return l10n.progressPhotos;
+      case 'goal':
+        return l10n.goal;
+      case 'notes':
+        return l10n.notes;
+      case 'limitationsInjuries':
+        return l10n.limitationsInjuries;
+      case 'clientProfile':
+        return l10n.clientProfile;
+      case 'units':
+        return l10n.units;
+      case 'features':
+        return l10n.features;
+      default:
+        return '';
+    }
   }
 }
