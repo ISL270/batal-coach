@@ -1,7 +1,7 @@
 part of '../client_details_screen.dart';
 
-class OverViewTab extends StatelessWidget {
-  const OverViewTab({super.key});
+class _OverViewTab extends StatelessWidget {
+  const _OverViewTab();
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class OverViewTab extends StatelessWidget {
       surfaceTintColor: context.colorsX.primary,
       color: context.colorsX.onBackground.withOpacity(0.05),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,9 +29,7 @@ class OverViewTab extends StatelessWidget {
                   // context.pushNamed(ClientTasksScreen.name);
                 },
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10.h),
               _OverviewCard(
                 title: context.l10n.tasks,
                 subTitle: context.l10n.noTasks,
@@ -41,7 +39,7 @@ class OverViewTab extends StatelessWidget {
                 },
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                 child: Row(
                   children: [
                     Text(
@@ -49,13 +47,12 @@ class OverViewTab extends StatelessWidget {
                       style: context.textThemeX.large.bold,
                     ),
                     const Spacer(),
-                    TextButton(
-                        onPressed: () {}, child: Text(context.l10n.viewMore)),
+                    TextButton(onPressed: () {}, child: Text(context.l10n.viewMore)),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
                 child: Row(
                   children: [
                     _MetricsWidget(
@@ -74,9 +71,7 @@ class OverViewTab extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20.h),
             ],
           ),
         ),
@@ -107,12 +102,12 @@ class _OverviewCard extends StatelessWidget {
             color: context.colorsX.isDark
                 ? context.colorsX.background
                 : context.colorsX.secondaryBackground,
-            borderRadius: BorderRadius.circular(8)),
+            borderRadius: BorderRadius.circular(8.sp)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: EdgeInsets.symmetric(vertical: 16.h),
           child: ListTile(
             leading: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.w),
               child: SvgPicture.asset(
                 image,
                 width: 40.w,
@@ -124,7 +119,7 @@ class _OverviewCard extends StatelessWidget {
             ),
             title: Text(
               title,
-              style: context.textThemeX.large.bold.copyWith(fontSize: 20),
+              style: context.textThemeX.large.bold.copyWith(fontSize: 20.sp),
             ),
             subtitle: Text(
               subTitle,
@@ -173,7 +168,7 @@ class _MetricsWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
                 subTitle,
-                style: context.textThemeX.small.copyWith(color: Colors.grey),
+                style: context.textThemeX.small.copyWith(color: context.colorsX.onBackgroundTint),
               ),
             ),
             SvgPicture.asset(

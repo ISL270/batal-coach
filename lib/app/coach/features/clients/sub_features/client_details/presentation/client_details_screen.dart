@@ -1,6 +1,5 @@
-import 'package:btl/app/coach/features/clients/domain/models/others_page_items.dart';
+import 'package:btl/app/coach/features/clients/domain/others_page_items.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
-import 'package:btl/app/core/extension_methods/name_x.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
@@ -11,22 +10,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:go_router/go_router.dart';
-part 'widgets/over_view_tab_widget.dart';
+
 part 'widgets/others_tab_view.dart';
+part 'widgets/over_view_tab_widget.dart';
 
 class ClientDetailsScreen extends StatelessWidget {
   const ClientDetailsScreen({super.key});
 
-  static const name = 'ClientDetails';
+  static const name = 'client-details';
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Screen(
-        appBar: AppBar(
-          backgroundColor: context.colorsX.secondaryBackground,
-        ),
+        appBar: AppBar(backgroundColor: context.colorsX.secondaryBackground),
         padding: EdgeInsets.zero,
         body: ColoredBox(
           color: context.colorsX.secondaryBackground,
@@ -34,7 +32,7 @@ class ClientDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: EdgeInsets.symmetric(horizontal: 8.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -52,11 +50,11 @@ class ClientDetailsScreen extends StatelessWidget {
                 ),
               ),
               const _ClientDetailsUserHeaderInfo(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               TabBar(
                 indicatorColor: context.colorsX.primary, // Tab indicator color
                 labelColor: context.colorsX.primary, // Active tab label color
-                unselectedLabelColor: Colors.grey, // Inactive tab label color
+                unselectedLabelColor: context.colorsX.onBackgroundTint, // Inactive tab label color
                 tabs: [
                   Tab(text: context.l10n.overview),
                   Tab(text: context.l10n.others),
@@ -66,8 +64,8 @@ class ClientDetailsScreen extends StatelessWidget {
               const Expanded(
                 child: TabBarView(
                   children: [
-                    OverViewTab(),
-                    OthersTabView(),
+                    _OverViewTab(),
+                    _OthersTabView(),
                   ],
                 ),
               ),
@@ -90,15 +88,15 @@ class _ClientDetailsHeaderIcon extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(5.w),
         child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.grey,
+          decoration: BoxDecoration(
+            color: context.colorsX.onBackgroundTint,
             shape: BoxShape.circle,
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Icon(icon, size: 16, color: Colors.white),
+            padding: EdgeInsets.all(10.w),
+            child: Icon(icon, size: 16.w, color: context.colorsX.background),
           ),
         ),
       ),
@@ -112,16 +110,16 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.symmetric(horizontal: 8.h),
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: const Color(0xffDD908C),
+            backgroundColor: context.colorsX.secondary,
             radius: 33.sp,
             child: Text(
               const Name.dirty('Amr Hossam').initials,
               style: TextStyle(
-                color: Colors.white,
+                color: context.colorsX.onBackground,
                 fontSize: 24.sp,
               ),
             ),
@@ -133,16 +131,18 @@ class _ClientDetailsUserHeaderInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Amr Hossam - Demo', style: context.textThemeX.heading.bold),
-              const SizedBox(height: 4),
+              SizedBox(height: 4.h),
               Text(
                 '🏡 (GMT-08:00) America/Los_Angeles',
                 textAlign: TextAlign.center,
-                style: context.textThemeX.small.copyWith(color: Colors.grey, fontSize: 12),
+                style: context.textThemeX.small
+                    .copyWith(color: context.colorsX.onBackgroundTint, fontSize: 12.sp),
               ),
               Text(
                 '⏱︎ 6:19 AM',
                 textAlign: TextAlign.center,
-                style: context.textThemeX.small.copyWith(color: Colors.grey, fontSize: 12),
+                style: context.textThemeX.small
+                    .copyWith(color: context.colorsX.onBackgroundTint, fontSize: 12),
               ),
             ],
           ),

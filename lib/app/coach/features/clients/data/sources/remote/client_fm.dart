@@ -1,4 +1,4 @@
-import 'package:btl/app/coach/features/clients/domain/models/client.dart';
+import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/core/firestore/remote_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:form_inputs/form_inputs.dart';
@@ -14,14 +14,14 @@ final class ClientFM implements RemoteModel<Client> {
   final String name;
   final String email;
   final String phoneNumber;
-  final DateTime lastActive;
+  final DateTime lastActiveAt;
 
   ClientFM({
     required this.id,
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.lastActive,
+    required this.lastActiveAt,
   });
 
   factory ClientFM.fromJson(String docID, Map<String, dynamic> json) => ClientFM(
@@ -29,9 +29,7 @@ final class ClientFM implements RemoteModel<Client> {
         name: json['name'] as String,
         email: json['email'] as String,
         phoneNumber: json['phoneNumber'] as String,
-        lastActive: json['lastActive'] != null
-            ? (json['lastActive'] as Timestamp).toDate()
-            : DateTime.fromMillisecondsSinceEpoch(0),
+        lastActiveAt: (json['lastActiveAt'] as Timestamp).toDate(),
       );
 
   Map<String, dynamic> toJson() => _$ClientFMToJson(this);
@@ -42,6 +40,6 @@ final class ClientFM implements RemoteModel<Client> {
         name: Name.fromString(name),
         email: email,
         phoneNumber: phoneNumber,
-        lastActiveDate: lastActive,
+        lastActiveAt: lastActiveAt,
       );
 }

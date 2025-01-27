@@ -1,7 +1,7 @@
 part of '../client_details_screen.dart';
 
-class OthersTabView extends StatelessWidget {
-  const OthersTabView({super.key});
+class _OthersTabView extends StatelessWidget {
+  const _OthersTabView();
 
   @override
   Widget build(BuildContext context) {
@@ -9,17 +9,17 @@ class OthersTabView extends StatelessWidget {
       surfaceTintColor: context.colorsX.primary,
       color: context.colorsX.onBackground.withOpacity(0.05),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             final item = OthersTabItem.values[index];
             return _OthersTabItemWidget(item: item);
           },
           separatorBuilder: (BuildContext context, int index) {
-            return const Divider(
+            return Divider(
               height: 1,
               thickness: 0.5,
-              color: Colors.grey,
+              color: context.colorsX.onBackgroundTint,
             );
           },
           itemCount: OthersTabItem.values.length,
@@ -39,7 +39,7 @@ class _OthersTabItemWidget extends StatelessWidget {
     final title = item.getTranslatedTitle(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
         children: <Widget>[
           Text(

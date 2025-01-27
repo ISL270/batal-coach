@@ -106,7 +106,7 @@
   "ago":"ago",
   "addClient":"Add Client",
   "add":"Add",
-  "fName":"Fist Name",
+  "fullName":"Name",
   "lName":"Last Name",
   "pNumber":"Phone Number",
   "clientCategory":"Client category",

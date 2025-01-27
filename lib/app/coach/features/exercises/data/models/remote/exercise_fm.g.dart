@@ -19,29 +19,22 @@ ExerciseFM _$ExerciseFMFromJson(Map<String, dynamic> json) => ExerciseFM(
       (json['secondaryMuscles'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$MuscleFMEnumMap, e))
           .toList(),
-      (json['instructions'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      (json['instructions'] as List<dynamic>?)?.map((e) => e as String).toList(),
       $enumDecodeNullable(_$CategoryFMEnumMap, json['category']),
       $enumDecodeNullable(_$TypeFMEnumMap, json['type']),
       (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      (json['fields'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$FieldFMEnumMap, e))
-          .toList(),
+      (json['fields'] as List<dynamic>?)?.map((e) => $enumDecode(_$FieldFMEnumMap, e)).toList(),
     );
 
-Map<String, dynamic> _$ExerciseFMToJson(ExerciseFM instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ExerciseFMToJson(ExerciseFM instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'force': _$ForceFMEnumMap[instance.force],
       'level': _$LevelFMEnumMap[instance.level],
       'mechanic': _$MechanicFMEnumMap[instance.mechanic],
       'equipment': _$EquipmentFMEnumMap[instance.equipment],
-      'primaryMuscles':
-          instance.primaryMuscles?.map((e) => _$MuscleFMEnumMap[e]!).toList(),
-      'secondaryMuscles':
-          instance.secondaryMuscles?.map((e) => _$MuscleFMEnumMap[e]!).toList(),
+      'primaryMuscles': instance.primaryMuscles?.map((e) => _$MuscleFMEnumMap[e]!).toList(),
+      'secondaryMuscles': instance.secondaryMuscles?.map((e) => _$MuscleFMEnumMap[e]!).toList(),
       'instructions': instance.instructions,
       'category': _$CategoryFMEnumMap[instance.category],
       'type': _$TypeFMEnumMap[instance.type],
