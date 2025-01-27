@@ -96,71 +96,81 @@ final coachRouter = GoRouter(
           navigatorKey: _workoutsNavigatorKey,
           routes: [
             GoRoute(
-                name: WorkoutsScreen.name,
-                path: '/${WorkoutsScreen.name}',
-                pageBuilder: (context, state) => NoTransitionPage(
-                      child: BlocProvider(
-                        create: (context) => WorkoutsBloc(getIt.get<WorkoutRepository>()),
-                        child: const WorkoutsScreen(),
-                      ),
-                    ),
-                routes: [
-                  GoRoute(
-                    name: WorkoutBuilderScreen.name,
-                    path: WorkoutBuilderScreen.name,
-                    parentNavigatorKey: _rootNavigatorKey,
-                    pageBuilder: (context, state) => CupertinoPage(
-                      fullscreenDialog: true,
-                      child: BlocProvider(
-                        create: (context) => WorkoutBuilderCubit(getIt.get<WorkoutRepository>()),
-                        child: const WorkoutBuilderScreen(),
-                      ),
+              name: WorkoutsScreen.name,
+              path: '/${WorkoutsScreen.name}',
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: BlocProvider(
+                  create: (context) => WorkoutsBloc(getIt.get<WorkoutRepository>()),
+                  child: const WorkoutsScreen(),
+                ),
+              ),
+              routes: [
+                GoRoute(
+                  name: WorkoutBuilderScreen.name,
+                  path: WorkoutBuilderScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
+                  pageBuilder: (context, state) => CupertinoPage(
+                    fullscreenDialog: true,
+                    child: BlocProvider(
+                      create: (context) => WorkoutBuilderCubit(getIt.get<WorkoutRepository>()),
+                      child: const WorkoutBuilderScreen(),
                     ),
                   ),
-                ]),
+                ),
+              ],
+            ),
           ],
         ),
         StatefulShellBranch(
           navigatorKey: _clientsNavigatorKey,
           routes: [
             GoRoute(
-              name: ClientsScreen.name,
-              path: '/${ClientsScreen.name}',
-              pageBuilder: (context, state) => NoTransitionPage(
-                child: BlocProvider(
-                  create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
-                  child: const ClientsScreen(),
-                ),
-              ),
-            ),
+                name: ClientsScreen.name,
+                path: '/${ClientsScreen.name}',
+                pageBuilder: (context, state) => NoTransitionPage(
+                      child: BlocProvider(
+                        create: (context) => ClientsBloc(getIt.get<ClientsRepository>()),
+                        child: const ClientsScreen(),
+                      ),
+                    ),
+                routes: [
+                  GoRoute(
+                    name: AddClientScreen.name,
+                    path: AddClientScreen.name,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) => const CupertinoPage(
+                      fullscreenDialog: true,
+                      child: AddClientScreen(),
+                    ),
+                  ),
+                ]),
             GoRoute(
-              name: AddClientScreen.name,
-              path: '/${AddClientScreen.name}',
-              builder: (context, state) => const AddClientScreen(),
-            ),
-            GoRoute(
-              path: '/${ClientDetailsScreen.name}',
               name: ClientDetailsScreen.name,
+              path: '/${ClientDetailsScreen.name}',
               builder: (context, state) => const ClientDetailsScreen(),
               routes: [
                 GoRoute(
                   name: ClientGoalsScreen.name,
                   path: ClientGoalsScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ClientGoalsScreen(),
                 ),
                 GoRoute(
                   name: ClientLimitationsScreen.name,
                   path: ClientLimitationsScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ClientLimitationsScreen(),
                 ),
                 GoRoute(
                   name: ClientTasksScreen.name,
                   path: ClientTasksScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const ClientTasksScreen(),
                 ),
                 GoRoute(
                   name: EditClientScreen.name,
                   path: EditClientScreen.name,
+                  parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) => const EditClientScreen(),
                 )
               ],
