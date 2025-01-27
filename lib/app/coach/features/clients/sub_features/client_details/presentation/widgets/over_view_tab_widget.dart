@@ -1,4 +1,4 @@
-part of 'client_details_screen.dart';
+part of '../client_details_screen.dart';
 
 class _OverViewTab extends StatelessWidget {
   const _OverViewTab();

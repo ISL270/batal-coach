@@ -11,8 +11,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:go_router/go_router.dart';
 
-part 'others_tab_view.dart';
-part 'over_view_tab_widget.dart';
+part 'widgets/others_tab_view.dart';
+part 'widgets/over_view_tab_widget.dart';
 
 class ClientDetailsScreen extends StatelessWidget {
   const ClientDetailsScreen({super.key});
