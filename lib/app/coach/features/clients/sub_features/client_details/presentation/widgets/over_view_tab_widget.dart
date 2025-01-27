@@ -7,7 +7,7 @@ class _OverViewTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       surfaceTintColor: context.colorsX.primary,
-      color: context.colorsX.onBackground.withOpacity(0.05),
+      color: context.colorsX.onBackground.withValues(alpha: 0.05),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         child: SingleChildScrollView(
@@ -26,7 +26,7 @@ class _OverViewTab extends StatelessWidget {
                 subTitle: context.l10n.noWorkout,
                 image: Assets.icons.dumbbell,
                 onTap: () {
-                  // context.pushNamed(ClientTasksScreen.name);
+                  context.pushNamed(ClientTasksScreen.name);
                 },
               ),
               SizedBox(height: 10.h),
