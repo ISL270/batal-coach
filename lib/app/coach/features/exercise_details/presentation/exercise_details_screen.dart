@@ -139,7 +139,7 @@ class _ImageWithPlaceHolder extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 30.h),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8), // Adjust the value for desired curvature
+        borderRadius: BorderRadius.circular(8.r), // Adjust the value for desired curvature
         child: CachedNetworkImage(
           fit: BoxFit.fill,
           imageUrl: image,
