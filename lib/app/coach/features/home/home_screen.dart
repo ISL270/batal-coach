@@ -27,23 +27,18 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: Directionality(
         textDirection: TextDirection.ltr,
         child: ClipRRect(
-          borderRadius: const BorderRadius.horizontal(
-            left: Radius.circular(35),
-            right: Radius.circular(35),
-          ),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(35)),
           child: NavigationBar(
             onDestinationSelected: _goBranch,
             selectedIndex: navigationShell.currentIndex,
             destinations: [
               NavigationDestination(
-                selectedIcon: SvgAsset(Assets.icons.dumbbell,
-                    color: context.colorsX.primary),
+                selectedIcon: SvgAsset(Assets.icons.dumbbell, color: context.colorsX.primary),
                 icon: SvgAsset(Assets.icons.dumbbellOutlined),
                 label: context.l10n.exercise(0).capitalizedDefinite,
               ),
               NavigationDestination(
-                selectedIcon: SvgAsset(Assets.icons.sprint,
-                    color: context.colorsX.primary),
+                selectedIcon: SvgAsset(Assets.icons.sprint, color: context.colorsX.primary),
                 icon: SvgAsset(Assets.icons.sprint),
                 label: context.l10n.workout(0).capitalizedDefinite,
               ),

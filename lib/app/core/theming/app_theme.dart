@@ -34,6 +34,7 @@ ThemeData _themeData(ColorsX colorScheme) {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         textStyle: textTheme.small.bold,
+        iconColor: colorScheme.primary,
         foregroundColor: colorScheme.primary,
       ),
     ),

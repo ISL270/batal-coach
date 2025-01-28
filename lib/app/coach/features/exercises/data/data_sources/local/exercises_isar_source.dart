@@ -12,8 +12,6 @@ import 'package:isar/isar.dart';
 final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
   const ExercisesIsarSource(super.isarService);
 
-  Future<int> deleteExercises(List<String> ids) => isarService.deleteAllByIDs<ExerciseIsar>(ids);
-
   Future<List<ExerciseIsar>> getExercises(
     String searchTerm,
     ExcFilters? filters,
@@ -64,16 +62,6 @@ final class ExercisesIsarSource extends IsarSource<Exercise, ExerciseIsar> {
         .limit(pageSize)
         .findAll();
   }
-
-  Future<List<ExerciseIsar>> getExercisesByIDs(List<String> ids) async {
-    return isarService.getAllByIDs<ExerciseIsar>(ids);
-  }
-
-  Future<ExerciseIsar?> getExercise(String id) async {
-    return isarService.get<ExerciseIsar>(id);
-  }
-
-  ExerciseIsar? getExerciseSync(String id) => isarService.getSync<ExerciseIsar>(id);
 
   @override
   ExerciseIsar fromDomain(Exercise dm) => ExerciseIsar.fromDomain(dm);

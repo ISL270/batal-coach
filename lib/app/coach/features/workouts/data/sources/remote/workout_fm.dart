@@ -59,7 +59,7 @@ final class ExerciseSetsFM with ExerciseSetsSerializer {
   }
 
   ExerciseSets toDomain() {
-    final excIsar = getIt.get<ExercisesIsarSource>().getExerciseSync(excID);
+    final excIsar = getIt.get<ExercisesIsarSource>().get(excID);
     return ExerciseSets(excIsar!.toDomain(), fields: fields);
   }
 }

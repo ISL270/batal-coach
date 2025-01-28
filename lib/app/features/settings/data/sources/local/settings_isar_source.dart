@@ -15,11 +15,6 @@ final class SettingsIsarSource extends IsarSource<Settings, SettingsIsar> {
     await isarService.put(settingsIsar);
   }
 
-  Future<Settings> getSettings() async {
-    final settingsIsar = await isarService.getFirst<SettingsIsar>();
-    return settingsIsar?.toDomain() ?? const Settings();
-  }
-
   @override
   SettingsIsar fromDomain(Settings dm) => SettingsIsar.fromDomain(dm);
 }
