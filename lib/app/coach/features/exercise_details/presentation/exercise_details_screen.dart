@@ -14,7 +14,7 @@ part 'widgets/exercise_details_body.dart';
 class ExerciseDetailsScreen extends StatelessWidget {
   const ExerciseDetailsScreen({super.key});
 
-  static const String name = 'exercisedetails';
+  static const String name = 'exercise-details';
 
   @override
   Widget build(BuildContext context) {

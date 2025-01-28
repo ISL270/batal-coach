@@ -12,6 +12,7 @@ import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/pre
 import 'package:btl/app/coach/features/exercise_builder/presentation/exercise_builder.dart';
 import 'package:btl/app/coach/features/exercise_details/presentation/cubit/exercise_details_cubit.dart';
 import 'package:btl/app/coach/features/exercise_details/presentation/exercise_details_screen.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/domain/repositories/exercises_repository.dart';
 import 'package:btl/app/coach/features/exercises/presentation/bloc/exercises_bloc.dart';
 import 'package:btl/app/coach/features/exercises/presentation/exercises_screen.dart';
@@ -96,10 +97,14 @@ final coachRouter = GoRouter(
                   name: ExerciseDetailsScreen.name,
                   path: ExerciseDetailsScreen.name,
                   parentNavigatorKey: _rootNavigatorKey,
-                  builder: (context, state) => BlocProvider(
-                    create: (context) => ExerciseDetailsCubit()..startTimer(),
-                    child: const ExerciseDetailsScreen(),
-                  ),
+                  builder: (context, state) {
+                    // Retrieve the exercise data from the 'extra' property
+                    final exercise = state.extra! as Exercise;
+                    return BlocProvider(
+                      create: (context) => ExerciseDetailsCubit(exercise),
+                      child: const ExerciseDetailsScreen(),
+                    );
+                  },
                 ),
               ],
             ),
