@@ -216,7 +216,14 @@
       "gallery":"المعرض",
       "camera":"الكاميرا",
       "noClients":"لايوجد عملاء حتي الان",
-      "changeClientCategory":"تغير نوع العميل"
-
+      "changeClientCategory":"تغير نوع العميل",
+      "mainMuscle": "العضلة الرئيسية",
+      "secondaryMuscle": "العضلات الثانوية",
+      "force": "القوة",
+      "type": "النوع",
+      "level": "المستوى",
+      "mechanic": "الميكانيكية",
+      "equipment": "المعدات",
+      "exerciseDetails": "تفاصيل التمرين"
 
 }

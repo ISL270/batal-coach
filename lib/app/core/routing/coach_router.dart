@@ -98,11 +98,12 @@ final coachRouter = GoRouter(
                   path: ExerciseDetailsScreen.name,
                   parentNavigatorKey: _rootNavigatorKey,
                   builder: (context, state) {
-                    // Retrieve the exercise data from the 'extra' property
                     final exercise = state.extra! as Exercise;
                     return BlocProvider(
-                      create: (context) => ExerciseDetailsCubit(exercise),
-                      child: const ExerciseDetailsScreen(),
+                      create: (context) => ExerciseDetailsCubit(exercise.images),
+                      child: ExerciseDetailsScreen(
+                        exercise: exercise,
+                      ),
                     );
                   },
                 ),

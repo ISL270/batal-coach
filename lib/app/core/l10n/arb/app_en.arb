@@ -210,5 +210,13 @@
       "gallery":"Gallery",
       "camera":"Camera",
       "noClients":"No Clients Found",
-      "changeClientCategory":"Change Client Category"
+      "changeClientCategory":"Change Client Category",
+        "mainMuscle": "Main Muscle",
+        "secondaryMuscle": "Secondary Muscle",
+        "force": "Force",
+        "type": "Type",
+        "level": "Level",
+        "mechanic": "Mechanic",
+        "equipment": "Equipment",
+        "exerciseDetails": "Exercise Details"
   }

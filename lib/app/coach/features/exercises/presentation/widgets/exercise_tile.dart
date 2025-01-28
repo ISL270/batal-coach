@@ -5,6 +5,7 @@ import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class ExerciseTile extends StatelessWidget {
@@ -18,9 +19,9 @@ class ExerciseTile extends StatelessWidget {
       onTap: () => context.pushNamed(ExerciseDetailsScreen.name, extra: exercise),
       contentPadding: EdgeInsets.zero,
       leading: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
         child: CachedNetworkImage(
-          width: 57,
+          width: 57.w,
           imageUrl: exercise.mockImage,
         ),
       ),

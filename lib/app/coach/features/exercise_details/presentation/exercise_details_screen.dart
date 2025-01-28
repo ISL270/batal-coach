@@ -1,41 +1,42 @@
 import 'package:btl/app/coach/features/exercise_details/presentation/cubit/exercise_details_cubit.dart';
+import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/core/extension_methods/text_style_x.dart';
+import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/widgets/screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 part 'widgets/exercise_details_body.dart';
 
 class ExerciseDetailsScreen extends StatelessWidget {
-  const ExerciseDetailsScreen({super.key});
+  const ExerciseDetailsScreen({required this.exercise, super.key});
 
+  final Exercise exercise;
   static const String name = 'exercise-details';
 
   @override
   Widget build(BuildContext context) {
-    //used in many parts in Exercise Details Screen
     final cubit = context.read<ExerciseDetailsCubit>();
     return Screen(
       padding: EdgeInsets.zero,
       appBar: AppBar(
         centerTitle: true,
-        leading: const BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        backgroundColor: context.colorsX.background,
         title: Text(
-          'Weighted crunches',
-          style: context.textThemeX.large.bold.copyWith(color: Colors.black),
+          exercise.name,
+          style: context.textThemeX.large.bold,
         ),
         actions: [
           IconButton(
-            icon: const Icon(FontAwesomeIcons.pencil, color: Colors.black),
+            icon: Icon(FontAwesomeIcons.penToSquare, size: 23.sp),
             onPressed: () {},
           ),
-          const Gap(5),
         ],
       ),
       body: Stack(
@@ -45,18 +46,18 @@ class ExerciseDetailsScreen extends StatelessWidget {
               BlocBuilder<ExerciseDetailsCubit, ExerciseDetailsState>(
                 builder: (context, state) {
                   return Container(
-                    height: 360,
+                    height: 360.h,
                     width: double.infinity,
-                    color: Colors.white,
+                    color: context.colorsX.background,
                     child: PageView.builder(
                       controller: cubit.pageController,
                       onPageChanged: cubit.changeActivePage,
-                      itemCount: state.images.length,
+                      itemCount: exercise.images.length,
                       itemBuilder: (context, index) {
                         final pages = List.generate(
-                          state.images.length,
+                          exercise.images.length,
                           (index) => _ImageWithPlaceHolder(
-                            image: state.images[index],
+                            image: exercise.mockImage,
                           ),
                         );
                         return pages[index];
@@ -68,7 +69,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
               BlocBuilder<ExerciseDetailsCubit, ExerciseDetailsState>(
                 builder: (context, state) {
                   return Positioned(
-                    bottom: 50,
+                    bottom: 50.h,
                     left: 0,
                     right: 0,
                     child: ColoredBox(
@@ -76,9 +77,9 @@ class ExerciseDetailsScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
-                          state.images.length,
+                          exercise.images.length,
                           (index) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
+                            padding: EdgeInsets.symmetric(horizontal: 2.w),
                             child: InkWell(
                               onTap: () {
                                 cubit.pageController.animateToPage(
@@ -88,13 +89,13 @@ class ExerciseDetailsScreen extends StatelessWidget {
                                 );
                               },
                               child: Container(
-                                width: state.activePage == index ? 20.0 : 10.0,
-                                height: 10,
+                                width: state.activePage == index ? 20.0.w : 10.0.w,
+                                height: 5.h,
                                 decoration: BoxDecoration(
                                   color: state.activePage == index
                                       ? context.colorsX.primary
                                       : context.colorsX.secondary,
-                                  borderRadius: BorderRadius.circular(64),
+                                  borderRadius: BorderRadius.circular(64.r),
                                 ),
                               ),
                             ),
@@ -107,16 +108,16 @@ class ExerciseDetailsScreen extends StatelessWidget {
               )
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 330),
+          Padding(
+            padding: EdgeInsets.only(top: 330.h),
             child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(32.r)),
               child: Stack(
                 children: [
-                  _ContainerShapeWidget(),
+                  const _ContainerShapeWidget(),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: _ExerciseDetailsBody(),
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: _ExerciseDetailsBody(exercise),
                   ),
                 ],
               ),
@@ -135,11 +136,17 @@ class _ImageWithPlaceHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      fit: BoxFit.contain,
-      imageUrl: image,
-      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-      errorWidget: (context, url, error) => const Center(child: Icon(FontAwesomeIcons.image)),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 30.h),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8), // Adjust the value for desired curvature
+        child: CachedNetworkImage(
+          fit: BoxFit.fill,
+          imageUrl: image,
+          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => const Center(child: Icon(FontAwesomeIcons.image)),
+        ),
+      ),
     );
   }
 }
@@ -154,8 +161,8 @@ class _ContainerShapeWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colorsX.background,
         border: const Border(),
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(32),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(32.r),
         ),
       ),
     );

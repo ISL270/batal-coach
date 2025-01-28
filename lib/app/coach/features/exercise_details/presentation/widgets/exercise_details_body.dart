@@ -1,64 +1,67 @@
 part of '../exercise_details_screen.dart';
 
 class _ExerciseDetailsBody extends StatelessWidget {
-  const _ExerciseDetailsBody();
+  const _ExerciseDetailsBody(this.exercise);
+
+  final Exercise exercise;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
+        spacing: 10.h,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Gap(20),
-          const _TitleWithASubTitleBehind(
-            title: 'Main Muscle',
-            subTitle: 'Shoulders',
+          Gap(10.h),
+          _TitleWithASubTitleBehind(
+            title: context.l10n.mainMuscle,
+            subTitle: exercise.mainMuscle.name,
           ),
-          const Gap(10),
-          const _TitleWithASubTitleBehind(
-            title: 'Secondary Muscle',
-            subTitle: 'Chest',
+          _TitleWithASubTitleBehind(
+            title: context.l10n.secondaryMuscle,
+            subTitle: exercise.secondaryMuscles.isNotEmpty
+                ? exercise.secondaryMuscles.map((muscle) => muscle.name).join(', ')
+                : 'N/A', // Use a default message when empty
           ),
-          const Gap(10),
-          const _TitleWithASubTitleBehind(
-            title: 'Force',
-            subTitle: 'Push',
+          _TitleWithASubTitleBehind(
+            title: context.l10n.force,
+            subTitle: exercise.force?.name ?? 'N/A',
           ),
-          const Gap(10),
-          const _TitleWithASubTitleBehind(
-            title: 'Type',
-            subTitle: 'Body weight',
+          _TitleWithASubTitleBehind(
+            title: context.l10n.type,
+            subTitle: exercise.type?.name ?? 'N/A',
           ),
-          const Gap(10),
-          const _TitleWithASubTitleBehind(
-            title: 'Level',
-            subTitle: 'intermediate',
+          _TitleWithASubTitleBehind(
+            title: context.l10n.level,
+            subTitle: exercise.type?.name ?? 'N/A',
           ),
-          const Gap(10),
-          const _TitleWithASubTitleBehind(
-            title: 'Mechanic',
-            subTitle: 'isolation',
+          _TitleWithASubTitleBehind(
+            title: context.l10n.mechanic,
+            subTitle: exercise.mechanic?.name ?? 'N/A',
           ),
-          const Gap(10),
-          const _TitleWithASubTitleBehind(
-            title: 'Equipment',
-            subTitle: 'Dumbbell',
+          _TitleWithASubTitleBehind(
+            title: context.l10n.equipment,
+            subTitle: exercise.equipment?.name ?? 'N/A',
           ),
-          const Gap(15),
-          const _ExerciseDetailsBodyTitle(text: 'Exercise Description'),
-          const Gap(5),
+          Gap(5.h),
+          Text(
+            context.l10n.exerciseDetails,
+            textAlign: TextAlign.center,
+            style: context.textThemeX.large.bold,
+          ),
+          Gap(5.h),
           BlocBuilder<ExerciseDetailsCubit, ExerciseDetailsState>(
             builder: (context, state) {
               return Padding(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
-                    state.setupLines.length,
+                    exercise.instructions.length,
                     (index) => _SetupLine(
                       index: index,
-                      text: state.setupLines[index],
+                      text: exercise.instructions[index],
                     ),
                   ),
                 ),
@@ -79,6 +82,8 @@ class _TitleWithASubTitleBehind extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final capitalizedSubTitle =
+        subTitle.isNotEmpty ? subTitle[0].toUpperCase() + subTitle.substring(1) : subTitle;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
@@ -86,7 +91,7 @@ class _TitleWithASubTitleBehind extends StatelessWidget {
         Text(title, style: context.textThemeX.medium.bold),
         const Spacer(),
         Text(
-          subTitle,
+          capitalizedSubTitle,
           style: context.textThemeX.medium.bold
               .copyWith(color: context.colorsX.primary, textBaseline: TextBaseline.ideographic),
         ),
@@ -118,22 +123,11 @@ class _SetupLine extends StatelessWidget {
                   textBaseline: TextBaseline.alphabetic,
                 ),
               ),
-              const Gap(5),
+              Gap(5.h),
             ],
           ),
         ),
       ],
     );
-  }
-}
-
-class _ExerciseDetailsBodyTitle extends StatelessWidget {
-  const _ExerciseDetailsBodyTitle({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(text, textAlign: TextAlign.center, style: context.textThemeX.large.bold);
   }
 }
