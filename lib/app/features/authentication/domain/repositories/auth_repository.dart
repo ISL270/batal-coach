@@ -34,7 +34,9 @@ final class AuthRepository {
     this._fireAuth,
     this._googleSignIn,
     this._userRepository,
-  );
+  ) {
+    _init();
+  }
 
   final _subject = BehaviorSubject<AuthState>.seeded(const Unauthenticated());
 
@@ -66,12 +68,9 @@ final class AuthRepository {
   /// - If no local user is found, sets state to [Unauthenticated]
   ///
   /// This method is called automatically after construction
-  @PostConstruct(preResolve: true)
-  Future<void> init() async {
-    final user = await _userRepository.geUserLocal();
-
-    if (user != null) {
-      _subject.add(Authenticated(user, false));
+  void _init() {
+    if (_userRepository.cachedUser != null) {
+      _subject.add(Authenticated(_userRepository.cachedUser!, false));
     } else {
       _subject.add(const Unauthenticated());
     }

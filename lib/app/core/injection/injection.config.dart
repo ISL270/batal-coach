@@ -107,16 +107,12 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i1055.SettingsBloc>(
         () => _i1055.SettingsBloc(gh<_i662.SettingsRepository>()));
-    await gh.singletonAsync<_i902.AuthRepository>(
-      () {
-        final i = _i902.AuthRepository(
-          gh<_i59.FirebaseAuth>(),
-          gh<_i116.GoogleSignIn>(),
-          gh<_i55.UserRepository>(),
-        );
-        return i.init().then((_) => i);
-      },
-      preResolve: true,
+    gh.singleton<_i902.AuthRepository>(
+      () => _i902.AuthRepository(
+        gh<_i59.FirebaseAuth>(),
+        gh<_i116.GoogleSignIn>(),
+        gh<_i55.UserRepository>(),
+      ),
       dispose: (i) => i.dispose(),
     );
     gh.singleton<_i260.AuthBloc>(

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:btl/app/coach/features/workouts/data/sources/local/workout_isar.dart';
-import 'package:btl/app/core/models/domain/workout.dart';
 import 'package:btl/app/core/isar/isar_source.dart';
+import 'package:btl/app/core/models/domain/workout.dart';
 import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
@@ -13,10 +13,6 @@ final class WorkoutIsarSource extends IsarSource<Workout, WorkoutIsar> {
 
   @override
   WorkoutIsar fromDomain(Workout dm) => WorkoutIsar.fromDomain(dm);
-
-  Future<int> putWorkout(WorkoutIsar workout) => isarService.put<WorkoutIsar>(workout);
-
-  Future<List<WorkoutIsar>> getAllWorkouts() => isarService.getAll<WorkoutIsar>();
 
   Future<List<WorkoutIsar>> getWorkouts(
     String searchTerm, {

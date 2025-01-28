@@ -12,10 +12,6 @@ final class ClientsIsarSource extends IsarSource<Client, ClientIsar> {
   @override
   ClientIsar fromDomain(Client dm) => ClientIsar.fromDomain(dm);
 
-  Future<int> putClient(ClientIsar client) => isarService.put<ClientIsar>(client);
-
-  Future<List<ClientIsar>> getAllClients() => isarService.getAll<ClientIsar>();
-
   Future<List<ClientIsar>> getClients(
     String searchTerm, {
     required int page,

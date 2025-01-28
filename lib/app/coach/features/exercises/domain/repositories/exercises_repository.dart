@@ -31,14 +31,11 @@ final class ExercisesRepository extends ReactiveRepository<Exercise, ExerciseFM,
   }
 
   Future<List<Exercise>> getExcsByIDs(List<String> ids) async {
-    final cmExercises = await _localSource.getExercisesByIDs(ids);
+    final cmExercises = await _localSource.getAllByIDs(ids);
     return cmExercises.map((e) => e.toDomain()).toList();
   }
 
-  Future<Exercise?> getExercise(String id) async {
-    final cmExercise = await _localSource.getExercise(id);
-    return cmExercise?.toDomain();
-  }
+  Exercise? getExercise(String id) => _localSource.get(id)?.toDomain();
 
   Future<void> clearLocalDB() => _localSource.clear();
 
