@@ -1,6 +1,6 @@
 import 'package:btl/app/core/models/domain/generic_exception.dart';
-import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart';
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart';
+import 'package:btl/app/features/authentication/data/sources/local/user_isar_source.dart';
+import 'package:btl/app/features/authentication/data/sources/remote/user_firestore_source.dart';
 import 'package:btl/app/features/authentication/domain/models/coach_type.dart';
 import 'package:btl/app/features/authentication/domain/models/user.dart';
 import 'package:btl/app/features/authentication/domain/models/user_type.dart';

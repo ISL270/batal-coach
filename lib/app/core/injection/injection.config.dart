@@ -36,9 +36,9 @@ import 'package:btl/app/core/firestore/firestore_service.dart' as _i997;
 import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/isar/isar_service.dart' as _i26;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
-import 'package:btl/app/features/authentication/data/data_sources/local/user_isar_source.dart'
+import 'package:btl/app/features/authentication/data/sources/local/user_isar_source.dart'
     as _i193;
-import 'package:btl/app/features/authentication/data/data_sources/remote/user_firestore_source.dart'
+import 'package:btl/app/features/authentication/data/sources/remote/user_firestore_source.dart'
     as _i538;
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
     as _i902;
