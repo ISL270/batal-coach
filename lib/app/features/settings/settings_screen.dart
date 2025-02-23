@@ -1,10 +1,10 @@
 // ignore_for_file: deprecated_member_use, unused_element
 
-import 'package:btl/app/core/extension_methods/arabic_x.dart';
+import 'package:batal/core/extension_methods/arabic_x.dart';
+import 'package:batal/core/extension_methods/english_x.dart';
+import 'package:batal/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
-import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/extension_methods/getit_x.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
@@ -44,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const _AvatarLabelRow(),
+                _AvatarLabelRow(onPressed: () {}),
                 _SettingsSectionWidget(
                   iconData: FontAwesomeIcons.lock,
                   label: context.l10n.changePassword.capitalized,
@@ -203,9 +203,7 @@ class _SettingsSectionWidget extends StatelessWidget {
 }
 
 class _LogoutButton extends StatelessWidget {
-  const _LogoutButton({
-    super.key,
-  });
+  const _LogoutButton();
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
+import 'package:batal/core/extension_methods/english_x.dart';
+import 'package:batal/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
-import 'package:btl/app/core/extension_methods/english_x.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';
 import 'package:btl/app/features/settings/domain/settings.dart';
@@ -37,8 +37,8 @@ class AboutAppScreen extends StatelessWidget {
               Text('0.0.1', style: context.textThemeX.medium.bold),
             ],
           ),
-          _AboutAppItemWidget(label: context.l10n.privacyPolicy.capitalized),
-          _AboutAppItemWidget(label: context.l10n.termsOfService.capitalized),
+          _AboutAppItemWidget(label: context.l10n.privacyPolicy.capitalized, onPressed: () {}),
+          _AboutAppItemWidget(label: context.l10n.termsOfService.capitalized, onPressed: () {}),
         ],
       ),
     );
@@ -48,7 +48,6 @@ class AboutAppScreen extends StatelessWidget {
 class _AboutAppItemWidget extends StatelessWidget {
   const _AboutAppItemWidget({
     required this.label,
-    // ignore: unused_element
     this.onPressed,
   });
 

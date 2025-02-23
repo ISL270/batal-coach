@@ -1,7 +1,7 @@
+import 'package:batal/core/extension_methods/context_x.dart';
+import 'package:batal/core/extension_methods/english_x.dart';
 import 'package:btl/app/coach/features/clients/domain/clients_repository.dart';
 import 'package:btl/app/coach/features/clients/sub_features/add_client/presentation/cubit/add_client_cubit.dart';
-import 'package:btl/app/core/extension_methods/context_x.dart';
-import 'package:btl/app/core/extension_methods/english_x.dart';
 import 'package:btl/app/core/injection/injection.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/widgets/button.dart';

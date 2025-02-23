@@ -1,6 +1,6 @@
+import 'package:batal/core/extension_methods/date_x.dart';
+import 'package:batal/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
-import 'package:btl/app/core/extension_methods/date_x.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';

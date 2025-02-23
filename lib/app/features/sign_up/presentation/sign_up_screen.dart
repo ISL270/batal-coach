@@ -1,7 +1,7 @@
+import 'package:batal/core/extension_methods/context_x.dart';
+import 'package:batal/core/extension_methods/english_x.dart';
+import 'package:batal/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
-import 'package:btl/app/core/extension_methods/context_x.dart';
-import 'package:btl/app/core/extension_methods/english_x.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/l10n/language.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';

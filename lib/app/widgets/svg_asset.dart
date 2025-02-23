@@ -1,4 +1,4 @@
-import 'package:btl/app/core/extension_methods/color_x.dart';
+import 'package:batal/core/extension_methods/color_x.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

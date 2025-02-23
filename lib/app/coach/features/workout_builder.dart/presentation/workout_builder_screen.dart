@@ -1,11 +1,11 @@
+import 'package:batal/core/constants/default.dart';
+import 'package:batal/core/extension_methods/double_x.dart';
+import 'package:batal/core/extension_methods/duration_x.dart';
+import 'package:batal/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/coach/features/exercises/domain/models/exercise.dart';
 import 'package:btl/app/coach/features/exercises/presentation/widgets/exercises_picker.dart';
 import 'package:btl/app/coach/features/workout_builder.dart/presentation/cubit/workout_builder_cubit.dart';
-import 'package:btl/app/core/constants/default.dart';
 import 'package:btl/app/core/extension_methods/bloc_x.dart';
-import 'package:btl/app/core/extension_methods/double_x.dart';
-import 'package:btl/app/core/extension_methods/duration_x.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/models/domain/field.dart';
 import 'package:btl/app/core/models/domain/length_unit.dart';

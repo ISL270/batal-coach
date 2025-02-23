@@ -54,6 +54,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.12.0"
+  batal:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: df64cfe3630111f66af32bd64b31083d90039e6e
+      url: "https://github.com/ISL270/batal"
+    source: git
+    version: "0.1.0+1"
   bloc:
     dependency: "direct main"
     description:
@@ -119,7 +128,7 @@ packages:
     source: hosted
     version: "2.4.4"
   build_runner:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: build_runner
       sha256: "058fe9dce1de7d69c4b84fada934df3e0153dd000758c4d65964d0166779aa99"

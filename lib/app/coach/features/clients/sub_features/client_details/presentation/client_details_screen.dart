@@ -1,10 +1,10 @@
+import 'package:batal/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/coach/features/clients/domain/client.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_goals/presentation/client_goals_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_limitaions/presentation/client_limitations_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/client_tasks/presentation/client_tasks_screen.dart';
 import 'package:btl/app/coach/features/clients/sub_features/edit_client_info/presentaion/edit_client_info.dart';
 import 'package:btl/app/core/assets_gen/assets.gen.dart';
-import 'package:btl/app/core/extension_methods/text_style_x.dart';
 import 'package:btl/app/core/l10n/l10n.dart';
 import 'package:btl/app/core/theming/app_colors_extension.dart';
 import 'package:btl/app/core/theming/text_theme_extension.dart';

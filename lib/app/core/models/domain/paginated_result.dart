@@ -1,4 +1,4 @@
-import 'package:btl/app/core/constants/default.dart';
+import 'package:batal/core/constants/default.dart';
 
 final class PaginatedResult<T> {
   final int page;

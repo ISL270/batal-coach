@@ -37,9 +37,9 @@ import 'package:btl/app/core/injection/auth_module.dart' as _i399;
 import 'package:btl/app/core/isar/isar_service.dart' as _i26;
 import 'package:btl/app/core/l10n/l10n_service.dart' as _i222;
 import 'package:btl/app/features/authentication/data/sources/local/user_isar_source.dart'
-    as _i193;
+    as _i120;
 import 'package:btl/app/features/authentication/data/sources/remote/user_firestore_source.dart'
-    as _i538;
+    as _i308;
 import 'package:btl/app/features/authentication/domain/repositories/auth_repository.dart'
     as _i902;
 import 'package:btl/app/features/authentication/domain/repositories/user_repository.dart'
@@ -77,20 +77,32 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i997.FirestoreService>(() => _i997.FirestoreService());
     gh.singleton<_i59.FirebaseAuth>(() => authModule.auth);
     gh.singleton<_i116.GoogleSignIn>(() => authModule.googleSignIn);
-    gh.singleton<_i538.UserFirestoreSource>(
-        () => _i538.UserFirestoreSource(gh<_i997.FirestoreService>()));
+    gh.singleton<_i308.UserFirestoreSource>(
+        () => _i308.UserFirestoreSource(gh<_i997.FirestoreService>()));
     gh.singleton<_i557.SettingsIsarSource>(
         () => _i557.SettingsIsarSource(gh<_i26.IsarService>()));
-    gh.singleton<_i193.UserIsarSource>(
-        () => _i193.UserIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i120.UserIsarSource>(
+        () => _i120.UserIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i347.ClientsIsarSource>(
         () => _i347.ClientsIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i25.WorkoutIsarSource>(
         () => _i25.WorkoutIsarSource(gh<_i26.IsarService>()));
     gh.singleton<_i714.ExercisesIsarSource>(
         () => _i714.ExercisesIsarSource(gh<_i26.IsarService>()));
+    gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
+          gh<_i120.UserIsarSource>(),
+          gh<_i308.UserFirestoreSource>(),
+        ));
     gh.singleton<_i662.SettingsRepository>(
         () => _i662.SettingsRepository(gh<_i557.SettingsIsarSource>()));
+    gh.singleton<_i902.AuthRepository>(
+      () => _i902.AuthRepository(
+        gh<_i59.FirebaseAuth>(),
+        gh<_i116.GoogleSignIn>(),
+        gh<_i55.UserRepository>(),
+      ),
+      dispose: (i) => i.dispose(),
+    );
     gh.singleton<_i886.ClientsFirestoreSource>(
       () => _i886.ClientsFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
@@ -100,20 +112,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i577.ExercisesFirestoreSource>(
       () => _i577.ExercisesFirestoreSource(gh<_i997.FirestoreService>()),
       dispose: (i) => i.dispMethod(),
-    );
-    gh.singleton<_i55.UserRepository>(() => _i55.UserRepository(
-          gh<_i193.UserIsarSource>(),
-          gh<_i538.UserFirestoreSource>(),
-        ));
-    gh.factory<_i1055.SettingsBloc>(
-        () => _i1055.SettingsBloc(gh<_i662.SettingsRepository>()));
-    gh.singleton<_i902.AuthRepository>(
-      () => _i902.AuthRepository(
-        gh<_i59.FirebaseAuth>(),
-        gh<_i116.GoogleSignIn>(),
-        gh<_i55.UserRepository>(),
-      ),
-      dispose: (i) => i.dispose(),
     );
     gh.singleton<_i260.AuthBloc>(
         () => _i260.AuthBloc(gh<_i902.AuthRepository>()));
@@ -137,6 +135,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1031.AddClientCubit(gh<_i999.ClientsRepository>()));
     gh.factory<_i441.ClientsBloc>(
         () => _i441.ClientsBloc(gh<_i999.ClientsRepository>()));
+    gh.factory<_i1055.SettingsBloc>(
+        () => _i1055.SettingsBloc(gh<_i662.SettingsRepository>()));
     gh.factory<_i450.ExercisesBloc>(
         () => _i450.ExercisesBloc(gh<_i611.ExercisesRepository>()));
     gh.singleton<_i820.WorkoutRepository>(
